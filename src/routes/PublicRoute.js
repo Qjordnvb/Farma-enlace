@@ -1,12 +1,12 @@
 import {Navigate, Outlet} from 'react-router-dom';
-import {LOGIN} from 'config/router/paths';
+import {PRIVATE} from 'config/paths';
 import {useAuthContext} from 'contexts/authContext';
 
-export default function PrivateRoute() {
+export default function PublicRoute() {
   const {isAuthenticated} = useAuthContext();
 
-  if (!isAuthenticated) {
-    return <Navigate to={LOGIN} />;
+  if (isAuthenticated) {
+    return <Navigate to={PRIVATE} />;
   }
 
   return (
