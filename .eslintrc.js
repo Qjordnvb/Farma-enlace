@@ -26,6 +26,7 @@ module.exports = {
     'space-before-function-paren': 'off',
     'no-unused-vars': 2,
     'react/no-did-update-set-state': ['off'],
+    'react/jsx-uses-react': 'error',
     'react/jsx-uses-vars': 'error',
     'react/jsx-no-undef': 'error',
     'react/jsx-key': 'error',
