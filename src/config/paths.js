@@ -1,5 +1,5 @@
 export const LOGIN = '/';
-export const LOADING = '/loading';
-export const PRIVATE = '/private';
 
+export const PRIVATE = '/private';
+export const DATA = '/private/data';
 export const LOGOUT = '/private/logout';

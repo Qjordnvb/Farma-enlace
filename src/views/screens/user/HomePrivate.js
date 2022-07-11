@@ -1,3 +1,5 @@
+import {DATA} from 'config/paths';
+
 import Button from 'views/components/button/Button';
 import HeaderLayout from 'views/layouts/headerLayout';
 import Logo from '../../../assets/img/logo.png';
@@ -26,10 +28,11 @@ function HomePrivate() {
           <h3 className="text-primary-500">Selecciona una función</h3>
           <img className="img-options mt-12" src={OptionsImg} alt="options" />
           <div className="flex justify-evenly w-10/12 mt-12">
-            <a>
+            <a href={DATA}>
               <img src={Options1} alt="option-1" />
               Parametrización
             </a>
+
             <a>
               <img src={Options2} alt="option-2" />
               Orden de consumo
