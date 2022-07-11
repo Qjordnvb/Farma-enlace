@@ -9,7 +9,7 @@ function SidebarLayout({children}) {
     <>
       <HeaderLayout>
         <div>
-          <SidebarMenu />
+          <SidebarMenu isActive />
         </div>
         {children}
       </HeaderLayout>

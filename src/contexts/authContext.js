@@ -1,5 +1,6 @@
 import {createContext, useCallback, useContext, useMemo, useState} from 'react';
 import PropTypes from 'prop-types';
+import {LOGIN} from 'config/paths';
 
 const MY_AUTH_APP = 'MY_AUTH_APP';
 
@@ -15,6 +16,7 @@ export default function AuthContextProvider({children}) {
 
   const logout = useCallback(function () {
     window.localStorage.removeItem(MY_AUTH_APP, true);
+    window.location.replace(LOGIN);
     setIsAuthenticated(false);
   }, []);
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import IcoBtn from '../../../assets/img/ico-btn.png';
 import IcoProfile from '../../../assets/img/ico-profile.png';
 import Logo from '../../../assets/img/logo.png';
@@ -7,6 +8,13 @@ import Logo from '../../../assets/img/logo.png';
 import {StyledContainerLayout} from './HeaderLayout.Styled';
 
 function HeaderLayout({children}) {
+  const handleLogout = () => {
+    if (window.localStorage.getItem('MY_AUTH_APP')) {
+      window.localStorage.removeItem('MY_AUTH_APP');
+      window.location.replace('/');
+    }
+  };
+
   return (
     <StyledContainerLayout>
       <header>
@@ -16,7 +24,10 @@ function HeaderLayout({children}) {
             <img src={IcoBtn} alt="ico-btn" />
             Inicio
           </button>
-          <img className="home-profile" src={IcoProfile} alt="ico-profile" />
+          <img className="home-profile mr-4" src={IcoProfile} alt="ico-profile" />
+          <button className="bg-transparent" onClick={handleLogout}>
+            Cerrar sesion
+          </button>
         </div>
       </header>
       {children}
