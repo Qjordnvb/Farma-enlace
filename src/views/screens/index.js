@@ -6,14 +6,22 @@ const LoginPage = lazy(() => import('./login/LoginPage'));
 // User
 const HomePrivate = lazy(() => import('./user/HomePrivate'));
 const Logout = lazy(() => import('./user/logout/Logout'));
-const DataGrid = lazy(() => import('./user/dataGrid/DataGrid'));
+// Grid Parameters
+const DataGridParameters = lazy(() => import('./user/dataGridParameters/DataGridParameters'));
+const GridList = lazy(() => import('./user/dataGridParameters/gridList/GridList'));
+const GridUniforms = lazy(() => import('./user/dataGridParameters/gridUniforms/GridUniforms'));
+// Grid Orders
+const DataGridOrders = lazy(() => import('./user/dataGridOrders/DataGridOrders'));
 
 const useScreens = () => {
   return {
     LoginPage,
     HomePrivate,
     Logout,
-    DataGrid
+    DataGridParameters,
+    DataGridOrders,
+    GridList,
+    GridUniforms
   };
 };
 

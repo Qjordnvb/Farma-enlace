@@ -1,0 +1,95 @@
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > tbody
+  > tr
+  > td:nth-child(odd) {
+  background-color: #eeeeee;
+}
+
+#root > div > div > div > div > div > div > div > div > div > div > div > table > thead > tr > th {
+  background: #bfedcc;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div
+  > div
+  > div
+  > ul
+  > li.ant-pagination-item.ant-pagination-item-1.ant-pagination-item-active,
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div
+  > div
+  > div
+  > ul
+  > li.ant-pagination-item.ant-pagination-item-2.ant-pagination-item-active {
+  border-color: #2bc155;
+  background-color: #2bc155;
+  border-radius: 5px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div
+  > div
+  > div
+  > ul
+  > li.ant-pagination-item.ant-pagination-item.ant-pagination-item-active
+  > a {
+  color: #ffffff;
+}
+
+li.ant-pagination-item.ant-pagination-item {
+  border-color: #2bc155;
+
+  border-radius: 5px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div
+  > div
+  > div
+  > ul
+  > li.ant-pagination-item.ant-pagination-item
+  > a {
+  color: #2bc155;
+}

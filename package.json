@@ -18,6 +18,7 @@
     "lint-staged": "12.4.*",
     "prettier": "2.6.*",
     "react": "^18.1.0",
+    "react-crud-table": "^0.3.1",
     "react-dom": "^18.1.0",
     "react-highlight-words": "^0.18.0",
     "react-loader-spinner": "^5.1.5",

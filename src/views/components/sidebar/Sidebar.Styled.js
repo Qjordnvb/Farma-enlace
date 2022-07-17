@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import tw from 'twin.macro';
 
 // Assets
@@ -7,18 +8,21 @@ export const StyledContainerSidebar = styled.div.attrs({
   className: 'StyledContainerSidebar'
 })`
   ${tw``}
-  .bg-icon-sidebar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    background: linear-gradient(190.08deg, #2bc155 9.78%, #26d0ce 111.09%);
-    height: 101px;
-    /* Inside auto layout */
 
-    order: 0;
-    flex-grow: 0;
-    z-index: 0;
+  ul {
+        z-index: 9999;
+    li {
+
+      a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+           height: 101px;
+        &.active {
+          background: linear-gradient(190.08deg, #2bc155 9.78%, #26d0ce 111.09%);
+}
+    }
   }
 
   position: absolute;

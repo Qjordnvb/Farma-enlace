@@ -3,7 +3,7 @@ import {SearchOutlined} from '@ant-design/icons';
 import {Button, Input, Space, Table} from 'antd';
 
 import Highlighter from 'react-highlight-words';
-import './style-parameters.css';
+import './style.css';
 
 const data = [
   {
@@ -38,109 +38,10 @@ const data = [
     region: 'Sierra',
     ppt: '$1,000',
     estado: 'Activo'
-  },
-  {
-    key: '4',
-    codigo: '0000115105',
-    marca: 'Economica',
-    description: 'ZP PRV KIT HOMBRE T-M-38',
-    genero: 'Hombre',
-    talla: 'XL',
-    region: 'Sierra',
-    ppt: '$1,000',
-    estado: 'Activo'
-  },
-  {
-    key: '5',
-    codigo: '0000115105',
-    marca: 'Economica',
-    description: 'ZP PRV KIT HOMBRE T-M-38',
-    genero: 'Hombre',
-    talla: 'XL',
-    region: 'Sierra',
-    ppt: '$1,000',
-    estado: 'Activo'
-  },
-  {
-    key: '6',
-    codigo: '0000115105',
-    marca: 'Economica',
-    description: 'ZP PRV KIT HOMBRE T-M-38',
-    genero: 'Hombre',
-    talla: 'XL',
-    region: 'Sierra',
-    ppt: '$1,000',
-    estado: 'Activo'
-  },
-  {
-    key: '7',
-    codigo: '0000115105',
-    marca: 'Economica',
-    description: 'ZP PRV KIT HOMBRE T-M-38',
-    genero: 'Hombre',
-    talla: 'XL',
-    region: 'Sierra',
-    ppt: '$1,000',
-    estado: 'Activo'
-  },
-  {
-    key: '8',
-    codigo: '0000115105',
-    marca: 'Economica',
-    description: 'ZP PRV KIT HOMBRE T-M-38',
-    genero: 'Hombre',
-    talla: 'XL',
-    region: 'Sierra',
-    ppt: '$1,000',
-    estado: 'Activo'
-  },
-  {
-    key: '9',
-    codigo: '0000115105',
-    marca: 'Economica',
-    description: 'ZP PRV KIT HOMBRE T-M-38',
-    genero: 'Hombre',
-    talla: 'XL',
-    region: 'Sierra',
-    ppt: '$1,000',
-    estado: 'Activo'
-  },
-  {
-    key: '10',
-    codigo: '0000115105',
-    marca: 'Economica',
-    description: 'ZP PRV KIT HOMBRE T-M-38',
-    genero: 'Hombre',
-    talla: 'XL',
-    region: 'Bogota',
-    ppt: '$1,000',
-    estado: 'Activo'
-  },
-  {
-    key: '11',
-    codigo: '0000115105',
-    marca: 'Costosa',
-    description: 'ZP PRV KIT HOMBRE T-M-38',
-    genero: 'Hombre',
-    talla: 'XL',
-    region: 'Bogota',
-    ppt: '$1,000',
-    estado: 'Activo'
-  },
-  {
-    key: '12',
-    codigo: '0000115105',
-    marca: 'Costosa',
-    description: 'ZP PRV KIT HOMBRE T-M-38',
-    genero: 'Hombre',
-    talla: 'XL',
-    region: 'Bogota',
-    ppt: '$1,000',
-    estado: 'Activo'
   }
 ];
 
-const TableParameter = () => {
+const TableOrders = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
@@ -315,4 +216,4 @@ const TableParameter = () => {
   );
 };
 
-export default TableParameter;
+export default TableOrders;

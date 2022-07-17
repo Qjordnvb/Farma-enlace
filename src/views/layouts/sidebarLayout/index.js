@@ -1,2 +1,2 @@
-import SidebarLayout from './SidebarLayout';
-export default SidebarLayout;
+import DataGridLayout from './DataGridLayout';
+export default DataGridLayout;

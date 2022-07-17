@@ -1,8 +1,12 @@
+import useComponents from './components';
+import useLayouts from './layouts';
 import useScreens from './screens';
 
 const useViews = () => {
   return {
-    useScreens
+    useScreens,
+    useLayouts,
+    useComponents
   };
 };
 
