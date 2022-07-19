@@ -35,7 +35,7 @@ function HomePrivate() {
               Parametrización
             </a>
 
-            <a>
+            <a href={`${DATA}orders`}>
               <img src={Options2} alt="option-2" />
               Orden de consumo
             </a>
