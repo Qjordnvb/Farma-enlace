@@ -14,23 +14,28 @@ function DataGridParameters() {
   const userMenu = [
     {
       name: 'Uniforme',
-      path: 'uniforms'
+      path: 'uniforms',
+      key: '1'
     },
     {
       name: 'Lista administrable',
-      path: 'list'
+      path: 'list',
+      key: '2'
     },
     {
       name: 'Descripción uniformes',
-      path: 'description'
+      path: 'description',
+      key: '3'
     },
     {
       name: 'Parámetros de reposición',
-      path: 'parameters'
+      path: 'replacement',
+      key: '4'
     },
     {
-      name: 'Parámetros de reposición',
-      path: 'entrega'
+      name: 'Entrega de uniformes',
+      path: 'entrega',
+      key: '5'
     }
   ];
   return (
@@ -40,10 +45,11 @@ function DataGridParameters() {
         <div>
           <Routes>
             <Route path="uniforms" element={<GridUniforms />} />
-            <Route path="list" element={<GridList />} />
-            <Route path="description" element={<GridList />} />
-            <Route path="parameters" element={<GridList />} />
-            <Route path="entrega" element={<GridList />} />
+            <Route path="list/*" element={<GridList />} />
+
+            <Route path="description" element={<GridUniforms />} />
+            <Route path="replacement" element={<GridUniforms />} />
+            <Route path="entrega" element={<GridUniforms />} />
           </Routes>
         </div>
       </DataGridLayout>

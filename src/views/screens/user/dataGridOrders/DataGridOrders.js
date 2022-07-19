@@ -11,15 +11,18 @@ function DataGridOrders() {
   const userMenu = [
     {
       name: 'actualización de tallas',
-      path: 'actualization'
+      path: 'actualization',
+      key: '6'
     },
     {
       name: 'orden de consumo',
-      path: 'consumo'
+      path: 'consumo',
+      key: '7'
     },
     {
       name: ' descuento',
-      path: 'descuento'
+      path: 'descuento',
+      key: '8'
     }
   ];
   return (

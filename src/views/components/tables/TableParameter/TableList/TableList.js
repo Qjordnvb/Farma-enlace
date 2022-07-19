@@ -1,182 +1,285 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {useRef, useState} from 'react';
+import {SearchOutlined} from '@ant-design/icons';
+import {Button, Input, Space, Table} from 'antd';
 
-import CRUDTable, {Fields, Field, CreateForm, UpdateForm, Pagination} from 'react-crud-table';
+import Highlighter from 'react-highlight-words';
 
-// Component's Base CSS
-import './style-list.css';
-
-let tasks = [
+const data = [
   {
-    id: 1,
-    title: 'Create an example',
-    description: 'Create an example of how to use the component'
+    key: '1',
+    codigo: '0000115105',
+    marca: 'Economica',
+    description: 'ZP PRV KIT HOMBRE T-M-38',
+    genero: 'Hombre',
+    talla: 'XL',
+    region: 'Sierra',
+    ppt: '$1,000',
+    estado: 'Activo'
   },
   {
-    id: 2,
-    title: 'Improve',
-    description: 'Improve the component!'
+    key: '2',
+    codigo: '0000115105',
+    marca: 'Economica',
+    description: 'ZP PRV KIT HOMBRE T-M-38',
+    genero: 'Hombre',
+    talla: 'XL',
+    region: 'Sierra',
+    ppt: '$1,000',
+    estado: 'Activo'
   },
   {
-    id: 3,
-    title: 'Create an example',
-    description: 'Create an example of how to use the component'
+    key: '3',
+    codigo: '0000115105',
+    marca: 'Economica',
+    description: 'ZP PRV KIT HOMBRE T-M-38',
+    genero: 'Hombre',
+    talla: 'XL',
+    region: 'Sierra',
+    ppt: '$1,000',
+    estado: 'Activo'
   },
   {
-    id: 4,
-    title: 'Improve',
-    description: 'Improve the component!'
+    key: '4',
+    codigo: '0000115105',
+    marca: 'Economica',
+    description: 'ZP PRV KIT HOMBRE T-M-38',
+    genero: 'Hombre',
+    talla: 'XL',
+    region: 'Sierra',
+    ppt: '$1,000',
+    estado: 'Activo'
   },
   {
-    id: 5,
-    title: 'Create an example',
-    description: 'Create an example of how to use the component'
+    key: '5',
+    codigo: '0000115105',
+    marca: 'Economica',
+    description: 'ZP PRV KIT HOMBRE T-M-38',
+    genero: 'Hombre',
+    talla: 'XL',
+    region: 'Sierra',
+    ppt: '$1,000',
+    estado: 'Activo'
   },
   {
-    id: 6,
-    title: 'Improve',
-    description: 'Improve the component!'
+    key: '6',
+    codigo: '0000115105',
+    marca: 'Economica',
+    description: 'ZP PRV KIT HOMBRE T-M-38',
+    genero: 'Hombre',
+    talla: 'XL',
+    region: 'Sierra',
+    ppt: '$1,000',
+    estado: 'Activo'
   },
   {
-    id: 7,
-    title: 'Create an example',
-    description: 'Create an example of how to use the component'
+    key: '7',
+    codigo: '0000115105',
+    marca: 'Economica',
+    description: 'ZP PRV KIT HOMBRE T-M-38',
+    genero: 'Hombre',
+    talla: 'XL',
+    region: 'Sierra',
+    ppt: '$1,000',
+    estado: 'Activo'
   },
   {
-    id: 8,
-    title: 'Improve',
-    description: 'Improve the component!'
+    key: '8',
+    codigo: '0000115105',
+    marca: 'Economica',
+    description: 'ZP PRV KIT HOMBRE T-M-38',
+    genero: 'Hombre',
+    talla: 'XL',
+    region: 'Sierra',
+    ppt: '$1,000',
+    estado: 'Activo'
+  },
+  {
+    key: '9',
+    codigo: '0000115105',
+    marca: 'Economica',
+    description: 'ZP PRV KIT HOMBRE T-M-38',
+    genero: 'Hombre',
+    talla: 'XL',
+    region: 'Sierra',
+    ppt: '$1,000',
+    estado: 'Activo'
+  },
+  {
+    key: '10',
+    codigo: '0000115105',
+    marca: 'Economica',
+    description: 'ZP PRV KIT HOMBRE T-M-38',
+    genero: 'Hombre',
+    talla: 'XL',
+    region: 'Bogota',
+    ppt: '$1,000',
+    estado: 'Activo'
+  },
+  {
+    key: '11',
+    codigo: '0000115105',
+    marca: 'Costosa',
+    description: 'ZP PRV KIT HOMBRE T-M-38',
+    genero: 'Hombre',
+    talla: 'XL',
+    region: 'Bogota',
+    ppt: '$1,000',
+    estado: 'Activo'
+  },
+  {
+    key: '12',
+    codigo: '0000115105',
+    marca: 'Costosa',
+    description: 'ZP PRV KIT HOMBRE T-M-38',
+    genero: 'Hombre',
+    talla: 'XL',
+    region: 'Bogota',
+    ppt: '$1,000',
+    estado: 'Activo'
   }
 ];
 
-const DescriptionRenderer = ({field}) => <textarea {...field} />;
-
-const SORTERS = {
-  NUMBER_ASCENDING: (mapper) => (a, b) => mapper(a) - mapper(b),
-  NUMBER_DESCENDING: (mapper) => (a, b) => mapper(b) - mapper(a),
-  STRING_ASCENDING: (mapper) => (a, b) => mapper(a).localeCompare(mapper(b)),
-  STRING_DESCENDING: (mapper) => (a, b) => mapper(b).localeCompare(mapper(a))
-};
-
-const getSorter = (data) => {
-  const mapper = (x) => x[data.field];
-  let sorter = SORTERS.STRING_ASCENDING(mapper);
-
-  if (data.field === 'id') {
-    sorter =
-      data.direction === 'ascending'
-        ? SORTERS.NUMBER_ASCENDING(mapper)
-        : SORTERS.NUMBER_DESCENDING(mapper);
-  } else {
-    sorter =
-      data.direction === 'ascending'
-        ? SORTERS.STRING_ASCENDING(mapper)
-        : SORTERS.STRING_DESCENDING(mapper);
-  }
-
-  return sorter;
-};
-let count = tasks.length;
-const service = {
-  fetchItems: (payload) => {
-    const {activePage, itemsPerPage} = payload.pagination;
-    const start = (activePage - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
-    let result = Array.from(tasks);
-    result = result.sort(getSorter(payload.sort));
-    return Promise.resolve(result.slice(start, end));
-  },
-  create: (task) => {
-    count += 1;
-    tasks.push({
-      ...task,
-      id: count
-    });
-    return Promise.resolve(task);
-  },
-  update: (data) => {
-    const task = tasks.find((t) => t.id === data.id);
-    task.title = data.title;
-    task.description = data.description;
-    return Promise.resolve(task);
-  },
-  delete: (data) => {
-    const task = tasks.find((t) => t.id === data.id);
-    tasks = tasks.filter((t) => t.id !== task.id);
-    return Promise.resolve(task);
-  },
-
-  fetchTotal: () => {
-    return Promise.resolve(tasks.length);
-  }
-};
-
 const TableList = () => {
-  return (
-    <div className="container-grid-list">
-      <CRUDTable
-        caption="motivos parametrizados"
-        fetchItems={(payload) => service.fetchItems(payload)}
-        fetchItemsPagination={(payload) => service.fetchItemsPagination(payload)}
+  const [searchText, setSearchText] = useState('');
+  const [searchedColumn, setSearchedColumn] = useState('');
+  const searchInput = useRef(null);
+
+  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    setSearchText(selectedKeys[0]);
+    setSearchedColumn(dataIndex);
+  };
+
+  const handleReset = (clearFilters) => {
+    clearFilters();
+    setSearchText('');
+  };
+
+  const getColumnSearchProps = (dataIndex) => ({
+    filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
+      <div
+        style={{
+          padding: 8
+        }}
       >
-        <Fields>
-          <Field name="id" label="Id" hideInCreateForm />
-          <Field name="title" label="Title" placeholder="Title" />
-          <Field name="description" label="Description" render={DescriptionRenderer} />
-        </Fields>
-        <CreateForm
-          title="Task Creation"
-          message="Create a new task!"
-          trigger="Create Task"
-          onSubmit={(task) => service.create(task)}
-          submitText="Create"
-          validate={(values) => {
-            const errors = {};
-            if (!values.title) {
-              errors.title = "Please, provide task's title";
-            }
-
-            if (!values.description) {
-              errors.description = "Please, provide task's description";
-            }
-
-            return errors;
+        <Input
+          ref={searchInput}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{
+            marginBottom: 8,
+            display: 'block'
           }}
         />
-
-        <UpdateForm
-          title="Task Update Process"
-          message="Update task"
-          trigger="Update"
-          onSubmit={(task) => service.update(task)}
-          submitText="Update"
-          validate={(values) => {
-            const errors = {};
-
-            if (!values.id) {
-              errors.id = 'Please, provide id';
-            }
-
-            if (!values.title) {
-              errors.title = "Please, provide task's title";
-            }
-
-            if (!values.description) {
-              errors.description = "Please, provide task's description";
-            }
-
-            return errors;
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{
+              width: 90
+            }}
+          >
+            Search
+          </Button>
+          <Button
+            onClick={() => clearFilters && handleReset(clearFilters)}
+            size="small"
+            style={{
+              width: 90
+            }}
+          >
+            Reset
+          </Button>
+          <Button
+            type="link"
+            size="small"
+            onClick={() => {
+              confirm({
+                closeDropdown: false
+              });
+              setSearchText(selectedKeys[0]);
+              setSearchedColumn(dataIndex);
+            }}
+          >
+            Filter
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: (filtered) => (
+      <SearchOutlined
+        style={{
+          color: filtered ? 'transparent' : undefined
+        }}
+      />
+    ),
+    onFilter: (value, record) =>
+      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+    onFilterDropdownVisibleChange: (visible) => {
+      if (visible) {
+        setTimeout(() => searchInput.current?.select(), 100);
+      }
+    },
+    render: (text) =>
+      searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{
+            padding: 0
           }}
+          searchWords={[searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ''}
         />
+      ) : (
+        text
+      )
+  });
 
-        <Pagination itemsPerPage={6} fetchTotalOfItems={(payload) => service.fetchTotal(payload)} />
-      </CRUDTable>
-    </div>
+  const columns = [
+    {
+      title: 'Código',
+      dataIndex: 'codigo',
+      key: 'codigo',
+      width: '15%',
+      ...getColumnSearchProps('codigo')
+    },
+    {
+      title: 'Marca',
+      dataIndex: 'marca',
+      key: 'marca',
+      width: '15%',
+      ...getColumnSearchProps('marca')
+    },
+    {
+      title: 'Descripción',
+      dataIndex: 'description',
+      key: 'description',
+      width: '20%',
+      ...getColumnSearchProps('description'),
+      sorter: (a, b) => a.description.length - b.description.length,
+      sortDirections: ['descend', 'ascend']
+    },
+    {
+      title: 'Género',
+      dataIndex: 'genero',
+      key: 'genero',
+      width: '10%',
+      ...getColumnSearchProps('genero')
+    }
+  ];
+  return (
+    <Table
+      pagination={{
+        pageSize: 6
+      }}
+      columns={columns}
+      dataSource={data}
+    />
   );
-};
-
-TableList.propTypes = {
-  field: PropTypes.string
 };
 
 export default TableList;

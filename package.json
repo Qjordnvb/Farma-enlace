@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@babel/core": "7.17.*",
     "@babel/eslint-parser": "7.17.*",
     "@babel/preset-react": "7.16.*",
@@ -18,7 +19,6 @@
     "lint-staged": "12.4.*",
     "prettier": "2.6.*",
     "react": "^18.1.0",
-    "react-crud-table": "^0.3.1",
     "react-dom": "^18.1.0",
     "react-highlight-words": "^0.18.0",
     "react-loader-spinner": "^5.1.5",

@@ -1,0 +1,53 @@
+.ant-table-thead > tr > th {
+  background: #bfedcc;
+}
+
+.ant-table-tbody > tr > td:nth-child(odd) {
+  background-color: #eeeeee;
+}
+
+.ant-table-tbody > tr.ant-table-row:hover > td:nth-child(odd) {
+  background-color: #eeeeee;
+}
+
+.ant-pagination-item-active a {
+  background-color: #2bc155;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.ant-pagination-item a {
+  color: #2bc155;
+}
+.ant-pagination-item a:hover {
+  color: #2bc155;
+}
+
+.ant-pagination-item-active a {
+  color: #ffffff;
+}
+.ant-pagination-item-active a:hover {
+  color: #ffffff;
+}
+
+.ant-pagination-next .ant-pagination-item-link,
+.ant-pagination-prev .ant-pagination-item-link {
+  border-color: #2bc155;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #2bc155;
+}
+
+.ant-pagination-next .ant-pagination-item-link:hover,
+.ant-pagination-prev .ant-pagination-item-link:hover {
+  border-color: #2bc155;
+  color: #2bc155;
+}

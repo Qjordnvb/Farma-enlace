@@ -10,6 +10,13 @@ export const StyledButton = styled.button.attrs((props) => ({
   className: `StyledButton StyledButton${props.variant}`
 }))`
   ${tw`text-center text-white cursor-pointer focus:outline-none text-lg`}
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  text-transform: uppercase;
+  box-shadow: 0px 6.91477px 6.91477px rgba(0, 0, 0, 0.25);
   // Size
   ${(props) => {
     switch (props.size) {

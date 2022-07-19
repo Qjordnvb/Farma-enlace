@@ -33,13 +33,12 @@ function DataGridLayout({children, titleGrid, userMenuLinks}) {
           />
 
           <StyledOptionData>
-            {_.map(userMenuLinks, (link, index) => {
+            {_.map(userMenuLinks, (link) => {
               return (
                 <NavLink
                   className={({isActive}) => (isActive ? 'active' : '')}
-                  key={index}
-                  exact
                   to={link.path}
+                  key={link.key}
                 >
                   <span>{link.name}</span>
                   <div className={({isActive}) => (isActive ? 'div-bg' : '')} />
