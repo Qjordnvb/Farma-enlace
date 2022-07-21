@@ -8,6 +8,8 @@ import {StyledGridList} from 'views/screens/user/dataGridParameters/gridList/Gri
 function TableEdit() {
   const [isEditing, setIsEditing] = useState(false);
   const [editingFile, setEditingFile] = useState(null);
+  const [isAdd, setIsAdd] = useState(false);
+  const [addingFile, setAddingFile] = useState(null);
   const [dataSource, setDataSource] = useState([
     {
       id: 251,
@@ -69,15 +71,21 @@ function TableEdit() {
     }
   ];
 
-  const onAddFile = () => {
-    const randomNumber = parseInt(Math.random() * 1000);
-    const newFile = {
-      id: randomNumber,
-      descripcion: 'Name ' + randomNumber,
-      estado: randomNumber + '@gmail.com'
-    };
-    setDataSource((pre) => {
-      return [...pre, newFile];
+  const resetEditing = () => {
+    setIsEditing(false);
+    setEditingFile(null);
+  };
+
+  const resetAdd = () => {
+    setIsAdd(false);
+    setAddingFile(null);
+  };
+
+  const onAddFile = (record) => {
+    setIsAdd(true);
+    setAddingFile({...record});
+    setDataSource(() => {
+      return [...dataSource];
     });
   };
   // const onDelete= (record) => {
@@ -93,10 +101,6 @@ function TableEdit() {
   //   });
   // };
 
-  const resetEditing = () => {
-    setIsEditing(false);
-    setEditingFile(null);
-  };
   return (
     <>
       {' '}
@@ -108,45 +112,93 @@ function TableEdit() {
           columns={columns}
           dataSource={dataSource}
         ></Table>
-        <Modal
-          title="Edit File"
-          visible={isEditing}
-          okText="Save"
-          onCancel={() => {
-            resetEditing();
-          }}
-          onOk={() => {
-            setDataSource((pre) => {
-              return pre.map((file) => {
-                if (file.id === editingFile.id) {
-                  return editingFile;
-                } else {
-                  return file;
-                }
-              });
-            });
-            resetEditing();
-          }}
-        >
-          <Input
-            placeholder="Descripción"
-            value={editingFile?.descripcion}
-            onChange={(e) => {
-              setEditingFile((pre) => {
-                return {...pre, descripcion: e.target.value};
-              });
+        <>
+          <Modal
+            title="Edit File"
+            visible={isEditing}
+            okText="Save"
+            onCancel={() => {
+              resetEditing();
             }}
-          />
-          <Input
-            placeholder="Estado"
-            value={editingFile?.estado}
-            onChange={(e) => {
-              setEditingFile((pre) => {
-                return {...pre, estado: e.target.value};
+            onOk={() => {
+              setDataSource((pre) => {
+                return pre.map((file) => {
+                  if (file.id === editingFile.id) {
+                    return editingFile;
+                  } else {
+                    return file;
+                  }
+                });
               });
+              resetEditing();
             }}
-          />
-        </Modal>
+          >
+            <Input
+              placeholder="Descripción"
+              value={editingFile?.descripcion}
+              onChange={(e) => {
+                setEditingFile((pre) => {
+                  return {...pre, descripcion: e.target.value};
+                });
+              }}
+            />
+            <Input
+              placeholder="Estado"
+              value={editingFile?.estado}
+              onChange={(e) => {
+                setEditingFile((pre) => {
+                  return {...pre, estado: e.target.value};
+                });
+              }}
+            />
+          </Modal>
+        </>
+
+        <>
+          <Modal
+            title="Agregar Prenda"
+            visible={isAdd}
+            okText="Save"
+            onCancel={() => {
+              resetAdd();
+            }}
+            onOk={() => {
+              setDataSource(() => {
+                return [...dataSource, addingFile];
+              });
+
+              resetAdd();
+            }}
+          >
+            <Input
+              placeholder="Código"
+              value={addingFile?.id}
+              onChange={(e) => {
+                setAddingFile(() => {
+                  return {id: e.target.value};
+                });
+              }}
+            />
+            <Input
+              placeholder="Descripción"
+              value={addingFile?.descripcion}
+              onChange={(e) => {
+                setAddingFile((pre) => {
+                  return {...pre, descripcion: e.target.value};
+                });
+              }}
+            />
+            <Input
+              placeholder="Estado"
+              value={addingFile?.estado}
+              onChange={(e) => {
+                setAddingFile((pre) => {
+                  return {...pre, estado: e.target.value};
+                });
+              }}
+            />
+          </Modal>
+        </>
       </div>
       <StyledGridList>
         <div className="btn-add">
