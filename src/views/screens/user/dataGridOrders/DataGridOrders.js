@@ -29,7 +29,7 @@ function DataGridOrders() {
     <>
       {' '}
       <DataGridLayout titleGrid="Orden de consumo" userMenuLinks={userMenu}>
-        <div className="container-table px-48 pt-16">
+        <div className="container-table pl-48 pr-52 pt-16">
           <TableOrders />
         </div>
       </DataGridLayout>
