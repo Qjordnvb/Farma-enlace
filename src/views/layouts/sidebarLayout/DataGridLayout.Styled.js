@@ -16,10 +16,10 @@ export const StyledOptionData = styled.div.attrs({
   justify-content: space-around;
 
   position: absolute;
-  width: 78%;
-
+  width: 79%;
   height: 60px;
-  left: 182px;
+  left: 190px;
+
   top: 230px;
 
   /* Tono 1 */

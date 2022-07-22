@@ -15,6 +15,7 @@ import {StyledContainerInicio, StyledSelectOption} from './HomePrivate.Styled';
 function HomePrivate() {
   const {useLayouts} = useViews();
   const {HeaderLayout} = useLayouts();
+
   return (
     <HeaderLayout>
       <StyledContainerInicio className="flex flex-col items-center justify-center">
@@ -26,6 +27,7 @@ function HomePrivate() {
           width="433px"
           height="60px"
         />
+
         <StyledSelectOption className="select-option">
           <h3 className="text-primary-500">Selecciona una función</h3>
           <img className="img-options mt-12" src={OptionsImg} alt="options" />

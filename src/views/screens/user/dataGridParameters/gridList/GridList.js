@@ -25,7 +25,7 @@ export default function GridList() {
         </NavLink>
       </StyledOptionDataList>
       <>
-        <div className="container-table w-11/12 px-36 ml-12 pt-28 ">
+        <div className="container-table pl-48 pr-52  pt-28 ">
           <Routes>
             <Route path="garments" element={<TableEdit />} />
             <Route path="reasons" element={<TableEdit />} />

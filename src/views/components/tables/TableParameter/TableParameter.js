@@ -158,11 +158,7 @@ const TableParameter = () => {
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
-      <div
-        style={{
-          padding: 8
-        }}
-      >
+      <div>
         <Input
           ref={searchInput}
           placeholder={`Search ${dataIndex}`}

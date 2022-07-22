@@ -11,7 +11,7 @@ function GridUniforms() {
   return (
     <>
       {' '}
-      <div className="container-table px-48 pt-16">
+      <div className="container-table pl-48 pr-52 pt-16">
         <TableParameter />
       </div>
     </>

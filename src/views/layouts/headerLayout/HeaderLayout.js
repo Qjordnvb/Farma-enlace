@@ -15,12 +15,16 @@ function HeaderLayout({children}) {
     }
   };
 
+  const goBack = () => {
+    window.history.back();
+  };
+
   return (
     <StyledContainerLayout>
       <header>
         <img src={Logo} alt="logo" />
         <div className="flex items-center">
-          <button>
+          <button onClick={goBack}>
             <img src={IcoBtn} alt="ico-btn" />
             Inicio
           </button>
