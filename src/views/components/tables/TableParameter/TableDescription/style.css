@@ -16,6 +16,27 @@
   > tr
   > th {
   text-align: center;
+  background: #bfedcc;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > tbody
+  > tr
+  > td:nth-child(odd) {
+  background-color: #eeeeee;
 }
 
 #root

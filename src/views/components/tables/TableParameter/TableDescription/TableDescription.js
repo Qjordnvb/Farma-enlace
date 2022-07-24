@@ -13,7 +13,7 @@ export default function TableDescription() {
     useCustomDescription();
   return (
     <div>
-      <Table columns={columns} dataSource={dataSource} style={{marginTop: 10}} />
+      <Table columns={columns} dataSource={dataSource} />
       <>
         <Modal
           title="Editar"
