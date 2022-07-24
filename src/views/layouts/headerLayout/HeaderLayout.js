@@ -1,4 +1,5 @@
 import React from 'react';
+import {useNavigate} from 'react-router';
 import PropTypes from 'prop-types';
 
 import IcoBtn from '../../../assets/img/ico-btn.png';
@@ -8,6 +9,7 @@ import Logo from '../../../assets/img/logo.png';
 import {StyledContainerLayout} from './HeaderLayout.Styled';
 
 function HeaderLayout({children}) {
+  const navigate = useNavigate();
   const handleLogout = () => {
     if (window.localStorage.getItem('MY_AUTH_APP')) {
       window.localStorage.removeItem('MY_AUTH_APP');
@@ -16,7 +18,7 @@ function HeaderLayout({children}) {
   };
 
   const goBack = () => {
-    window.history.back();
+    navigate('/');
   };
 
   return (
