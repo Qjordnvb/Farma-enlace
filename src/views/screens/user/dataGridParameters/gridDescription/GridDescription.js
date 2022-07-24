@@ -3,21 +3,21 @@ import useViews from 'views';
 
 // import PropTypes from 'prop-types';
 
-function GridDescription() {
+function GridUniforms() {
   const {useComponents} = useViews();
 
   const {useTables} = useComponents();
-  const {TableParameter} = useTables();
+  const {TableDescription} = useTables();
   return (
     <>
       {' '}
       <div className="container-table pl-48 pr-52 pt-16">
-        <TableParameter />
+        <TableDescription />
       </div>
     </>
   );
 }
 
-// GridDescription.propTypes = {};
+// GridUniforms.propTypes = {};
 
-export default GridDescription;
+export default GridUniforms;

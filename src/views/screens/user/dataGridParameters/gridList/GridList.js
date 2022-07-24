@@ -10,7 +10,7 @@ export default function GridList() {
   const {useComponents} = useViews();
 
   const {useTables} = useComponents();
-  const {TableEdit} = useTables();
+  const {TableGarments, TableReasons} = useTables();
 
   return (
     <>
@@ -27,8 +27,8 @@ export default function GridList() {
       <>
         <div className="container-table pl-48 pr-52  pt-28 ">
           <Routes>
-            <Route path="garments" element={<TableEdit />} />
-            <Route path="reasons" element={<TableEdit />} />
+            <Route path="garments" element={<TableGarments />} />
+            <Route path="reasons" element={<TableReasons />} />
           </Routes>
         </div>
       </>

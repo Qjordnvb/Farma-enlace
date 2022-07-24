@@ -1,0 +1,50 @@
+#root
+  > div
+  > div
+  > div
+  > div
+  > div.container-table.pl-48.pr-52.pt-28
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > thead
+  > tr
+  > th {
+  text-align: center;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div.container-table.pl-48.pr-52.pt-28
+  > div:nth-child(1)
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > tbody
+  > tr {
+  text-align: center;
+}
+
+.modal-add-reasons {
+  max-width: 914px;
+  width: auto !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ant-row.item-form {
+  margin-left: 3%;
+}

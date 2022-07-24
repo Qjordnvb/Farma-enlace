@@ -20,28 +20,32 @@ function SidebarMenu() {
         <li>
           <NavLink
             to={`${DATA}parameters`}
-            children={({isActive}) => <img src={`${isActive ? Ico1 : Ico1Green}`} alt="ico-1" />}
+            children={({isActive}) => (
+              <img width="100" height="auto" src={`${isActive ? Ico1 : Ico1Green}`} alt="ico-1" />
+            )}
           />
         </li>
 
         <li>
           <NavLink
             to={`${DATA}orders`}
-            children={({isActive}) => <img src={`${isActive ? Ico2 : Ico2Green}`} alt="ico-2" />}
+            children={({isActive}) => (
+              <img width="100" height="auto" src={`${isActive ? Ico2 : Ico2Green}`} alt="ico-2" />
+            )}
           />
         </li>
 
         <li>
           <NavLink to={'/'}>
             {' '}
-            <img src={Ico3Green} alt="ico-3" />{' '}
+            <img width="100" height="auto" src={Ico3Green} alt="ico-3" />{' '}
           </NavLink>
         </li>
 
         <li>
           <NavLink to={'/'}>
             {' '}
-            <img src={Ico4Green} alt="ico-4" />{' '}
+            <img width="100" height="auto" src={Ico4Green} alt="ico-4" />{' '}
           </NavLink>
         </li>
 
@@ -49,7 +53,7 @@ function SidebarMenu() {
           {' '}
           <NavLink to={'/'}>
             {' '}
-            <img src={Ico5Green} alt="ico-5" />{' '}
+            <img width="100" height="auto" src={Ico5Green} alt="ico-5" />{' '}
           </NavLink>
         </li>
       </ul>

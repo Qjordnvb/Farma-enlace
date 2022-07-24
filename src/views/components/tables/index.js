@@ -4,14 +4,18 @@ import {lazy} from 'react';
 const TableOrders = lazy(() => import('./TableOrders'));
 const TableParameter = lazy(() => import('./TableParameter'));
 const TableList = lazy(() => import('./TableParameter/TableList'));
-const TableEdit = lazy(() => import('./TableParameter/TableEdit'));
+const TableGarments = lazy(() => import('./TableParameter/TableGarments'));
+const TableReasons = lazy(() => import('./TableParameter/TableReasons'));
+const TableDescription = lazy(() => import('./TableParameter/TableDescription'));
 
 const useTables = () => {
   return {
     TableOrders,
     TableParameter,
     TableList,
-    TableEdit
+    TableGarments,
+    TableReasons,
+    TableDescription
   };
 };
 

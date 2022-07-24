@@ -9,6 +9,8 @@ export const StyledContainerSidebar = styled.div.attrs({
 })`
   ${tw``}
 
+
+
   ul {
         z-index: 9999;
     li {
@@ -21,8 +23,15 @@ export const StyledContainerSidebar = styled.div.attrs({
            height: 101px;
         &.active {
           background: linear-gradient(190.08deg, #2bc155 9.78%, #26d0ce 111.09%);
-}
+        }
+          img {
+    width: 100px;
+    height: auto;
+
+  }
     }
+
+
   }
 
   position: absolute;

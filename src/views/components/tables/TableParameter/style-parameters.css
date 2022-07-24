@@ -157,3 +157,40 @@ li.ant-pagination-item.ant-pagination-item {
   > svg {
   fill: #2bc155;
 }
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > thead
+  > tr
+  > th {
+  text-align: center;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > tbody
+  > tr {
+  text-align: center;
+}

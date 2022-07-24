@@ -1,0 +1,55 @@
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > thead
+  > tr
+  > th {
+  text-align: center;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > tbody
+  > tr
+  > td {
+  text-align: center;
+}
+
+.btn-download {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.btn-download {
+  width: 200px;
+  height: 50px;
+}
+
+.btn-save {
+  width: 160px;
+  height: 50px;
+}
