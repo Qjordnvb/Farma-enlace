@@ -1,2 +1,2 @@
-import GridUniforms from './GridUniforms';
-export default GridUniforms;
+import GridDescription from './GridDescription';
+export default GridDescription;

@@ -3,7 +3,7 @@ import useViews from 'views';
 
 // import PropTypes from 'prop-types';
 
-function GridUniforms() {
+function GridDescription() {
   const {useComponents} = useViews();
 
   const {useTables} = useComponents();
@@ -18,6 +18,6 @@ function GridUniforms() {
   );
 }
 
-// GridUniforms.propTypes = {};
+// GridDescription.propTypes = {};
 
-export default GridUniforms;
+export default GridDescription;
