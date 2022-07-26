@@ -9,19 +9,31 @@ export const useCustomDescription = () => {
   const [dataSource, setDataSource] = useState([
     {
       n: 1,
-      code: 'John Brown',
-      description: 32,
+      code: '0000115105',
+      description: 'ZP PRV KIT ECO HOMBRE T-M-38',
       garments: 'New York No. 1 Lake Park',
-      brand: 'My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.',
-      region: 'New York No. 1 Lake Park'
+      brand: 'Económica',
+      region: 'Sierra',
+      garment1: '3',
+      garment2: '0',
+      garment3: '1',
+      garment4: '0',
+      garment5: '2',
+      garment6: '0'
     },
     {
-      n: 2,
-      code: 'John Brown',
-      description: 32,
+      n: 1,
+      code: '0000115105',
+      description: 'ZP PRV KIT ECO HOMBRE T-M-38',
       garments: 'New York No. 1 Lake Park',
-      brand: 'My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.',
-      region: 'New York No. 1 Lake Park'
+      brand: 'Económica',
+      region: 'Sierra',
+      garment1: '3',
+      garment2: '0',
+      garment3: '1',
+      garment4: '0',
+      garment5: '2',
+      garment6: '0'
     }
   ]);
 
@@ -49,6 +61,38 @@ export const useCustomDescription = () => {
     {
       key: '4',
       title: 'Prendas',
+      children: [
+        {
+          title: 'Mandil blanco',
+          dataIndex: 'garment1',
+          key: 'garment1'
+        },
+        {
+          title: 'Mandil azul',
+          dataIndex: 'garment2',
+          key: 'garment2'
+        },
+        {
+          title: 'Camiseta',
+          dataIndex: 'garment3',
+          key: 'garment3'
+        },
+        {
+          title: 'Buso',
+          dataIndex: 'garment4',
+          key: 'garment4'
+        },
+        {
+          title: 'Chompa',
+          dataIndex: 'garment5',
+          key: 'garment5'
+        },
+        {
+          title: 'Escarapela',
+          dataIndex: 'garment6',
+          key: 'garment6'
+        }
+      ],
       dataIndex: 'garments'
     },
     {

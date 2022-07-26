@@ -5,6 +5,12 @@ export const StyledContainerLayout = styled.div.attrs({
   className: 'StyledContainerLayout'
 })`
   ${tw``}
+  .div-logo {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 847px;
+  }
 
   backdrop-filter: blur(20px);
   background: linear-gradient(

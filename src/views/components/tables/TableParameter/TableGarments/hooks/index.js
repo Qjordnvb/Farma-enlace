@@ -1,5 +1,6 @@
 import {useState} from 'react';
-import {EditOutlined} from '@ant-design/icons';
+import {Switch} from 'antd';
+import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 export const useCustomGarments = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingFile, setEditingFile] = useState(null);
@@ -33,6 +34,10 @@ export const useCustomGarments = () => {
     setEditingFile({...record});
   };
 
+  const onChange = (checked) => {
+    `switch to ${checked}`;
+  };
+
   const columns = [
     {
       key: '1',
@@ -54,13 +59,17 @@ export const useCustomGarments = () => {
       title: 'Acción',
       render: (record) => {
         return (
-          <>
-            <EditOutlined
+          <div className="flex-action">
+            <Switch className="input-switch" defaultChecked onChange={onChange} />
+            <div
               onClick={() => {
                 onEditFile(record);
               }}
-            />
-          </>
+              className="btn-edit"
+            >
+              <img src={BtnEdit} alt="btn-edit" />
+            </div>
+          </div>
         );
       }
     }

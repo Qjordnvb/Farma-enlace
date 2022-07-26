@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table, Modal, Input, Form} from 'antd';
+import {Table, Modal, Input, Form, Switch, Select} from 'antd';
 import './style.css';
 import Button from 'views/components/button/Button';
 import {StyledGridList} from 'views/screens/user/dataGridParameters/gridList/GridList.Styled';
@@ -20,6 +20,11 @@ function TableReasons() {
     resetAdd,
     onAddFile
   } = useCustomReasons();
+  const [options, setOptions] = React.useState([]);
+  const {Option} = Select;
+
+  const percentage = ['10%', '20%', '30%', '40%', '50%', '60%', '70%'];
+  const cal = [' Fecha de ingreso del colaborador', 'Fecha de última reposición'];
 
   return (
     <>
@@ -178,12 +183,14 @@ function TableReasons() {
                   />
                 </Form.Item>
                 <Form.Item className="item-form" label="Reposición automática">
-                  <Input
-                    className="input-add"
-                    value={addingFile?.replacement}
-                    onChange={(e) => {
+                  <Switch
+                    checkedChildren={<p>SI</p>}
+                    unCheckedChildren={<p>NO</p>}
+                    className="input-switch"
+                    checked={addingFile?.replacement}
+                    onChange={() => {
                       setAddingFile((pre) => {
-                        return {...pre, replacement: e.target.value};
+                        return {...pre, replacement: 'SI'};
                       });
                     }}
                   />
@@ -201,37 +208,46 @@ function TableReasons() {
                     }}
                   />
                 </Form.Item>
-              </div>
-              <div className="flex flex-wrap">
                 <Form.Item className="item-form" label="Cálculo desde">
-                  <Input
-                    className="input-add"
-                    placeholder="Cálculo desde"
-                    value={addingFile?.calculation}
-                    onChange={(e) => {
+                  <Select
+                    defaultValue={'Fecha de ingreso del colaborador'}
+                    value={options?.calculation}
+                    onChange={() => {
+                      // console.log(e);
                       setAddingFile((pre) => {
-                        return {...pre, calculation: e.target.value};
+                        return {...pre, calculation: setOptions.calculation};
                       });
                     }}
-                  />
+                  >
+                    {cal.map((cals, index) => {
+                      return (
+                        <Option key={index} value={cals}>
+                          {cals}
+                        </Option>
+                      );
+                    })}
+                  </Select>
                 </Form.Item>
+              </div>
+              <div className="flex items-center justify-around">
                 <Form.Item className="item-form" label="Cobro">
-                  <Input
-                    className="input-add"
-                    value={addingFile?.payment}
-                    onChange={(e) => {
+                  <Switch
+                    checkedChildren={<p>SI</p>}
+                    unCheckedChildren={<p>NO</p>}
+                    className="input-switch"
+                    checked={addingFile?.payment}
+                    onChange={() => {
                       setAddingFile((pre) => {
-                        return {...pre, payment: e.target.value};
+                        return {...pre, payment: 'SI'};
                       });
                     }}
                   />
                 </Form.Item>
                 <Form.Item className="item-form" label="Cuotas">
                   <Input
-                    type="number"
                     className="input-add"
-                    placeholder="1 a 100"
                     value={addingFile?.dues}
+                    placeholder="1 a 100"
                     onChange={(e) => {
                       setAddingFile((pre) => {
                         return {...pre, dues: e.target.value};
@@ -240,28 +256,44 @@ function TableReasons() {
                   />
                 </Form.Item>
                 <Form.Item className="item-form" label="Descuento Personal">
-                  <Input
-                    className="input-add"
-                    placeholder="0%"
-                    value={addingFile?.discountPersonal}
-                    onChange={(e) => {
+                  <Select
+                    defaultValue="5%"
+                    value={options?.discountPersonal}
+                    onChange={() => {
+                      // console.log(e);
                       setAddingFile((pre) => {
-                        return {...pre, discountPersonal: e.target.value};
+                        return {...pre, discountPersonal: setOptions.discountPersonal};
                       });
                     }}
-                  />
+                  >
+                    {percentage.map((percen, index) => {
+                      return (
+                        <Option key={index} value={percen}>
+                          {percen}
+                        </Option>
+                      );
+                    })}
+                  </Select>
                 </Form.Item>
                 <Form.Item className="item-form" label="Descuento Farmaenlace">
-                  <Input
-                    className="input-add"
-                    placeholder="10%"
-                    value={addingFile?.discountCompany}
-                    onChange={(e) => {
+                  <Select
+                    defaultValue="5%"
+                    value={options?.discountCompany}
+                    onChange={() => {
+                      // console.log(e);
                       setAddingFile((pre) => {
-                        return {...pre, discountCompany: e.target.value};
+                        return {...pre, discountCompany: setOptions.discountCompany};
                       });
                     }}
-                  />
+                  >
+                    {percentage.map((percen, index) => {
+                      return (
+                        <Option key={index} value={percen}>
+                          {percen}
+                        </Option>
+                      );
+                    })}
+                  </Select>
                 </Form.Item>
               </div>
             </Form>

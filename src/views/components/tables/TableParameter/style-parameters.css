@@ -194,3 +194,106 @@ li.ant-pagination-item.ant-pagination-item {
   > tr {
   text-align: center;
 }
+
+.ant-input:hover {
+  border-color: #2bc155;
+  border-right-width: 1px;
+}
+
+.ant-input-focused,
+.ant-input:focus {
+  border-color: #2bc155;
+  border-right-width: 1px;
+}
+
+.ant-btn-primary {
+  color: #fff;
+  border-color: #2bc155;
+  background: #2bc155;
+  text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+}
+
+.ant-btn-primary:hover {
+  border-color: #2bc155;
+  background: #2bc155;
+}
+
+.ant-btn-sm {
+  border-color: #2bc155;
+}
+
+.ant-btn-link {
+  color: #2bc155;
+}
+
+.ant-btn-sm:hover {
+  border-color: #2bc155;
+  color: #2bc155;
+}
+
+.ant-btn-sm:focus {
+  border-color: #2bc155;
+  color: #2bc155;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > thead
+  > tr
+  > th.ant-table-cell.ant-table-column-sort.ant-table-column-has-sorters
+  > div
+  > span.ant-table-column-title
+  > div
+  > span.ant-table-column-sorter.ant-table-column-sorter-full
+  > span
+  > span.anticon.anticon-caret-down.ant-table-column-sorter-down.active
+  > svg {
+  fill: #2bc155;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > thead
+  > tr
+  > th.ant-table-cell.ant-table-column-sort.ant-table-column-has-sorters
+  > div
+  > span.ant-table-column-title
+  > div
+  > span.ant-table-column-sorter.ant-table-column-sorter-full
+  > span
+  > span.anticon.anticon-caret-up.ant-table-column-sorter-up.active
+  > svg {
+  fill: #2bc155;
+}
+
+.ant-table-filter-trigger {
+  color: #2bc155;
+}
+
+.ant-table-filter-trigger:hover {
+  background: #2bc155;
+  color: #ffffff;
+}

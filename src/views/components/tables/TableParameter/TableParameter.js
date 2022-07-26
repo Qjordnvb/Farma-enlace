@@ -1,8 +1,9 @@
 import React, {useRef, useState} from 'react';
 import {SearchOutlined} from '@ant-design/icons';
 import {Button, Input, Space, Table} from 'antd';
-
+import {CSVLink} from 'react-csv';
 import Highlighter from 'react-highlight-words';
+import btnDownload from '../../../../assets/img/btn-download.png';
 import './style-parameters.css';
 
 const data = [
@@ -301,13 +302,20 @@ const TableParameter = () => {
     }
   ];
   return (
-    <Table
-      pagination={{
-        pageSize: 6
-      }}
-      columns={columns}
-      dataSource={data}
-    />
+    <>
+      <Table
+        pagination={{
+          pageSize: 6
+        }}
+        columns={columns}
+        dataSource={data}
+      />
+      <div className="flex justify-end">
+        <CSVLink filename={'TableContent.csv'} data={data} className="btn-download">
+          <img className="btn-download" src={btnDownload} alt="btnDownload" />
+        </CSVLink>
+      </div>
+    </>
   );
 };
 
