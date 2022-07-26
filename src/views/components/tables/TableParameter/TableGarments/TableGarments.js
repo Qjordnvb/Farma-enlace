@@ -19,18 +19,6 @@ function TableGarments() {
     resetAdd,
     onAddFile
   } = useCustomGarments();
-  // const onDelete= (record) => {
-  //   Modal.confirm({
-  //     title: 'Are you sure, you want to delete this student record?',
-  //     okText: 'Yes',
-  //     okType: 'danger',
-  //     onOk: () => {
-  //       setDataSource((pre) => {
-  //         return pre.filter((student) => student.id !== record.id);
-  //       });
-  //     }
-  //   });
-  // };
 
   return (
     <>
