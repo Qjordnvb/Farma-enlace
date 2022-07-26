@@ -12,6 +12,13 @@ export const StyledContainerLayout = styled.div.attrs({
     top: 847px;
   }
 
+  .div-figures {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: -2;
+  }
+
   backdrop-filter: blur(20px);
   background: linear-gradient(
     90deg,
@@ -48,8 +55,13 @@ export const StyledContainerLayout = styled.div.attrs({
     padding: 10px 50px;
 
     .home-profile {
-      width: 50px;
-      height: 50px;
+      width: 38px;
+      height: 38px;
+      margin-right: 4%;
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+      border-radius: 100px;
+
+      fill: #2bc155;
     }
 
     button {

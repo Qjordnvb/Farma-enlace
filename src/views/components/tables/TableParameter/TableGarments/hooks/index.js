@@ -57,6 +57,7 @@ export const useCustomGarments = () => {
     {
       key: '4',
       title: 'Acción',
+      width: '20%',
       render: (record) => {
         return (
           <div className="flex-action">

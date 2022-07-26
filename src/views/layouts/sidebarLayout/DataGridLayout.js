@@ -8,6 +8,7 @@ import {NavLink} from 'react-router-dom';
 import useViews from 'views';
 import Button from 'views/components/button/Button';
 import SidebarMenu from 'views/components/sidebar';
+import BgFigures from '../../../assets/img/bg-figures.png';
 import Logo from '../../../assets/img/logo.png';
 import {StyledContainerDataGrid, StyledOptionData} from './DataGridLayout.Styled';
 
@@ -50,6 +51,15 @@ function DataGridLayout({children, titleGrid, userMenuLinks}) {
         {children}
         <div className="div-logo flex justify-center">
           <img className="logo-img" width={'168px'} height={'70px'} src={Logo} alt="Logo" />
+        </div>
+        <div className="div-figures flex justify-end">
+          <img
+            className="figures-img"
+            width={'735.42px'}
+            height={'552px'}
+            src={BgFigures}
+            alt="figures"
+          />
         </div>
       </HeaderLayout>
     </>

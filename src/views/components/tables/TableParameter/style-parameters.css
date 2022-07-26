@@ -206,7 +206,7 @@ li.ant-pagination-item.ant-pagination-item {
   border-right-width: 1px;
 }
 
-.ant-btn-primary {
+button.ant-btn.ant-btn-primary.ant-btn-sm {
   color: #fff;
   border-color: #2bc155;
   background: #2bc155;
@@ -214,9 +214,16 @@ li.ant-pagination-item.ant-pagination-item {
   box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
 }
 
-.ant-btn-primary:hover {
+button.ant-btn.ant-btn-primary.ant-btn-sm:hover {
   border-color: #2bc155;
   background: #2bc155;
+  color: #fff;
+}
+
+.ant-btn-primary:focus {
+  border-color: #2bc155;
+  background: #2bc155;
+  color: #fff;
 }
 
 .ant-btn-sm {
