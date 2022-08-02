@@ -31,7 +31,7 @@ function HomePrivate() {
         <StyledSelectOption className="select-option">
           <h3 className="text-primary-500">Selecciona una función</h3>
           <img className="img-options mt-12" src={OptionsImg} alt="options" />
-          <div className="flex justify-evenly w-10/12 mt-12">
+          <div className="flex justify-evenly w-10/12 mt-12 flex-wrap">
             <a href={`${DATA}parameters/uniforms`}>
               <img src={Options1} alt="option-1" />
               Parametrización

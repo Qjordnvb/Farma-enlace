@@ -36,52 +36,68 @@ export default function TableDescription() {
           }}
         >
           <Form>
-            <Form.Item className="item-form" label="Código Producto">
+            <Form.Item className="item-form" label="Mandil blanco">
               <Input
-                value={editingFile?.code}
+                className="input-add"
+                value={editingFile?.garment1}
                 onChange={(e) => {
                   setEditingFile((pre) => {
-                    return {...pre, code: e.target.value};
+                    return {...pre, garment1: e.target.value};
                   });
                 }}
               />
             </Form.Item>
-            <Form.Item className="item-form" label="Descripción">
+            <Form.Item className="item-form" label="Mandil azul">
               <Input
-                value={editingFile?.description}
+                className="input-add"
+                value={editingFile?.garment2}
                 onChange={(e) => {
                   setEditingFile((pre) => {
-                    return {...pre, description: e.target.value};
+                    return {...pre, garment2: e.target.value};
                   });
                 }}
               />
             </Form.Item>
-            <Form.Item className="item-form" label="Prendas">
+            <Form.Item className="item-form" label="Camiseta">
               <Input
-                value={editingFile?.garments}
+                className="input-add"
+                value={editingFile?.garment3}
                 onChange={(e) => {
                   setEditingFile((pre) => {
-                    return {...pre, garments: e.target.value};
+                    return {...pre, garment3: e.target.value};
                   });
                 }}
               />
             </Form.Item>
-            <Form.Item className="item-form" label="Marca">
+            <Form.Item className="item-form" label="Buso">
               <Input
-                value={editingFile?.brand}
+                className="input-add"
+                value={editingFile?.garment4}
                 onChange={(e) => {
                   setEditingFile((pre) => {
-                    return {...pre, brand: e.target.value};
+                    return {...pre, garment4: e.target.value};
                   });
                 }}
               />
             </Form.Item>
-            <Form.Item className="item-form" label="Región">
+            <Form.Item className="item-form" label="Chompa">
               <Input
-                value={editingFile?.region}
+                className="input-add"
+                value={editingFile?.garment5}
                 onChange={(e) => {
                   setEditingFile((pre) => {
-                    return {...pre, region: e.target.value};
+                    return {...pre, garment5: e.target.value};
+                  });
+                }}
+              />
+            </Form.Item>
+            <Form.Item className="item-form" label="Escarapela">
+              <Input
+                className="input-add"
+                value={editingFile?.garment6}
+                onChange={(e) => {
+                  setEditingFile((pre) => {
+                    return {...pre, garment6: e.target.value};
                   });
                 }}
               />

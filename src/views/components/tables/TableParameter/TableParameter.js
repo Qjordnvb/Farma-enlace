@@ -162,7 +162,7 @@ const TableParameter = () => {
       <div>
         <Input
           ref={searchInput}
-          placeholder={`Search ${dataIndex}`}
+          placeholder={`Buscar ${dataIndex}`}
           value={selectedKeys[0]}
           onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
@@ -181,7 +181,7 @@ const TableParameter = () => {
               width: 90
             }}
           >
-            Search
+            Buscar
           </Button>
           <Button
             onClick={() => clearFilters && handleReset(clearFilters)}
@@ -190,7 +190,7 @@ const TableParameter = () => {
               width: 90
             }}
           >
-            Reset
+            Resetear
           </Button>
           <Button
             type="link"
@@ -203,7 +203,7 @@ const TableParameter = () => {
               setSearchedColumn(dataIndex);
             }}
           >
-            Filter
+            Filtrar
           </Button>
         </Space>
       </div>
@@ -243,14 +243,18 @@ const TableParameter = () => {
       dataIndex: 'codigo',
       key: 'codigo',
       width: '15%',
-      ...getColumnSearchProps('codigo')
+      ...getColumnSearchProps('codigo'),
+      sorter: (a, b) => a.codigo.length - b.codigo.length,
+      sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Marca',
       dataIndex: 'marca',
       key: 'marca',
       width: '15%',
-      ...getColumnSearchProps('marca')
+      ...getColumnSearchProps('marca'),
+      sorter: (a, b) => a.marca.length - b.marca.length,
+      sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Descripción',
@@ -266,14 +270,18 @@ const TableParameter = () => {
       dataIndex: 'genero',
       key: 'genero',
       width: '10%',
-      ...getColumnSearchProps('genero')
+      ...getColumnSearchProps('genero'),
+      sorter: (a, b) => a.genero.length - b.genero.length,
+      sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Talla',
       dataIndex: 'talla',
       key: 'talla',
       width: '5%',
-      ...getColumnSearchProps('talla')
+      ...getColumnSearchProps('talla'),
+      sorter: (a, b) => a.talla.length - b.talla.length,
+      sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Región',
@@ -289,7 +297,9 @@ const TableParameter = () => {
       dataIndex: 'ppt',
       key: 'ppt',
       width: '15%',
-      ...getColumnSearchProps('ppt')
+      ...getColumnSearchProps('ppt'),
+      sorter: (a, b) => a.ppt.length - b.ppt.length,
+      sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Estado',

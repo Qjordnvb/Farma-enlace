@@ -14,11 +14,10 @@ export const StyledOptionData = styled.div.attrs({
   display: flex;
   align-items: center;
   justify-content: space-around;
-
+  margin: auto;
   position: absolute;
-  width: 79%;
+  width: 1232px;
   height: 60px;
-  left: 190px;
 
   top: 230px;
 

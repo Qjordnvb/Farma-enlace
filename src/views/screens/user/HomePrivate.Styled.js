@@ -30,10 +30,11 @@ export const StyledSelectOption = styled.div.attrs({
   display: flex;
   flex-direction: column;
   align-items: center;
+
   background: #ffffff;
   padding: 50px 10px 50px 10px;
   width: 60%;
-  height: 600px;
+  height: auto;
 
   h3 {
     background: linear-gradient(190.08deg, #2bc155 9.78%, #26d0ce 111.09%);
@@ -62,7 +63,8 @@ export const StyledSelectOption = styled.div.attrs({
     font-weight: 600;
     font-size: 16px;
     line-height: 20px;
-
+    width: 120px;
+    text-align: center;
     color: #000000;
     img {
       transition: all 0.9s;

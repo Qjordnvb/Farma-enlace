@@ -24,11 +24,10 @@ export const StyledOptionDataList = styled.div.attrs({
   align-items: center;
   justify-content: space-around;
   padding: 16px;
-  margin-top: 2.7%;
+  margin: auto;
+  margin-top: 3.2%;
 
-  position: absolute;
-  width: 79%;
-  left: 190px;
+  width: 1232px;
 
   /* Tono 1 */
 

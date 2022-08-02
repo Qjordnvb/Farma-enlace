@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {EditOutlined} from '@ant-design/icons';
+import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 
 export const useCustomDescription = () => {
   const [isAdd, setIsAdd] = useState(false);
@@ -22,7 +22,7 @@ export const useCustomDescription = () => {
       garment6: '0'
     },
     {
-      n: 1,
+      n: 2,
       code: '0000115105',
       description: 'ZP PRV KIT ECO HOMBRE T-M-38',
       garments: 'New York No. 1 Lake Park',
@@ -110,13 +110,14 @@ export const useCustomDescription = () => {
       title: 'Acción',
       render: (record) => {
         return (
-          <>
-            <EditOutlined
-              onClick={() => {
-                onEditFile(record);
-              }}
-            />
-          </>
+          <div
+            onClick={() => {
+              onEditFile(record);
+            }}
+            className="btn-edit"
+          >
+            <img src={BtnEdit} alt="btn-edit" />
+          </div>
         );
       }
     }

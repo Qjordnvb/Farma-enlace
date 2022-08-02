@@ -19,7 +19,7 @@ function DataGridParameters() {
     },
     {
       name: 'Lista administrable',
-      path: 'list',
+      path: 'list/garments',
       key: '2'
     },
     {
