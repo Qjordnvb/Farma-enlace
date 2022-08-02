@@ -13,6 +13,9 @@ const GridUniforms = lazy(() => import('./user/dataGridParameters/gridUniforms/G
 const GridDescription = lazy(() =>
   import('./user/dataGridParameters/gridDescription/GridDescription')
 );
+const GridReplacement = lazy(() =>
+  import('./user/dataGridParameters/gridReplacement/GridReplacement')
+);
 // Grid Orders
 const DataGridOrders = lazy(() => import('./user/dataGridOrders/DataGridOrders'));
 
@@ -25,7 +28,8 @@ const useScreens = () => {
     DataGridOrders,
     GridList,
     GridUniforms,
-    GridDescription
+    GridDescription,
+    GridReplacement
   };
 };
 

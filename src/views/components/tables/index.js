@@ -7,6 +7,7 @@ const TableParameter = lazy(() => import('./TableParameter'));
 const TableGarments = lazy(() => import('./TableParameter/TableGarments'));
 const TableReasons = lazy(() => import('./TableParameter/TableReasons'));
 const TableDescription = lazy(() => import('./TableParameter/TableDescription'));
+const TableReplacement = lazy(() => import('./TableParameter/TableReplacement'));
 
 const useTables = () => {
   return {
@@ -15,7 +16,8 @@ const useTables = () => {
     // TableList,
     TableGarments,
     TableReasons,
-    TableDescription
+    TableDescription,
+    TableReplacement
   };
 };
 
