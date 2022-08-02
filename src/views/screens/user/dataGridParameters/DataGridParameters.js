@@ -10,7 +10,7 @@ import {StyledSidebarLayout} from './DataGridParameters.Styled';
 function DataGridParameters() {
   const {useLayouts, useScreens} = useViews();
   const {DataGridLayout} = useLayouts();
-  const {GridList, GridUniforms, GridDescription, GridReplacement} = useScreens();
+  const {GridList, GridParameters, GridDescription, GridReplacement, GridDelivery} = useScreens();
   const userMenu = [
     {
       name: 'Uniforme',
@@ -44,11 +44,11 @@ function DataGridParameters() {
       <DataGridLayout titleGrid="Parametrización" userMenuLinks={userMenu}>
         <div>
           <Routes>
-            <Route path="uniforms" element={<GridUniforms />} />
+            <Route path="uniforms" element={<GridParameters />} />
             <Route path="list/*" element={<GridList />} />
             <Route path="description" element={<GridDescription />} />
             <Route path="replacement" element={<GridReplacement />} />
-            <Route path="entrega" element={<GridUniforms />} />
+            <Route path="entrega" element={<GridDelivery />} />
           </Routes>
         </div>
       </DataGridLayout>

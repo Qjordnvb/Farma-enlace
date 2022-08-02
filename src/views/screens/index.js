@@ -9,13 +9,14 @@ const Logout = lazy(() => import('./user/logout/Logout'));
 // Grid Parameters
 const DataGridParameters = lazy(() => import('./user/dataGridParameters/DataGridParameters'));
 const GridList = lazy(() => import('./user/dataGridParameters/gridList/GridList'));
-const GridUniforms = lazy(() => import('./user/dataGridParameters/gridUniforms/GridUniforms'));
+const GridParameters = lazy(() => import('./user/dataGridParameters/gridUniforms/GridUniforms'));
 const GridDescription = lazy(() =>
   import('./user/dataGridParameters/gridDescription/GridDescription')
 );
 const GridReplacement = lazy(() =>
   import('./user/dataGridParameters/gridReplacement/GridReplacement')
 );
+const GridDelivery = lazy(() => import('./user/dataGridParameters/gridDelivery/GridDelivery'));
 // Grid Orders
 const DataGridOrders = lazy(() => import('./user/dataGridOrders/DataGridOrders'));
 
@@ -27,9 +28,10 @@ const useScreens = () => {
     DataGridParameters,
     DataGridOrders,
     GridList,
-    GridUniforms,
+    GridParameters,
     GridDescription,
-    GridReplacement
+    GridReplacement,
+    GridDelivery
   };
 };
 

@@ -1,24 +1,17 @@
 import React from 'react';
 import {Table, Modal, Input, Form} from 'antd';
 import './style.css';
-import Button from 'views/components/button/Button';
+import {CSVLink} from 'react-csv';
 import {StyledGridList} from 'views/screens/user/dataGridParameters/gridList/GridList.Styled';
+import btnDownload from '../../../../../assets/img/btn-download.png';
 import {useCustomReplacement} from './hooks';
 
 function TableReplacement() {
-  const {
-    dataSource,
-    setDataSource,
-    setEditingFile,
-    isEditing,
-    editingFile,
-    columns,
-    resetEditing,
-    onAddFile
-  } = useCustomReplacement();
+  const {dataSource, setDataSource, setEditingFile, isEditing, editingFile, columns, resetEditing} =
+    useCustomReplacement();
 
-  // const object = {
-  //   id: 1,
+  {
+    /* //   id: 1,
   //   n: '1',
   //   codigo: '115105',
   //   descripcion: 'ZP PRV KIT ECO HOMBRE T-M-38',
@@ -30,7 +23,8 @@ function TableReplacement() {
   //   sugeridoMaximo: '20',
   //   ultimaM: '10',
   //   fechaM: '10/10/2020'
-  // };
+  //  */
+  }
 
   return (
     <>
@@ -159,13 +153,9 @@ function TableReplacement() {
       </div>
       <StyledGridList>
         <div className="btn-add">
-          <Button
-            onClick={onAddFile}
-            className="py-2.5 px-8 rounded-lg my-4"
-            width="224px"
-            label="Crear"
-            variant="primary"
-          />
+          <CSVLink filename={'TableContent.csv'} data={dataSource} className="btn-download">
+            <img className="btn-download" src={btnDownload} alt="btnDownload" />
+          </CSVLink>
         </div>
       </StyledGridList>
     </>

@@ -32,7 +32,7 @@ export const StyledSelectOption = styled.div.attrs({
   align-items: center;
 
   background: #ffffff;
-  padding: 50px 10px 50px 10px;
+  padding: 30px 10px 30px 10px;
   width: 60%;
   height: auto;
 

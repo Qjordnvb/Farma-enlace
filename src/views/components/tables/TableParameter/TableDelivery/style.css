@@ -72,21 +72,66 @@
   color: #ffffff;
 }
 
-input.input-add {
+input.input-add,
+#modalAdd
+  > div:nth-child(2)
+  > div
+  > div.ant-col.ant-form-item-control
+  > div
+  > div
+  > span
+  > span
+  > input {
   padding: 0.4rem;
   background: #ffffff;
   border: 0.930349px solid #4d4e4e;
   border-radius: 9.30349px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
-.input-add:focus {
+#modalAdd
+  > div:nth-child(2)
+  > div
+  > div.ant-col.ant-form-item-control
+  > div
+  > div
+  > span
+  > span
+  > span
+  > button {
+  border: 0.930349px solid #4d4e4e;
+  border-top-right-radius: 9.30349px;
+  border-bottom-right-radius: 9.30349px;
+  height: 37px;
+}
+
+.input-add:focus,
+#modalAdd
+  > div:nth-child(2)
+  > div
+  > div.ant-col.ant-form-item-control
+  > div
+  > div
+  > span
+  > span
+  > input:focus {
   border-color: #4d4e4e;
   box-shadow: none;
   border-right-width: 1px;
   outline: 0;
 }
 
-.input-add:hover {
+.input-add:hover,
+#modalAdd
+  > div:nth-child(2)
+  > div
+  > div.ant-col.ant-form-item-control
+  > div
+  > div
+  > span
+  > span
+  > input:hover {
   border-color: #4d4e4e;
 }
 
@@ -190,9 +235,4 @@ input.input-add {
   > tr
   > td {
   text-align: center;
-}
-
-.disable-row {
-  background: #f5f5f5;
-  opacity: 0.1;
 }

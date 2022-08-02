@@ -34,8 +34,9 @@ export const useCustomGarments = () => {
     setEditingFile({...record});
   };
 
-  const onChange = (checked) => {
-    `switch to ${checked}`;
+  const onChange = (record) => {
+    `switch to ${record}`;
+    record ? record.enabled : !record.enabled;
   };
 
   const columns = [
