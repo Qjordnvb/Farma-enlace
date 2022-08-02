@@ -7,6 +7,7 @@ import {LOGIN, PRIVATE, DATA} from 'config/paths';
 import AuthContextProvider from 'contexts/authContext';
 import PrivateRoute from 'routes/PrivateRoute';
 import PublicRoute from 'routes/PublicRoute';
+
 //views
 import useViews from 'views';
 import LoadingComponent from 'views/components/utils/LoadingComponent';
