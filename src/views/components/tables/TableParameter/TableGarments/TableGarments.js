@@ -30,7 +30,7 @@ function TableGarments() {
           }}
           columns={columns}
           dataSource={dataSource}
-          rowClassName={(record) => !record.enabled && 'disabled-row'}
+          rowClassName={(record) => record.estado==='Inactivo' && 'disabled-row'}
         ></Table>
         <>
           <Modal
