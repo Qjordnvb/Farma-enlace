@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import {Table, Modal, Input, Form} from 'antd';
 import './style.css';
 import Button from 'views/components/button/Button';
@@ -20,6 +21,18 @@ function TableGarments() {
     onAddFile
   } = useCustomGarments();
 
+  let random = Math.floor(Math.random() * 1000).toString();
+
+  useEffect(() => {
+    if (isAdd) {
+      setAddingFile({
+        ...addingFile,
+        id: random
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAdd]);
+
   return (
     <>
       {' '}
@@ -30,7 +43,7 @@ function TableGarments() {
           }}
           columns={columns}
           dataSource={dataSource}
-          rowClassName={(record) => record.estado==='Inactivo' && 'disabled-row'}
+          rowClassName={(record) => record.estado === 'Inactivo' && 'disabled-row'}
         ></Table>
         <>
           <Modal
@@ -65,17 +78,6 @@ function TableGarments() {
                   }}
                 />
               </Form.Item>
-              <Form.Item className="item-form" label="Estado">
-                <Input
-                  placeholder="Estado"
-                  value={editingFile?.estado}
-                  onChange={(e) => {
-                    setEditingFile((pre) => {
-                      return {...pre, estado: e.target.value};
-                    });
-                  }}
-                />
-              </Form.Item>
             </Form>
           </Modal>
         </>
@@ -102,9 +104,9 @@ function TableGarments() {
                   className="input-add"
                   placeholder="Código"
                   value={addingFile?.id}
-                  onChange={(e) => {
-                    setAddingFile(() => {
-                      return {id: e.target.value};
+                  onChange={() => {
+                    setAddingFile((e, pre) => {
+                      return {...pre, id: e.target.value};
                     });
                   }}
                 />

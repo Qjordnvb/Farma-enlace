@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 // Hooks
-import {PASSWORD, USER} from 'consts/userLogin';
+
 import {useAuthContext} from 'contexts/authContext';
 // Components
 import LoadingComponent from 'views/components/utils/LoadingComponent';
@@ -12,9 +12,15 @@ import Logo from '../../../../assets/img/logo.png';
 import {StyledContainerFormLogin, StyledContainerLogin} from './CardLogin.Styled';
 
 function CardLogin({isLoading}) {
-  const {login} = useAuthContext();
+  const {login, token, userLogin} = useAuthContext();
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    if (!token) {
+      login('externo', 'Externo.2019*');
+    }
+  }, [login, token]);
 
   function handleInputUser(event) {
     setUser(event.target.value);
@@ -26,10 +32,10 @@ function CardLogin({isLoading}) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (user === USER && password === PASSWORD) {
-      login();
-    }
+
+    userLogin(user, password, 'SMH', token);
   }
+
   return (
     <StyledContainerLogin isLoading={isLoading}>
       <StyledContainerFormLogin isLoading={isLoading} className="flex flex-col items-center">
@@ -47,7 +53,8 @@ function CardLogin({isLoading}) {
                   type="password"
                   value={password}
                   onChange={handleInputPassword}
-                  placeholder="********"
+                  name="password"
+                  autoComplete="on"
                 />
                 <button type="submit">
                   <img src={ArrowGreen} alt="arrow-green" />

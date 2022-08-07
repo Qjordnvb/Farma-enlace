@@ -16,6 +16,7 @@ function App() {
   const {useScreens} = useViews();
   const {LoginPage, HomePrivate, DataGridParameters, DataGridOrders} = useScreens();
   const history = createMemoryHistory();
+
   return (
     <AuthContextProvider>
       <BrowserRouter location={history.location} navigator={history}>

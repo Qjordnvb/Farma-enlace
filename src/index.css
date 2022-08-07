@@ -122,3 +122,44 @@ html {
   > span:hover {
   color: #ffffff;
 }
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div.container-table
+  > div:nth-child(1)
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > tbody
+  > tr.ant-table-row.ant-table-row-level-0.disabled-row {
+  opacity: 0.5;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div.container-table
+  > div:nth-child(1)
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > tbody
+  > tr.ant-table-row.ant-table-row-level-0.disabled-row
+  > td
+  > div
+  > div {
+  pointer-events: none;
+}

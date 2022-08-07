@@ -1,37 +1,40 @@
-import {useState} from 'react';
+import {Api} from 'services/Api';
 
-export const useCustomHelpers = () => {
-  const [isAdd, setIsAdd] = useState(false);
-  const [addingFile, setAddingFile] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editingFile, setEditingFile] = useState(null);
-
-  const onEditFile = (record) => {
-    setIsEditing(true);
-    setEditingFile({...record});
+export const useUstils = () => {
+  const setUserLocalStorage = (data) => {
+    window.localeStorage.setItem('user', JSON.stringify(data));
   };
 
-  const resetEditing = () => {
-    setIsEditing(false);
-    setEditingFile(null);
-  };
+  async function LoginRequest(usuario, password) {
+    try {
+      const request = await Api.post('/usuarios/login', {usuario, password});
+      return request.data;
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      return false;
+    }
+  }
 
-  const resetAdd = () => {
-    setIsAdd(false);
-    setAddingFile(null);
-  };
+  async function UserLogin(usuario, password, app, token) {
+    try {
+      const request = await Api.post(
+        'ServiceDesk/loginUsuarios',
+        {usuario, password, app},
+        {headers: {Authorization: `Bearer ${token}`}}
+      );
+
+      return request.data;
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      return false;
+    }
+  }
 
   return {
-    isEditing,
-    setIsEditing,
-    editingFile,
-    setEditingFile,
-    isAdd,
-    setIsAdd,
-    addingFile,
-    setAddingFile,
-    resetEditing,
-    resetAdd,
-    onEditFile
+    LoginRequest,
+    setUserLocalStorage,
+    UserLogin
   };
 };

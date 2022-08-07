@@ -9,7 +9,10 @@ export const StyledContainerLayout = styled.div.attrs({
     position: absolute;
     left: 0;
     right: 0;
-    top: 847px;
+    top: auto;
+    width: 100%;
+    background: #efefef;
+    z-index: -3;
   }
 
   .div-figures {
@@ -17,6 +20,7 @@ export const StyledContainerLayout = styled.div.attrs({
     right: 0;
     bottom: 0;
     z-index: -2;
+    margin-bottom: -50px;
   }
 
   backdrop-filter: blur(20px);
@@ -30,8 +34,8 @@ export const StyledContainerLayout = styled.div.attrs({
   box-shadow: inset 0px 0px 22.473px rgba(255, 255, 255, 0.6);
   filter: drop-shadow(0px 6.91477px 6.91477px rgba(0, 0, 0, 0.25));
   backdrop-filter: blur(20px);
-
-  height: 928px;
+  max-height: 100%;
+  height: 100%;
 
   header {
     display: flex;

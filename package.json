@@ -8,6 +8,7 @@
     "@babel/eslint-parser": "7.17.*",
     "@babel/preset-react": "7.16.*",
     "antd": "^4.21.5",
+    "axios": "^0.27.2",
     "eslint": "8.13.*",
     "eslint-config-prettier": "8.5.*",
     "eslint-config-react-app": "7.0.*",

@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import { Switch} from 'antd';
+import {Switch} from 'antd';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 export const useCustomGarments = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -34,14 +34,14 @@ export const useCustomGarments = () => {
     setEditingFile({...record});
   };
 
-  const onChange = (record,selectedRows) => {
+  const onChange = (record, selectedRows) => {
     let auxArray = JSON.parse(JSON.stringify(dataSource));
-    for(let i =0; i<auxArray.length;i++){
-      if(auxArray[i].id===record.id){
-        auxArray[i].estado = selectedRows ? 'Activo':'Inactivo';
+    for (let i = 0; i < auxArray.length; i++) {
+      if (auxArray[i].id === record.id) {
+        auxArray[i].estado = selectedRows ? 'Activo' : 'Inactivo';
       }
     }
-    `switch to ${record}`;
+
     record ? record.enabled : !record.enabled;
     setDataSource(auxArray);
   };
@@ -69,7 +69,13 @@ export const useCustomGarments = () => {
       render: (record) => {
         return (
           <div className="flex-action">
-            <Switch className="input-switch" defaultChecked onChange={(selectedRows )=>{onChange(record,selectedRows)}} />
+            <Switch
+              className="input-switch"
+              defaultChecked
+              onChange={(selectedRows) => {
+                onChange(record, selectedRows);
+              }}
+            />
             <div
               onClick={() => {
                 onEditFile(record);

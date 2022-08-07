@@ -11,7 +11,7 @@ export const useCustomReasons = () => {
     {
       id: 1,
       reason: 'Personal nuevo',
-      replacement: 'NO',
+      replacement: 'SI',
       replacementManual: '3',
       payment: 'NO',
       dues: '0',
@@ -22,7 +22,161 @@ export const useCustomReasons = () => {
     {
       id: 2,
       reason: 'Personal nuevo',
-      replacement: 'NO',
+      replacement: 'SI',
+      replacementManual: '3',
+      payment: 'NO',
+      dues: '0',
+      calculation: 'Desde la fecha de ingreso',
+      discountPersonal: '0%',
+      discountCompany: '50%'
+    },
+    {
+      id: 3,
+      reason: 'Personal nuevo',
+      replacement: 'SI',
+      replacementManual: '3',
+      payment: 'NO',
+      dues: '0',
+      calculation: 'Desde la fecha de ingreso',
+      discountPersonal: '0%',
+      discountCompany: '50%'
+    },
+    {
+      id: 4,
+      reason: 'Personal nuevo',
+      replacement: 'SI',
+      replacementManual: '3',
+      payment: 'NO',
+      dues: '0',
+      calculation: 'Desde la fecha de ingreso',
+      discountPersonal: '0%',
+      discountCompany: '50%'
+    },
+    {
+      id: 5,
+      reason: 'Personal nuevo',
+      replacement: 'SI',
+      replacementManual: '3',
+      payment: 'NO',
+      dues: '0',
+      calculation: 'Desde la fecha de ingreso',
+      discountPersonal: '0%',
+      discountCompany: '50%'
+    },
+    {
+      id: 6,
+      reason: 'Personal nuevo',
+      replacement: 'SI',
+      replacementManual: '3',
+      payment: 'NO',
+      dues: '0',
+      calculation: 'Desde la fecha de ingreso',
+      discountPersonal: '0%',
+      discountCompany: '50%'
+    },
+    {
+      id: 7,
+      reason: 'Personal nuevo',
+      replacement: 'SI',
+      replacementManual: '3',
+      payment: 'NO',
+      dues: '0',
+      calculation: 'Desde la fecha de ingreso',
+      discountPersonal: '0%',
+      discountCompany: '50%'
+    },
+    {
+      id: 8,
+      reason: 'Personal nuevo',
+      replacement: 'SI',
+      replacementManual: '3',
+      payment: 'NO',
+      dues: '0',
+      calculation: 'Desde la fecha de ingreso',
+      discountPersonal: '0%',
+      discountCompany: '50%'
+    },
+    {
+      id: 9,
+      reason: 'Personal nuevo',
+      replacement: 'SI',
+      replacementManual: '3',
+      payment: 'NO',
+      dues: '0',
+      calculation: 'Desde la fecha de ingreso',
+      discountPersonal: '0%',
+      discountCompany: '50%'
+    },
+    {
+      id: 10,
+      reason: 'Personal nuevo',
+      replacement: 'SI',
+      replacementManual: '3',
+      payment: 'NO',
+      dues: '0',
+      calculation: 'Desde la fecha de ingreso',
+      discountPersonal: '0%',
+      discountCompany: '50%'
+    },
+    {
+      id: 11,
+      reason: 'Personal nuevo',
+      replacement: 'SI',
+      replacementManual: '3',
+      payment: 'NO',
+      dues: '0',
+      calculation: 'Desde la fecha de ingreso',
+      discountPersonal: '0%',
+      discountCompany: '50%'
+    },
+    {
+      id: 12,
+      reason: 'Personal nuevo',
+      replacement: 'SI',
+      replacementManual: '3',
+      payment: 'NO',
+      dues: '0',
+      calculation: 'Desde la fecha de ingreso',
+      discountPersonal: '0%',
+      discountCompany: '50%'
+    },
+    {
+      id: 13,
+      reason: 'Personal nuevo',
+      replacement: 'SI',
+      replacementManual: '3',
+      payment: 'NO',
+      dues: '0',
+      calculation: 'Desde la fecha de ingreso',
+      discountPersonal: '0%',
+      discountCompany: '50%'
+    },
+    {
+      id: 14,
+      reason: 'Personal nuevo',
+      replacement: 'SI',
+      replacementManual: '3',
+      payment: 'NO',
+      dues: '0',
+      calculation: 'Desde la fecha de ingreso',
+      discountPersonal: '0%',
+      discountCompany: '50%'
+    },
+    {
+      id: 15,
+      reason: 'Personal nuevo',
+      replacement: 'SI',
+      replacementManual: '3',
+      payment: 'NO',
+      dues: '0',
+      calculation: 'Desde la fecha de ingreso',
+      discountPersonal: '0%',
+      discountCompany: '50%'
+    },
+    {
+      id: 16,
+      reason: 'Personal nuevo',
+      replacement: 'SI',
       replacementManual: '3',
       payment: 'NO',
       dues: '0',
@@ -37,8 +191,16 @@ export const useCustomReasons = () => {
     setEditingFile({...record});
   };
 
-  const onChange = (checked) => {
-    `switch to ${checked}`;
+  const onChange = (record, selectedRows) => {
+    let auxArray = JSON.parse(JSON.stringify(dataSource));
+    for (let i = 0; i < auxArray.length; i++) {
+      if (auxArray[i].id === record.id) {
+        auxArray[i].replacement = selectedRows ? 'SI' : 'NO';
+      }
+    }
+
+    record ? record.enabled : !record.enabled;
+    setDataSource(auxArray);
   };
 
   const columns = [
@@ -88,7 +250,13 @@ export const useCustomReasons = () => {
       render: (record) => {
         return (
           <div className="flex-action">
-            <Switch className="input-switch" defaultChecked onChange={onChange} />
+            <Switch
+              className="input-switch"
+              defaultChecked={record.replacement === 'SI'}
+              onChange={(selectedRows) => {
+                onChange(record, selectedRows);
+              }}
+            />
             <div
               onClick={() => {
                 onEditFile(record);
@@ -135,6 +303,7 @@ export const useCustomReasons = () => {
     setAddingFile,
     resetEditing,
     resetAdd,
-    onAddFile
+    onAddFile,
+    onChange
   };
 };

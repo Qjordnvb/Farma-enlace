@@ -59,24 +59,13 @@ function TableReplacement() {
             }}
           >
             <Form>
-              <Form.Item className="item-form" label="Motivo">
+              <Form.Item className="item-form" label="Porcentajes">
                 <Input
                   className="input-add"
-                  value={editingFile?.reason}
+                  value={editingFile?.porcentaje}
                   onChange={(e) => {
                     setEditingFile((pre) => {
-                      return {...pre, reason: e.target.value};
-                    });
-                  }}
-                />
-              </Form.Item>
-              <Form.Item className="item-form" label="Reposición automática">
-                <Input
-                  className="input-add"
-                  value={editingFile?.replacement}
-                  onChange={(e) => {
-                    setEditingFile((pre) => {
-                      return {...pre, replacement: e.target.value};
+                      return {...pre, porcentaje: e.target.value};
                     });
                   }}
                 />
@@ -84,65 +73,10 @@ function TableReplacement() {
               <Form.Item className="item-form" label="Reposición">
                 <Input
                   className="input-add"
-                  value={editingFile?.replacementManual}
+                  value={editingFile?.replacement}
                   onChange={(e) => {
                     setEditingFile((pre) => {
-                      return {...pre, replacementManual: e.target.value};
-                    });
-                  }}
-                />
-              </Form.Item>
-              <Form.Item className="item-form" label="Cobro">
-                <Input
-                  className="input-add"
-                  value={editingFile?.payment}
-                  onChange={(e) => {
-                    setEditingFile((pre) => {
-                      return {...pre, payment: e.target.value};
-                    });
-                  }}
-                />
-              </Form.Item>
-              <Form.Item className="item-form" label="Cuotas">
-                <Input
-                  className="input-add"
-                  value={editingFile?.dues}
-                  onChange={(e) => {
-                    setEditingFile((pre) => {
-                      return {...pre, dues: e.target.value};
-                    });
-                  }}
-                />
-              </Form.Item>
-              <Form.Item className="item-form" label="Cálculo">
-                <Input
-                  className="input-add"
-                  value={editingFile?.calculation}
-                  onChange={(e) => {
-                    setEditingFile((pre) => {
-                      return {...pre, calculation: e.target.value};
-                    });
-                  }}
-                />
-              </Form.Item>
-              <Form.Item className="item-form" label="Descuento Personal">
-                <Input
-                  className="input-add"
-                  value={editingFile?.discountPersonal}
-                  onChange={(e) => {
-                    setEditingFile((pre) => {
-                      return {...pre, discountPersonal: e.target.value};
-                    });
-                  }}
-                />
-              </Form.Item>
-              <Form.Item className="item-form" label="Descuento Farmaenlace">
-                <Input
-                  className="input-add"
-                  value={editingFile?.discountCompany}
-                  onChange={(e) => {
-                    setEditingFile((pre) => {
-                      return {...pre, discountCompany: e.target.value};
+                      return {...pre, replacement: e.target.value};
                     });
                   }}
                 />

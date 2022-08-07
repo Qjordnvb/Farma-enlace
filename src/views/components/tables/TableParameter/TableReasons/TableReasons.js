@@ -18,7 +18,8 @@ function TableReasons() {
     setAddingFile,
     resetEditing,
     resetAdd,
-    onAddFile
+    onAddFile,
+    onChange
   } = useCustomReasons();
   const [options, setOptions] = React.useState([]);
   const {Option} = Select;
@@ -32,10 +33,13 @@ function TableReasons() {
       <div>
         <Table
           pagination={{
-            pageSize: 5
+            pageSize: 10
           }}
           columns={columns}
           dataSource={dataSource}
+          rowClassName={(record) => record.replacement === 'NO' && 'disabled-row'}
+          rowKey={(record) => record.id}
+          scroll={{y: 500}}
         ></Table>
         <>
           <Modal
@@ -184,13 +188,12 @@ function TableReasons() {
                 </Form.Item>
                 <Form.Item className="item-form" label="Reposición automática">
                   <Switch
-                    checkedChildren={<p>SI</p>}
-                    unCheckedChildren={<p>NO</p>}
                     className="input-switch"
-                    checked={addingFile?.replacement}
-                    onChange={() => {
-                      setAddingFile((pre) => {
-                        return {...pre, replacement: 'SI'};
+                    value={addingFile?.replacement}
+                    onChange={(record, selectedRows) => {
+                      onChange(record, selectedRows);
+                      setAddingFile((record) => {
+                        return {...record, replacement: record.replacement ? 'NO' : 'SI'};
                       });
                     }}
                   />
