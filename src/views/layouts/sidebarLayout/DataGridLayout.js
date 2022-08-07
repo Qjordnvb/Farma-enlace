@@ -35,9 +35,19 @@ function DataGridLayout({children, titleGrid, userMenuLinks}) {
 
           <StyledOptionData>
             {_.map(userMenuLinks, (link) => {
+              console.log('soy link', link);
               return (
                 <NavLink
-                  className={({isActive}) => (isActive ? 'active' : '')}
+                  className={({isActive}) =>
+                    isActive
+                      ? 'active'
+                      : `${
+                          window.location.pathname === '/private/*parameters/list/reasons' &&
+                          link.name === 'Lista administrable'
+                            ? 'active'
+                            : ''
+                        }`
+                  }
                   to={link.path}
                   key={link.key}
                 >
