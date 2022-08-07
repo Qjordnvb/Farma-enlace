@@ -19,50 +19,53 @@ export default function TableDelivery() {
   return (
     <div>
       <Table columns={columns} dataSource={dataSource} />
-      <>
-        <Modal
-          title="Agregar Prenda"
-          visible={isAdd}
-          okText="Crear Prenda"
-          onCancel={() => {
-            resetAdd();
-          }}
-          onOk={() => {
-            setDataSource(() => {
-              return [...dataSource, addingFile];
-            });
+      {isAdd && (
+        <>
+          <Modal
+            title="Agregar Prenda"
+            visible={isAdd}
+            okText="Crear Prenda"
+            onCancel={() => {
+              resetAdd();
+            }}
+            onOk={() => {
+              setDataSource(() => {
+                return [...dataSource, addingFile];
+              });
 
-            resetAdd();
-          }}
-        >
-          <Form id="modalAdd">
-            <Form.Item className="item-form" label="Motivos">
-              <Input
-                className="input-add"
-                placeholder="000001"
-                value={addingFile?.motivo}
-                onChange={(e) => {
-                  setAddingFile(() => {
-                    return {motivo: e.target.value};
-                  });
-                }}
-              />
-            </Form.Item>
-            <Form.Item className="item-form" label="Uniformes">
-              <Search
-                className="input-add"
-                placeholder="Seleccionar..."
-                value={addingFile?.prendas}
-                onChange={(e) => {
-                  setAddingFile((pre) => {
-                    return {...pre, prendas: e.target.value};
-                  });
-                }}
-              />
-            </Form.Item>
-          </Form>
-        </Modal>
-      </>
+              resetAdd();
+            }}
+          >
+            <Form id="modalAdd">
+              <Form.Item className="item-form" label="Motivos">
+                <Input
+                  className="input-add"
+                  placeholder="000001"
+                  value={addingFile?.motivo}
+                  onChange={(e) => {
+                    setAddingFile(() => {
+                      return {motivo: e.target.value};
+                    });
+                  }}
+                />
+              </Form.Item>
+              <Form.Item className="item-form" label="Uniformes">
+                <Search
+                  className="input-add"
+                  placeholder="Seleccionar..."
+                  value={addingFile?.prendas}
+                  onChange={(e) => {
+                    setAddingFile((pre) => {
+                      return {...pre, prendas: e.target.value};
+                    });
+                  }}
+                />
+              </Form.Item>
+            </Form>
+          </Modal>
+        </>
+      )}
+
       <div className="flex justify-end">
         <button onClick={onAddFile}>
           <img src={btnAdd} alt={'add'} />{' '}

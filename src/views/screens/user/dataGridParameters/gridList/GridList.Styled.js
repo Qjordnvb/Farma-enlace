@@ -26,8 +26,8 @@ export const StyledOptionDataList = styled.div.attrs({
   padding: 16px;
   margin: auto;
   margin-top: 3.2%;
-
-  width: 1232px;
+  max-width: 1400px;
+  width: 100%;
 
   /* Tono 1 */
 

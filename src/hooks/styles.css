@@ -1,0 +1,191 @@
+.ant-input:hover {
+  border-color: #2bc155;
+  border-right-width: 1px;
+}
+
+.ant-input-focused,
+.ant-input:focus {
+  border-color: #2bc155;
+  border-right-width: 1px;
+}
+
+button.ant-btn.ant-btn-primary.ant-btn-sm {
+  color: #fff;
+  border-color: #2bc155;
+  background: #2bc155;
+  text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+}
+
+button.ant-btn.ant-btn-primary.ant-btn-sm:hover {
+  border-color: #2bc155;
+  background: #2bc155;
+  color: #fff;
+}
+
+.ant-btn-primary:focus {
+  border-color: #2bc155;
+  background: #2bc155;
+  color: #fff;
+}
+
+.ant-btn-sm {
+  border-color: #2bc155;
+}
+
+.ant-btn-link {
+  color: #2bc155;
+}
+
+.ant-btn-sm:hover {
+  border-color: #2bc155;
+  color: #2bc155;
+}
+
+.ant-btn-sm:focus {
+  border-color: #2bc155;
+  color: #2bc155;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > thead
+  > tr
+  > th.ant-table-cell.ant-table-column-sort.ant-table-column-has-sorters
+  > div
+  > span.ant-table-column-title
+  > div
+  > span.ant-table-column-sorter.ant-table-column-sorter-full
+  > span
+  > span.anticon.anticon-caret-down.ant-table-column-sorter-down.active
+  > svg {
+  fill: #2bc155;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > thead
+  > tr
+  > th.ant-table-cell.ant-table-column-sort.ant-table-column-has-sorters
+  > div
+  > span.ant-table-column-title
+  > div
+  > span.ant-table-column-sorter.ant-table-column-sorter-full
+  > span
+  > span.anticon.anticon-caret-up.ant-table-column-sorter-up.active
+  > svg {
+  fill: #2bc155;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > thead
+  > tr
+  > th.ant-table-cell.ant-table-column-sort.ant-table-column-has-sorters
+  > div
+  > span
+  > span
+  > svg:hover {
+  fill: #ffffff;
+}
+
+span.ant-dropdown-trigger.ant-table-filter-trigger:hover {
+  background: #2bc155;
+  color: #ffffff;
+}
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div.container-table
+  > div:nth-child(1)
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > thead
+  > tr
+  > th:nth-child(2)
+  > div
+  > span.ant-dropdown-trigger.ant-table-filter-trigger.active
+  > span
+  > svg {
+  fill: #bfbfbf;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > thead
+  > tr
+  > th.ant-table-cell.ant-table-column-sort.ant-table-column-has-sorters
+  > div
+  > span.ant-dropdown-trigger.ant-table-filter-trigger.active,
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > thead
+  > tr
+  > th.ant-table-cell.ant-table-column-sort.ant-table-column-has-sorters
+  > div
+  > span.ant-dropdown-trigger.ant-table-filter-trigger.active
+  > span {
+  color: #bfbfbf !important;
+}

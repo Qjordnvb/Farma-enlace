@@ -18,6 +18,11 @@
   text-align: center;
 }
 
+.btn-edit img {
+  width: 99px;
+  height: auto;
+}
+
 #root
   > div
   > div
@@ -224,4 +229,7 @@ input.input-add {
 
 .ant-select.ant-select-in-form-item.ant-select-single.ant-select-show-arrow {
   width: auto;
+}
+li.ant-pagination-item.ant-pagination-item-1.ant-pagination-item-active {
+  border-color: #2bc155;
 }

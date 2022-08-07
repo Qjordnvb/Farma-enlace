@@ -3,16 +3,13 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 
 import {NavLink} from 'react-router-dom';
-// import {DATA} from 'config/paths';
-// import {DATA} from 'config/paths';
+
 import useViews from 'views';
 import Button from 'views/components/button/Button';
 import SidebarMenu from 'views/components/sidebar';
 import BgFigures from '../../../assets/img/bg-figures.png';
 import Logo from '../../../assets/img/logo.png';
 import {StyledContainerDataGrid, StyledOptionData} from './DataGridLayout.Styled';
-
-// import GridList from 'views/screens/user/dataGridParameters/gridList';
 
 function DataGridLayout({children, titleGrid, userMenuLinks}) {
   const {useLayouts} = useViews();
@@ -35,7 +32,6 @@ function DataGridLayout({children, titleGrid, userMenuLinks}) {
 
           <StyledOptionData>
             {_.map(userMenuLinks, (link) => {
-              console.log('soy link', link);
               return (
                 <NavLink
                   className={({isActive}) =>

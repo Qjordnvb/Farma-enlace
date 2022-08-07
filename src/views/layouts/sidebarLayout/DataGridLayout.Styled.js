@@ -16,7 +16,8 @@ export const StyledOptionData = styled.div.attrs({
   justify-content: space-around;
   margin: auto;
   position: absolute;
-  width: 1232px;
+  max-width: 1400px;
+  width: 100%;
   height: 60px;
 
   top: 230px;

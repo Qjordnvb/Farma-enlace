@@ -296,11 +296,30 @@ button.ant-btn.ant-btn-primary.ant-btn-sm:hover {
   fill: #2bc155;
 }
 
-.ant-table-filter-trigger {
-  color: #2bc155;
-}
-
 .ant-table-filter-trigger:hover {
   background: #2bc155;
   color: #ffffff;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > thead
+  > tr
+  > th.ant-table-cell.ant-table-column-sort.ant-table-column-has-sorters
+  > div
+  > span.ant-dropdown-trigger.ant-table-filter-trigger.active
+  > span
+  > svg:hover {
+  fill: #ffffff !important;
 }

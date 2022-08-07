@@ -1,5 +1,5 @@
 import {useState} from 'react';
-
+import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 
 export const useCustomReplacement = () => {
@@ -7,6 +7,7 @@ export const useCustomReplacement = () => {
   const [addingFile, setAddingFile] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editingFile, setEditingFile] = useState(null);
+  const {getColumnSearchProps} = useUtils();
   const [dataSource, setDataSource] = useState([
     {
       id: 1,
@@ -16,10 +17,10 @@ export const useCustomReplacement = () => {
       talla: 'M',
       genero: 'HOMBRE',
       porcentaje: '30%',
-      replacement: '15 días',
+      replacement: '10 días',
       sugeridoMinimo: '10',
       sugeridoMaximo: '20',
-      ultimaM: '10',
+      ultimaM: 'jjarrin',
       fechaM: '10/10/2020'
     },
     {
@@ -33,7 +34,7 @@ export const useCustomReplacement = () => {
       replacement: '15 días',
       sugeridoMinimo: '10',
       sugeridoMaximo: '20',
-      ultimaM: '10',
+      ultimaM: 'jjalvarez',
       fechaM: '10/10/2020'
     }
   ]);
@@ -52,56 +53,87 @@ export const useCustomReplacement = () => {
     {
       key: '1',
       title: 'Código bodega',
-      dataIndex: 'codigo'
+      dataIndex: 'codigo',
+      ...getColumnSearchProps('codigo'),
+      sorter: (a, b) => a.codigo.length - b.codigo.length,
+      sortDirections: ['descend', 'ascend']
     },
     {
       key: '2',
       title: 'Descripción',
-      dataIndex: 'descripcion'
+      dataIndex: 'descripcion',
+      ...getColumnSearchProps('descripcion'),
+      sorter: (a, b) => a.descripcion.length - b.descripcion.length,
+      sortDirections: ['descend', 'ascend']
     },
     {
       key: '3',
       title: 'Talla',
-      dataIndex: 'talla'
+      dataIndex: 'talla',
+      ...getColumnSearchProps('talla'),
+      sorter: (a, b) => a.talla.length - b.talla.length,
+      sortDirections: ['descend', 'ascend']
     },
     {
       key: '4',
       title: 'Genero',
-      dataIndex: 'genero'
+      dataIndex: 'genero',
+      ...getColumnSearchProps('genero'),
+      sorter: (a, b) => a.genero.length - b.genero.length,
+      sortDirections: ['descend', 'ascend']
     },
     {
       key: '5',
       title: 'Porcentajes',
-      dataIndex: 'porcentaje'
+      dataIndex: 'porcentaje',
+      ...getColumnSearchProps('porcentaje'),
+      sorter: (a, b) => a.porcentaje.length - b.porcentaje.length,
+      sortDirections: ['descend', 'ascend']
     },
     {
       key: '6',
       title: 'Reposición',
-      dataIndex: 'replacement'
+      dataIndex: 'replacement',
+      ...getColumnSearchProps('replacement'),
+      sorter: (a, b) => a.replacement.length - b.replacement.length,
+      sortDirections: ['descend', 'ascend']
     },
     {
       key: '7',
       title: 'Sugerido mínimo',
-      dataIndex: 'sugeridoMinimo'
+      dataIndex: 'sugeridoMinimo',
+      ...getColumnSearchProps('sugeridoMinimo'),
+      sorter: (a, b) => a.sugeridoMinimo.length - b.sugeridoMinimo.length,
+      sortDirections: ['descend', 'ascend']
     },
     {
       key: '8',
       title: 'Sugerido máximo',
-      dataIndex: 'sugeridoMaximo'
+      dataIndex: 'sugeridoMaximo',
+      ...getColumnSearchProps('sugeridoMaximo'),
+      sorter: (a, b) => a.sugeridoMaximo.length - b.sugeridoMaximo.length,
+      sortDirections: ['descend', 'ascend']
     },
     {
       key: '9',
       title: 'Última modificación',
-      dataIndex: 'ultimaM'
+      dataIndex: 'ultimaM',
+      ...getColumnSearchProps('ultimaM'),
+      sorter: (a, b) => a.ultimaM.length - b.ultimaM.length,
+      sortDirections: ['descend', 'ascend']
     },
     {
       key: '10',
       title: 'Fecha de modificación',
-      dataIndex: 'fechaM'
+      dataIndex: 'fechaM',
+      ...getColumnSearchProps('fechaM'),
+      sorter: (a, b) => a.fechaM.length - b.fechaM.length,
+      sortDirections: ['descend', 'ascend']
     },
     {
       key: '11',
       title: 'Acción',
+      width: '15%',
       render: (record) => {
         return (
           <div className="flex-action">

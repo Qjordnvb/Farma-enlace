@@ -15,11 +15,11 @@ export default function GridList() {
   return (
     <>
       <StyledOptionDataList>
-        <NavLink className={({isActive}) => (isActive ? 'active' : '')} to="garments" key={'9'}>
+        <NavLink className={({isActive}) => (isActive ? 'active' : '')} to="garments">
           <span>prenda parametrizadas</span>
           <div className={({isActive}) => (isActive ? 'div-bg' : '')} />
         </NavLink>
-        <NavLink className={({isActive}) => (isActive ? 'active' : '')} to="reasons" key={'10'}>
+        <NavLink className={({isActive}) => (isActive ? 'active' : '')} to="reasons">
           <span>motivos parametrizados</span>
           <div className={({isActive}) => (isActive ? 'div-bg' : '')} />
         </NavLink>

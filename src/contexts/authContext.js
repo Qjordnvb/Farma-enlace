@@ -1,7 +1,7 @@
 import {createContext, useCallback, useContext, useMemo, useState} from 'react';
 import PropTypes from 'prop-types';
 import {LOGIN} from 'config/paths';
-import {useUstils} from 'hooks';
+import {useUtils} from 'hooks';
 
 const MY_AUTH_APP = 'MY_AUTH_APP';
 
@@ -11,7 +11,7 @@ export default function AuthContextProvider({children}) {
   const [isAuthenticated, setIsAuthenticated] = useState(window.localStorage.getItem(MY_AUTH_APP));
   const [token, setToken] = useState();
 
-  const {LoginRequest, UserLogin} = useUstils();
+  const {LoginRequest, UserLogin} = useUtils();
 
   const login = useCallback(
     async function (usuario, password) {

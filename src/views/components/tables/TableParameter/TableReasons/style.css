@@ -225,3 +225,31 @@ input.input-add {
 .ant-select.ant-select-in-form-item.ant-select-single.ant-select-show-arrow {
   width: auto;
 }
+
+#root
+  > div
+  > div
+  > div
+  > div
+  > div.container-table
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div.ant-table-header
+  > table
+  > thead
+  > tr
+  > th
+  > div
+  > span.ant-dropdown-trigger.ant-table-filter-trigger.active
+  > span {
+  color: #bfbfbf !important;
+}
+
+.input-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

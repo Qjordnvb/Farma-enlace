@@ -37,53 +37,55 @@ function TableReplacement() {
           columns={columns}
           dataSource={dataSource}
         ></Table>
-        <>
-          <Modal
-            title="Editar"
-            visible={isEditing}
-            okText="Guardar"
-            onCancel={() => {
-              resetEditing();
-            }}
-            onOk={() => {
-              setDataSource((pre) => {
-                return pre.map((file) => {
-                  if (file.id === editingFile.id) {
-                    return editingFile;
-                  } else {
-                    return file;
-                  }
+        {isEditing && (
+          <>
+            <Modal
+              title="Editar"
+              visible={isEditing}
+              okText="Guardar"
+              onCancel={() => {
+                resetEditing();
+              }}
+              onOk={() => {
+                setDataSource((pre) => {
+                  return pre.map((file) => {
+                    if (file.id === editingFile.id) {
+                      return editingFile;
+                    } else {
+                      return file;
+                    }
+                  });
                 });
-              });
-              resetEditing();
-            }}
-          >
-            <Form>
-              <Form.Item className="item-form" label="Porcentajes">
-                <Input
-                  className="input-add"
-                  value={editingFile?.porcentaje}
-                  onChange={(e) => {
-                    setEditingFile((pre) => {
-                      return {...pre, porcentaje: e.target.value};
-                    });
-                  }}
-                />
-              </Form.Item>
-              <Form.Item className="item-form" label="Reposición">
-                <Input
-                  className="input-add"
-                  value={editingFile?.replacement}
-                  onChange={(e) => {
-                    setEditingFile((pre) => {
-                      return {...pre, replacement: e.target.value};
-                    });
-                  }}
-                />
-              </Form.Item>
-            </Form>
-          </Modal>
-        </>
+                resetEditing();
+              }}
+            >
+              <Form>
+                <Form.Item className="item-form" label="Porcentajes">
+                  <Input
+                    className="input-add"
+                    value={editingFile?.porcentaje}
+                    onChange={(e) => {
+                      setEditingFile((pre) => {
+                        return {...pre, porcentaje: e.target.value};
+                      });
+                    }}
+                  />
+                </Form.Item>
+                <Form.Item className="item-form" label="Reposición">
+                  <Input
+                    className="input-add"
+                    value={editingFile?.replacement}
+                    onChange={(e) => {
+                      setEditingFile((pre) => {
+                        return {...pre, replacement: e.target.value};
+                      });
+                    }}
+                  />
+                </Form.Item>
+              </Form>
+            </Modal>
+          </>
+        )}
       </div>
       <StyledGridList>
         <div className="btn-add">

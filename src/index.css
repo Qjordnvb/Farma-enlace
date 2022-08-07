@@ -15,7 +15,8 @@ html {
 }
 
 .container-table {
-  width: 1232px;
+  max-width: 1400px;
+  width: 100%;
   margin: auto;
 }
 
@@ -162,4 +163,91 @@ html {
   > div
   > div {
   pointer-events: none;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > thead
+  > tr
+  > th.ant-table-cell.ant-table-column-sort.ant-table-column-has-sorters
+  > div
+  > span.ant-dropdown-trigger.ant-table-filter-trigger.active
+  > span:hover {
+  color: #ffffff !important;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > thead
+  > tr
+  > th.ant-table-cell.ant-table-column-sort.ant-table-column-has-sorters
+  > div
+  > span.ant-dropdown-trigger.ant-table-filter-trigger.active:hover {
+  color: #ffffff !important;
+}
+
+.ant-input-focused,
+.ant-input:focus {
+  border-color: #2bc155 !important;
+}
+
+.ant-btn-link {
+  color: #2bc155 !important;
+  border-color: #2bc155 !important;
+}
+
+button.ant-btn.ant-btn-default.ant-btn-sm {
+  color: #2bc155 !important;
+  border-color: #2bc155 !important;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div.container-table
+  > div:nth-child(1)
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > thead
+  > tr
+  > th
+  > div
+  > span.ant-dropdown-trigger.ant-table-filter-trigger
+  > span
+  > svg:hover {
+  fill: #ffffff;
+}
+
+span.anticon.anticon-caret-down.ant-table-column-sorter-down.active,
+span.anticon.anticon-caret-up.ant-table-column-sorter-up.active {
+  color: #2bc155 !important;
 }
