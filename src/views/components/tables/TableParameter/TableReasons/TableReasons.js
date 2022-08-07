@@ -1,9 +1,9 @@
 import React from 'react';
-import {Table, Modal, Input, Form, Switch, Select} from 'antd';
+import { Table, Modal, Input, Form, Switch, Select } from 'antd';
 import './style.css';
 import Button from 'views/components/button/Button';
-import {StyledGridList} from 'views/screens/user/dataGridParameters/gridList/GridList.Styled';
-import {useCustomReasons} from './hooks';
+import { StyledGridList } from 'views/screens/user/dataGridParameters/gridList/GridList.Styled';
+import { useCustomReasons } from './hooks';
 
 function TableReasons() {
   const {
@@ -18,14 +18,12 @@ function TableReasons() {
     setAddingFile,
     resetEditing,
     resetAdd,
-    onAddFile,
-    onChange
+    onAddFile
   } = useCustomReasons();
-  const [options, setOptions] = React.useState([]);
-  const {Option} = Select;
+  const { Option } = Select;
 
-  const percentage = ['10%', '20%', '30%', '40%', '50%', '60%', '70%'];
-  const cal = [' Fecha de ingreso del colaborador', 'Fecha de última reposición'];
+  const percentage = ['0%', '10%', '20%', '30%', '40%', '50%', '60%', '70%'];
+  const cal = ['Fecha de ingreso del colaborador', 'Fecha de última reposición'];
 
   return (
     <>
@@ -39,7 +37,7 @@ function TableReasons() {
           dataSource={dataSource}
           rowClassName={(record) => record.replacement === 'NO' && 'disabled-row'}
           rowKey={(record) => record.id}
-          scroll={{y: 500}}
+          scroll={{ y: 500 }}
         ></Table>
         <>
           <Modal
@@ -69,7 +67,7 @@ function TableReasons() {
                   value={editingFile?.reason}
                   onChange={(e) => {
                     setEditingFile((pre) => {
-                      return {...pre, reason: e.target.value};
+                      return { ...pre, reason: e.target.value };
                     });
                   }}
                 />
@@ -80,7 +78,7 @@ function TableReasons() {
                   value={editingFile?.replacement}
                   onChange={(e) => {
                     setEditingFile((pre) => {
-                      return {...pre, replacement: e.target.value};
+                      return { ...pre, replacement: e.target.value };
                     });
                   }}
                 />
@@ -91,7 +89,7 @@ function TableReasons() {
                   value={editingFile?.replacementManual}
                   onChange={(e) => {
                     setEditingFile((pre) => {
-                      return {...pre, replacementManual: e.target.value};
+                      return { ...pre, replacementManual: e.target.value };
                     });
                   }}
                 />
@@ -102,7 +100,7 @@ function TableReasons() {
                   value={editingFile?.payment}
                   onChange={(e) => {
                     setEditingFile((pre) => {
-                      return {...pre, payment: e.target.value};
+                      return { ...pre, payment: e.target.value };
                     });
                   }}
                 />
@@ -113,7 +111,7 @@ function TableReasons() {
                   value={editingFile?.dues}
                   onChange={(e) => {
                     setEditingFile((pre) => {
-                      return {...pre, dues: e.target.value};
+                      return { ...pre, dues: e.target.value };
                     });
                   }}
                 />
@@ -124,7 +122,7 @@ function TableReasons() {
                   value={editingFile?.calculation}
                   onChange={(e) => {
                     setEditingFile((pre) => {
-                      return {...pre, calculation: e.target.value};
+                      return { ...pre, calculation: e.target.value };
                     });
                   }}
                 />
@@ -135,7 +133,7 @@ function TableReasons() {
                   value={editingFile?.discountPersonal}
                   onChange={(e) => {
                     setEditingFile((pre) => {
-                      return {...pre, discountPersonal: e.target.value};
+                      return { ...pre, discountPersonal: e.target.value };
                     });
                   }}
                 />
@@ -146,7 +144,7 @@ function TableReasons() {
                   value={editingFile?.discountCompany}
                   onChange={(e) => {
                     setEditingFile((pre) => {
-                      return {...pre, discountCompany: e.target.value};
+                      return { ...pre, discountCompany: e.target.value };
                     });
                   }}
                 />
@@ -155,153 +153,142 @@ function TableReasons() {
           </Modal>
         </>
 
-        <>
-          <Modal
-            className="modal-add-reasons"
-            title="Agregar Prenda"
-            visible={isAdd}
-            okText="Crear Prenda"
-            onCancel={() => {
-              resetAdd();
-            }}
-            onOk={() => {
-              setDataSource(() => {
-                return [...dataSource, addingFile];
-              });
+        {isAdd && (
+          <>
+            <Modal
+              className="modal-add-reasons"
+              title="Agregar Prenda"
+              visible={isAdd}
+              okText="Crear Prenda"
+              onCancel={() => {
+                resetAdd();
+              }}
+              onOk={() => {
+                setDataSource(() => {
+                  return [...dataSource, addingFile];
+                });
 
-              resetAdd();
-            }}
-          >
-            <Form id="modalAdd" className="w-full">
-              <div className="flex">
-                <Form.Item className="item-form" label="Motivo">
-                  <Input
-                    className="input-add"
-                    placeholder="Motivo"
-                    value={addingFile?.reason}
-                    onChange={(e) => {
-                      setAddingFile((pre) => {
-                        return {...pre, reason: e.target.value};
-                      });
-                    }}
-                  />
-                </Form.Item>
-                <Form.Item className="item-form" label="Reposición automática">
-                  <Switch
-                    className="input-switch"
-                    value={addingFile?.replacement}
-                    onChange={(record, selectedRows) => {
-                      onChange(record, selectedRows);
-                      setAddingFile((record) => {
-                        return {...record, replacement: record.replacement ? 'NO' : 'SI'};
-                      });
-                    }}
-                  />
-                </Form.Item>
-                <Form.Item className="item-form" label="Reposición cantidad">
-                  <Input
-                    type="number"
-                    className="input-add"
-                    placeholder="Días"
-                    value={addingFile?.replacementManual}
-                    onChange={(e) => {
-                      setAddingFile((pre) => {
-                        return {...pre, replacementManual: e.target.value};
-                      });
-                    }}
-                  />
-                </Form.Item>
-                <Form.Item className="item-form" label="Cálculo desde">
-                  <Select
-                    defaultValue={'Fecha de ingreso del colaborador'}
-                    value={options?.calculation}
-                    onChange={() => {
-                      // console.log(e);
-                      setAddingFile((pre) => {
-                        return {...pre, calculation: setOptions.calculation};
-                      });
-                    }}
-                  >
-                    {cal.map((cals, index) => {
-                      return (
-                        <Option key={index} value={cals}>
-                          {cals}
-                        </Option>
-                      );
-                    })}
-                  </Select>
-                </Form.Item>
-              </div>
-              <div className="flex items-center justify-around">
-                <Form.Item className="item-form" label="Cobro">
-                  <Switch
-                    checkedChildren={<p>SI</p>}
-                    unCheckedChildren={<p>NO</p>}
-                    className="input-switch"
-                    checked={addingFile?.payment}
-                    onChange={() => {
-                      setAddingFile((pre) => {
-                        return {...pre, payment: 'SI'};
-                      });
-                    }}
-                  />
-                </Form.Item>
-                <Form.Item className="item-form" label="Cuotas">
-                  <Input
-                    className="input-add"
-                    value={addingFile?.dues}
-                    placeholder="1 a 100"
-                    onChange={(e) => {
-                      setAddingFile((pre) => {
-                        return {...pre, dues: e.target.value};
-                      });
-                    }}
-                  />
-                </Form.Item>
-                <Form.Item className="item-form" label="Descuento Personal">
-                  <Select
-                    defaultValue="5%"
-                    value={options?.discountPersonal}
-                    onChange={() => {
-                      // console.log(e);
-                      setAddingFile((pre) => {
-                        return {...pre, discountPersonal: setOptions.discountPersonal};
-                      });
-                    }}
-                  >
-                    {percentage.map((percen, index) => {
-                      return (
-                        <Option key={index} value={percen}>
-                          {percen}
-                        </Option>
-                      );
-                    })}
-                  </Select>
-                </Form.Item>
-                <Form.Item className="item-form" label="Descuento Farmaenlace">
-                  <Select
-                    defaultValue="5%"
-                    value={options?.discountCompany}
-                    onChange={() => {
-                      // console.log(e);
-                      setAddingFile((pre) => {
-                        return {...pre, discountCompany: setOptions.discountCompany};
-                      });
-                    }}
-                  >
-                    {percentage.map((percen, index) => {
-                      return (
-                        <Option key={index} value={percen}>
-                          {percen}
-                        </Option>
-                      );
-                    })}
-                  </Select>
-                </Form.Item>
-              </div>
-            </Form>
-          </Modal>
-        </>
+                resetAdd();
+              }}
+            >
+              <Form id="modalAdd" className="w-full">
+                <div className="flex">
+                  <Form.Item className="item-form" label="Motivo">
+                    <Input
+                      className="input-add"
+                      placeholder="Motivo"
+                      value={addingFile?.reason}
+                      onChange={(e) => {
+                        setAddingFile({ ...addingFile, reason: e.target.value });
+                      }}
+                    />
+                  </Form.Item>
+                  <Form.Item className="item-form" label="Reposición automática">
+                    <Switch
+                      className="input-switch"
+                      value={addingFile?.replacement}
+                      onChange={(record) => {
+                        setAddingFile({ ...addingFile, replacement: !record ? 'NO' : 'SI' });
+                      }}
+                    />
+                  </Form.Item>
+                  <Form.Item 
+                    className={`item-form ${addingFile?.replacement==='NO'?'input-disabled':''}`}
+                    label="Reposición cantidad">
+                    <Input
+                      type="number"
+                      className="input-add"
+                      placeholder="Días"
+                      value={addingFile?.replacementManual}
+                      onChange={(e) => {
+                        setAddingFile((pre) => {
+                          return { ...pre, replacementManual: e.target.value };
+                        });
+                      }}
+                    />
+                  </Form.Item>
+                  <Form.Item 
+                    className={`item-form ${addingFile?.replacement==='NO'?'input-disabled':''}`} 
+                    label="Cálculo desde">
+                    <Select
+                      defaultValue={'Fecha de ingreso del colaborador'}
+                      value={addingFile?.calculation}
+                      onChange={(value) => {
+                        setAddingFile({ ...addingFile, calculation: value });
+                      }}
+                    >
+                      {cal.map((cals, index) => {
+                        return (
+                          <Option key={index} value={cals}>
+                            {cals}
+                          </Option>
+                        );
+                      })}
+                    </Select>
+                  </Form.Item>
+                </div>
+                <div className="flex items-center justify-around">
+                  <Form.Item className="item-form" label="Cobro">
+                    <Switch
+                      className="input-switch"
+                      value={addingFile?.payment}
+                      onChange={(record) => {
+                        setAddingFile({ ...addingFile, payment: !record ? 'NO' : 'SI' });
+                      }}
+                    />
+                  </Form.Item>
+                  <Form.Item className="item-form" label="Cuotas">
+                    <Input
+                      className="input-add"
+                      value={addingFile?.dues}
+                      placeholder="1 a 100"
+                      onChange={(e) => {
+                        setAddingFile((pre) => {
+                          return { ...pre, dues: e.target.value };
+                        });
+                      }}
+                    />
+                  </Form.Item>
+                  <Form.Item className="item-form" label="Descuento Personal">
+                    <Select
+                      defaultValue="0%"
+                      value={addingFile?.discountPersonal}
+                      onChange={(value) => {
+                        setAddingFile({ ...addingFile, discountPersonal: value });
+                      }}
+                    >
+                      {percentage.map((percen, index) => {
+                        return (
+                          <Option key={index} value={percen}>
+                            {percen}
+                          </Option>
+                        );
+                      })}
+                    </Select>
+                  </Form.Item>
+                  <Form.Item className="item-form" label="Descuento Farmaenlace">
+                    <Select
+                      defaultValue="0%"
+                      value={addingFile?.discountCompany}
+                      onChange={(value) => {
+                        setAddingFile({ ...addingFile, discountCompany: value });
+                      }}
+                    >
+                      {percentage.map((percen, index) => {
+                        return (
+                          <Option key={index} value={percen}>
+                            {percen}
+                          </Option>
+                        );
+                      })}
+                    </Select>
+                  </Form.Item>
+                </div>
+              </Form>
+            </Modal>
+          </>
+        )}
+
       </div>
       <StyledGridList>
         <div className="btn-add">
