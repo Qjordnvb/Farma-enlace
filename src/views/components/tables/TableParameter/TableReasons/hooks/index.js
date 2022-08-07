@@ -51,138 +51,6 @@ export const useCustomReasons = () => {
       calculation: 'Desde la fecha de ingreso',
       discountPersonal: '0%',
       discountCompany: '50%'
-    },
-    {
-      id: 5,
-      reason: 'Personal nuevo',
-      replacement: 'SI',
-      replacementManual: '3',
-      payment: 'NO',
-      dues: '0',
-      calculation: 'Desde la fecha de ingreso',
-      discountPersonal: '0%',
-      discountCompany: '50%'
-    },
-    {
-      id: 6,
-      reason: 'Personal nuevo',
-      replacement: 'SI',
-      replacementManual: '3',
-      payment: 'NO',
-      dues: '0',
-      calculation: 'Desde la fecha de ingreso',
-      discountPersonal: '0%',
-      discountCompany: '50%'
-    },
-    {
-      id: 7,
-      reason: 'Personal nuevo',
-      replacement: 'SI',
-      replacementManual: '3',
-      payment: 'NO',
-      dues: '0',
-      calculation: 'Desde la fecha de ingreso',
-      discountPersonal: '0%',
-      discountCompany: '50%'
-    },
-    {
-      id: 8,
-      reason: 'Personal nuevo',
-      replacement: 'SI',
-      replacementManual: '3',
-      payment: 'NO',
-      dues: '0',
-      calculation: 'Desde la fecha de ingreso',
-      discountPersonal: '0%',
-      discountCompany: '50%'
-    },
-    {
-      id: 9,
-      reason: 'Personal nuevo',
-      replacement: 'SI',
-      replacementManual: '3',
-      payment: 'NO',
-      dues: '0',
-      calculation: 'Desde la fecha de ingreso',
-      discountPersonal: '0%',
-      discountCompany: '50%'
-    },
-    {
-      id: 10,
-      reason: 'Personal nuevo',
-      replacement: 'SI',
-      replacementManual: '3',
-      payment: 'NO',
-      dues: '0',
-      calculation: 'Desde la fecha de ingreso',
-      discountPersonal: '0%',
-      discountCompany: '50%'
-    },
-    {
-      id: 11,
-      reason: 'Personal nuevo',
-      replacement: 'SI',
-      replacementManual: '3',
-      payment: 'NO',
-      dues: '0',
-      calculation: 'Desde la fecha de ingreso',
-      discountPersonal: '0%',
-      discountCompany: '50%'
-    },
-    {
-      id: 12,
-      reason: 'Personal nuevo',
-      replacement: 'SI',
-      replacementManual: '3',
-      payment: 'NO',
-      dues: '0',
-      calculation: 'Desde la fecha de ingreso',
-      discountPersonal: '0%',
-      discountCompany: '50%'
-    },
-    {
-      id: 13,
-      reason: 'Personal nuevo',
-      replacement: 'SI',
-      replacementManual: '3',
-      payment: 'NO',
-      dues: '0',
-      calculation: 'Desde la fecha de ingreso',
-      discountPersonal: '0%',
-      discountCompany: '50%'
-    },
-    {
-      id: 14,
-      reason: 'Personal nuevo',
-      replacement: 'SI',
-      replacementManual: '3',
-      payment: 'NO',
-      dues: '0',
-      calculation: 'Desde la fecha de ingreso',
-      discountPersonal: '0%',
-      discountCompany: '50%'
-    },
-    {
-      id: 15,
-      reason: 'Personal nuevo',
-      replacement: 'SI',
-      replacementManual: '3',
-      payment: 'NO',
-      dues: '0',
-      calculation: 'Desde la fecha de ingreso',
-      discountPersonal: '0%',
-      discountCompany: '50%'
-    },
-    {
-      id: 16,
-      reason: 'Personal nuevo',
-      replacement: 'SI',
-      replacementManual: '3',
-      payment: 'NO',
-      dues: '0',
-      calculation: 'Desde la fecha de ingreso',
-      discountPersonal: '0%',
-      discountCompany: '50%'
     }
   ]);
 
@@ -281,11 +149,17 @@ export const useCustomReasons = () => {
     setAddingFile(null);
   };
 
-  const onAddFile = (record) => {
+  const onAddFile = () => {
     setIsAdd(true);
-    setAddingFile({...record});
-    setDataSource(() => {
-      return [...dataSource];
+    setAddingFile({
+      reason: '',
+      replacement: 'NO',
+      replacementManual: '0',
+      payment: 'NO',
+      dues: '0',
+      calculation: 'Fecha de ingreso del colaborador',
+      discountPersonal: '0%',
+      discountCompany: '0%'
     });
   };
 
