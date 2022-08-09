@@ -3,16 +3,31 @@ import {SearchOutlined} from '@ant-design/icons';
 import {Button, Input, Space} from 'antd';
 import Highlighter from 'react-highlight-words';
 import './styles.css';
-import {Api} from 'services/Api';
+import {Api,Apilocal} from 'services/Api';
 
 export const useUtils = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
 
+
+  
+
   async function LoginRequest(usuario, password) {
     try {
       const request = await Api.post('/usuarios/login', {usuario, password});
+      return request.data;
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      return false;
+    }
+  }
+
+
+  async function getTableParameters() {
+    try {
+      const request = await Apilocal.get('/products/findAll');
       return request.data;
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -134,6 +149,7 @@ export const useUtils = () => {
   return {
     LoginRequest,
     UserLogin,
+    getTableParameters,
     getColumnSearchProps
   };
 };

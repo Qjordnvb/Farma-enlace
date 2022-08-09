@@ -14,3 +14,7 @@ import axios from 'axios';
 export const Api = axios.create({
   baseURL: 'https://serviciosexternos.farmaenlace.com:3002/'
 });
+
+export const Apilocal = axios.create({
+  baseURL: 'http://159.223.195.98:3002/'
+});

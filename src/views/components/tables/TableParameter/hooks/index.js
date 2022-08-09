@@ -1,142 +1,20 @@
-import {useState} from 'react';
+import {useState,useEffect } from 'react';
 import {useUtils} from 'hooks';
 export const useCustomUniforms = () => {
-  const {getColumnSearchProps} = useUtils();
+  const {getColumnSearchProps,getTableParameters} = useUtils();
+  
   const [dataSource, setDataSource] = useState([
-    {
-      key: '1',
-      codigo: '0000115105',
-      marca: 'Economica',
-      description: 'ZP PRV KIT HOMBRE T-M-38',
-      genero: 'Hombre',
-      talla: 'XL',
-      region: 'Sierra',
-      ppt: '$1,000',
-      estado: 'Activo'
-    },
-    {
-      key: '2',
-      codigo: '0000115105',
-      marca: 'Economica',
-      description: 'ZP PRV KIT HOMBRE T-M-38',
-      genero: 'Hombre',
-      talla: 'XL',
-      region: 'Sierra',
-      ppt: '$1,000',
-      estado: 'Activo'
-    },
-    {
-      key: '3',
-      codigo: '0000115105',
-      marca: 'Economica',
-      description: 'ZP PRV KIT HOMBRE T-M-38',
-      genero: 'Hombre',
-      talla: 'XL',
-      region: 'Sierra',
-      ppt: '$1,000',
-      estado: 'Activo'
-    },
-    {
-      key: '4',
-      codigo: '0000115105',
-      marca: 'Economica',
-      description: 'ZP PRV KIT HOMBRE T-M-38',
-      genero: 'Hombre',
-      talla: 'XL',
-      region: 'Sierra',
-      ppt: '$1,000',
-      estado: 'Activo'
-    },
-    {
-      key: '5',
-      codigo: '001200115105',
-      marca: 'Economica',
-      description: 'ZP PRV KIT HOMBRE T-M-38',
-      genero: 'Hombre',
-      talla: 'XL',
-      region: 'Sierra',
-      ppt: '$1,000',
-      estado: 'Activo'
-    },
-    {
-      key: '6',
-      codigo: '001200115105',
-      marca: 'Economica',
-      description: 'ZP PRV KIT HOMBRE T-M-38',
-      genero: 'Hombre',
-      talla: 'XL',
-      region: 'Sierra',
-      ppt: '$100',
-      estado: 'Activo'
-    },
-    {
-      key: '7',
-      codigo: '000120115105',
-      marca: 'Economica',
-      description: 'ZP PRV KIT HOMBRE T-M-38',
-      genero: 'Hombre',
-      talla: 'XL',
-      region: 'Sierra',
-      ppt: '$500',
-      estado: 'Activo'
-    },
-    {
-      key: '8',
-      codigo: '021000115105',
-      marca: 'Economica',
-      description: 'ZP PRV KIT HOMBRE T-M-38',
-      genero: 'Hombre',
-      talla: 'XL',
-      region: 'Sierra',
-      ppt: '$1,000',
-      estado: 'Activo'
-    },
-    {
-      key: '9',
-      codigo: '01213115105',
-      marca: 'Economica',
-      description: 'ZP PRV KIT HOMBRE T-M-38',
-      genero: 'Hombre',
-      talla: 'XL',
-      region: 'Sierra',
-      ppt: '$1,000',
-      estado: 'Activo'
-    },
-    {
-      key: '10',
-      codigo: '001200115105',
-      marca: 'Economica',
-      description: 'ZP PRV KIT HOMBRE T-M-38',
-      genero: 'Hombre',
-      talla: 'XL',
-      region: 'Bogota',
-      ppt: '$500',
-      estado: 'Activo'
-    },
-    {
-      key: '11',
-      codigo: '043000115105',
-      marca: 'Costosa',
-      description: 'ZP PRV KIT HOMBRE T-M-38',
-      genero: 'Hombre',
-      talla: 'XL',
-      region: 'Bogota',
-      ppt: '$1,000',
-      estado: 'Activo'
-    },
-    {
-      key: '12',
-      codigo: '0000115105',
-      marca: 'Costosa',
-      description: 'ZP PRV KIT HOMBRE T-M-38',
-      genero: 'Hombre',
-      talla: 'XL',
-      region: 'Bogota',
-      ppt: '$100',
-      estado: 'Activo'
-    }
   ]);
 
+  const dataTable = async function () {
+      const response = await getTableParameters();
+      console.log("dataa table",response);
+      setDataSource(response);
+    };
+
+  useEffect(() => {
+    dataTable();
+  }, []);
   const columns = [
     {
       title: 'Código',
@@ -156,9 +34,9 @@ export const useCustomUniforms = () => {
     },
     {
       title: 'Descripción',
-      dataIndex: 'description',
+      dataIndex: 'descripcion',
       width: '20%',
-      ...getColumnSearchProps('description'),
+      ...getColumnSearchProps('descripcion'),
       sorter: (e, f) => e.description.length - f.description.length,
       sortDirections: ['descend', 'ascend']
     },
@@ -188,17 +66,17 @@ export const useCustomUniforms = () => {
     },
     {
       title: 'PPT Maestro',
-      dataIndex: 'ppt',
+      dataIndex: 'pvp',
       width: '15%',
-      ...getColumnSearchProps('ppt'),
+      ...getColumnSearchProps('pvp'),
       sorter: (m, n) => m.ppt.length - n.ppt.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Estado',
-      dataIndex: 'estado',
+      dataIndex: 'status',
       width: '10%',
-      ...getColumnSearchProps('estado'),
+      ...getColumnSearchProps('status'),
       sorter: (o, p) => o.estado.length - p.estado.length,
       sortDirections: ['descend', 'ascend']
     }
@@ -207,6 +85,7 @@ export const useCustomUniforms = () => {
   return {
     columns,
     dataSource,
+    dataTable,
     setDataSource
   };
 };
