@@ -4,6 +4,7 @@ import './style.css';
 import Button from 'views/components/button/Button';
 import {StyledGridList} from 'views/screens/user/dataGridParameters/gridList/GridList.Styled';
 import {useCustomReasons} from './hooks';
+import LoadingComponent from "../../../utils/LoadingComponent";
 
 function TableReasons() {
   const {
@@ -13,7 +14,8 @@ function TableReasons() {
     addingFile,
     setAddingFile,
     resetAdd,
-    onAddFile
+    onAddFile,
+    isLoading
   } = useCustomReasons();
   const {Option} = Select;
 
@@ -24,16 +26,20 @@ function TableReasons() {
     <>
       {' '}
       <div>
-        <Table
-          pagination={{
-            pageSize: 10
-          }}
-          columns={columns}
-          dataSource={dataSource}
-          rowClassName={(record) => record.replacement === 'NO' && 'disabled-row'}
-          rowKey={(record) => record.id}
-          scroll={{y: 500}}
-        ></Table>
+        {
+          isLoading ? <LoadingComponent/> :
+            <Table
+              pagination={{
+                pageSize: 10
+              }}
+              columns={columns}
+              dataSource={dataSource}
+              rowClassName={(record) => record.replacement === 'NO' && 'disabled-row'}
+              rowKey={(record) => record.id}
+              scroll={{y: 500}}
+            ></Table>
+        }
+
 
         {isAdd && (
           <>
@@ -42,6 +48,7 @@ function TableReasons() {
               title="Agregar Prenda"
               visible={isAdd}
               okText="Crear Prenda"
+              okButtonProps={{disabled: !addingFile.reason || addingFile?.reason.length === 0}}
               onCancel={() => {
                 resetAdd();
 

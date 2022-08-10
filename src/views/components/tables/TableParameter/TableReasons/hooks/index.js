@@ -7,9 +7,8 @@ export const useCustomReasons = () => {
   const [addingFile, setAddingFile] = useState({});
   const {getColumnSearchProps, getReasonsTableParameters, addReason,switchActiveReason} = useUtils();
   const [dataSource, setDataSource] = useState([
-
   ]);
-
+  const [isLoading, setIsLoading] = useState(false);
   const dataReasonsTable =  function () {
     getReasonsTableParameters().then((response) => {
       console.log("data table",response);
@@ -136,8 +135,10 @@ export const useCustomReasons = () => {
 
   const onAddFile = async () => {
     setIsAdd(true);
+    setIsLoading(true);
     await addReason({...addingFile});
     dataReasonsTable();
+    setIsLoading(false);
     setAddingFile({
       reason: '',
       replacement: 'NO',
@@ -163,6 +164,8 @@ export const useCustomReasons = () => {
     setAddingFile,
     resetAdd,
     onAddFile,
-    onChange
+    onChange,
+    isLoading,
+    setIsLoading
   };
 };
