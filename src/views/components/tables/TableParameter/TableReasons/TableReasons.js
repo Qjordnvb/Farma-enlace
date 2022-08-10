@@ -8,7 +8,6 @@ import {useCustomReasons} from './hooks';
 function TableReasons() {
   const {
     dataSource,
-    setDataSource,
     columns,
     isAdd,
     addingFile,
@@ -45,13 +44,14 @@ function TableReasons() {
               okText="Crear Prenda"
               onCancel={() => {
                 resetAdd();
+
               }}
               onOk={() => {
-                setDataSource(() => {
-                  return [...dataSource, addingFile];
-                });
 
-                resetAdd();
+                onAddFile().then(() =>{
+                  resetAdd();
+
+                });
               }}
             >
               <Form id="modalAdd" className="w-full">
@@ -85,10 +85,10 @@ function TableReasons() {
                       type="number"
                       className="input-add"
                       placeholder="Días"
-                      value={addingFile?.replacementManual}
+                      value={addingFile?.replacementAuto}
                       onChange={(e) => {
                         setAddingFile((pre) => {
-                          return {...pre, replacementManual: e.target.value};
+                          return {...pre, replacementAuto: e.target.value};
                         });
                       }}
                     />
@@ -147,9 +147,9 @@ function TableReasons() {
                   >
                     <Select
                       defaultValue="0%"
-                      value={addingFile?.discountPersonal}
+                      value={addingFile?.personalDiscount}
                       onChange={(value) => {
-                        setAddingFile({...addingFile, discountPersonal: value});
+                        setAddingFile({...addingFile, personalDiscount: value});
                       }}
                     >
                       {percentage.map((percen, index) => {
@@ -164,15 +164,15 @@ function TableReasons() {
                   <Form.Item className="item-form" label="Descuento Farmaenlace">
                     <Select
                       defaultValue="0%"
-                      value={addingFile?.discountCompany}
+                      value={addingFile?.companyDiscount}
                       onChange={(value) => {
-                        setAddingFile({...addingFile, discountCompany: value});
+                        setAddingFile({...addingFile, companyDiscount: value});
                       }}
                     >
-                      {percentage.map((percen, index) => {
+                      {percentage.map((percent, index) => {
                         return (
-                          <Option key={index} value={percen}>
-                            {percen}
+                          <Option key={index} value={percent}>
+                            {percent}
                           </Option>
                         );
                       })}

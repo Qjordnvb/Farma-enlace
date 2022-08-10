@@ -1,57 +1,30 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Switch} from 'antd';
 import {useUtils} from 'hooks';
 
 export const useCustomReasons = () => {
   const [isAdd, setIsAdd] = useState(false);
-  const [addingFile, setAddingFile] = useState(null);
-  const {getColumnSearchProps} = useUtils();
+  const [addingFile, setAddingFile] = useState({});
+  const {getColumnSearchProps, getReasonsTableParameters, addReason,switchActiveReason} = useUtils();
   const [dataSource, setDataSource] = useState([
-    {
-      id: 1,
-      reason: 'Personal nuevo',
-      replacement: 'NO',
-      replacementManual: '0',
-      payment: 'NO',
-      dues: '0',
-      calculation: 'Desde la fecha de ingreso',
-      discountPersonal: '0%',
-      discountCompany: '50%'
-    },
-    {
-      id: 2,
-      reason: 'Personal nuevo',
-      replacement: 'SI',
-      replacementManual: '3',
-      payment: 'NO',
-      dues: '0',
-      calculation: 'Desde la fecha de ingreso',
-      discountPersonal: '0%',
-      discountCompany: '50%'
-    },
-    {
-      id: 3,
-      reason: 'Personal nuevo',
-      replacement: 'NO',
-      replacementManual: '2',
-      payment: 'NO',
-      dues: '0',
-      calculation: 'Desde la fecha de ingreso',
-      discountPersonal: '0%',
-      discountCompany: '50%'
-    },
-    {
-      id: 4,
-      reason: 'Personal nuevo',
-      replacement: 'SI',
-      replacementManual: '3',
-      payment: 'NO',
-      dues: '0',
-      calculation: 'Desde la fecha de ingreso',
-      discountPersonal: '0%',
-      discountCompany: '50%'
-    }
+
   ]);
+
+  const dataReasonsTable =  function () {
+    getReasonsTableParameters().then((response) => {
+      console.log("data table",response);
+      setDataSource(response);
+    });
+
+  };
+
+  useEffect(() => {
+    dataReasonsTable();
+  }, []);
+
+  useEffect(() => {
+    console.log('adding file', addingFile);
+  },[addingFile]);
 
   const onChange = (record, selectedRows) => {
     let auxArray = JSON.parse(JSON.stringify(dataSource));
@@ -63,6 +36,13 @@ export const useCustomReasons = () => {
 
     record ? record.enabled : !record.enabled;
     setDataSource(auxArray);
+  };
+
+  const onSwitchChange =  (record, selectedRows) =>{
+    console.log('switch', record, selectedRows);
+    switchActiveReason(record.id,selectedRows).then(res => {
+      console.log('res',res);
+    });
   };
 
   const columns = [
@@ -85,8 +65,8 @@ export const useCustomReasons = () => {
     {
       key: '3',
       title: 'Reposición',
-      dataIndex: 'replacementManual',
-      ...getColumnSearchProps('replacementManual'),
+      dataIndex: 'replacementAuto',
+      ...getColumnSearchProps('replacementAuto'),
       sorter: (a, b) => a.replacementManual.length - b.replacementManual.length,
       sortDirections: ['descend', 'ascend']
     },
@@ -117,16 +97,16 @@ export const useCustomReasons = () => {
     {
       key: '7',
       title: 'Descuento Personal',
-      dataIndex: 'discountPersonal',
-      ...getColumnSearchProps('discountPersonal'),
+      dataIndex: 'personalDiscount',
+      ...getColumnSearchProps('personalDiscount'),
       sorter: (a, b) => a.discountPersonal.length - b.discountPersonal.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       key: '8',
       title: 'Descuento Farmaenlace',
-      dataIndex: 'discountCompany',
-      ...getColumnSearchProps('discountCompany'),
+      dataIndex: 'companyDiscount',
+      ...getColumnSearchProps('companyDiscount'),
       sorter: (a, b) => a.discountCompany.length - b.discountCompany.length,
       sortDirections: ['descend', 'ascend']
     },
@@ -138,9 +118,9 @@ export const useCustomReasons = () => {
           <div className="flex-action">
             <Switch
               className="input-switch"
-              defaultChecked={record.replacement === 'SI'}
+              defaultChecked={record.active}
               onChange={(selectedRows) => {
-                onChange(record, selectedRows);
+                onSwitchChange(record, selectedRows);
               }}
             />
           </div>
@@ -154,19 +134,24 @@ export const useCustomReasons = () => {
     setAddingFile(null);
   };
 
-  const onAddFile = () => {
+  const onAddFile = async () => {
     setIsAdd(true);
+    await addReason({...addingFile});
+    dataReasonsTable();
     setAddingFile({
       reason: '',
       replacement: 'NO',
-      replacementManual: '0 ',
+      replacementAuto: '0 ',
       payment: 'NO',
       dues: '0',
       calculation: 'Fecha de ingreso del colaborador',
-      discountPersonal: '0%',
-      discountCompany: '0%'
+      personalDiscount: '0%',
+      companyDiscount: '0%'
     });
+
   };
+
+
 
   return {
     dataSource,
