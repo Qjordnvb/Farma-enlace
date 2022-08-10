@@ -7,7 +7,7 @@ import {useCustomUniforms} from './hooks';
 import './style-parameters.css';
 
 const TableParameter = () => {
-  const {dataSource, columns} = useCustomUniforms();
+  const {dataSource, columns, loading} = useCustomUniforms();
   return (
     <>
       <Table
@@ -16,6 +16,7 @@ const TableParameter = () => {
         }}
         columns={columns}
         dataSource={dataSource}
+        loading={loading}
       />
       <div className="flex justify-end">
         <CSVLink filename={'TableContent.csv'} data={dataSource} className="btn-download">

@@ -1,20 +1,23 @@
-import {useState,useEffect } from 'react';
+import {useState, useEffect} from 'react';
 import {useUtils} from 'hooks';
 export const useCustomUniforms = () => {
-  const {getColumnSearchProps,getTableParameters} = useUtils();
-  
-  const [dataSource, setDataSource] = useState([
-  ]);
+  const {getColumnSearchProps, getTableParameters} = useUtils();
+  const [loading, setLoading] = useState(false);
+  const [dataSource, setDataSource] = useState([]);
 
   const dataTable = async function () {
-      const response = await getTableParameters();
-      console.log("dataa table",response);
-      setDataSource(response);
-    };
+    setLoading(true);
+    const response = await getTableParameters();
+    console.log('dataa table', response);
+    setDataSource(response);
+    setLoading(false);
+  };
 
   useEffect(() => {
     dataTable();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const columns = [
     {
       title: 'Código',
@@ -86,6 +89,7 @@ export const useCustomUniforms = () => {
     columns,
     dataSource,
     dataTable,
-    setDataSource
+    setDataSource,
+    loading
   };
 };

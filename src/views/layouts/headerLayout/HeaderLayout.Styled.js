@@ -24,12 +24,7 @@ export const StyledContainerLayout = styled.div.attrs({
   }
 
   backdrop-filter: blur(20px);
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.6) 16.15%,
-    rgba(255, 255, 255, 0.264535) 81.75%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: #efefef;
 
   box-shadow: inset 0px 0px 22.473px rgba(255, 255, 255, 0.6);
   filter: drop-shadow(0px 6.91477px 6.91477px rgba(0, 0, 0, 0.25));
