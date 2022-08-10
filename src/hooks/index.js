@@ -36,6 +36,33 @@ export const useUtils = () => {
     }
   }
 
+  async function getReasonsTableParameters(){
+    try{
+      const request = await Apilocal.get('/parameterizedReasons/findAll');
+      return request.data;
+    }catch (e) {
+      console.log("ERROR - getGarmentsTableParameters",e);
+    }
+  }
+
+  async function addReason(data){
+    try{
+      const request = await Apilocal.post('/parameterizedReasons/create', {...data});
+      return request.data;
+    }catch (e) {
+      console.log("ERROR - addReason",e);
+    }
+  }
+
+  async function switchActiveReason(id,active){
+    try{
+      const request = await Apilocal.post('/parameterizedReasons/active', {id,active});
+      return request.data;
+    }catch (e) {
+      console.log("ERROR - addReason",e);
+    }
+  }
+
   async function UserLogin(usuario, password, app, token) {
     try {
       const request = await Api.post(
@@ -150,6 +177,9 @@ export const useUtils = () => {
     LoginRequest,
     UserLogin,
     getTableParameters,
-    getColumnSearchProps
+    getColumnSearchProps,
+    getReasonsTableParameters,
+    addReason,
+    switchActiveReason
   };
 };

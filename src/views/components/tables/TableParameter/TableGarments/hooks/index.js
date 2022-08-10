@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState} from 'react';
 import {Switch} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
@@ -27,10 +27,12 @@ export const useCustomGarments = () => {
     },
     {
       id: 254,
-      descripcion: 'Camiseta Azul',
+      descripcion: 'Camiseta Azuls',
       estado: 'Activo'
     }
   ]);
+
+
 
   const onEditFile = (record) => {
     setIsEditing(true);
