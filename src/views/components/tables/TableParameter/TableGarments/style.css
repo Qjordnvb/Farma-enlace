@@ -96,12 +96,6 @@ input.input-add {
   align-items: flex-start;
 }
 
-.ant-modal-content {
-  width: 60%;
-  overflow-y: auto;
-  max-height: 550px;
-}
-
 .ant-col.ant-form-item-control {
   width: 100%;
 }
@@ -195,4 +189,10 @@ input.input-add {
 .disable-row {
   background: #f5f5f5;
   opacity: 0.1;
+}
+
+.modalAdd-garments,
+.modalEdit-garments {
+  width: 100%;
+  max-width: 400px !important;
 }

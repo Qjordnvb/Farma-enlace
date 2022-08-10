@@ -48,6 +48,7 @@ function TableGarments() {
         {isEditing && (
           <>
             <Modal
+              className="modalEdit-garments"
               title="Editar"
               visible={isEditing}
               okText="Guardar"
@@ -87,6 +88,7 @@ function TableGarments() {
         {isAdd && (
           <>
             <Modal
+              className="modalAdd-garments"
               title="Agregar Prenda"
               visible={isAdd}
               okText="Crear Prenda"

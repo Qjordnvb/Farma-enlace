@@ -45,10 +45,6 @@
   justify-content: center;
 }
 
-.ant-row.item-form {
-  margin-left: 3%;
-}
-
 .ant-pagination-item-active a {
   background-color: #2bc155;
 
@@ -133,13 +129,6 @@ input.input-add {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-right: 5%;
-}
-
-.ant-modal-content {
-  width: auto;
-  overflow-y: auto;
-  max-height: 550px;
 }
 
 .ant-col.ant-form-item-control {
@@ -150,7 +139,7 @@ input.input-add {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 14.8856px;
+  font-size: 12px;
   line-height: 19px;
   /* identical to box height, or 125% */
 
@@ -252,4 +241,12 @@ input.input-add {
 .input-disabled {
   opacity: 0.5;
   pointer-events: none;
+}
+
+#item-form-w {
+  width: 80%;
+}
+
+.item-form-custom {
+  margin-left: 3%;
 }

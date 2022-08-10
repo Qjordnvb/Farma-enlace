@@ -251,3 +251,9 @@ span.anticon.anticon-caret-down.ant-table-column-sorter-down.active,
 span.anticon.anticon-caret-up.ant-table-column-sorter-up.active {
   color: #2bc155 !important;
 }
+
+.ant-modal-content {
+  width: auto;
+  overflow-y: auto;
+  max-height: 550px;
+}

@@ -176,12 +176,6 @@ input.input-add {
   align-items: flex-start;
 }
 
-.ant-modal-content {
-  width: 60%;
-  overflow-y: auto;
-  max-height: 550px;
-}
-
 .ant-col.ant-form-item-control {
   width: 100%;
 }

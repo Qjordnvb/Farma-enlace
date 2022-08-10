@@ -54,9 +54,9 @@ function TableReasons() {
                 resetAdd();
               }}
             >
-              <Form id="modalAdd" className="w-full">
-                <div className="flex">
-                  <Form.Item className="item-form" label="Motivo">
+              <Form id="modalAdd" className="w-full flex flex-col justify-around items-center">
+                <div className="flex w-full">
+                  <Form.Item className="item-form w-full" label="Motivo">
                     <Input
                       className="input-add"
                       placeholder="Motivo"
@@ -66,6 +66,8 @@ function TableReasons() {
                       }}
                     />
                   </Form.Item>
+                </div>
+                <div className="flex items-center justify-around w-full">
                   <Form.Item className="item-form" label="Reposición automática">
                     <Switch
                       className="input-switch"
@@ -76,14 +78,15 @@ function TableReasons() {
                     />
                   </Form.Item>
                   <Form.Item
-                    className={`item-form ${
+                    className={`item-form-custom ${
                       addingFile?.replacement === 'NO' ? 'input-disabled' : ''
                     }`}
                     label="Reposición cantidad"
                   >
                     <Input
                       type="number"
-                      className="input-add"
+                      id="item-form-w"
+                      className="input-add "
                       placeholder="Días"
                       value={addingFile?.replacementManual}
                       onChange={(e) => {
@@ -116,7 +119,7 @@ function TableReasons() {
                     </Select>
                   </Form.Item>
                 </div>
-                <div className="flex items-center justify-around">
+                <div className="flex items-center justify-around w-full">
                   <Form.Item className="item-form" label="Cobro">
                     <Switch
                       className="input-switch"
