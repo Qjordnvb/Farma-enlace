@@ -1,36 +1,32 @@
-import { useState} from 'react';
+import { useState,useEffect} from 'react';
 import {Switch} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 
 export const useCustomGarments = () => {
+  const {getColumnSearchProps,getGarmentsTableParameters,switchActiveGarment} = useUtils();
+
   const [isEditing, setIsEditing] = useState(false);
   const [editingFile, setEditingFile] = useState(null);
   const [isAdd, setIsAdd] = useState(false);
   const [addingFile, setAddingFile] = useState(null);
-  const {getColumnSearchProps} = useUtils();
   const [dataSource, setDataSource] = useState([
-    {
-      id: 251,
-      descripcion: 'Camiseta Azul',
-      estado: 'Activo'
-    },
-    {
-      id: 252,
-      descripcion: 'Camiseta Roja',
-      estado: 'Activo'
-    },
-    {
-      id: 253,
-      descripcion: 'Camiseta Azuls',
-      estado: 'Activo'
-    },
-    {
-      id: 254,
-      descripcion: 'Camiseta Azuls',
-      estado: 'Activo'
-    }
+
   ]);
+
+  const dataReasonsTable =  function () {
+    getGarmentsTableParameters().then((response) => {
+      console.log("data table",response);
+      setDataSource(response);
+    });
+
+  }; 
+
+  useEffect(() => {
+    dataReasonsTable();
+  }, []);
+
+  
 
 
 
@@ -39,16 +35,11 @@ export const useCustomGarments = () => {
     setEditingFile({...record});
   };
 
-  const onChange = (record, selectedRows) => {
-    let auxArray = JSON.parse(JSON.stringify(dataSource));
-    for (let i = 0; i < auxArray.length; i++) {
-      if (auxArray[i].id === record.id) {
-        auxArray[i].estado = selectedRows ? 'Activo' : 'Inactivo';
-      }
-    }
-
-    record ? record.enabled : !record.enabled;
-    setDataSource(auxArray);
+  const onSwitchChange = (record, selectedRows) => {
+    console.log('switch', record, selectedRows);
+    switchActiveGarment(record.id,selectedRows).then(res => {
+      console.log('res',res);
+    });
   };
 
   const columns = [
@@ -71,10 +62,8 @@ export const useCustomGarments = () => {
     {
       key: '3',
       title: 'Estado',
-      dataIndex: 'estado',
-      ...getColumnSearchProps('estado'),
-      sorter: (a, b) => a.estado.length - b.estado.length,
-      sortDirections: ['descend', 'ascend']
+      dataIndex: 'active',
+   
     },
     {
       key: '4',
@@ -85,9 +74,9 @@ export const useCustomGarments = () => {
           <div className="flex-action">
             <Switch
               className="input-switch"
-              defaultChecked
+              defaultChecked={record.active}
               onChange={(selectedRows) => {
-                onChange(record, selectedRows);
+                onSwitchChange(record, selectedRows);
               }}
             />
             <div

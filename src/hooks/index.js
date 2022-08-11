@@ -37,7 +37,7 @@ export const useUtils = () => {
   }
 
   async function getReasonsTableParameters(){
-    try{
+    try{ 
       const request = await Apilocal.get('/parameterizedReasons/findAll');
       return request.data;
     }catch (e) {
@@ -57,6 +57,25 @@ export const useUtils = () => {
   async function switchActiveReason(id,active){
     try{
       const request = await Apilocal.post('/parameterizedReasons/active', {id,active});
+      return request.data;
+    }catch (e) {
+      console.log("ERROR - addReason",e);
+    }
+  }
+
+
+  async function getGarmentsTableParameters(){
+    try{ 
+      const request = await Apilocal.get('/prenda/findAll');
+      return request.data;
+    }catch (e) {
+      console.log("ERROR - garments",e);
+    }
+  }
+
+  async function switchActiveGarment(id,active){
+    try{
+      const request = await Apilocal.post('/prenda/active', {id,active});
       return request.data;
     }catch (e) {
       console.log("ERROR - addReason",e);
@@ -179,7 +198,9 @@ export const useUtils = () => {
     getTableParameters,
     getColumnSearchProps,
     getReasonsTableParameters,
+    getGarmentsTableParameters,
     addReason,
-    switchActiveReason
+    switchActiveReason,
+    switchActiveGarment
   };
 };
