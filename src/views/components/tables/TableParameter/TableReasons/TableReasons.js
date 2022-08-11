@@ -13,7 +13,8 @@ function TableReasons() {
     addingFile,
     setAddingFile,
     resetAdd,
-    onAddFile
+    onAddFile,
+    onCreateReason
   } = useCustomReasons();
   const {Option} = Select;
 
@@ -44,13 +45,10 @@ function TableReasons() {
               okText="Crear Prenda"
               onCancel={() => {
                 resetAdd();
-
               }}
               onOk={() => {
-
-                onAddFile().then(() =>{
+                onCreateReason().then(() => {
                   resetAdd();
-
                 });
               }}
             >

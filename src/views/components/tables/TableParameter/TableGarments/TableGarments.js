@@ -1,9 +1,9 @@
-import {useEffect} from 'react';
-import {Table, Modal, Input, Form} from 'antd';
+import {Table, Modal, Input, Form, Select} from 'antd';
 import './style.css';
 import Button from 'views/components/button/Button';
 import {StyledGridList} from 'views/screens/user/dataGridParameters/gridList/GridList.Styled';
 import {useCustomGarments} from './hooks';
+import {Option} from 'antd/es/mentions';
 
 function TableGarments() {
   const {
@@ -18,20 +18,10 @@ function TableGarments() {
     setAddingFile,
     resetEditing,
     resetAdd,
-    onAddFile
+    onAddFile,
+    onCreateGarment,
+    onEditGarment
   } = useCustomGarments();
-
-  let random = Math.floor(Math.random() * 1000).toString();
-
-  useEffect(() => {
-    if (isAdd) {
-      setAddingFile({
-        ...addingFile,
-        id: random
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAdd]);
 
   return (
     <>
@@ -43,7 +33,9 @@ function TableGarments() {
           }}
           columns={columns}
           dataSource={dataSource}
-          rowClassName={(record) => record.estado === 'Inactivo' && 'disabled-row'}
+          rowClassName={(record) => {
+            return record.active ? null : 'disabled-row';
+          }}
         ></Table>
         {isEditing && (
           <>
@@ -56,27 +48,18 @@ function TableGarments() {
                 resetEditing();
               }}
               onOk={() => {
-                setDataSource((pre) => {
-                  return pre.map((file) => {
-                    if (file.id === editingFile.id) {
-                      return editingFile;
-                    } else {
-                      return file;
-                    }
-                  });
+                onEditGarment().then(() => {
+                  resetEditing();
                 });
-                resetEditing();
               }}
             >
               <Form>
                 <Form.Item className="item-form" label="Descripción">
                   <Input
                     placeholder="Descripción"
-                    value={editingFile?.descripcion}
+                    value={editingFile?.description}
                     onChange={(e) => {
-                      setEditingFile((pre) => {
-                        return {...pre, descripcion: e.target.value};
-                      });
+                      setEditingFile({...editingFile, description: e.target.value});
                     }}
                   />
                 </Form.Item>
@@ -96,50 +79,43 @@ function TableGarments() {
                 resetAdd();
               }}
               onOk={() => {
-                setDataSource(() => {
-                  return [...dataSource, addingFile];
+                onCreateGarment().then(() => {
+                  setDataSource(() => {
+                    return [...dataSource, addingFile];
+                  });
                 });
 
                 resetAdd();
               }}
             >
               <Form id="modalAdd">
-                <Form.Item className="item-form" label="Código">
-                  <Input
-                    className="input-add"
-                    placeholder="Código"
-                    value={addingFile?.id}
-                    onChange={() => {
-                      setAddingFile((e, pre) => {
-                        return {...pre, id: e.target.value};
-                      });
-                    }}
-                  />
-                </Form.Item>
                 <Form.Item className="item-form" label="Descripción">
                   <Input
                     className="input-add"
                     placeholder="Descripción"
-                    value={addingFile?.descripcion}
+                    value={addingFile?.description}
                     onChange={(e) => {
                       setAddingFile((pre) => {
-                        return {...pre, descripcion: e.target.value};
+                        return {...pre, description: e.target.value};
                       });
                     }}
                   />
                 </Form.Item>
                 <Form.Item className="item-form" label="Estado">
-                  <Input
-                    className="input-add"
-                    label="Estado"
+                  <Select
+                    defaultValue={true}
                     placeholder="Estado"
-                    value={addingFile?.estado}
                     onChange={(e) => {
-                      setAddingFile((pre) => {
-                        return {...pre, estado: e.target.value};
+                      console.log('e', e);
+                      setAddingFile({
+                        ...addingFile,
+                        active: e
                       });
                     }}
-                  />
+                  >
+                    <Option value={true}>Activo</Option>
+                    <Option value={false}>Pasivo</Option>
+                  </Select>
                 </Form.Item>
               </Form>
             </Modal>
