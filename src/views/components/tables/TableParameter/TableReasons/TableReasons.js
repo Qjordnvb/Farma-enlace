@@ -18,7 +18,6 @@ function TableReasons() {
   } = useCustomReasons();
   const {Option} = Select;
 
-  const percentage = ['0%', '10%', '20%', '30%', '40%', '50%', '60%', '70%'];
   const cal = ['Fecha de ingreso del colaborador', 'Fecha de última reposición'];
 
   return (
@@ -146,38 +145,46 @@ function TableReasons() {
                     className={`item-form ${addingFile?.payment === 'NO' ? 'input-disabled' : ''}`}
                     label="Descuento Personal"
                   >
-                    <Select
-                      defaultValue="0%"
+                    <Input
+                      type={'number'}
+                      max={100}
                       value={addingFile?.personalDiscount}
-                      onChange={(value) => {
-                        setAddingFile({...addingFile, personalDiscount: value});
+                      onChange={(e) => {
+                        const controlledValue = Math.max(0, Math.min(100, Number(e.target.value)));
+                        let newCompanyDiscount = 100 - controlledValue;
+
+                        setAddingFile({
+                          ...addingFile,
+                          companyDiscount: newCompanyDiscount,
+                          personalDiscount: controlledValue
+                        });
                       }}
-                    >
-                      {percentage.map((percen, index) => {
-                        return (
-                          <Option key={index} value={percen}>
-                            {percen}
-                          </Option>
-                        );
-                      })}
-                    </Select>
+                      suffix={'%'}
+                    />
                   </Form.Item>
                   <Form.Item className="item-form" label="Descuento Farmaenlace">
-                    <Select
-                      defaultValue="0%"
+                    <Input
+                      type={'number'}
+                      max={100}
                       value={addingFile?.companyDiscount}
-                      onChange={(value) => {
-                        setAddingFile({...addingFile, companyDiscount: value});
+                      onChange={(e) => {
+                        const controlledValue = Math.max(0, Math.min(100, Number(e.target.value)));
+                        let newPersonalDiscount = 100 - controlledValue;
+                        if (addingFile.payment === 'YES') {
+                          setAddingFile({
+                            ...addingFile,
+                            companyDiscount: controlledValue,
+                            personalDiscount: newPersonalDiscount
+                          });
+                        } else {
+                          setAddingFile({
+                            ...addingFile,
+                            companyDiscount: controlledValue
+                          });
+                        }
                       }}
-                    >
-                      {percentage.map((percent, index) => {
-                        return (
-                          <Option key={index} value={percent}>
-                            {percent}
-                          </Option>
-                        );
-                      })}
-                    </Select>
+                      suffix={'%'}
+                    />
                   </Form.Item>
                 </div>
               </Form>
