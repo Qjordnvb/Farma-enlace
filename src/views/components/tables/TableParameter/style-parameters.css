@@ -25,39 +25,7 @@
   > div
   > div
   > div
-  > div:nth-child(4)
   > div
-  > div
-  > div
-  > div
-  > ul
-  > li.ant-pagination-item.ant-pagination-item-1.ant-pagination-item-active,
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div
-  > div
-  > div
-  > ul
-  > li.ant-pagination-item.ant-pagination-item-2.ant-pagination-item-active {
-  border-color: #2bc155;
-  background-color: #2bc155;
-  border-radius: 5px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  text-transform: uppercase;
-}
-
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
   > div
   > div
   > div
@@ -68,22 +36,11 @@
   color: #ffffff;
 }
 
-li.ant-pagination-item.ant-pagination-item {
-  border-color: #2bc155;
-
-  border-radius: 5px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  text-transform: uppercase;
-}
-
 #root
   > div
   > div
   > div
-  > div:nth-child(4)
+  > div
   > div
   > div
   > div
@@ -92,70 +49,6 @@ li.ant-pagination-item.ant-pagination-item {
   > li.ant-pagination-item.ant-pagination-item
   > a {
   color: #2bc155;
-}
-
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div
-  > div
-  > div
-  > ul
-  > li.ant-pagination-next
-  > button,
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div
-  > div
-  > div
-  > ul
-  > li.ant-pagination-prev
-  > button {
-  border-color: #2bc155;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div
-  > div
-  > div
-  > ul
-  > li.ant-pagination-next
-  > button
-  > span
-  > svg,
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div
-  > div
-  > div
-  > ul
-  > li.ant-pagination-prev
-  > button
-  > span
-  > svg {
-  fill: #2bc155;
 }
 
 #root

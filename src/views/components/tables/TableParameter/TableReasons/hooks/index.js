@@ -5,26 +5,25 @@ import {useUtils} from 'hooks';
 export const useCustomReasons = () => {
   const [isAdd, setIsAdd] = useState(false);
   const [addingFile, setAddingFile] = useState({});
-  const {getColumnSearchProps, getReasonsTableParameters, addReason,switchActiveReason} = useUtils();
-  const [dataSource, setDataSource] = useState([
+  const {getColumnSearchProps, getReasonsTableParameters, addReason, switchActiveReason} =
+    useUtils();
+  const [dataSource, setDataSource] = useState([]);
 
-  ]);
-
-  const dataReasonsTable =  function () {
+  const dataReasonsTable = function () {
     getReasonsTableParameters().then((response) => {
-      console.log("data table",response);
+      console.log('data table', response);
       setDataSource(response);
     });
-
   };
 
   useEffect(() => {
     dataReasonsTable();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     console.log('adding file', addingFile);
-  },[addingFile]);
+  }, [addingFile]);
 
   const onChange = (record, selectedRows) => {
     let auxArray = JSON.parse(JSON.stringify(dataSource));
@@ -38,10 +37,10 @@ export const useCustomReasons = () => {
     setDataSource(auxArray);
   };
 
-  const onSwitchChange =  (record, selectedRows) =>{
+  const onSwitchChange = (record, selectedRows) => {
     console.log('switch', record, selectedRows);
-    switchActiveReason(record.id,selectedRows).then(res => {
-      console.log('res',res);
+    switchActiveReason(record.id, selectedRows).then((res) => {
+      console.log('res', res);
     });
   };
 
@@ -148,10 +147,7 @@ export const useCustomReasons = () => {
       personalDiscount: '0%',
       companyDiscount: '0%'
     });
-
   };
-
-
 
   return {
     dataSource,

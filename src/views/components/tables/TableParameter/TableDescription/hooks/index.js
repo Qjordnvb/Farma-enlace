@@ -1,57 +1,107 @@
 import {useState} from 'react';
+
+import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 
 export const useCustomDescription = () => {
-  const [isAdd, setIsAdd] = useState(false);
-  const [addingFile, setAddingFile] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editingFile, setEditingFile] = useState(null);
-  const {getColumnSearchProps} = useUtils();
-  const [dataSource, setDataSource] = useState([
-    {
-      n: 1,
-      code: '0000115105',
-      description: 'ZP PRV KIT ECO HOMBRE T-M-38',
-      garments: 'New York No. 1 Lake Park',
-      brand: 'Costosa',
-      region: 'Sierra',
-      garment1: '3',
-      garment2: '0',
-      garment3: '1',
-      garment4: '0',
-      garment5: '2',
-      garment6: '0'
-    },
-    {
-      n: 2,
-      code: '0000115105',
-      description: 'ZP PRV KIT ECO HOMBRE T-M-38',
-      garments: 'New York No. 1 Lake Park',
-      brand: 'Económica',
-      region: 'Sierra',
-      garment1: '3',
-      garment2: '0',
-      garment3: '1',
-      garment4: '0',
-      garment5: '2',
-      garment6: '0'
-    }
-  ]);
+  const originData = [];
+  const [form] = Form.useForm();
+  const [data, setData] = useState(originData);
+  const [editingKey, setEditingKey] = useState('');
 
-  const onEditFile = (record) => {
-    setIsEditing(true);
-    setEditingFile({...record});
+  const isEditing = (record) => record.key === editingKey;
+
+  const {getColumnSearchProps} = useUtils();
+
+  for (let i = 0; i < 100; i++) {
+    originData.push({
+      key: i.toString(),
+      n: 1,
+      code: `0000115105 ${i}`,
+      description: `ZP PRV KIT ECO HOMBRE T-M-38 ${i}`,
+      garments: `New York No. 1 Lake Park ${i}`,
+      brand: `Costosa ${i}`,
+      region: `Sierra ${i}`,
+      garment1: `3 `,
+      garment2: `0 `,
+      garment3: `1 `,
+      garment4: `0 `,
+      garment5: `2 `,
+      garment6: `0 `
+    });
+  }
+
+  const EditableCell = ({editing, dataIndex, title, inputType, children, ...restProps}) => {
+    const inputNode = inputType === 'garments' ? <InputNumber /> : <Input />;
+    return (
+      <td {...restProps}>
+        {editing ? (
+          <Form.Item
+            name={dataIndex}
+            style={{
+              margin: 0
+            }}
+            rules={[
+              {
+                required: true,
+                message: `Please Input ${title}!`
+              }
+            ]}
+          >
+            {inputNode}
+          </Form.Item>
+        ) : (
+          children
+        )}
+      </td>
+    );
+  };
+
+  const edit = (record) => {
+    form.setFieldsValue({
+      garment1: '',
+      garment2: '',
+      garment3: '',
+      garment4: '',
+      garment5: '',
+      garment6: '',
+      ...record
+    });
+    setEditingKey(record.key);
+  };
+
+  const cancel = () => {
+    setEditingKey('');
+  };
+
+  const save = async (key) => {
+    try {
+      const row = await form.validateFields();
+      const newData = [...data];
+      const index = newData.findIndex((item) => key === item.key);
+
+      if (index > -1) {
+        const item = newData[index];
+        newData.splice(index, 1, {...item, ...row});
+        setData(newData);
+        setEditingKey('');
+      } else {
+        newData.push(row);
+        setData(newData);
+        setEditingKey('');
+      }
+    } catch (errInfo) {
+      console.log('Validate Failed:', errInfo);
+    }
   };
 
   const columns = [
     {
-      key: '1',
       title: 'N°',
       dataIndex: 'n'
     },
     {
-      key: '2',
       title: 'Código Producto',
       dataIndex: 'code',
       ...getColumnSearchProps('code'),
@@ -59,52 +109,44 @@ export const useCustomDescription = () => {
       sortDirections: ['descend', 'ascend']
     },
     {
-      key: '3',
       title: 'Descripción',
       dataIndex: 'description',
       ...getColumnSearchProps('description'),
       sorter: (a, b) => a.description.length - b.description.length,
       sortDirections: ['descend', 'ascend']
     },
+
     {
-      key: '4',
-      title: 'Prendas',
-      children: [
-        {
-          title: 'Mandil blanco',
-          dataIndex: 'garment1',
-          key: 'garment1'
-        },
-        {
-          title: 'Mandil azul',
-          dataIndex: 'garment2',
-          key: 'garment2'
-        },
-        {
-          title: 'Camiseta',
-          dataIndex: 'garment3',
-          key: 'garment3'
-        },
-        {
-          title: 'Buso',
-          dataIndex: 'garment4',
-          key: 'garment4'
-        },
-        {
-          title: 'Chompa',
-          dataIndex: 'garment5',
-          key: 'garment5'
-        },
-        {
-          title: 'Escarapela',
-          dataIndex: 'garment6',
-          key: 'garment6'
-        }
-      ],
-      dataIndex: 'garments'
+      title: 'Mandil blanco',
+      dataIndex: 'garment1',
+      editable: true
     },
     {
-      key: '5',
+      title: 'Mandil azul',
+      dataIndex: 'garment2',
+      editable: true
+    },
+    {
+      title: 'Camiseta',
+      dataIndex: 'garment3',
+      editable: true
+    },
+    {
+      title: 'Buso',
+      dataIndex: 'garment4',
+      editable: true
+    },
+    {
+      title: 'Chompa',
+      dataIndex: 'garment5',
+      editable: true
+    },
+    {
+      title: 'Escarapela',
+      dataIndex: 'garment6',
+      editable: true
+    },
+    {
       title: 'Marca',
       dataIndex: 'brand',
       ...getColumnSearchProps('brand'),
@@ -112,7 +154,6 @@ export const useCustomDescription = () => {
       sortDirections: ['descend', 'ascend']
     },
     {
-      key: '6',
       title: 'Región',
       dataIndex: 'region',
       ...getColumnSearchProps('region'),
@@ -120,16 +161,26 @@ export const useCustomDescription = () => {
       sortDirections: ['descend', 'ascend']
     },
     {
-      key: '7',
       title: 'Acción',
-      render: (record) => {
-        return (
-          <div
-            onClick={() => {
-              onEditFile(record);
-            }}
-            className="btn-edit"
-          >
+      dataIndex: 'accion',
+      render: (_, record) => {
+        const editable = isEditing(record);
+        return editable ? (
+          <span>
+            <Typography.Link
+              onClick={() => save(record.key)}
+              style={{
+                marginRight: 8
+              }}
+            >
+              Save
+            </Typography.Link>
+            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+              <a>Cancel</a>
+            </Popconfirm>
+          </span>
+        ) : (
+          <div disabled={editingKey !== ''} onClick={() => edit(record)} className="btn-edit">
             <img src={BtnEdit} alt="btn-edit" />
           </div>
         );
@@ -137,38 +188,28 @@ export const useCustomDescription = () => {
     }
   ];
 
-  const resetEditing = () => {
-    setIsEditing(false);
-    setEditingFile(null);
-  };
+  const mergedColumns = columns.map((col) => {
+    if (!col.editable) {
+      return col;
+    }
 
-  const resetAdd = () => {
-    setIsAdd(false);
-    setAddingFile(null);
-  };
-
-  const onAddFile = (record) => {
-    setIsAdd(true);
-    setAddingFile({...record});
-    setDataSource(() => {
-      return [...dataSource];
-    });
-  };
+    return {
+      ...col,
+      onCell: (record) => ({
+        record,
+        inputType: col.dataIndex === 'garments' ? 'number' : 'text',
+        dataIndex: col.dataIndex,
+        title: col.title,
+        editing: isEditing(record)
+      })
+    };
+  });
 
   return {
-    dataSource,
-    setDataSource,
-    isEditing,
-    setIsEditing,
-    editingFile,
-    setEditingFile,
-    columns,
-    isAdd,
-    setIsAdd,
-    addingFile,
-    setAddingFile,
-    resetEditing,
-    resetAdd,
-    onAddFile
+    form,
+    EditableCell,
+    data,
+    mergedColumns,
+    cancel
   };
 };

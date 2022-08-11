@@ -2,15 +2,14 @@
   > div
   > div
   > div
-  > div:nth-child(4)
+  > div
+  > div
+  > div.ant-table-wrapper
   > div
   > div
   > div
   > div
-  > div
-  > div
-  > div
-  > div
+  > div.ant-table-header
   > table
   > thead
   > tr
@@ -23,7 +22,6 @@
   > div
   > div
   > div
-  > div:nth-child(4)
   > div
   > div
   > div.ant-table-wrapper
@@ -31,7 +29,25 @@
   > div
   > div
   > div
+  > div.ant-table-body
+  > table
+  > tbody
+  > tr {
+  text-align: center;
+}
+
+#root
   > div
+  > div
+  > div
+  > div
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > div
+  > div
+  > div.ant-table-body
   > table
   > tbody
   > tr
@@ -43,193 +59,19 @@
   > div
   > div
   > div
-  > div:nth-child(4)
+  > div
+  > div
+  > div.ant-table-wrapper
   > div
   > div
   > div
   > div
-  > div
-  > div
-  > div
-  > div
+  > div.ant-table-body
   > table
   > tbody
   > tr
-  > td {
-  text-align: center;
-}
-
-.btn-download {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.btn-download {
-  width: 200px;
-  height: 50px;
-}
-
-.btn-save {
-  width: 160px;
-  height: 50px;
-}
-
-.ant-pagination-item-active a {
-  background-color: #2bc155;
-
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  text-transform: uppercase;
-}
-
-.ant-pagination-item a {
-  color: #2bc155;
-}
-.ant-pagination-item a:hover {
-  color: #2bc155;
-}
-
-.ant-pagination-item-active a {
-  color: #ffffff;
-}
-.ant-pagination-item-active a:hover {
-  color: #ffffff;
-}
-
-.ant-pagination-next .ant-pagination-item-link,
-.ant-pagination-prev .ant-pagination-item-link {
-  border-color: #2bc155;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: #2bc155;
-}
-
-.ant-pagination-next .ant-pagination-item-link:hover,
-.ant-pagination-prev .ant-pagination-item-link:hover {
-  border-color: #2bc155;
-  color: #2bc155;
-}
-
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > ul
-  > li.ant-pagination-item.ant-pagination-item-1.ant-pagination-item-active {
-  border-color: #2bc155;
-}
-
-.ant-modal-header {
-  background: linear-gradient(190.08deg, #2bc155 9.78%, #26d0ce 111.09%);
-  text-align: center;
-}
-
-.ant-modal-title {
-  color: #ffffff;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14.8856px;
-  line-height: 19px;
-  text-transform: uppercase;
-}
-
-.ant-modal-close-x {
-  margin-top: -15%;
-  color: #ffffff;
-}
-
-input.input-add {
-  padding: 0.4rem;
-  background: #ffffff;
-  border: 0.930349px solid #4d4e4e;
-  border-radius: 9.30349px;
-}
-
-.input-add:focus {
-  border-color: #4d4e4e;
-  box-shadow: none;
-  border-right-width: 1px;
-  outline: 0;
-}
-
-.input-add:hover {
-  border-color: #4d4e4e;
-}
-
-.ant-row.ant-form-item-row {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.ant-col.ant-form-item-control {
-  width: 100%;
-}
-
-.ant-form-item-label > label {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14.8856px;
-  line-height: 19px;
-  /* identical to box height, or 125% */
-
-  color: #000000;
-}
-
-.ant-modal-footer .ant-btn + .ant-btn:not(.ant-dropdown-trigger) {
-  width: 152.85px;
-  height: 34.56px;
-  background: #2bc155;
-  border-color: #2bc155;
-  box-shadow: 0px 4.59522px 4.59522px rgba(0, 0, 0, 0.25);
-  border-radius: 6.64551px;
-  text-transform: uppercase;
-  font-family: 'Inter';
-}
-
-.ant-modal-footer button.ant-btn.ant-btn-default {
-  display: none;
-}
-
-.ant-modal-footer {
-  text-align: center;
-}
-
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > div
-  > div
-  > div
-  > table
-  > thead
-  > tr:nth-child(1)
-  > th.ant-table-cell.ant-table-column-sort.ant-table-column-has-sorters
-  > div
-  > span.ant-dropdown-trigger.ant-table-filter-trigger.active
+  > td
   > span
-  > svg {
-  color: #bfbfbf !important;
+  > a {
+  color: #2bc155;
 }

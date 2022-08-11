@@ -257,3 +257,160 @@ span.anticon.anticon-caret-up.ant-table-column-sorter-up.active {
   overflow-y: auto;
   max-height: 550px;
 }
+
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > ul
+  > li.ant-pagination-item.ant-pagination-item.ant-pagination-item-active {
+  border-color: #2bc155;
+  background-color: #2bc155;
+  border-radius: 5px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > ul
+  > li.ant-pagination-item.ant-pagination-item.ant-pagination-item-active
+  > a {
+  color: #ffffff;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > ul
+  > li.ant-pagination-item.ant-pagination-item
+  > a {
+  color: #2bc155;
+}
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > ul
+  > li.ant-pagination-item.ant-pagination-item {
+  border-color: #2bc155;
+  border-radius: 5px;
+  font-weight: 700;
+}
+
+li.ant-pagination-item.ant-pagination-item {
+  border-color: #2bc155;
+  border-radius: 5px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+#root > div > div > div > div > div > div > div > div > ul > li.ant-pagination-next > button,
+#root > div > div > div > div > div > div > div > div > ul > li.ant-pagination-prev > button {
+  border-color: #2bc155;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > ul
+  > li.ant-pagination-next
+  > button
+  > span
+  > svg,
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > ul
+  > li.ant-pagination-prev
+  > button
+  > span
+  > svg {
+  fill: #2bc155;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > ul
+  > li.ant-pagination-options
+  > div
+  > div
+  > span.ant-select-selection-item {
+  color: #2bc155;
+  font-weight: 400;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > ul
+  > li.ant-pagination-options
+  > div
+  > div {
+  border-color: #2bc155;
+  border-radius: 5px;
+}
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: #bfedcc !important;
+}
