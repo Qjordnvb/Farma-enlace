@@ -142,13 +142,16 @@ function TableReasons() {
                     />
                   </Form.Item>
                   <Form.Item
-                    className={`item-form ${addingFile?.payment === 'NO' ? 'input-disabled' : ''}`}
+                    className={`item-form w-32 ${
+                      addingFile?.payment === 'NO' ? 'input-disabled' : ''
+                    }`}
                     label="Descuento Personal"
                   >
                     <Input
                       type={'number'}
                       max={100}
                       value={addingFile?.personalDiscount}
+                      className={'input-add'}
                       onChange={(e) => {
                         const controlledValue = Math.max(0, Math.min(100, Number(e.target.value)));
                         let newCompanyDiscount = 100 - controlledValue;
@@ -162,11 +165,12 @@ function TableReasons() {
                       suffix={'%'}
                     />
                   </Form.Item>
-                  <Form.Item className="item-form" label="Descuento Farmaenlace">
+                  <Form.Item className="item-form w-40" label="Descuento Farmaenlace">
                     <Input
                       type={'number'}
                       max={100}
                       value={addingFile?.companyDiscount}
+                      className={'input-add'}
                       onChange={(e) => {
                         const controlledValue = Math.max(0, Math.min(100, Number(e.target.value)));
                         let newPersonalDiscount = 100 - controlledValue;

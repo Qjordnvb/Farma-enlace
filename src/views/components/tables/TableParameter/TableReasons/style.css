@@ -107,7 +107,8 @@
   color: #ffffff;
 }
 
-input.input-add {
+input.input-add,
+span.input-add {
   padding: 0.4rem;
   background: #ffffff;
   border: 0.930349px solid #4d4e4e;
