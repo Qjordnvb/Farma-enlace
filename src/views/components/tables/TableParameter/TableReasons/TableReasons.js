@@ -156,7 +156,14 @@ function TableReasons() {
                       defaultValue="0%"
                       value={addingFile?.personalDiscount}
                       onChange={(value) => {
-                        setAddingFile({...addingFile, personalDiscount: value});
+                        let indexOf = percentage.indexOf(value);
+                        let companyDiscountIndex = 10 - indexOf;
+                        if(percentage[companyDiscountIndex]) {
+                          setAddingFile({...addingFile, personalDiscount: value, companyDiscount: percentage[companyDiscountIndex]});
+                        }else{
+                          setAddingFile({...addingFile, personalDiscount: value});
+                        }
+
                       }}
                     >
                       {percentage.map((percen, index) => {
@@ -173,12 +180,20 @@ function TableReasons() {
                       defaultValue="0%"
                       value={addingFile?.companyDiscount}
                       onChange={(value) => {
-                        setAddingFile({...addingFile, companyDiscount: value});
+                        let indexOf = percentage.indexOf(value);
+                        let personDiscountIndex = 10 - indexOf;
+                        console.log('index',percentage[personDiscountIndex]);
+                        if(percentage[personDiscountIndex]) {
+                          setAddingFile({...addingFile, companyDiscount: value, personalDiscount: percentage[personDiscountIndex]});
+                        }else{
+                          setAddingFile({...addingFile, companyDiscount: value});
+                        }
+
                       }}
                     >
                       {percentage.map((percent, index) => {
                         return (
-                          <Option key={index} value={percent}>
+                          <Option key={index} value={percent} id={index}>
                             {percent}
                           </Option>
                         );
