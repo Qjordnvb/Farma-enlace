@@ -86,6 +86,24 @@ export const useUtils = () => {
     }
   }
 
+  async function getAllDescriptions() {
+    try {
+      const request = await Apilocal.get('/uniformDescription/findAll');
+      return request.data;
+    } catch (e) {
+      console.log('ERROR - getAllDescriptions', e);
+    }
+  }
+
+  async function updateGarmentQuantity(data) {
+    try {
+      const request = await Apilocal.post('/uniformDescription/updateQuantity', {...data});
+      return request.data;
+    } catch (e) {
+      console.log('ERROR - getAllDescriptions', e);
+    }
+  }
+
   async function switchActiveGarment(id, active) {
     try {
       const request = await Apilocal.post('/prenda/active', {id, active});
@@ -216,6 +234,8 @@ export const useUtils = () => {
     switchActiveReason,
     switchActiveGarment,
     addGarment,
-    editGarmentDescription
+    editGarmentDescription,
+    getAllDescriptions,
+    updateGarmentQuantity
   };
 };
