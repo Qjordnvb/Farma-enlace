@@ -135,8 +135,7 @@ export const useCustomReasons = () => {
 
   const onAddFile = async () => {
     setIsAdd(true);
-    await addReason({...addingFile});
-    dataReasonsTable();
+
     setAddingFile({
       reason: '',
       replacement: 'NO',
@@ -147,6 +146,10 @@ export const useCustomReasons = () => {
       personalDiscount: '0%',
       companyDiscount: '0%'
     });
+  };
+  const onCreateReason = async () => {
+    await addReason({...addingFile});
+    dataReasonsTable();
   };
 
   return {
@@ -159,6 +162,7 @@ export const useCustomReasons = () => {
     setAddingFile,
     resetAdd,
     onAddFile,
-    onChange
+    onChange,
+    onCreateReason
   };
 };

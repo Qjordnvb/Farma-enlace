@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
 import {useUtils} from 'hooks';
@@ -7,30 +7,76 @@ import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 export const useCustomDescription = () => {
   const originData = [];
   const [form] = Form.useForm();
+  // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState(originData);
   const [editingKey, setEditingKey] = useState('');
 
-  const isEditing = (record) => record.key === editingKey;
+  const isEditing = (record) => record.id === editingKey;
 
-  const {getColumnSearchProps} = useUtils();
+  const {
+    getColumnSearchProps,
+    getAllDescriptions,
+    getGarmentsTableParameters,
+    updateGarmentQuantity
+  } = useUtils();
 
-  for (let i = 0; i < 100; i++) {
-    originData.push({
-      key: i.toString(),
-      n: 1,
-      code: `0000115105 ${i}`,
-      description: `ZP PRV KIT ECO HOMBRE T-M-38 ${i}`,
-      garments: `New York No. 1 Lake Park ${i}`,
-      brand: `Costosa ${i}`,
-      region: `Sierra ${i}`,
-      garment1: `3 `,
-      garment2: `0 `,
-      garment3: `1 `,
-      garment4: `0 `,
-      garment5: `2 `,
-      garment6: `0 `
+  const [dataTable, setDataTable] = useState([]);
+  const [garmentsList, setGarmentsList] = useState([]);
+  const [garmentColumns, setGarmentsColumns] = useState([]);
+
+  useEffect(() => {
+    getGarmentsTableParameters().then((res) => {
+      setGarmentsList(res);
+
+      getAllDescriptions().then((res) => {
+        setDataTable(res);
+      });
     });
-  }
+  }, []);
+
+  useEffect(() => {
+    let getColumns = garmentsList.map((garment) => {
+      return {
+        title: garment.description,
+        dataIndex: `garment${garment.id}`,
+        editable: true
+      };
+    });
+    setGarmentsColumns(getColumns);
+  }, [garmentsList]);
+  /**/
+  useEffect(() => {
+    let formatData1 = dataTable.map((product) => {
+      if (product.garmentTypes.length > 0) {
+        let formatGarment = product.garmentTypes.reduce(function (res, garmentType) {
+          res[`garment${garmentType.garments[0].garmentId}_obj`] = {
+            ...garmentType,
+            ...garmentType.garments[0]
+          };
+
+          res[`garment${garmentType.garments[0].garmentId}`] = garmentType.quantity;
+
+          delete res[`garment${garmentType.garments[0].garmentId}`].garments;
+          return res;
+        }, {});
+
+        return {...product, ...formatGarment};
+      } else {
+        return {...product};
+      }
+    });
+    let checkGarmentsValue = formatData1.map((product) => {
+      let newProduct = product;
+      garmentsList.map((garment) => {
+        let index = `garment${garment.id}`;
+        if (!newProduct[index]) {
+          newProduct[index] = 0;
+        }
+      });
+      return newProduct;
+    });
+    setData(formatData1);
+  }, [dataTable]);
 
   const EditableCell = ({editing, dataIndex, title, inputType, children, ...restProps}) => {
     const inputNode = inputType === 'garments' ? <InputNumber /> : <Input />;
@@ -68,7 +114,7 @@ export const useCustomDescription = () => {
       garment6: '',
       ...record
     });
-    setEditingKey(record.key);
+    setEditingKey(record.id);
   };
 
   const cancel = () => {
@@ -77,20 +123,35 @@ export const useCustomDescription = () => {
 
   const save = async (key) => {
     try {
-      const row = await form.validateFields();
-      const newData = [...data];
-      const index = newData.findIndex((item) => key === item.key);
+      let findRow = data.find((obj) => obj.id === key);
 
-      if (index > -1) {
-        const item = newData[index];
-        newData.splice(index, 1, {...item, ...row});
-        setData(newData);
-        setEditingKey('');
-      } else {
-        newData.push(row);
-        setData(newData);
-        setEditingKey('');
-      }
+      const row = await form.validateFields();
+
+      Object.keys(row).map((rowKey) => {
+        if (findRow[`${rowKey}_obj`]?.garmentTypeId) {
+          updateGarmentQuantity({
+            quantity: row[rowKey],
+            garmentTypeId: findRow[`${rowKey}_obj`].garmentTypeId,
+            uniformId: key
+          }).then(() => {
+            getAllDescriptions().then((res) => {
+              setDataTable(res);
+            });
+            setEditingKey('');
+          });
+        } else {
+          updateGarmentQuantity({
+            quantity: row[rowKey],
+            garmentId: Number(rowKey.substring(7, 9)),
+            uniformId: key
+          }).then(() => {
+            getAllDescriptions().then((res) => {
+              setDataTable(res);
+            });
+            setEditingKey('');
+          });
+        }
+      });
     } catch (errInfo) {
       console.log('Validate Failed:', errInfo);
     }
@@ -99,58 +160,29 @@ export const useCustomDescription = () => {
   const columns = [
     {
       title: 'N°',
-      dataIndex: 'n'
+      dataIndex: 'id'
     },
     {
       title: 'Código Producto',
-      dataIndex: 'code',
-      ...getColumnSearchProps('code'),
-      sorter: (a, b) => a.code.length - b.code.length,
+      dataIndex: 'codigo',
+      ...getColumnSearchProps('codigo'),
+      sorter: (a, b) => a.codigo.length - b.codigo.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Descripción',
-      dataIndex: 'description',
-      ...getColumnSearchProps('description'),
-      sorter: (a, b) => a.description.length - b.description.length,
+      dataIndex: 'descripcion',
+      ...getColumnSearchProps('descripcion'),
+      sorter: (a, b) => a.descripcion.length - b.descripcion.length,
       sortDirections: ['descend', 'ascend']
     },
+    ...garmentColumns,
 
     {
-      title: 'Mandil blanco',
-      dataIndex: 'garment1',
-      editable: true
-    },
-    {
-      title: 'Mandil azul',
-      dataIndex: 'garment2',
-      editable: true
-    },
-    {
-      title: 'Camiseta',
-      dataIndex: 'garment3',
-      editable: true
-    },
-    {
-      title: 'Buso',
-      dataIndex: 'garment4',
-      editable: true
-    },
-    {
-      title: 'Chompa',
-      dataIndex: 'garment5',
-      editable: true
-    },
-    {
-      title: 'Escarapela',
-      dataIndex: 'garment6',
-      editable: true
-    },
-    {
       title: 'Marca',
-      dataIndex: 'brand',
-      ...getColumnSearchProps('brand'),
-      sorter: (a, b) => a.brand.length - b.brand.length,
+      dataIndex: 'marca',
+      ...getColumnSearchProps('marca'),
+      sorter: (a, b) => a.marca.length - b.marca.length,
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -168,7 +200,7 @@ export const useCustomDescription = () => {
         return editable ? (
           <span>
             <Typography.Link
-              onClick={() => save(record.key)}
+              onClick={() => save(record.id)}
               style={{
                 marginRight: 8
               }}

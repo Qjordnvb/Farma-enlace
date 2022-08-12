@@ -3,15 +3,12 @@ import {SearchOutlined} from '@ant-design/icons';
 import {Button, Input, Space} from 'antd';
 import Highlighter from 'react-highlight-words';
 import './styles.css';
-import {Api,Apilocal} from 'services/Api';
+import {Api, Apilocal} from 'services/Api';
 
 export const useUtils = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
-
-
-  
 
   async function LoginRequest(usuario, password) {
     try {
@@ -24,7 +21,6 @@ export const useUtils = () => {
     }
   }
 
-
   async function getTableParameters() {
     try {
       const request = await Apilocal.get('/products/findAll');
@@ -36,49 +32,84 @@ export const useUtils = () => {
     }
   }
 
-  async function getReasonsTableParameters(){
-    try{ 
+  async function getReasonsTableParameters() {
+    try {
       const request = await Apilocal.get('/parameterizedReasons/findAll');
       return request.data;
-    }catch (e) {
-      console.log("ERROR - getGarmentsTableParameters",e);
+    } catch (e) {
+      console.log('ERROR - getGarmentsTableParameters', e);
     }
   }
 
-  async function addReason(data){
-    try{
+  async function addReason(data) {
+    try {
       const request = await Apilocal.post('/parameterizedReasons/create', {...data});
       return request.data;
-    }catch (e) {
-      console.log("ERROR - addReason",e);
+    } catch (e) {
+      console.log('ERROR - addReason', e);
     }
   }
 
-  async function switchActiveReason(id,active){
-    try{
-      const request = await Apilocal.post('/parameterizedReasons/active', {id,active});
+  async function switchActiveReason(id, active) {
+    try {
+      const request = await Apilocal.post('/parameterizedReasons/active', {id, active});
       return request.data;
-    }catch (e) {
-      console.log("ERROR - addReason",e);
+    } catch (e) {
+      console.log('ERROR - addReason', e);
     }
   }
 
+  async function addGarment(data) {
+    try {
+      const request = await Apilocal.post('/prenda/create', {...data});
+      return request.data;
+    } catch (e) {
+      console.log('ERROR - addGarment', e);
+    }
+  }
 
-  async function getGarmentsTableParameters(){
-    try{ 
+  async function editGarmentDescription(data) {
+    try {
+      const request = await Apilocal.post('/prenda/edit', {...data});
+      return request.data;
+    } catch (e) {
+      console.log('ERROR - editGarmentDescription', e);
+    }
+  }
+
+  async function getGarmentsTableParameters() {
+    try {
       const request = await Apilocal.get('/prenda/findAll');
       return request.data;
-    }catch (e) {
-      console.log("ERROR - garments",e);
+    } catch (e) {
+      console.log('ERROR - garments', e);
     }
   }
 
-  async function switchActiveGarment(id,active){
-    try{
-      const request = await Apilocal.post('/prenda/active', {id,active});
+  async function getAllDescriptions() {
+    try {
+      const request = await Apilocal.get('/uniformDescription/findAll');
       return request.data;
-    }catch (e) {
-      console.log("ERROR - addReason",e);
+    } catch (e) {
+      console.log('ERROR - getAllDescriptions', e);
+    }
+  }
+
+  async function updateGarmentQuantity(data) {
+    try {
+      const request = await Apilocal.post('/uniformDescription/updateQuantity', {...data});
+      return request.data;
+    } catch (e) {
+      console.log('ERROR - getAllDescriptions', e);
+    }
+  }
+
+  async function switchActiveGarment(id, active) {
+    try {
+      const request = await Apilocal.post('/prenda/active', {id, active});
+      return request.data;
+    } catch (e) {
+      console.log('ERROR - addReason', e);
     }
   }
 
@@ -201,6 +232,10 @@ export const useUtils = () => {
     getGarmentsTableParameters,
     addReason,
     switchActiveReason,
-    switchActiveGarment
+    switchActiveGarment,
+    addGarment,
+    editGarmentDescription,
+    getAllDescriptions,
+    updateGarmentQuantity
   };
 };
