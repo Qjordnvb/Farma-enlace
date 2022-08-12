@@ -65,7 +65,7 @@ export const useCustomDescription = () => {
         return {...product};
       }
     });
-    let checkGarmentsValue = formatData1.map((product) => {
+    formatData1.map((product) => {
       let newProduct = product;
       garmentsList.map((garment) => {
         let index = `garment${garment.id}`;
