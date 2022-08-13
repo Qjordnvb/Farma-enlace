@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 
@@ -7,7 +7,7 @@ export const useCustomReplacement = () => {
   const [addingFile, setAddingFile] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editingFile, setEditingFile] = useState(null);
-  const {getColumnSearchProps} = useUtils();
+  const {getColumnSearchProps, getAllRepositionParameters} = useUtils();
   const [dataSource, setDataSource] = useState([
     {
       id: 1,
@@ -39,6 +39,12 @@ export const useCustomReplacement = () => {
     }
   ]);
 
+  useEffect(() => {
+    getAllRepositionParameters().then((res) => {
+      setDataSource(res);
+    });
+  }, []);
+
   const onEditFile = (record) => {
     setIsEditing(true);
     setEditingFile({...record});
@@ -48,7 +54,7 @@ export const useCustomReplacement = () => {
     {
       key: '0',
       title: 'N°',
-      dataIndex: 'n'
+      dataIndex: 'id'
     },
     {
       key: '1',
@@ -93,9 +99,9 @@ export const useCustomReplacement = () => {
     {
       key: '6',
       title: 'Reposición',
-      dataIndex: 'replacement',
-      ...getColumnSearchProps('replacement'),
-      sorter: (a, b) => a.replacement.length - b.replacement.length,
+      dataIndex: 'reposicion',
+      ...getColumnSearchProps('reposicion'),
+      sorter: (a, b) => a.reposicion.length - b.reposicion.length,
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -117,17 +123,17 @@ export const useCustomReplacement = () => {
     {
       key: '9',
       title: 'Última modificación',
-      dataIndex: 'ultimaM',
-      ...getColumnSearchProps('ultimaM'),
-      sorter: (a, b) => a.ultimaM.length - b.ultimaM.length,
+      dataIndex: 'ultimaActualizacion',
+      ...getColumnSearchProps('ultimaActualizacion'),
+      sorter: (a, b) => a.ultimaActualizacion.length - b.ultimaActualizacion.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       key: '10',
       title: 'Fecha de modificación',
-      dataIndex: 'fechaM',
+      dataIndex: 'updatedAt',
       ...getColumnSearchProps('fechaM'),
-      sorter: (a, b) => a.fechaM.length - b.fechaM.length,
+      sorter: (a, b) => a.updatedAt.length - b.updatedAt.length,
       sortDirections: ['descend', 'ascend']
     },
     {

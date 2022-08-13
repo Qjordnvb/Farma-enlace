@@ -106,7 +106,6 @@ function TableGarments() {
                     defaultValue={true}
                     placeholder="Estado"
                     onChange={(e) => {
-                      console.log('e', e);
                       setAddingFile({
                         ...addingFile,
                         active: e
