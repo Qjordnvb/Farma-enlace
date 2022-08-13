@@ -64,7 +64,7 @@ export const useCustomUniforms = () => {
       dataIndex: 'region',
       width: '10%',
       ...getColumnSearchProps('region'),
-      sorter: (k, l) => k.region.length - l.region.length,
+      sorter: (k, l) => k.region?.length - l.region?.length,
       sortDirections: ['descend', 'ascend']
     },
     {

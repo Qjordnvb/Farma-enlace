@@ -191,7 +191,7 @@ export const useCustomDescription = () => {
       title: 'Región',
       dataIndex: 'region',
       ...getColumnSearchProps('region'),
-      sorter: (a, b) => a.region.length - b.region.length,
+      sorter: (a, b) => a.region?.length - b.region?.length,
       sortDirections: ['descend', 'ascend']
     },
     {

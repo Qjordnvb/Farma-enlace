@@ -7,7 +7,8 @@ export const useCustomReplacement = () => {
   const [addingFile, setAddingFile] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editingFile, setEditingFile] = useState(null);
-  const {getColumnSearchProps, getAllRepositionParameters} = useUtils();
+  const [editId, setEditId] = useState();
+  const {getColumnSearchProps, getAllRepositionParameters, editRepositionParameter} = useUtils();
   const [dataSource, setDataSource] = useState([
     {
       id: 1,
@@ -48,7 +49,7 @@ export const useCustomReplacement = () => {
 
   const onEditFile = (record) => {
     setIsEditing(true);
-    setEditingFile({...record});
+    setEditId(record.id);
   };
 
   const columns = [
@@ -161,6 +162,7 @@ export const useCustomReplacement = () => {
   const resetEditing = () => {
     setIsEditing(false);
     setEditingFile(null);
+    setEditId(null);
   };
 
   const resetAdd = () => {
@@ -168,11 +170,18 @@ export const useCustomReplacement = () => {
     setAddingFile(null);
   };
 
-  const onAddFile = (record) => {
+  const onAddFile = () => {
     setIsAdd(true);
-    setAddingFile({...record});
     setDataSource(() => {
       return [...dataSource];
+    });
+  };
+
+  const onEditReplacement = async () => {
+    editRepositionParameter({...editingFile, id: editId}).then(() => {
+      getAllRepositionParameters().then((res) => {
+        setDataSource(res);
+      });
     });
   };
 
@@ -190,6 +199,7 @@ export const useCustomReplacement = () => {
     setAddingFile,
     resetEditing,
     resetAdd,
-    onAddFile
+    onAddFile,
+    onEditReplacement
   };
 };
