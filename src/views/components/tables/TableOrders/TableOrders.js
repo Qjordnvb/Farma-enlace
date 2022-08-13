@@ -185,7 +185,7 @@ const TableOrders = () => {
       key: 'region',
       width: '10%',
       ...getColumnSearchProps('region'),
-      sorter: (a, b) => a.region.length - b.region.length,
+      sorter: (a, b) => a.region?.length - b.region?.length,
       sortDirections: ['descend', 'ascend']
     },
     {

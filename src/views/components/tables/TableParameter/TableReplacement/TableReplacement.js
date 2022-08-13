@@ -7,8 +7,15 @@ import btnDownload from '../../../../../assets/img/btn-download.png';
 import {useCustomReplacement} from './hooks';
 
 function TableReplacement() {
-  const {dataSource, setDataSource, setEditingFile, isEditing, editingFile, columns, resetEditing} =
-    useCustomReplacement();
+  const {
+    dataSource,
+    setEditingFile,
+    isEditing,
+    editingFile,
+    columns,
+    resetEditing,
+    onEditReplacement
+  } = useCustomReplacement();
 
   {
     /* //   id: 1,
@@ -47,16 +54,9 @@ function TableReplacement() {
                 resetEditing();
               }}
               onOk={() => {
-                setDataSource((pre) => {
-                  return pre.map((file) => {
-                    if (file.id === editingFile.id) {
-                      return editingFile;
-                    } else {
-                      return file;
-                    }
-                  });
+                onEditReplacement().then(() => {
+                  resetEditing();
                 });
-                resetEditing();
               }}
             >
               <Form>
@@ -65,8 +65,10 @@ function TableReplacement() {
                     className="input-add"
                     value={editingFile?.porcentaje}
                     onChange={(e) => {
-                      setEditingFile((pre) => {
-                        return {...pre, porcentaje: e.target.value};
+                      const controlledValue = Math.max(0, Math.min(100, Number(e.target.value)));
+                      setEditingFile({
+                        ...editingFile,
+                        porcentaje: controlledValue
                       });
                     }}
                   />
@@ -76,9 +78,7 @@ function TableReplacement() {
                     className="input-add"
                     value={editingFile?.replacement}
                     onChange={(e) => {
-                      setEditingFile((pre) => {
-                        return {...pre, replacement: e.target.value};
-                      });
+                      setEditingFile({...editingFile, replacement: e.target.value});
                     }}
                   />
                 </Form.Item>
