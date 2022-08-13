@@ -3,8 +3,26 @@
   > div
   > div
   > div
+  > div.ant-table-wrapper
   > div
   > div
+  > div
+  > div
+  > div
+  > table
+  > thead
+  > tr
+  > th {
+  background: #bfedcc;
+  text-align: center;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div
+  > div.ant-table-wrapper
   > div
   > div
   > div
@@ -17,35 +35,27 @@
   background-color: #eeeeee;
 }
 
-#root > div > div > div > div > div > div > div > div > div > div > div > table > thead > tr > th {
-  background: #bfedcc;
+#root
+  > div
+  > div
+  > div
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > tbody
+  > tr
+  > td {
+  text-align: center;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div
-  > div
-  > div
-  > ul
-  > li.ant-pagination-item.ant-pagination-item-1.ant-pagination-item-active,
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div
-  > div
-  > div
-  > ul
-  > li.ant-pagination-item.ant-pagination-item-2.ant-pagination-item-active {
-  border-color: #2bc155;
+.ant-pagination-item-active a {
   background-color: #2bc155;
-  border-radius: 5px;
+
   font-family: 'Inter';
   font-style: normal;
   font-weight: 600;
@@ -53,43 +63,39 @@
   text-transform: uppercase;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div
-  > div
-  > div
-  > ul
-  > li.ant-pagination-item.ant-pagination-item.ant-pagination-item-active
-  > a {
+.ant-pagination-item a {
+  color: #2bc155;
+}
+.ant-pagination-item a:hover {
+  color: #2bc155;
+}
+
+.ant-pagination-item-active a {
+  color: #ffffff;
+}
+.ant-pagination-item-active a:hover {
   color: #ffffff;
 }
 
-li.ant-pagination-item.ant-pagination-item {
+.ant-pagination-next .ant-pagination-item-link,
+.ant-pagination-prev .ant-pagination-item-link {
   border-color: #2bc155;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 5px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 700;
   text-transform: uppercase;
+  color: #2bc155;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div
-  > div
-  > div
-  > ul
-  > li.ant-pagination-item.ant-pagination-item
-  > a {
+.ant-pagination-next .ant-pagination-item-link:hover,
+.ant-pagination-prev .ant-pagination-item-link:hover {
+  border-color: #2bc155;
   color: #2bc155;
+}
+
+.modal-add-orders {
+  max-width: 700px;
+  width: 100% !important;
 }

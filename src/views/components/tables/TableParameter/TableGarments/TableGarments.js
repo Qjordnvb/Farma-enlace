@@ -1,9 +1,9 @@
 import {Table, Modal, Input, Form, Select} from 'antd';
+import {Option} from 'antd/es/mentions';
 import './style.css';
 import Button from 'views/components/button/Button';
 import {StyledGridList} from 'views/screens/user/dataGridParameters/gridList/GridList.Styled';
 import {useCustomGarments} from './hooks';
-import {Option} from 'antd/es/mentions';
 
 function TableGarments() {
   const {

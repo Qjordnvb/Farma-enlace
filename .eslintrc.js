@@ -37,7 +37,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'no-console': ['warn'],
     'comma-dangle': ['warn', 'never'],
-    eqeqeq: [2, 'always'],
+
     'import/order': [
       'warn',
       {

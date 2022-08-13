@@ -73,7 +73,7 @@ function DataGridLayout({children, titleGrid, userMenuLinks}) {
 }
 
 DataGridLayout.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   titleGrid: PropTypes.string,
   userMenuLinks: PropTypes.array
 };
