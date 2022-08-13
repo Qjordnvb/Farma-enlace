@@ -5,9 +5,6 @@ export const StyledSidebarLayout = styled.div.attrs({
   className: 'StyledSidebarLayout'
 })`
   ${tw``}
-
-  .container-table {
-  }
 `;
 
 export const StyledDataTable = styled.div.attrs({

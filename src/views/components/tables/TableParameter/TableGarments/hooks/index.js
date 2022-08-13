@@ -27,6 +27,7 @@ export const useCustomGarments = () => {
 
   useEffect(() => {
     dataReasonsTable();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onEditFile = (record) => {

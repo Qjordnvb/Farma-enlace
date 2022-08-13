@@ -32,6 +32,7 @@ export const useCustomDescription = () => {
         setDataTable(res);
       });
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -76,6 +77,7 @@ export const useCustomDescription = () => {
       return newProduct;
     });
     setData(formatData1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataTable]);
 
   const EditableCell = ({editing, dataIndex, title, inputType, children, ...restProps}) => {

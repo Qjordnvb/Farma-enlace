@@ -1,6 +1,6 @@
 import React from 'react';
 import {Table, Modal, Input, Form, Switch, Select} from 'antd';
-import './style.css';
+import './style-reasons.css';
 import Button from 'views/components/button/Button';
 import {StyledGridList} from 'views/screens/user/dataGridParameters/gridList/GridList.Styled';
 import {useCustomReasons} from './hooks';

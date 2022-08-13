@@ -44,6 +44,7 @@ export const useCustomReplacement = () => {
     getAllRepositionParameters().then((res) => {
       setDataSource(res);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onEditFile = (record) => {

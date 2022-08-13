@@ -1,4 +1,5 @@
 import React from 'react';
+import {Route, Routes} from 'react-router';
 import useViews from 'views';
 
 // import PropTypes from 'prop-types';
@@ -16,21 +17,24 @@ function DataGridOrders() {
     },
     {
       name: 'orden de consumo',
-      path: 'consumo',
+      path: 'intake',
       key: '7'
-    },
-    {
-      name: ' descuento',
-      path: 'descuento',
-      key: '8'
     }
+    // {
+
+    //   element: ,
+
+    // }
   ];
   return (
     <>
       {' '}
       <DataGridLayout titleGrid="Orden de consumo" userMenuLinks={userMenu}>
-        <div className="container-table pt-16">
-          <TableOrders />
+        <div>
+          <Routes>
+            <Route path="actualization" element={<TableOrders />} />
+            <Route path="intake" element={<TableOrders />} />
+          </Routes>
         </div>
       </DataGridLayout>
     </>

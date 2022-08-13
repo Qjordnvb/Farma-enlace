@@ -19,15 +19,67 @@ function SidebarMenu() {
       <ul>
         <li>
           <NavLink
-            to={`${DATA}parameters`}
-            children={({isActive}) => <img src={`${isActive ? Ico1 : Ico1Green}`} alt="ico-1" />}
+            to={`${DATA}parameters/uniforms`}
+            children={({isActive}) => (
+              <img
+                src={`${
+                  isActive
+                    ? Ico1
+                    : (Ico1Green &&
+                        window.location.pathname == '/private/*parameters/list/garments') ||
+                      (Ico1Green &&
+                        window.location.pathname == '/private/*parameters/list/reasons') ||
+                      (Ico1Green &&
+                        window.location.pathname == '/private/*parameters/description') ||
+                      (Ico1Green &&
+                        window.location.pathname == '/private/*parameters/replacement') ||
+                      (Ico1Green && window.location.pathname == '/private/*parameters/entrega')
+                    ? Ico1
+                    : Ico1Green
+                }`}
+                alt="ico-2"
+              />
+            )}
+            className={({isActive}) =>
+              isActive
+                ? 'active'
+                : `${
+                    window.location.pathname == '/private/*parameters/list/garments'
+                      ? 'active'
+                      : '' || window.location.pathname == '/private/*parameters/list/reasons'
+                      ? 'active'
+                      : '' || window.location.pathname == '/private/*parameters/description'
+                      ? 'active'
+                      : '' || window.location.pathname == '/private/*parameters/replacement'
+                      ? 'active'
+                      : '' || window.location.pathname == '/private/*parameters/entrega'
+                      ? 'active'
+                      : ''
+                  }`
+            }
           />
         </li>
 
         <li>
           <NavLink
-            to={`${DATA}orders`}
-            children={({isActive}) => <img src={`${isActive ? Ico2 : Ico2Green}`} alt="ico-2" />}
+            to={`${DATA}orders/actualization`}
+            children={({isActive}) => (
+              <img
+                src={`${
+                  isActive
+                    ? Ico2
+                    : Ico2Green && window.location.pathname === '/private/*orders/intake'
+                    ? Ico2
+                    : Ico2Green
+                }`}
+                alt="ico-2"
+              />
+            )}
+            className={({isActive}) =>
+              isActive
+                ? 'active'
+                : `${window.location.pathname === '/private/*orders/intake' ? 'active' : ''}`
+            }
           />
         </li>
 
