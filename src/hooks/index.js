@@ -95,6 +95,42 @@ export const useUtils = () => {
     }
   }
 
+  async function getAllRepositionParameters() {
+    try {
+      const request = await Apilocal.get('/products/findWithReplacement');
+      return request.data;
+    } catch (e) {
+      console.log('ERROR - getAllDescriptions', e);
+    }
+  }
+
+  async function editRepositionParameter(data) {
+    try {
+      const request = await Apilocal.post('/products/editReplacement', {...data});
+      return request.data;
+    } catch (e) {
+      console.log('ERROR - getAllDescriptions', e);
+    }
+  }
+
+  async function getAllDeliveries() {
+    try {
+      const request = await Apilocal.get('/uniformDelivery/findAll');
+      return request.data;
+    } catch (e) {
+      console.log('ERROR - getAllDeliveries', e);
+    }
+  }
+
+  async function createDelivery(data) {
+    try {
+      const request = await Apilocal.post('/uniformDelivery/create', {...data});
+      return request.data;
+    } catch (e) {
+      console.log('ERROR - createDelivery', e);
+    }
+  }
+
   async function updateGarmentQuantity(data) {
     try {
       const request = await Apilocal.post('/uniformDescription/updateQuantity', {...data});
@@ -236,6 +272,10 @@ export const useUtils = () => {
     addGarment,
     editGarmentDescription,
     getAllDescriptions,
-    updateGarmentQuantity
+    updateGarmentQuantity,
+    getAllRepositionParameters,
+    editRepositionParameter,
+    createDelivery,
+    getAllDeliveries
   };
 };
