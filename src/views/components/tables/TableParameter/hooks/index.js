@@ -8,7 +8,7 @@ export const useCustomUniforms = () => {
   const dataTable = async function () {
     setLoading(true);
     const response = await getTableParameters();
-    console.log('dataa table', response);
+
     setDataSource(response);
     setLoading(false);
   };

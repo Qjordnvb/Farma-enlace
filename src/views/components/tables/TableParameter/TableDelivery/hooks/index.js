@@ -84,6 +84,7 @@ export const useCustomDelivery = () => {
     getReasonsTableParameters().then((res) => {
       setReasonsList(res);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

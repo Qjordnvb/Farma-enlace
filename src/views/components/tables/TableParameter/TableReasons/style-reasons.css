@@ -239,3 +239,8 @@
 .item-form-custom {
   margin-left: 3%;
 }
+
+.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled) {
+  border-color: #4d4e4e;
+  border-radius: 10px;
+}

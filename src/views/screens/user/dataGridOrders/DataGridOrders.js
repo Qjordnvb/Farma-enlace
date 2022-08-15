@@ -8,23 +8,16 @@ function DataGridOrders() {
   const {useLayouts, useComponents} = useViews();
   const {DataGridLayout} = useLayouts();
   const {useTables} = useComponents();
-  const {TableOrders} = useTables();
+  const {TableOrders, TableIntake} = useTables();
   const userMenu = [
     {
       name: 'actualización de tallas',
-      path: 'actualization',
-      key: '6'
+      path: 'actualization'
     },
     {
       name: 'orden de consumo',
-      path: 'intake',
-      key: '7'
+      path: 'intake'
     }
-    // {
-
-    //   element: ,
-
-    // }
   ];
   return (
     <>
@@ -33,7 +26,7 @@ function DataGridOrders() {
         <div>
           <Routes>
             <Route path="actualization" element={<TableOrders />} />
-            <Route path="intake" element={<TableOrders />} />
+            <Route path="intake" element={<TableIntake />} />
           </Routes>
         </div>
       </DataGridLayout>

@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/charts": "^1.4.2",
     "@ant-design/icons": "^4.7.0",
+    "@ant-design/plots": "^1.2.1",
     "@babel/core": "7.17.*",
     "@babel/eslint-parser": "7.17.*",
     "@babel/preset-react": "7.16.*",

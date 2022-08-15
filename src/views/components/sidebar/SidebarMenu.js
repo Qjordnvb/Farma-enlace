@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
 import {DATA} from 'config/paths';
 // Assets
+import Ico4 from '../../../assets/img/Ico4.png';
+import Ico5 from '../../../assets/img/Ico5.png';
 import Ico2 from '../../../assets/img/consumo-white.png';
 import Ico2Green from '../../../assets/img/consumo.png';
 import Ico4Green from '../../../assets/img/descuento.png';
 import Ico1Green from '../../../assets/img/doctor.png';
+import Ico3 from '../../../assets/img/ico-3.png';
 import Ico3Green from '../../../assets/img/inventario.png';
 import Ico1 from '../../../assets/img/parametrizacion.png';
+
 import Ico5Green from '../../../assets/img/reporteria.png';
 // StyledComponents
 import {StyledContainerSidebar} from './Sidebar.Styled';
@@ -84,25 +88,40 @@ function SidebarMenu() {
         </li>
 
         <li>
-          <NavLink to={'/'}>
-            {' '}
-            <img src={Ico3Green} alt="ico-3" />{' '}
-          </NavLink>
+          <NavLink
+            to={`${DATA}inventory/buy`}
+            children={({isActive}) => (
+              <img
+                src={`${
+                  isActive
+                    ? Ico3
+                    : Ico3Green && window.location.pathname === '/private/*inventory/graphic'
+                    ? Ico3
+                    : Ico3Green
+                }`}
+                alt="ico-2"
+              />
+            )}
+            className={({isActive}) =>
+              isActive
+                ? 'active'
+                : `${window.location.pathname === '/private/*inventory/graphic' ? 'active' : ''}`
+            }
+          />
         </li>
 
         <li>
-          <NavLink to={'/'}>
-            {' '}
-            <img src={Ico4Green} alt="ico-4" />{' '}
-          </NavLink>
+          <NavLink
+            to={`${DATA}discount`}
+            children={({isActive}) => <img src={`${isActive ? Ico4 : Ico4Green}`} alt="ico-1" />}
+          />
         </li>
 
         <li>
-          {' '}
-          <NavLink to={'/'}>
-            {' '}
-            <img src={Ico5Green} alt="ico-5" />{' '}
-          </NavLink>
+          <NavLink
+            to={`${DATA}report`}
+            children={({isActive}) => <img src={`${isActive ? Ico5 : Ico5Green}`} alt="ico-1" />}
+          />
         </li>
       </ul>
     </StyledContainerSidebar>

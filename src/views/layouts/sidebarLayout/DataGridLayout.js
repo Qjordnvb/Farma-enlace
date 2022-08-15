@@ -45,7 +45,7 @@ function DataGridLayout({children, titleGrid, userMenuLinks}) {
                         }`
                   }
                   to={link.path}
-                  key={link.key}
+                  key={link.name}
                 >
                   <span>{link.name}</span>
                   <div className={({isActive}) => (isActive ? 'div-bg' : '')} />

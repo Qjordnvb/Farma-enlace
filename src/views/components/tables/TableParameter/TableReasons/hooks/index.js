@@ -11,7 +11,6 @@ export const useCustomReasons = () => {
 
   const dataReasonsTable = function () {
     getReasonsTableParameters().then((response) => {
-      console.log('data table', response);
       setDataSource(response);
     });
   };
@@ -22,6 +21,7 @@ export const useCustomReasons = () => {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line no-console
     console.log('adding file', addingFile);
   }, [addingFile]);
 
@@ -38,8 +38,8 @@ export const useCustomReasons = () => {
   };
 
   const onSwitchChange = (record, selectedRows) => {
-    console.log('switch', record, selectedRows);
     switchActiveReason(record.id, selectedRows).then((res) => {
+      // eslint-disable-next-line no-console
       console.log('res', res);
     });
   };

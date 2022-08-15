@@ -1,25 +1,34 @@
 import {lazy} from 'react';
 
-// Tables
-const TableOrders = lazy(() => import('./TableOrders'));
+// Tables Parameters
 const TableParameter = lazy(() => import('./TableParameter'));
-// const TableList = lazy(() => import('./TableParameter/TableList'));
 const TableGarments = lazy(() => import('./TableParameter/TableGarments'));
 const TableReasons = lazy(() => import('./TableParameter/TableReasons'));
 const TableDescription = lazy(() => import('./TableParameter/TableDescription'));
 const TableReplacement = lazy(() => import('./TableParameter/TableReplacement'));
 const TableDelivery = lazy(() => import('./TableParameter/TableDelivery'));
+// Tables Orders
+const TableOrders = lazy(() => import('./TableOrders'));
+const TableIntake = lazy(() => import('./TableOrders/TableIntake'));
+// Tables Inventory
+const TableInventory = lazy(() => import('./TableInventory'));
+const TableGraphic = lazy(() => import('./TableInventory/TableGraphic'));
+// Table Discount
+const TableDiscount = lazy(() => import('./TableDiscount'));
 
 const useTables = () => {
   return {
-    TableOrders,
     TableParameter,
-    // TableList,
     TableGarments,
     TableReasons,
     TableDescription,
     TableReplacement,
-    TableDelivery
+    TableDelivery,
+    TableOrders,
+    TableIntake,
+    TableInventory,
+    TableGraphic,
+    TableDiscount
   };
 };
 

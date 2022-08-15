@@ -10,7 +10,7 @@ import btnNew from '../../../../assets/img/btn-new.svg';
 // Hooks
 import {useCustomOrders} from './hooks';
 // Styles
-import './style.css';
+import './style-orders.css';
 import '../TableParameter/TableReasons/style-reasons.css';
 
 const {Option} = Select;
@@ -27,7 +27,11 @@ const TableOrders = () => {
     sucursales,
     distribuciones,
     tallas,
-    options
+    options,
+    isEditing,
+    editingFile,
+    setEditingFile,
+    resetEditing
   } = useCustomOrders();
   return (
     <div className="container-table pt-16">
@@ -38,6 +42,140 @@ const TableOrders = () => {
         columns={columns}
         dataSource={dataSource}
       />
+      {isEditing && (
+        <>
+          <Modal
+            id="modalEditOrders"
+            className="modalEdit-garments"
+            title="Editar"
+            visible={isEditing}
+            okText="Guardar"
+            onCancel={() => {
+              resetEditing();
+            }}
+            // Espera el retorno del endpoit para editar la información
+            // onOk={() => {
+            //   onEditGarment().then(() => {
+            //     resetEditing();
+            //   });
+            // }}
+            onOk={() => {
+              setDataSource((pre) => {
+                return pre.map((file) => {
+                  if (file.id === editingFile.id) {
+                    return editingFile;
+                  } else {
+                    return file;
+                  }
+                });
+              });
+              resetEditing();
+            }}
+          >
+            <Form>
+              <Form.Item className="item-form" label="N°">
+                <Input
+                  className="input-add"
+                  value={editingFile?.n}
+                  onChange={(e) => {
+                    setEditingFile({...editingFile, n: e.target.value});
+                  }}
+                />
+              </Form.Item>
+              <Form.Item className="item-form" label="Cédula">
+                <Input
+                  className="input-add"
+                  value={editingFile?.id}
+                  onChange={(e) => {
+                    setEditingFile({...editingFile, id: e.target.value});
+                  }}
+                />
+              </Form.Item>
+              <Form.Item className="item-form" label="Colaborador">
+                <Input
+                  className="input-add"
+                  value={editingFile?.colaborador}
+                  onChange={(e) => {
+                    setEditingFile({...editingFile, colaborador: e.target.value});
+                  }}
+                />
+              </Form.Item>
+              <Form.Item className="item-form" label="Cargo">
+                <Input
+                  className="input-add"
+                  value={editingFile?.cargo}
+                  onChange={(e) => {
+                    setEditingFile({...editingFile, cargo: e.target.value});
+                  }}
+                />
+              </Form.Item>
+              <Form.Item className="item-form" label="Género">
+                <Input
+                  className="input-add"
+                  value={editingFile?.genero}
+                  onChange={(e) => {
+                    setEditingFile({...editingFile, genero: e.target.value});
+                  }}
+                />
+              </Form.Item>
+              <Form.Item className="item-form" label="Sucursal">
+                <Input
+                  className="input-add"
+                  value={editingFile?.sucursal}
+                  onChange={(e) => {
+                    setEditingFile({...editingFile, sucursal: e.target.value});
+                  }}
+                />
+              </Form.Item>
+              <Form.Item className="item-form" label="Región">
+                <Input
+                  className="input-add"
+                  value={editingFile?.region}
+                  onChange={(e) => {
+                    setEditingFile({...editingFile, region: e.target.value});
+                  }}
+                />
+              </Form.Item>
+              <Form.Item className="item-form" label="Fecha de ingreso">
+                <Input
+                  className="input-add"
+                  value={editingFile?.fechaIngreso}
+                  onChange={(e) => {
+                    setEditingFile({...editingFile, fechaIngreso: e.target.value});
+                  }}
+                />
+              </Form.Item>
+              <Form.Item className="item-form" label="Distribución Administrativa">
+                <Input
+                  className="input-add"
+                  value={editingFile?.distribution}
+                  onChange={(e) => {
+                    setEditingFile({...editingFile, distribution: e.target.value});
+                  }}
+                />
+              </Form.Item>
+              <Form.Item className="item-form" label="Número oficina">
+                <Input
+                  className="input-add"
+                  value={editingFile?.numberOfi}
+                  onChange={(e) => {
+                    setEditingFile({...editingFile, numberOfi: e.target.value});
+                  }}
+                />
+              </Form.Item>
+              <Form.Item className="item-form" label="Nombre de la oficina">
+                <Input
+                  className="input-add"
+                  value={editingFile?.nameOfi}
+                  onChange={(e) => {
+                    setEditingFile({...editingFile, nameOfi: e.target.value});
+                  }}
+                />
+              </Form.Item>
+            </Form>
+          </Modal>
+        </>
+      )}
       {isAdd && (
         <>
           <Modal
@@ -232,9 +370,11 @@ const TableOrders = () => {
           </Modal>
         </>
       )}
-      <Button className="py-2 rounded-lg">
+
+      <label for="file" className="py-8">
         <img src={btnCarga} alt="download" width="274px" height="70px" />
-      </Button>
+        <input style={{visibility: 'hidden'}} id="file" type="file" accept=".xlsx" />
+      </label>
       <div className="flex justify-end items-end flex-col -mt-10">
         <Button onClick={onAddFile} className="rounded-lg my-1 mr-3">
           <img src={btnNew} alt="new" width="274px" height="50px" />

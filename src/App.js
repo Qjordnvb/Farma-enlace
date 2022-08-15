@@ -14,7 +14,14 @@ import LoadingComponent from 'views/components/utils/LoadingComponent';
 
 function App() {
   const {useScreens} = useViews();
-  const {LoginPage, HomePrivate, DataGridParameters, DataGridOrders} = useScreens();
+  const {
+    LoginPage,
+    HomePrivate,
+    DataGridParameters,
+    DataGridOrders,
+    DataGridInventory,
+    DataGridDiscount
+  } = useScreens();
   const history = createMemoryHistory();
 
   return (
@@ -25,8 +32,10 @@ function App() {
             <Route path={PRIVATE} element={<PrivateRoute />}>
               <Route index element={<HomePrivate />} />
               <Route path={`${DATA}parameters/*`} element={<DataGridParameters />} />
-
               <Route path={`${DATA}orders/*`} element={<DataGridOrders />} />
+              <Route path={`${DATA}inventory/*`} element={<DataGridInventory />} />
+              <Route path={`${DATA}discount/*`} element={<DataGridDiscount />} />
+              <Route path={`${DATA}report/*`} element={<DataGridInventory />} />
             </Route>
             <Route path="/" element={<PublicRoute />}>
               <Route path={LOGIN} element={<LoginPage />} />

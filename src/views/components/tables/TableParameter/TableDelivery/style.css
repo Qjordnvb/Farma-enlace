@@ -73,7 +73,7 @@
 }
 
 input.input-add,
-#modalAdd
+#modalDelivery
   > div:nth-child(2)
   > div
   > div.ant-col.ant-form-item-control
@@ -90,7 +90,7 @@ input.input-add,
   border-bottom-right-radius: 0px;
 }
 
-#modalAdd
+#modalDelivery
   > div:nth-child(2)
   > div
   > div.ant-col.ant-form-item-control
@@ -107,7 +107,7 @@ input.input-add,
 }
 
 .input-add:focus,
-#modalAdd
+#modalDelivery
   > div:nth-child(2)
   > div
   > div.ant-col.ant-form-item-control
@@ -123,7 +123,7 @@ input.input-add,
 }
 
 .input-add:hover,
-#modalAdd
+#modalDelivery
   > div:nth-child(2)
   > div
   > div.ant-col.ant-form-item-control

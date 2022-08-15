@@ -1,9 +1,12 @@
 import {useState} from 'react';
 import {useUtils} from 'hooks';
+import BtnEdit from '../../../../../assets/img/btn-edit.png';
 
 export const useCustomOrders = () => {
   const [isAdd, setIsAdd] = useState(false);
   const [addingFile, setAddingFile] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingFile, setEditingFile] = useState(null);
   const [options, setOptions] = useState([]);
 
   const sucursales = ['1', '2', '3', '4', '5'];
@@ -58,6 +61,16 @@ export const useCustomOrders = () => {
       nameOfi: 'Farmados'
     }
   ]);
+
+  const onEditFile = (record) => {
+    setIsEditing(true);
+    setEditingFile({...record});
+  };
+
+  const resetEditing = () => {
+    setIsEditing(false);
+    setEditingFile(null);
+  };
 
   const columns = [
     {
@@ -136,6 +149,23 @@ export const useCustomOrders = () => {
       ...getColumnSearchProps('nameOfi'),
       sorter: (a, b) => a.nameOfi.length - b.nameOfi.length,
       sortDirections: ['descend', 'ascend']
+    },
+    {
+      title: 'Acción',
+      render: (record) => {
+        return (
+          <div className="flex-action">
+            <div
+              onClick={() => {
+                onEditFile(record);
+              }}
+              className="btn-edit"
+            >
+              <img src={BtnEdit} alt="btn-edit" />
+            </div>
+          </div>
+        );
+      }
     }
   ];
 
@@ -165,6 +195,11 @@ export const useCustomOrders = () => {
     tallas,
     distribuciones,
     options,
-    setOptions
+    setOptions,
+    isEditing,
+    editingFile,
+    resetEditing,
+    onEditFile,
+    setEditingFile
   };
 };

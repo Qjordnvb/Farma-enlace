@@ -1,2 +1,2 @@
-import DataGridParameters from './DataGridOrders';
-export default DataGridParameters;
+import DataGridOrders from './DataGridOrders';
+export default DataGridOrders;

@@ -37,19 +37,19 @@ function HomePrivate() {
               Parametrización
             </a>
 
-            <a href={`${DATA}orders`}>
+            <a href={`${DATA}orders/actualization`}>
               <img src={Options2} alt="option-2" />
               Orden de consumo
             </a>
-            <a>
+            <a href={`${DATA}inventory/buy`}>
               <img src={Options3} alt="option-3" />
               Reposición de inventario
             </a>
-            <a>
+            <a href={`${DATA}discount`}>
               <img src={Options4} alt="option-4" />
               Descuento uniforme
             </a>
-            <a>
+            <a href={`${DATA}report`}>
               <img src={Options5} alt="option-5" />
               Reporteria
             </a>

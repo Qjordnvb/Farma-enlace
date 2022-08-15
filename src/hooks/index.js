@@ -37,6 +37,7 @@ export const useUtils = () => {
       const request = await Apilocal.get('/parameterizedReasons/findAll');
       return request.data;
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log('ERROR - getGarmentsTableParameters', e);
     }
   }
@@ -46,6 +47,7 @@ export const useUtils = () => {
       const request = await Apilocal.post('/parameterizedReasons/create', {...data});
       return request.data;
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log('ERROR - addReason', e);
     }
   }
@@ -55,6 +57,7 @@ export const useUtils = () => {
       const request = await Apilocal.post('/parameterizedReasons/active', {id, active});
       return request.data;
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log('ERROR - addReason', e);
     }
   }
@@ -64,6 +67,7 @@ export const useUtils = () => {
       const request = await Apilocal.post('/prenda/create', {...data});
       return request.data;
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log('ERROR - addGarment', e);
     }
   }
@@ -73,6 +77,7 @@ export const useUtils = () => {
       const request = await Apilocal.post('/prenda/edit', {...data});
       return request.data;
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log('ERROR - editGarmentDescription', e);
     }
   }
@@ -82,6 +87,7 @@ export const useUtils = () => {
       const request = await Apilocal.get('/prenda/findAll');
       return request.data;
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log('ERROR - garments', e);
     }
   }
@@ -91,6 +97,7 @@ export const useUtils = () => {
       const request = await Apilocal.get('/uniformDescription/findAll');
       return request.data;
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log('ERROR - getAllDescriptions', e);
     }
   }
@@ -100,6 +107,7 @@ export const useUtils = () => {
       const request = await Apilocal.get('/products/findWithReplacement');
       return request.data;
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log('ERROR - getAllDescriptions', e);
     }
   }
@@ -109,6 +117,7 @@ export const useUtils = () => {
       const request = await Apilocal.post('/products/editReplacement', {...data});
       return request.data;
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log('ERROR - getAllDescriptions', e);
     }
   }
@@ -118,6 +127,7 @@ export const useUtils = () => {
       const request = await Apilocal.get('/uniformDelivery/findAll');
       return request.data;
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log('ERROR - getAllDeliveries', e);
     }
   }
@@ -127,6 +137,7 @@ export const useUtils = () => {
       const request = await Apilocal.post('/uniformDelivery/create', {...data});
       return request.data;
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log('ERROR - createDelivery', e);
     }
   }
@@ -136,6 +147,7 @@ export const useUtils = () => {
       const request = await Apilocal.post('/uniformDescription/updateQuantity', {...data});
       return request.data;
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log('ERROR - getAllDescriptions', e);
     }
   }
@@ -145,6 +157,7 @@ export const useUtils = () => {
       const request = await Apilocal.post('/prenda/active', {id, active});
       return request.data;
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log('ERROR - addReason', e);
     }
   }

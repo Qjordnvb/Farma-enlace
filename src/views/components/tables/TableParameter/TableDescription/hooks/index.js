@@ -155,6 +155,7 @@ export const useCustomDescription = () => {
         }
       });
     } catch (errInfo) {
+      // eslint-disable-next-line no-console
       console.log('Validate Failed:', errInfo);
     }
   };

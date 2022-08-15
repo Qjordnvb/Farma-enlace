@@ -14,28 +14,23 @@ function DataGridParameters() {
   const userMenu = [
     {
       name: 'Uniforme',
-      path: 'uniforms',
-      key: '1'
+      path: 'uniforms'
     },
     {
       name: 'Lista administrable',
-      path: 'list/garments',
-      key: '2'
+      path: 'list/garments'
     },
     {
       name: 'Descripción uniformes',
-      path: 'description',
-      key: '3'
+      path: 'description'
     },
     {
       name: 'Parámetros de reposición',
-      path: 'replacement',
-      key: '4'
+      path: 'replacement'
     },
     {
       name: 'Entrega de uniformes',
-      path: 'entrega',
-      key: '5'
+      path: 'entrega'
     }
   ];
   return (

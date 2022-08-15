@@ -19,19 +19,29 @@ const GridReplacement = lazy(() =>
 const GridDelivery = lazy(() => import('./user/dataGridParameters/gridDelivery/GridDelivery'));
 // Grid Orders
 const DataGridOrders = lazy(() => import('./user/dataGridOrders/DataGridOrders'));
+// Grid Inventory
+const DataGridInventory = lazy(() => import('./user/dataGridInventory/DataGridInventory'));
+// Grid Discount
+const DataGridDiscount = lazy(() => import('./user/dataGridDiscount/DataGridDiscount'));
 
 const useScreens = () => {
   return {
     LoginPage,
     HomePrivate,
     Logout,
+    // parameters
     DataGridParameters,
-    DataGridOrders,
     GridList,
     GridParameters,
     GridDescription,
     GridReplacement,
-    GridDelivery
+    GridDelivery,
+    // orders
+    DataGridOrders,
+    // inventory
+    DataGridInventory,
+    // discount
+    DataGridDiscount
   };
 };
 

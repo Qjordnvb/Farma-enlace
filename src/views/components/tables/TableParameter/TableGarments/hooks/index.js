@@ -20,7 +20,6 @@ export const useCustomGarments = () => {
 
   const dataReasonsTable = function () {
     getGarmentsTableParameters().then((response) => {
-      console.log('data table', response);
       setDataSource(response);
     });
   };
@@ -117,7 +116,6 @@ export const useCustomGarments = () => {
   };
 
   const onEditGarment = async () => {
-    console.log('editing file', editingFile);
     await editGarmentDescription({...editingFile}).then(async () => {
       await dataReasonsTable();
     });

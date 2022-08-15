@@ -37,7 +37,7 @@ export default function TableDelivery() {
               resetAdd();
             }}
           >
-            <Form id="modalAdd">
+            <Form id="modalDelivery">
               <Form.Item className="item-form" label="Motivos">
                 <Select
                   className="input-add"
