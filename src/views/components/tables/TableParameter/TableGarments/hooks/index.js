@@ -77,6 +77,7 @@ export const useCustomGarments = () => {
             <Switch
               className="input-switch"
               defaultChecked={record.active}
+              checked={record.active}
               onChange={(selectedRows) => {
                 onSwitchChange(record, selectedRows);
               }}
@@ -116,7 +117,7 @@ export const useCustomGarments = () => {
   };
 
   const onEditGarment = async () => {
-    await editGarmentDescription({...editingFile}).then(async () => {
+    editGarmentDescription({...editingFile}).then(async () => {
       await dataReasonsTable();
     });
   };

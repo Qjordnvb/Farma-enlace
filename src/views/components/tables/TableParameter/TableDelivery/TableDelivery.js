@@ -8,7 +8,7 @@ import {useCustomDelivery} from './hooks';
 const {Option} = Select;
 export default function TableDelivery() {
   const {
-    dataSource,
+    formatDataSource,
 
     columns,
     isAdd,
@@ -22,7 +22,7 @@ export default function TableDelivery() {
   } = useCustomDelivery();
   return (
     <div>
-      <Table columns={columns} dataSource={dataSource} />
+      <Table columns={columns} dataSource={formatDataSource} />
       {isAdd && (
         <>
           <Modal
@@ -40,7 +40,6 @@ export default function TableDelivery() {
             <Form id="modalDelivery">
               <Form.Item className="item-form" label="Motivos">
                 <Select
-                  className="input-add"
                   placeholder={'000001'}
                   value={addingFile?.reason}
                   onChange={(e) => {
@@ -48,6 +47,11 @@ export default function TableDelivery() {
                       ...addingFile,
                       reasonId: e
                     });
+                  }}
+                  className="input-add"
+                  showSearch
+                  filterOption={(input, option) => {
+                    return option.children.toLowerCase().includes(input.toLowerCase());
                   }}
                 >
                   {reasonsList.map((reason) => {
@@ -66,6 +70,10 @@ export default function TableDelivery() {
                   value={addingFile?.uniformId}
                   onChange={(e) => {
                     setAddingFile({...addingFile, uniformId: e});
+                  }}
+                  showSearch
+                  filterOption={(input, option) => {
+                    return option.children.toLowerCase().includes(input.toLowerCase());
                   }}
                 >
                   {productsList.map((product) => {
