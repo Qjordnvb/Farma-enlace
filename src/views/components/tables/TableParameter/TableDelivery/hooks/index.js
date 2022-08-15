@@ -18,38 +18,8 @@ export const useCustomDelivery = () => {
   const [garmentsColumns, setGarmentsColumns] = useState([]);
   const [productsList, setProductsList] = useState([]);
   const [reasonsList, setReasonsList] = useState([]);
-  const [dataSource, setDataSource] = useState([
-    {
-      n: 1,
-      motivo: 'Personal Nuevo',
-      description: 'ZP PRV KIT ECO HOMBRE T-M-38',
-      prendas: '',
-      reposicion: '0 Días',
-      calculo: 'Désde fecha de ingreso',
-      cobro: 'NO',
-      garment1: '3',
-      garment2: '0',
-      garment3: '1',
-      garment4: '0',
-      garment5: '2',
-      garment6: '0'
-    },
-    {
-      n: 2,
-      motivo: 'Personal Nuevo',
-      description: 'ZP PRV KIT ECO HOMBRE T-M-38',
-      prendas: '',
-      reposicion: '0 Días',
-      calculo: 'Désde fecha de ingreso',
-      cobro: 'SI',
-      garment1: '3',
-      garment2: '0',
-      garment3: '1',
-      garment4: '0',
-      garment5: '2',
-      garment6: '0'
-    }
-  ]);
+  const [dataSource, setDataSource] = useState([]);
+
   const formatAllDeliveries = (data) => {
     let newData = data.map((delivery) => {
       let newParamGarments = delivery.producto.garmentTypes.reduce(function (res, garmentType) {
@@ -68,16 +38,35 @@ export const useCustomDelivery = () => {
       delete newDelivery.garmentTypes;
       return newDelivery;
     });
+
     setDataSource(newData);
   };
+
+  useEffect(() => {
+    if (garments) {
+      let newData = dataSource.map((delivery) => {
+        let newDelivery = delivery;
+
+        garments.map((garment) => {
+          let index = `garment${garment.id}`;
+          if (!newDelivery[index]) {
+            newDelivery[index] = 0;
+          }
+        });
+        return newDelivery;
+      });
+      setDataSource(newData);
+    }
+  }, [dataSource, garments]);
 
   useEffect(() => {
     getGarmentsTableParameters().then((res) => {
       setGarments(res);
     });
-    getAllDeliveries().then((res) => {
-      formatAllDeliveries(res);
+    getAllDeliveries().then((response) => {
+      formatAllDeliveries(response);
     });
+
     getTableParameters().then((res) => {
       setProductsList(res);
     });

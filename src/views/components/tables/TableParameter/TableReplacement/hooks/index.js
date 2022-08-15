@@ -1,14 +1,18 @@
 import {useEffect, useState} from 'react';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
+import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
 
 export const useCustomReplacement = () => {
   const [isAdd, setIsAdd] = useState(false);
   const [addingFile, setAddingFile] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
   const [editingFile, setEditingFile] = useState(null);
   const [editId, setEditId] = useState();
   const {getColumnSearchProps, getAllRepositionParameters, editRepositionParameter} = useUtils();
+  const [editingKey, setEditingKey] = useState(null);
+  const [form] = Form.useForm();
+  const isEditing = (record) => record?.id === editingKey;
+
   const [dataSource, setDataSource] = useState([
     {
       id: 1,
@@ -47,16 +51,69 @@ export const useCustomReplacement = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onEditFile = (record) => {
-    setIsEditing(true);
-    setEditId(record.id);
+  const EditableCell = ({editing, dataIndex, title, inputType, children, ...restProps}) => {
+    const inputNode = inputType === 'garments' ? <InputNumber /> : <Input />;
+    return (
+      <td {...restProps}>
+        {editing ? (
+          <Form.Item
+            name={dataIndex}
+            style={{
+              margin: 0
+            }}
+            rules={[
+              {
+                required: true,
+                message: `Please enter input ${title}!`
+              }
+            ]}
+          >
+            {inputNode}
+          </Form.Item>
+        ) : (
+          children
+        )}
+      </td>
+    );
+  };
+
+  const edit = (record) => {
+    form.setFieldsValue({
+      ...record
+    });
+    setEditingKey(record.id);
+  };
+
+  const cancel = () => {
+    setEditingKey('');
+  };
+
+  const save = async (key) => {
+    try {
+      const row = await form.validateFields();
+
+      const {porcentaje, reposicion} = row;
+      editRepositionParameter({porcentaje, reposicion, id: key}).then(() => {
+        getAllRepositionParameters().then((res) => {
+          setDataSource(res);
+          setEditingKey(null);
+          isEditing(null);
+        });
+      });
+    } catch (errInfo) {
+      // eslint-disable-next-line no-console
+      console.log('Validate Failed:', errInfo);
+    }
   };
 
   const columns = [
     {
       key: '0',
       title: 'N°',
-      dataIndex: 'id'
+      dataIndex: 'id',
+      sorter: (a, b) => a.id - b.id,
+      sortDirections: ['descend', 'ascend'],
+      defaultSortOrder: 'ascend'
     },
     {
       key: '1',
@@ -96,7 +153,8 @@ export const useCustomReplacement = () => {
       dataIndex: 'porcentaje',
       ...getColumnSearchProps('porcentaje'),
       sorter: (a, b) => a.porcentaje.length - b.porcentaje.length,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      editable: true
     },
     {
       key: '6',
@@ -104,7 +162,8 @@ export const useCustomReplacement = () => {
       dataIndex: 'reposicion',
       ...getColumnSearchProps('reposicion'),
       sorter: (a, b) => a.reposicion.length - b.reposicion.length,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      editable: true
     },
     {
       key: '7',
@@ -139,20 +198,27 @@ export const useCustomReplacement = () => {
       sortDirections: ['descend', 'ascend']
     },
     {
-      key: '11',
       title: 'Acción',
-      width: '15%',
-      render: (record) => {
-        return (
-          <div className="flex-action">
-            <div
-              onClick={() => {
-                onEditFile(record);
+      dataIndex: 'accion',
+      render: (_, record) => {
+        const editable = isEditing(record);
+        return editable ? (
+          <span>
+            <Typography.Link
+              onClick={() => save(record.id)}
+              style={{
+                marginRight: 8
               }}
-              className="btn-edit"
             >
-              <img src={BtnEdit} alt="btn-edit" />
-            </div>
+              Save
+            </Typography.Link>
+            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+              <a>Cancel</a>
+            </Popconfirm>
+          </span>
+        ) : (
+          <div disabled={editingKey !== ''} onClick={() => edit(record)} className="btn-edit">
+            <img src={BtnEdit} alt="btn-edit" />
           </div>
         );
       }
@@ -160,7 +226,7 @@ export const useCustomReplacement = () => {
   ];
 
   const resetEditing = () => {
-    setIsEditing(false);
+    //setIsEditing(false);
     setEditingFile(null);
     setEditId(null);
   };
@@ -185,11 +251,27 @@ export const useCustomReplacement = () => {
     });
   };
 
+  const mergedColumns = columns.map((col) => {
+    if (!col.editable) {
+      return col;
+    }
+
+    return {
+      ...col,
+      onCell: (record) => ({
+        record,
+        inputType: col.dataIndex === 'reposicion' ? 'number' : 'text',
+        dataIndex: col.dataIndex,
+        title: col.title,
+        editing: isEditing(record)
+      })
+    };
+  });
+
   return {
     dataSource,
     setDataSource,
     isEditing,
-    setIsEditing,
     editingFile,
     setEditingFile,
     columns,
@@ -200,6 +282,9 @@ export const useCustomReplacement = () => {
     resetEditing,
     resetAdd,
     onAddFile,
-    onEditReplacement
+    onEditReplacement,
+    EditableCell,
+    mergedColumns,
+    form
   };
 };

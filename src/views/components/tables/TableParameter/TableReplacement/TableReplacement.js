@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table, Modal, Input, Form} from 'antd';
+import {Table, Form /*Modal, Input, Form*/} from 'antd';
 import './style.css';
 import {CSVLink} from 'react-csv';
 import {StyledGridList} from 'views/screens/user/dataGridParameters/gridList/GridList.Styled';
@@ -7,15 +7,7 @@ import btnDownload from '../../../../../assets/img/btn-download.png';
 import {useCustomReplacement} from './hooks';
 
 function TableReplacement() {
-  const {
-    dataSource,
-    setEditingFile,
-    isEditing,
-    editingFile,
-    columns,
-    resetEditing,
-    onEditReplacement
-  } = useCustomReplacement();
+  const {dataSource, form, mergedColumns, EditableCell} = useCustomReplacement();
 
   {
     /* //   id: 1,
@@ -34,58 +26,22 @@ function TableReplacement() {
   }
 
   return (
-    <>
+    <Form form={form} component={false}>
       {' '}
       <div>
         <Table
           pagination={{
             pageSize: 5
           }}
-          columns={columns}
+          columns={mergedColumns}
           dataSource={dataSource}
+          components={{
+            body: {
+              cell: EditableCell
+            }
+          }}
+          rowClassName="editable-row"
         ></Table>
-        {isEditing && (
-          <>
-            <Modal
-              title="Editar"
-              visible={isEditing}
-              okText="Guardar"
-              onCancel={() => {
-                resetEditing();
-              }}
-              onOk={() => {
-                onEditReplacement().then(() => {
-                  resetEditing();
-                });
-              }}
-            >
-              <Form>
-                <Form.Item className="item-form" label="Porcentajes">
-                  <Input
-                    className="input-add"
-                    value={editingFile?.porcentaje}
-                    onChange={(e) => {
-                      const controlledValue = Math.max(0, Math.min(100, Number(e.target.value)));
-                      setEditingFile({
-                        ...editingFile,
-                        porcentaje: controlledValue
-                      });
-                    }}
-                  />
-                </Form.Item>
-                <Form.Item className="item-form" label="Reposición">
-                  <Input
-                    className="input-add"
-                    value={editingFile?.replacement}
-                    onChange={(e) => {
-                      setEditingFile({...editingFile, replacement: e.target.value});
-                    }}
-                  />
-                </Form.Item>
-              </Form>
-            </Modal>
-          </>
-        )}
       </div>
       <StyledGridList>
         <div className="btn-add">
@@ -94,7 +50,7 @@ function TableReplacement() {
           </CSVLink>
         </div>
       </StyledGridList>
-    </>
+    </Form>
   );
 }
 
