@@ -19,6 +19,7 @@ export const useCustomDelivery = () => {
   const [productsList, setProductsList] = useState([]);
   const [reasonsList, setReasonsList] = useState([]);
   const [dataSource, setDataSource] = useState([]);
+  const [formatDataSource, setFormatDataSource] = useState([]);
 
   const formatAllDeliveries = (data) => {
     let newData = data.map((delivery) => {
@@ -39,24 +40,23 @@ export const useCustomDelivery = () => {
       return newDelivery;
     });
 
-    setDataSource(newData);
+    newData = newData.map((delivery) => {
+      let newDelivery = delivery;
+
+      garments.map((garment) => {
+        let index = `garment${garment.id}`;
+        if (!newDelivery[index]) {
+          newDelivery[index] = 0;
+        }
+      });
+      return newDelivery;
+    });
+
+    setFormatDataSource(newData);
   };
 
   useEffect(() => {
-    if (garments) {
-      let newData = dataSource.map((delivery) => {
-        let newDelivery = delivery;
-
-        garments.map((garment) => {
-          let index = `garment${garment.id}`;
-          if (!newDelivery[index]) {
-            newDelivery[index] = 0;
-          }
-        });
-        return newDelivery;
-      });
-      setDataSource(newData);
-    }
+    formatAllDeliveries(dataSource);
   }, [dataSource, garments]);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export const useCustomDelivery = () => {
       setGarments(res);
     });
     getAllDeliveries().then((response) => {
-      formatAllDeliveries(response);
+      setDataSource(response);
     });
 
     getTableParameters().then((res) => {
@@ -168,6 +168,7 @@ export const useCustomDelivery = () => {
 
   return {
     dataSource,
+    formatDataSource,
     setDataSource,
     isEditing,
     setIsEditing,

@@ -8,7 +8,7 @@ import {useCustomDelivery} from './hooks';
 const {Option} = Select;
 export default function TableDelivery() {
   const {
-    dataSource,
+    formatDataSource,
 
     columns,
     isAdd,
@@ -22,7 +22,7 @@ export default function TableDelivery() {
   } = useCustomDelivery();
   return (
     <div>
-      <Table columns={columns} dataSource={dataSource} />
+      <Table columns={columns} dataSource={formatDataSource} />
       {isAdd && (
         <>
           <Modal
