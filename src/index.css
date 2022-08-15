@@ -545,3 +545,47 @@ li.ant-pagination-item.ant-pagination-item {
   background-color: #fff;
   border: 1px solid #d9d9d9;
 }
+
+#root
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > div
+  > div
+  > div.ant-table-body
+  > table
+  > tbody
+  > tr.ant-table-row.ant-table-row-level-0
+  > td.ant-table-cell.ant-table-selection-column.ant-table-cell-row-hover
+  > label
+  > span
+  > span,
+#root
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > div
+  > div
+  > div.ant-table-header
+  > table
+  > thead
+  > tr
+  > th.ant-table-cell.ant-table-selection-column
+  > div
+  > label
+  > span
+  > span {
+  border-color: inherit;
+}
+
+.ant-checkbox-indeterminate .ant-checkbox-inner:after {
+  background-color: #2bc155 !important;
+}

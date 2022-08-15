@@ -23,6 +23,8 @@ const DataGridOrders = lazy(() => import('./user/dataGridOrders/DataGridOrders')
 const DataGridInventory = lazy(() => import('./user/dataGridInventory/DataGridInventory'));
 // Grid Discount
 const DataGridDiscount = lazy(() => import('./user/dataGridDiscount/DataGridDiscount'));
+// Grid Report
+const DataGridReport = lazy(() => import('./user/dataGridReport/DataGridReport'));
 
 const useScreens = () => {
   return {
@@ -41,7 +43,9 @@ const useScreens = () => {
     // inventory
     DataGridInventory,
     // discount
-    DataGridDiscount
+    DataGridDiscount,
+    // report
+    DataGridReport
   };
 };
 
