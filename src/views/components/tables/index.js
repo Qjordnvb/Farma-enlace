@@ -15,6 +15,8 @@ const TableInventory = lazy(() => import('./TableInventory'));
 const TableGraphic = lazy(() => import('./TableInventory/TableGraphic'));
 // Table Discount
 const TableDiscount = lazy(() => import('./TableDiscount'));
+// Table Report
+const TableReport = lazy(() => import('./TableReport'));
 
 const useTables = () => {
   return {
@@ -28,7 +30,8 @@ const useTables = () => {
     TableIntake,
     TableInventory,
     TableGraphic,
-    TableDiscount
+    TableDiscount,
+    TableReport
   };
 };
 

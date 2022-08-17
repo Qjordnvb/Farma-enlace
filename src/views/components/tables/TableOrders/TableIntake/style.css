@@ -1,5 +1,5 @@
 .modal-add-intake {
-  max-width: 1000px;
+  max-width: 500px;
   width: 100% !important;
 }
 
@@ -17,4 +17,28 @@ input.input-add,
   background: #ffffff;
   border-color: #4d4e4e;
   border-radius: 9.30349px;
+}
+
+#modalAdd > div > div > div > div.ant-col.ant-form-item-control > div > div > span > span > input {
+  border-color: #2bc155 !important;
+  border-radius: 12px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  padding: 0.5rem;
+}
+#modalAdd
+  > div
+  > div
+  > div
+  > div.ant-col.ant-form-item-control
+  > div
+  > div
+  > span
+  > span
+  > span
+  > button {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  height: 40px;
+  border-color: #2bc155 !important;
 }

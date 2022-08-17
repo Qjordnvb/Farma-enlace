@@ -20,7 +20,8 @@ function App() {
     DataGridParameters,
     DataGridOrders,
     DataGridInventory,
-    DataGridDiscount
+    DataGridDiscount,
+    DataGridReport
   } = useScreens();
   const history = createMemoryHistory();
 
@@ -35,7 +36,7 @@ function App() {
               <Route path={`${DATA}orders/*`} element={<DataGridOrders />} />
               <Route path={`${DATA}inventory/*`} element={<DataGridInventory />} />
               <Route path={`${DATA}discount/*`} element={<DataGridDiscount />} />
-              <Route path={`${DATA}report/*`} element={<DataGridInventory />} />
+              <Route path={`${DATA}report/*`} element={<DataGridReport />} />
             </Route>
             <Route path="/" element={<PublicRoute />}>
               <Route path={LOGIN} element={<LoginPage />} />

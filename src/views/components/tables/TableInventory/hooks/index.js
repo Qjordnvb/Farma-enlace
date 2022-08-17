@@ -1,11 +1,10 @@
 import {useState} from 'react';
 import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
 import {useUtils} from 'hooks';
+import BtnEdit from '../../../../../assets/img/btn-edit.png';
 
 export const useCustomInventory = () => {
   const [form] = Form.useForm();
-  const [isAdd, setIsAdd] = useState(false);
-  const [addingFile, setAddingFile] = useState(null);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const {getColumnSearchProps} = useUtils();
   const [dataSource, setDataSource] = useState([
@@ -19,7 +18,13 @@ export const useCustomInventory = () => {
       cantidad: '10',
       stockMin: '1',
       stockMax: '100',
-      cantidadCompra: '10'
+      cantidadCompra: '10',
+      prenda1: '12',
+      prenda2: '3',
+      prenda3: '4',
+      prenda4: '5',
+      prenda5: '2',
+      prenda6: '1'
     },
     {
       key: '2',
@@ -31,7 +36,13 @@ export const useCustomInventory = () => {
       cantidad: '10',
       stockMin: '1',
       stockMax: '100',
-      cantidadCompra: '10'
+      cantidadCompra: '10',
+      prenda1: '12',
+      prenda2: '3',
+      prenda3: '4',
+      prenda4: '5',
+      prenda5: '2',
+      prenda6: '1'
     },
     {
       key: '3',
@@ -43,7 +54,13 @@ export const useCustomInventory = () => {
       cantidad: '10',
       stockMin: '1',
       stockMax: '100',
-      cantidadCompra: '10'
+      cantidadCompra: '10',
+      prenda1: '12',
+      prenda2: '3',
+      prenda3: '4',
+      prenda4: '5',
+      prenda5: '2',
+      prenda6: '1'
     }
   ]);
   const [editingKey, setEditingKey] = useState('');
@@ -128,10 +145,45 @@ export const useCustomInventory = () => {
       sortDirections: ['descend', 'ascend']
     },
     {
-      title: 'Prendas',
-      dataIndex: 'prendas',
-      ...getColumnSearchProps('Prendas'),
-      sorter: (a, b) => a.prendas.length - b.prendas.length,
+      title: 'Mandil blanco',
+      dataIndex: 'prenda1',
+      ...getColumnSearchProps('Mandil blanco'),
+      sorter: (a, b) => a.prenda1.length - b.prenda1.length,
+      sortDirections: ['descend', 'ascend']
+    },
+    {
+      title: 'Mandil azul',
+      dataIndex: 'prenda2',
+      ...getColumnSearchProps('Mandil azul'),
+      sorter: (a, b) => a.prenda2.length - b.prenda2.length,
+      sortDirections: ['descend', 'ascend']
+    },
+    {
+      title: 'Camiseta',
+      dataIndex: 'prenda3',
+      ...getColumnSearchProps('Camiseta'),
+      sorter: (a, b) => a.prenda3.length - b.prenda3.length,
+      sortDirections: ['descend', 'ascend']
+    },
+    {
+      title: 'Buso',
+      dataIndex: 'prenda4',
+      ...getColumnSearchProps('Buso'),
+      sorter: (a, b) => a.prenda4.length - b.prenda4.length,
+      sortDirections: ['descend', 'ascend']
+    },
+    {
+      title: 'Chompa',
+      dataIndex: 'prenda5',
+      ...getColumnSearchProps('Chompa'),
+      sorter: (a, b) => a.prenda5.length - b.prenda5.length,
+      sortDirections: ['descend', 'ascend']
+    },
+    {
+      title: 'Escarapela',
+      dataIndex: 'prenda6',
+      ...getColumnSearchProps('Escarapela'),
+      sorter: (a, b) => a.prenda6.length - b.prenda6.length,
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -199,7 +251,7 @@ export const useCustomInventory = () => {
           </span>
         ) : (
           <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-            Edit
+            <img src={BtnEdit} alt="btn-edit" />
           </Typography.Link>
         );
       }
@@ -222,19 +274,6 @@ export const useCustomInventory = () => {
     };
   });
 
-  const resetAdd = () => {
-    setIsAdd(false);
-    setAddingFile(null);
-  };
-
-  const onAddFile = (record) => {
-    setIsAdd(true);
-    setAddingFile({...record});
-    setDataSource(() => {
-      return [...dataSource];
-    });
-  };
-
   return {
     mergedColumns,
     EditableCell,
@@ -242,11 +281,6 @@ export const useCustomInventory = () => {
     form,
     cancel,
     rowSelection,
-    isAdd,
-    addingFile,
-    setDataSource,
-    onAddFile,
-    resetAdd,
-    setAddingFile
+    setDataSource
   };
 };

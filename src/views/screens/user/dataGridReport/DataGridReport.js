@@ -4,29 +4,27 @@ import useViews from 'views';
 
 // import PropTypes from 'prop-types';
 
-function DataGridDiscount() {
+function DataGridReport() {
   const {useLayouts, useComponents} = useViews();
   const {DataGridLayout} = useLayouts();
   const {useTables} = useComponents();
-  const {TableDiscount} = useTables();
+  const {TableReport} = useTables();
   const userMenu = [
     {
-      name: 'Descuento',
+      name: 'Envios',
       path: ''
     }
   ];
   return (
     <>
       {' '}
-      <DataGridLayout titleGrid="Orden de consumo - Descuento uniforme" userMenuLinks={userMenu}>
+      <DataGridLayout titleGrid="Reporte" userMenuLinks={userMenu}>
         <div>
-          <TableDiscount />
+          <TableReport />
         </div>
       </DataGridLayout>
     </>
   );
 }
 
-// DataGridDiscount.propTypes = {};
-
-export default DataGridDiscount;
+export default DataGridReport;

@@ -1,9 +1,9 @@
 #root
   > div
   > div
-  > div:nth-child(4)
   > div
   > div
+  > div.ant-table-wrapper
   > div
   > div
   > div
@@ -11,35 +11,19 @@
   > div.ant-table-body
   > table
   > tbody
-  > tr.ant-table-row.ant-table-row-level-0.editable-row
-  > td:nth-child(10)
+  > tr
+  > td
   > span
-  > a.ant-typography,
-#root
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-body
-  > table
-  > tbody
-  > tr.ant-table-row.ant-table-row-level-0.editable-row
-  > td:nth-child(10)
-  > a {
+  > a.ant-typography {
   color: #2bc155;
 }
 
 #root
   > div
   > div
-  > div:nth-child(4)
   > div
   > div
+  > div.ant-table-wrapper
   > div
   > div
   > div
@@ -47,11 +31,16 @@
   > div.ant-table-body
   > table
   > tbody
-  > tr.ant-table-row.ant-table-row-level-0.editable-row
-  > td:nth-child(10)
+  > tr
+  > td
   > span
-  > a:nth-child(2) {
+  > a {
   color: black;
+}
+
+.ant-input-number-focused,
+.ant-input-number:focus {
+  border-color: #2bc155 !important;
 }
 
 .modal-add-buy {

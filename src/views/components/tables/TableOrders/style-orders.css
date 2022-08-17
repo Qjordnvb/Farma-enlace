@@ -115,3 +115,43 @@ input.input-add,
   border-color: #4d4e4e;
   border-radius: 9.30349px;
 }
+
+#root
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > div
+  > div
+  > div.ant-table-body
+  > table
+  > tbody
+  > tr.ant-table-row.ant-table-row-level-0.editable-row
+  > td:nth-child(14)
+  > span
+  > a.ant-typography {
+  color: #2bc155;
+}
+
+#root
+  > div
+  > div
+  > div:nth-child(4)
+  > div
+  > div.ant-table-wrapper
+  > div
+  > div
+  > div
+  > div
+  > div.ant-table-body
+  > table
+  > tbody
+  > tr.ant-table-row.ant-table-row-level-0.editable-row
+  > td:nth-child(14)
+  > span
+  > a:nth-child(2) {
+  color: black;
+}

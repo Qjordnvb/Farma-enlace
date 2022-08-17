@@ -2,24 +2,24 @@ import React from 'react';
 import {Table} from 'antd';
 import {CSVLink} from 'react-csv';
 import btnDownload from '../../../../assets/img/btn-discount.png';
-import {useCustomDiscount} from './hooks';
+import {useCustomReport} from './hooks';
 import './style.css';
 import '../TableParameter/TableReasons/style-reasons.css';
 
-const TableDiscount = () => {
-  const {columns, rowSelection, dataSource} = useCustomDiscount();
+const TableReport = () => {
+  const {columns, rowSelection, dataSource} = useCustomReport();
   return (
     <div className="container-table pt-16">
       <Table
-        scroll={{y: 300}}
+        scroll={{x: 2000, y: 300}}
         rowSelection={rowSelection}
         columns={columns}
         dataSource={dataSource}
         pagination={{
-          pageSize: 1
+          pageSize: 3
         }}
       />
-      <CSVLink filename={'TableDiscount.xlsx'} data={dataSource} className="pt-2 flex justify-end">
+      <CSVLink filename={'TableReport.xlsx'} data={dataSource} className="pt-2 flex justify-end">
         <img
           className="btn-download"
           src={btnDownload}
@@ -32,4 +32,4 @@ const TableDiscount = () => {
   );
 };
 
-export default TableDiscount;
+export default TableReport;
