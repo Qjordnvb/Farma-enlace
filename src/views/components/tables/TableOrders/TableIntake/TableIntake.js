@@ -17,7 +17,7 @@ const TableIntake = () => {
     rowSelection,
     isAdd,
     onAddFile,
-    setDataSource,
+    onAddOrder,
     resetAdd,
     addingFile,
     setAddingFile,
@@ -34,7 +34,7 @@ const TableIntake = () => {
         columns={columns}
         dataSource={dataSource}
         pagination={{
-          pageSize: 1
+          pageSize: 5
         }}
       />
       {isAdd && (
@@ -49,11 +49,7 @@ const TableIntake = () => {
               resetAdd();
             }}
             onOk={() => {
-              setDataSource(() => {
-                return [...dataSource, addingFile];
-              });
-
-              resetAdd();
+              onAddOrder();
             }}
           >
             <Form id="modalAdd" className="w-full">
@@ -62,10 +58,10 @@ const TableIntake = () => {
                   <Input
                     className="input-add"
                     placeholder="CI"
-                    value={addingFile?.id}
+                    value={addingFile?.ci}
                     onChange={(e) => {
                       setAddingFile((pre) => {
-                        return {...pre, id: e.target.value};
+                        return {...pre, ci: e.target.value};
                       });
                     }}
                   />
@@ -73,9 +69,9 @@ const TableIntake = () => {
                 <Form.Item className="item-form" label="Colaborador">
                   <Select
                     defaultValue={'Seleccionar...'}
-                    value={options?.colaborador}
+                    value={options?.collaborator}
                     onChange={(value) => {
-                      setAddingFile({...addingFile, colaborador: value});
+                      setAddingFile({...addingFile, collaborator: value});
                     }}
                   >
                     {sucursales.map((suc, index) => {
@@ -90,18 +86,18 @@ const TableIntake = () => {
                 <Form.Item className="item-form" label="Cargo">
                   <Input
                     className="input-add"
-                    value={addingFile?.cargo}
+                    value={addingFile?.position}
                     onChange={(e) => {
-                      setAddingFile({...addingFile, cargo: e.target.value});
+                      setAddingFile({...addingFile, position: e.target.value});
                     }}
                   />
                 </Form.Item>
                 <Form.Item className="item-form" label="Distribución administrativa">
                   <Select
                     defaultValue={'Seleccionar...'}
-                    value={options?.distribution}
+                    value={options?.administrativeDistribution}
                     onChange={(value) => {
-                      setAddingFile({...addingFile, distribution: value});
+                      setAddingFile({...addingFile, administrativeDistribution: value});
                     }}
                   >
                     {distribuciones.map((suc, index) => {
@@ -117,10 +113,10 @@ const TableIntake = () => {
                   <Input
                     className="input-add"
                     placeholder="Código oficina"
-                    value={options?.idOfi}
+                    value={options?.officePosition}
                     onChange={(e) => {
                       setAddingFile((pre) => {
-                        return {...pre, idOfi: e.target.value};
+                        return {...pre, officePosition: e.target.value};
                       });
                     }}
                   />
@@ -131,10 +127,10 @@ const TableIntake = () => {
                   <Input
                     className="input-add"
                     placeholder="Nombre de la oficina"
-                    value={addingFile?.nameOfi}
+                    value={addingFile?.officeName}
                     onChange={(e) => {
                       setAddingFile((pre) => {
-                        return {...pre, nameOfi: e.target.value};
+                        return {...pre, officeName: e.target.value};
                       });
                     }}
                   />
@@ -142,9 +138,9 @@ const TableIntake = () => {
                 <Form.Item className="item-form" label="Talla">
                   <Select
                     defaultValue={'M'}
-                    value={options?.talla}
+                    value={options?.size}
                     onChange={(value) => {
-                      setAddingFile({...addingFile, talla: value});
+                      setAddingFile({...addingFile, size: value});
                     }}
                   >
                     {tallas.map((suc, index) => {
@@ -173,10 +169,10 @@ const TableIntake = () => {
                     type={'date'}
                     className="input-add"
                     placeholder="DD / MM /AAAA"
-                    value={addingFile?.fechaSolicitud}
+                    value={addingFile?.requestData}
                     onChange={(e) => {
                       setAddingFile((pre) => {
-                        return {...pre, fechaSolicitud: e.target.value};
+                        return {...pre, requestData: e.target.value};
                       });
                     }}
                   />
@@ -185,10 +181,10 @@ const TableIntake = () => {
                   <Input
                     className="input-add"
                     placeholder="00000000000"
-                    value={addingFile?.motivo}
+                    value={addingFile?.reason}
                     onChange={(e) => {
                       setAddingFile((pre) => {
-                        return {...pre, motivo: e.target.value};
+                        return {...pre, reason: e.target.value};
                       });
                     }}
                   />
@@ -199,10 +195,10 @@ const TableIntake = () => {
                   <Input
                     className="input-add"
                     placeholder="10 meses"
-                    value={addingFile?.ultimaReposicion}
+                    value={addingFile?.timeSinceLastReplacement}
                     onChange={(e) => {
                       setAddingFile((pre) => {
-                        return {...pre, ultimaReposicion: e.target.value};
+                        return {...pre, timeSinceLastReplacement: e.target.value};
                       });
                     }}
                   />
@@ -210,9 +206,9 @@ const TableIntake = () => {
                 <Form.Item className="item-form" label="Estado de la solicitud">
                   <Select
                     defaultValue={'Seleccionar...'}
-                    value={options?.estadoSolicitud}
+                    value={options?.requestStatus}
                     onChange={(value) => {
-                      setAddingFile({...addingFile, estadoSolicitud: value});
+                      setAddingFile({...addingFile, requestStatus: value});
                     }}
                   >
                     {sucursales.map((suc, index) => {
@@ -229,10 +225,10 @@ const TableIntake = () => {
                     type={'date'}
                     className="input-add"
                     placeholder="DD / MM /AAAA"
-                    value={addingFile?.fechaOC}
+                    value={addingFile?.dateConsumptionOrder}
                     onChange={(e) => {
                       setAddingFile((pre) => {
-                        return {...pre, fechaOC: e.target.value};
+                        return {...pre, dateConsumptionOrder: e.target.value};
                       });
                     }}
                   />
@@ -241,10 +237,10 @@ const TableIntake = () => {
                   <Input
                     className="input-add"
                     placeholder="10 meses"
-                    value={addingFile?.numeroOC}
+                    value={addingFile?.consumptionOrderNumber}
                     onChange={(e) => {
                       setAddingFile((pre) => {
-                        return {...pre, numeroOC: e.target.value};
+                        return {...pre, consumptionOrderNumber: e.target.value};
                       });
                     }}
                   />

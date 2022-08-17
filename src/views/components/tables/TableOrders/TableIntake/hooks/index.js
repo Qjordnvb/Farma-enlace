@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {useUtils} from 'hooks';
 
 export const useCustomIntake = () => {
@@ -6,7 +6,7 @@ export const useCustomIntake = () => {
 
   const [isAdd, setIsAdd] = useState(false);
   const [addingFile, setAddingFile] = useState(null);
-  const {getColumnSearchProps} = useUtils();
+  const {getColumnSearchProps, createOrder, getOrders} = useUtils();
   const [options, setOptions] = useState([]);
   const [dataSource, setDataSource] = useState([
     {
@@ -69,6 +69,16 @@ export const useCustomIntake = () => {
     'Distribución Administrativa 3'
   ];
 
+  const getOrdersTable = () => {
+    getOrders().then((res) => {
+      setDataSource(res);
+    });
+  };
+
+  useEffect(() => {
+    getOrdersTable();
+  }, []);
+
   const onSelectChange = (newSelectedRowKeys) => {
     setSelectedRowKeys(newSelectedRowKeys);
   };
@@ -98,107 +108,107 @@ export const useCustomIntake = () => {
     {
       title: 'N°',
       width: 70,
-      dataIndex: 'n',
-      sorter: (a, b) => a.n.length - b.n.length,
-      sortDirections: ['descend', 'ascend']
-    },
-    {
-      title: 'Cédula',
       dataIndex: 'id',
-      ...getColumnSearchProps('Cédula'),
       sorter: (a, b) => a.id.length - b.id.length,
       sortDirections: ['descend', 'ascend']
     },
     {
+      title: 'Cédula',
+      dataIndex: 'ci',
+      ...getColumnSearchProps('ci'),
+      sorter: (a, b) => a.ci.length - b.ci.length,
+      sortDirections: ['descend', 'ascend']
+    },
+    {
       title: 'Colaborador',
-      dataIndex: 'colaborador',
-      ...getColumnSearchProps('Colaborador'),
-      sorter: (a, b) => a.colaborador.length - b.colaborador.length,
+      dataIndex: 'collaborator',
+      ...getColumnSearchProps('collaborator'),
+      sorter: (a, b) => a.collaborator.length - b.collaborator.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Cargo',
-      dataIndex: 'cargo',
+      dataIndex: 'position',
       ...getColumnSearchProps('Cargo'),
-      sorter: (a, b) => a.cargo.length - b.cargo.length,
+      sorter: (a, b) => a.position.length - b.position.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Distribución Administrativa',
-      dataIndex: 'distribution',
-      ...getColumnSearchProps('Distribución Administrativa'),
-      sorter: (a, b) => a.distribution.length - b.distribution.length,
+      dataIndex: 'administrativeDistribution',
+      ...getColumnSearchProps('administrativeDistribution'),
+      sorter: (a, b) => a.administrativeDistribution.length - b.administrativeDistribution.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Código oficina ',
-      dataIndex: 'idOfi',
-      ...getColumnSearchProps('Código oficina '),
-      sorter: (a, b) => a.idOfi.length - b.idOfi.length,
+      dataIndex: 'officePosition',
+      ...getColumnSearchProps('officePosition'),
+      sorter: (a, b) => a.idOfi.length - b.officePosition.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Nombre de la oficina',
-      dataIndex: 'nameOfi',
-      ...getColumnSearchProps('nameOfi'),
-      sorter: (a, b) => a.nameOfi.length - b.nameOfi.length,
+      dataIndex: 'officeName',
+      ...getColumnSearchProps('officeName'),
+      sorter: (a, b) => a.officeName.length - b.officeName.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Talla',
-      dataIndex: 'talla',
+      dataIndex: 'size',
       with: 50,
-      ...getColumnSearchProps('Talla'),
-      sorter: (a, b) => a.talla.length - b.talla.length,
+      ...getColumnSearchProps('size'),
+      sorter: (a, b) => a.size.length - b.size.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Descripcion',
       dataIndex: 'description',
-      ...getColumnSearchProps('Descripcion'),
+      ...getColumnSearchProps('description'),
       sorter: (a, b) => a.description.length - b.description.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Fecha de solicitud',
-      dataIndex: 'fechaSolicitud',
-      ...getColumnSearchProps('Fecha de solicitud'),
-      sorter: (a, b) => a.fechaSolicitud.length - b.fechaSolicitud.length,
+      dataIndex: 'requestDate',
+      ...getColumnSearchProps('requestDate'),
+      sorter: (a, b) => a.requestDate.length - b.requestDate.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Motivo',
-      dataIndex: 'motivo',
-      ...getColumnSearchProps('Motivo'),
-      sorter: (a, b) => a.motivo.length - b.motivo.length,
+      dataIndex: 'reason',
+      ...getColumnSearchProps('reason'),
+      sorter: (a, b) => a.reason.length - b.reason.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Tiempo desde la última reposición',
-      dataIndex: 'ultimaReposicion',
-      ...getColumnSearchProps('Tiempo desde la última reposición'),
-      sorter: (a, b) => a.ultimaReposicion.length - b.ultimaReposicion.length,
+      dataIndex: 'timeSinceLastReplacement',
+      ...getColumnSearchProps('timeSinceLastReplacement'),
+      sorter: (a, b) => a.timeSinceLastReplacement.length - b.timeSinceLastReplacement.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Estado de la solicitud',
-      dataIndex: 'estadoSolicitud',
-      ...getColumnSearchProps('Estado de la solicitud'),
-      sorter: (a, b) => a.estadoSolicitud.length - b.estadoSolicitud.length,
+      dataIndex: 'requestStatus',
+      ...getColumnSearchProps('requestStatus'),
+      sorter: (a, b) => a.requestStatus.length - b.requestStatus.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Fecha orden de consumo.',
-      dataIndex: 'fechaOC',
-      ...getColumnSearchProps('Motivo'),
-      sorter: (a, b) => a.fechaOC.length - b.fechaOC.length,
+      dataIndex: 'dateConsumptionOrder',
+      ...getColumnSearchProps('dateConsumptionOrder'),
+      sorter: (a, b) => a.dateConsumptionOrder.length - b.dateConsumptionOrder.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'N° Orden de consumo',
-      dataIndex: 'numeroOC',
-      ...getColumnSearchProps('N° Orden de consumo'),
-      sorter: (a, b) => a.numeroOC.length - b.numeroOC.length,
+      dataIndex: 'consumptionOrderNumber',
+      ...getColumnSearchProps('consumptionOrderNumber'),
+      sorter: (a, b) => a.consumptionOrderNumber.length - b.consumptionOrderNumber.length,
       sortDirections: ['descend', 'ascend']
     }
   ];
@@ -208,11 +218,17 @@ export const useCustomIntake = () => {
     setAddingFile(null);
   };
 
-  const onAddFile = (record) => {
+  const onAddFile = () => {
     setIsAdd(true);
-    setAddingFile({...record});
     setDataSource(() => {
       return [...dataSource];
+    });
+  };
+
+  const onAddOrder = () => {
+    createOrder(addingFile).then(() => {
+      getOrdersTable();
+      resetAdd();
     });
   };
 
@@ -230,6 +246,7 @@ export const useCustomIntake = () => {
     setOptions,
     sucursales,
     tallas,
-    distribuciones
+    distribuciones,
+    onAddOrder
   };
 };

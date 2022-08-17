@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useRef, useEffect} from 'react';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../assets/img/btn-edit.png';
 
@@ -8,7 +8,7 @@ export const useCustomOrders = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingFile, setEditingFile] = useState(null);
   const [options, setOptions] = useState([]);
-
+  const inputFileRef = useRef(null);
   const sucursales = ['1', '2', '3', '4', '5'];
   const tallas = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
   const distribuciones = [
@@ -16,51 +16,18 @@ export const useCustomOrders = () => {
     'Distribución Administrativa 2',
     'Distribución Administrativa 3'
   ];
-  const {getColumnSearchProps} = useUtils();
-  const [dataSource, setDataSource] = useState([
-    {
-      key: '1',
-      n: '1',
-      id: '1724567890',
-      colaborador: 'ABAD GAONA LADY ABIGAIL',
-      cargo: 'ASISTENTE SENIOR',
-      genero: 'MUJER',
-      sucursal: 'Sucursal',
-      region: 'Bogotá',
-      fechaIngreso: '2/03/2022',
-      distribution: 'Distribución Administrativa',
-      numberOfi: '123',
-      nameOfi: 'Farmados'
-    },
-    {
-      key: '2',
-      n: '2',
-      id: '1724567890',
-      colaborador: 'ABAD GAONA LADY ABIGAIL',
-      cargo: 'ASISTENTE SENIOR',
-      genero: 'MUJER',
-      sucursal: 'Sucursal',
-      region: 'Bogotá',
-      fechaIngreso: '2/03/2022',
-      distribution: 'Distribución Administrativa',
-      numberOfi: '123',
-      nameOfi: 'Farmados'
-    },
-    {
-      key: '3',
-      n: '3',
-      id: '1724567890',
-      colaborador: 'ABAD GAONA LADY ABIGAIL',
-      cargo: 'ASISTENTE SENIOR',
-      genero: 'MUJER',
-      sucursal: 'Sucursal',
-      region: 'Bogotá',
-      fechaIngreso: '2/03/2022',
-      distribution: 'Distribución Administrativa',
-      numberOfi: '123',
-      nameOfi: 'Farmados'
-    }
-  ]);
+  const {getColumnSearchProps, bulkSizeUpdate, getEmployees, updateEmployeeSize} = useUtils();
+  const [dataSource, setDataSource] = useState([]);
+
+  const getEmployeesTable = () => {
+    getEmployees().then((res) => {
+      setDataSource(res);
+    });
+  };
+
+  useEffect(() => {
+    getEmployeesTable();
+  }, []);
 
   const onEditFile = (record) => {
     setIsEditing(true);
@@ -75,79 +42,80 @@ export const useCustomOrders = () => {
   const columns = [
     {
       title: 'N°',
-      dataIndex: 'n',
+      dataIndex: 'id',
       ...getColumnSearchProps('N°'),
-      sorter: (a, b) => a.n.length - b.n.length,
-      sortDirections: ['descend', 'ascend']
+      sorter: (a, b) => a.id - b.id,
+      sortDirections: ['descend', 'ascend'],
+      defaultSortOrder: 'ascend'
     },
     {
       title: 'Cédula',
-      dataIndex: 'id',
-      ...getColumnSearchProps('Cédula'),
-      sorter: (a, b) => a.id.length - b.id.length,
+      dataIndex: 'CEDULA',
+      ...getColumnSearchProps('CEDULA'),
+      sorter: (a, b) => a.CEDULA.length - b.CEDULA.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Colaborador',
-      dataIndex: 'colaborador',
-      ...getColumnSearchProps('Colaborador'),
-      sorter: (a, b) => a.colaborador.length - b.colaborador.length,
+      dataIndex: 'COLABORADOR',
+      ...getColumnSearchProps('COLABORADOR'),
+      sorter: (a, b) => a.COLABORADOR.length - b.COLABORADOR.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Cargo',
-      dataIndex: 'cargo',
-      ...getColumnSearchProps('Cargo'),
-      sorter: (a, b) => a.cargo.length - b.cargo.length,
+      dataIndex: 'CARGO',
+      ...getColumnSearchProps('CARGO'),
+      sorter: (a, b) => a.CARGO.length - b.CARGO.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Género',
-      dataIndex: 'genero',
-      ...getColumnSearchProps('Género'),
-      sorter: (a, b) => a.genero.length - b.genero.length,
+      dataIndex: 'GENERO',
+      ...getColumnSearchProps('GENERO'),
+      sorter: (a, b) => a.GENERO.length - b.GENERO.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Sucursal',
-      dataIndex: 'sucursal',
-      ...getColumnSearchProps('Sucursal'),
-      sorter: (a, b) => a.sucursal.length - b.sucursal.length,
+      dataIndex: 'SUCURSAL',
+      ...getColumnSearchProps('SUCURSAL'),
+      sorter: (a, b) => a.SUCURSAL.length - b.SUCURSAL.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Región',
-      dataIndex: 'region',
-      ...getColumnSearchProps('Región'),
-      sorter: (a, b) => a.region.length - b.region.length,
+      dataIndex: 'REGION',
+      ...getColumnSearchProps('REGION'),
+      sorter: (a, b) => a.REGION.length - b.REGION.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Fecha de ingreso',
-      dataIndex: 'fechaIngreso',
+      dataIndex: 'FECHA_INGRESO',
       ...getColumnSearchProps('Fecha de ingreso'),
-      sorter: (a, b) => a.fechaIngreso.length - b.fechaIngreso.length,
+      sorter: (a, b) => a.FECHA_INGRESO.length - b.FECHA_INGRESO.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Distribución Administrativa',
-      dataIndex: 'distribution',
+      dataIndex: 'DISTRIBUCION',
       ...getColumnSearchProps('Distribución Administrativa'),
-      sorter: (a, b) => a.distribution.length - b.distribution.length,
+      sorter: (a, b) => a.DISTRIBUCION.length - b.DISTRIBUCION.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Número oficina',
-      dataIndex: 'numberOfi',
+      dataIndex: 'CODIGO_OFICINA',
       ...getColumnSearchProps('Número oficina'),
-      sorter: (a, b) => a.numberOfi.length - b.numberOfi.length,
+      sorter: (a, b) => a.CODIGO_OFICINA.length - b.CODIGO_OFICINA.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Nombre de la oficina',
-      dataIndex: 'nameOfi',
-      ...getColumnSearchProps('nameOfi'),
-      sorter: (a, b) => a.nameOfi.length - b.nameOfi.length,
+      dataIndex: 'NOMBRE_OFICINA',
+      ...getColumnSearchProps('NOMBRE_OFICINA'),
+      sorter: (a, b) => a.NOMBRE_OFICINA.length - b.NOMBRE_OFICINA.length,
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -182,6 +150,22 @@ export const useCustomOrders = () => {
     });
   };
 
+  const handleInputFile = () => {
+    let file = inputFileRef.current.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    bulkSizeUpdate(formData).then(() => {
+      //TODO: Show success or error message, maybe add modal
+    });
+  };
+
+  const onSizeUpdate = () => {
+    updateEmployeeSize(editingFile).then(() => {
+      getEmployeesTable();
+      resetEditing();
+    });
+  };
+
   return {
     columns,
     dataSource,
@@ -200,6 +184,9 @@ export const useCustomOrders = () => {
     editingFile,
     resetEditing,
     onEditFile,
-    setEditingFile
+    setEditingFile,
+    handleInputFile,
+    inputFileRef,
+    onSizeUpdate
   };
 };
