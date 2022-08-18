@@ -1,23 +1,22 @@
-import {useState, useRef, useEffect} from 'react';
+import {useState, useEffect} from 'react';
+import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../assets/img/btn-edit.png';
 
 export const useCustomOrders = () => {
-  const [isAdd, setIsAdd] = useState(false);
-  const [addingFile, setAddingFile] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editingFile, setEditingFile] = useState(null);
-  const [options, setOptions] = useState([]);
-  const inputFileRef = useRef(null);
-  const sucursales = ['1', '2', '3', '4', '5'];
+  const [form] = Form.useForm();
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [editingKey, setEditingKey] = useState('');
+  /*const inputFileRef = useRef(null);*/
+
   const tallas = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
-  const distribuciones = [
-    'Distribución Administrativa 1',
-    'Distribución Administrativa 2',
-    'Distribución Administrativa 3'
-  ];
-  const {getColumnSearchProps, bulkSizeUpdate, getEmployees, updateEmployeeSize} = useUtils();
+
+  const {getColumnSearchProps, getEmployees, updateEmployeeSize} = useUtils();
   const [dataSource, setDataSource] = useState([]);
+
+  const onSelectChange = (newSelectedRowKeys) => {
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
 
   const getEmployeesTable = () => {
     getEmployees().then((res) => {
@@ -29,14 +28,66 @@ export const useCustomOrders = () => {
     getEmployeesTable();
   }, []);
 
-  const onEditFile = (record) => {
-    setIsEditing(true);
-    setEditingFile({...record});
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange
   };
 
-  const resetEditing = () => {
-    setIsEditing(false);
-    setEditingFile(null);
+  const EditableCell = ({editing, dataIndex, title, inputType, children, ...restProps}) => {
+    const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
+    return (
+      <td {...restProps}>
+        {editing ? (
+          <Form.Item
+            name={dataIndex}
+            style={{
+              margin: 0
+            }}
+            rules={[
+              {
+                required: true,
+                message: `Please Input ${title}!`
+              }
+            ]}
+          >
+            {inputNode}
+          </Form.Item>
+        ) : (
+          children
+        )}
+      </td>
+    );
+  };
+
+  const isEditing = (record) => {
+    //console.log('record', record, editingKey);
+    return record.id === editingKey;
+  };
+
+  const edit = (record) => {
+    form.setFieldsValue({
+      ...record
+    });
+    setEditingKey(record.id);
+  };
+
+  const cancel = () => {
+    setEditingKey('');
+  };
+
+  const save = async (key) => {
+    try {
+      let row = await form.validateFields();
+      const newData = [...dataSource];
+      const index = newData.findIndex((item) => key === item.id);
+      updateEmployeeSize({TALLA: row.TALLA, CEDULA: newData[index].CEDULA}).then(() => {
+        getEmployeesTable();
+        cancel();
+      });
+    } catch (errInfo) {
+      // eslint-disable-next-line no-console
+      console.log('Validate Failed:', errInfo);
+    }
   };
 
   const columns = [
@@ -78,9 +129,9 @@ export const useCustomOrders = () => {
     },
     {
       title: 'Sucursal',
-      dataIndex: 'SUCURSAL',
-      ...getColumnSearchProps('SUCURSAL'),
-      sorter: (a, b) => a.SUCURSAL.length - b.SUCURSAL.length,
+      dataIndex: 'NOMBRE_SUCURSAL',
+      ...getColumnSearchProps('Sucursal'),
+      sorter: (a, b) => a.NOMBRE_SUCURSAL.length - b.NOMBRE_SUCURSAL.length,
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -119,30 +170,60 @@ export const useCustomOrders = () => {
       sortDirections: ['descend', 'ascend']
     },
     {
+      title: 'Talla',
+      dataIndex: 'TALLA',
+      editable: true,
+      ...getColumnSearchProps('Talla'),
+      sorter: (a, b) => a.TALLA.length - b.TALLA.length,
+      sortDirections: ['descend', 'ascend']
+    },
+    {
       title: 'Acción',
-      render: (record) => {
-        return (
-          <div className="flex-action">
-            <div
-              onClick={() => {
-                onEditFile(record);
+      dataIndex: 'accion',
+      render: (_, record) => {
+        const editable = isEditing(record);
+        return editable ? (
+          <span>
+            <Typography.Link
+              onClick={async () => {
+                await save(record.id);
               }}
-              className="btn-edit"
+              style={{
+                marginRight: 8
+              }}
             >
-              <img src={BtnEdit} alt="btn-edit" />
-            </div>
-          </div>
+              Save
+            </Typography.Link>
+            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+              <a>Cancel</a>
+            </Popconfirm>
+          </span>
+        ) : (
+          <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
+            <img src={BtnEdit} alt="btn-edit" />
+          </Typography.Link>
         );
       }
     }
   ];
+  const mergedColumns = columns.map((col) => {
+    if (!col.editable) {
+      return col;
+    }
 
-  const resetAdd = () => {
-    setIsAdd(false);
-    setAddingFile(null);
-  };
+    return {
+      ...col,
+      onCell: (record) => ({
+        record,
+        inputType: col.dataIndex === 'cantidadCompra' ? 'number' : 'text',
+        dataIndex: col.dataIndex,
+        title: col.title,
+        editing: isEditing(record)
+      })
+    };
+  });
 
-  const onAddFile = (record) => {
+  /* const onAddFile = (record) => {
     setIsAdd(true);
     setAddingFile({...record});
     setDataSource(() => {
@@ -164,29 +245,17 @@ export const useCustomOrders = () => {
       getEmployeesTable();
       resetEditing();
     });
-  };
+  };*/
 
   return {
     columns,
+    mergedColumns,
+    EditableCell,
     dataSource,
-    setDataSource,
-    isAdd,
-    addingFile,
-    resetAdd,
-    onAddFile,
-    setAddingFile,
-    sucursales,
     tallas,
-    distribuciones,
-    options,
-    setOptions,
-    isEditing,
-    editingFile,
-    resetEditing,
-    onEditFile,
-    setEditingFile,
-    handleInputFile,
-    inputFileRef,
-    onSizeUpdate
+    form,
+    cancel,
+    rowSelection,
+    setDataSource
   };
 };

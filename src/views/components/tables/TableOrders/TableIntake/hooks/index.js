@@ -6,12 +6,13 @@ export const useCustomIntake = () => {
 
   const [isAdd, setIsAdd] = useState(false);
   const [addingFile, setAddingFile] = useState(null);
-  const {getColumnSearchProps, createOrder, getOrders} = useUtils();
+  const {getColumnSearchProps, createOrder, getOrders, getEmployees} = useUtils();
   const [options, setOptions] = useState([]);
   const [dataSource, setDataSource] = useState([
     {
+      key: '1',
       n: `1`,
-      id: `112131311`,
+      id: `1121313114`,
       colaborador: `ABAD GAONA LADY ABIGAIL 1`,
       cargo: `ASISTENTE SENIOR 1`,
       distribution: 'Distribución Administrativa',
@@ -27,8 +28,9 @@ export const useCustomIntake = () => {
       numeroOC: `1231`
     },
     {
+      key: '2',
       n: `2`,
-      id: `112131311`,
+      id: `1121313115`,
       colaborador: `ABAD GAONA LADY ABIGAIL 1`,
       cargo: `ASISTENTE SENIOR 1`,
       distribution: 'Distribución Administrativa',
@@ -44,8 +46,9 @@ export const useCustomIntake = () => {
       numeroOC: `1231`
     },
     {
+      key: '3',
       n: `3`,
-      id: `112131311`,
+      id: `1121313116`,
       colaborador: `ABAD GAONA LADY ABIGAIL 1`,
       cargo: `ASISTENTE SENIOR 1`,
       distribution: 'Distribución Administrativa',
@@ -61,13 +64,8 @@ export const useCustomIntake = () => {
       numeroOC: `1231`
     }
   ]);
-  const sucursales = ['1', '2', '3', '4', '5'];
-  const tallas = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
-  const distribuciones = [
-    'Distribución Administrativa 1',
-    'Distribución Administrativa 2',
-    'Distribución Administrativa 3'
-  ];
+
+  const [employeesList, setEmployeesList] = useState([]);
 
   const getOrdersTable = () => {
     getOrders().then((res) => {
@@ -75,8 +73,15 @@ export const useCustomIntake = () => {
     });
   };
 
+  const getEmployeesList = () => {
+    getEmployees().then((res) => {
+      setEmployeesList(res);
+    });
+  };
+
   useEffect(() => {
     getOrdersTable();
+    getEmployeesList();
   }, []);
 
   const onSelectChange = (newSelectedRowKeys) => {
@@ -87,22 +92,6 @@ export const useCustomIntake = () => {
     selectedRowKeys,
     onChange: onSelectChange
   };
-
-  // a.- Cédula
-  // b.- Colaborador
-  // c.- Cargo
-  // d.- Distribución Administrativa
-  // e.- Código Centro de Gestión
-  // f.- Centro de Gestión
-  // g.- Nombre Oficina
-  // h.- Talla
-  // h.- Descripción
-  // i.- Fecha de solicitud
-  // j.- Motivo
-  // k.- Tiempo desde la última reposición
-  // l.- Estado de la solicitud.
-  // m.- Fecha de OC (Orden de consumo).
-  // n.- N° de Orde de consumo
 
   const columns = [
     {
@@ -244,9 +233,7 @@ export const useCustomIntake = () => {
     setDataSource,
     options,
     setOptions,
-    sucursales,
-    tallas,
-    distribuciones,
-    onAddOrder
+    onAddOrder,
+    employeesList
   };
 };
