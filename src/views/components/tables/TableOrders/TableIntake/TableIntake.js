@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table, Form, Input, Modal, Select} from 'antd';
+import {Table, Form, Modal, Select} from 'antd';
 import {CSVLink} from 'react-csv';
 import Button from 'views/components/button/Button';
 import btnCarga from '../../../../../assets/img/btn-carga.svg';
@@ -11,7 +11,6 @@ import './style.css';
 import '../../TableParameter/TableReasons/style-reasons.css';
 
 const TableIntake = () => {
-  const {Search} = Input;
   const {
     dataSource,
     columns,
@@ -22,11 +21,11 @@ const TableIntake = () => {
     resetAdd,
     addingFile,
     setAddingFile,
-    employeesList
+    employeesList,
+    productsList
   } = useCustomIntake();
 
   // eslint-disable-next-line no-console
-  const onSearch = (value) => console.log(value);
   return (
     <div className="container-table pt-16">
       <Table
@@ -81,17 +80,29 @@ const TableIntake = () => {
                   </Select>
                 </Form.Item>
                 <Form.Item className="item-form" label="Descripcion">
-                  <Search
-                    className="input-add"
-                    placeholder="Descripcion"
-                    onSearch={onSearch}
-                    value={addingFile?.description}
+                  <Select
+                    placeholder={'Descripcion'}
+                    value={addingFile?.descripcion}
                     onChange={(e) => {
-                      setAddingFile((pre) => {
-                        return {...pre, description: e.target.value};
+                      setAddingFile({
+                        ...addingFile,
+                        descripcion: e
                       });
                     }}
-                  />
+                    className="input-add"
+                    showSearch
+                    filterOption={(input, option) => {
+                      return option.children.toLowerCase().includes(input.toLowerCase());
+                    }}
+                  >
+                    {productsList.map((product) => {
+                      return (
+                        <Select.Option key={product.id} value={product.id}>
+                          {product.descripcion}
+                        </Select.Option>
+                      );
+                    })}
+                  </Select>
                 </Form.Item>
               </div>
             </Form>
