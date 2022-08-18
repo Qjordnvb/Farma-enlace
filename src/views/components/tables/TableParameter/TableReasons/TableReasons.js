@@ -174,7 +174,7 @@ function TableReasons() {
                       onChange={(e) => {
                         const controlledValue = Math.max(0, Math.min(100, Number(e.target.value)));
                         let newPersonalDiscount = 100 - controlledValue;
-                        if (addingFile.payment === 'YES') {
+                        if (addingFile.payment === 'SI') {
                           setAddingFile({
                             ...addingFile,
                             companyDiscount: controlledValue,

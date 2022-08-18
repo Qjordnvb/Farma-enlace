@@ -18,7 +18,7 @@ const TableIntake = () => {
     rowSelection,
     isAdd,
     onAddFile,
-    setDataSource,
+    onAddOrder,
     resetAdd,
     addingFile,
     setAddingFile
@@ -49,11 +49,7 @@ const TableIntake = () => {
               resetAdd();
             }}
             onOk={() => {
-              setDataSource(() => {
-                return [...dataSource, addingFile];
-              });
-
-              resetAdd();
+              onAddOrder();
             }}
           >
             <Form id="modalAdd" className="w-full">

@@ -8,7 +8,6 @@ import {useCustomGarments} from './hooks';
 function TableGarments() {
   const {
     dataSource,
-    setDataSource,
     setEditingFile,
     isEditing,
     editingFile,
@@ -80,12 +79,8 @@ function TableGarments() {
               }}
               onOk={() => {
                 onCreateGarment().then(() => {
-                  setDataSource(() => {
-                    return [...dataSource, addingFile];
-                  });
+                  resetAdd();
                 });
-
-                resetAdd();
               }}
             >
               <Form id="modalAdd">
@@ -113,7 +108,7 @@ function TableGarments() {
                     }}
                   >
                     <Option value={true}>Activo</Option>
-                    <Option value={false}>Pasivo</Option>
+                    <Option value={false}>Inactivo</Option>
                   </Select>
                 </Form.Item>
               </Form>

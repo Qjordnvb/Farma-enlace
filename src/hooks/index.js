@@ -132,6 +132,56 @@ export const useUtils = () => {
     }
   }
 
+  async function getOrders() {
+    try {
+      const request = await Apilocal.get('/orders/findAll');
+      return request.data;
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('ERROR - getAllDeliveries', e);
+    }
+  }
+
+  async function createOrder(data) {
+    try {
+      const request = await Apilocal.post('/orders/create', {...data});
+      return request.data;
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('ERROR - getAllDeliveries', e);
+    }
+  }
+
+  async function bulkSizeUpdate(formData) {
+    try {
+      const request = await Apilocal.post('/employees/bulkUpdate', formData);
+      return request.data;
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('ERROR - getAllDeliveries', e);
+    }
+  }
+
+  async function getEmployees() {
+    try {
+      const request = await Apilocal.get('/employees/findAll');
+      return request.data;
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('ERROR - getAllDeliveries', e);
+    }
+  }
+
+  async function updateEmployeeSize(data) {
+    try {
+      const request = await Apilocal.post('/employees/updateSize', {...data});
+      return request.data;
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('ERROR - getAllDeliveries', e);
+    }
+  }
+
   async function createDelivery(data) {
     try {
       const request = await Apilocal.post('/uniformDelivery/create', {...data});
@@ -148,7 +198,7 @@ export const useUtils = () => {
       return request.data;
     } catch (e) {
       // eslint-disable-next-line no-console
-      console.log('ERROR - getAllDescriptions', e);
+      console.log('ERROR - updateGarmentQuantity', e);
     }
   }
 
@@ -158,7 +208,7 @@ export const useUtils = () => {
       return request.data;
     } catch (e) {
       // eslint-disable-next-line no-console
-      console.log('ERROR - addReason', e);
+      console.log('ERROR - switchActiveGarment', e);
     }
   }
 
@@ -289,6 +339,11 @@ export const useUtils = () => {
     getAllRepositionParameters,
     editRepositionParameter,
     createDelivery,
-    getAllDeliveries
+    getAllDeliveries,
+    getOrders,
+    createOrder,
+    bulkSizeUpdate,
+    getEmployees,
+    updateEmployeeSize
   };
 };
