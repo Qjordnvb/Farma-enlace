@@ -6,7 +6,7 @@ export const useCustomIntake = () => {
 
   const [isAdd, setIsAdd] = useState(false);
   const [addingFile, setAddingFile] = useState(null);
-  const {getColumnSearchProps, createOrder, getOrders} = useUtils();
+  const {getColumnSearchProps, createOrder, getOrders, getEmployees} = useUtils();
   const [options, setOptions] = useState([]);
   const [dataSource, setDataSource] = useState([
     {
@@ -65,14 +65,23 @@ export const useCustomIntake = () => {
     }
   ]);
 
+  const [employeesList, setEmployeesList] = useState([]);
+
   const getOrdersTable = () => {
     getOrders().then((res) => {
       setDataSource(res);
     });
   };
 
+  const getEmployeesList = () => {
+    getEmployees().then((res) => {
+      setEmployeesList(res);
+    });
+  };
+
   useEffect(() => {
     getOrdersTable();
+    getEmployeesList();
   }, []);
 
   const onSelectChange = (newSelectedRowKeys) => {
@@ -224,9 +233,7 @@ export const useCustomIntake = () => {
     setDataSource,
     options,
     setOptions,
-    sucursales,
-    tallas,
-    distribuciones,
-    onAddOrder
+    onAddOrder,
+    employeesList
   };
 };

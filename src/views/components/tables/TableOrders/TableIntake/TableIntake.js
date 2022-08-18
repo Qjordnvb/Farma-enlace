@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table, Form, Input, Modal} from 'antd';
+import {Table, Form, Input, Modal, Select} from 'antd';
 import {CSVLink} from 'react-csv';
 import Button from 'views/components/button/Button';
 import btnCarga from '../../../../../assets/img/btn-carga.svg';
@@ -21,7 +21,8 @@ const TableIntake = () => {
     onAddOrder,
     resetAdd,
     addingFile,
-    setAddingFile
+    setAddingFile,
+    employeesList
   } = useCustomIntake();
 
   // eslint-disable-next-line no-console
@@ -55,17 +56,29 @@ const TableIntake = () => {
             <Form id="modalAdd" className="w-full">
               <div className="flex flex-col justify-around">
                 <Form.Item className="item-form" label="Colaboradores">
-                  <Search
-                    className="input-add"
-                    placeholder="Colaboradores"
-                    onSearch={onSearch}
+                  <Select
+                    placeholder={'Colaboradores'}
                     value={addingFile?.colaborador}
                     onChange={(e) => {
-                      setAddingFile((pre) => {
-                        return {...pre, colaborador: e.target.value};
+                      setAddingFile({
+                        ...addingFile,
+                        colaborador: e
                       });
                     }}
-                  />
+                    className="input-add"
+                    showSearch
+                    filterOption={(input, option) => {
+                      return option.children.toLowerCase().includes(input.toLowerCase());
+                    }}
+                  >
+                    {employeesList.map((employee) => {
+                      return (
+                        <Select.Option key={employee.id} value={employee.id}>
+                          {employee.COLABORADOR}
+                        </Select.Option>
+                      );
+                    })}
+                  </Select>
                 </Form.Item>
                 <Form.Item className="item-form" label="Descripcion">
                   <Search

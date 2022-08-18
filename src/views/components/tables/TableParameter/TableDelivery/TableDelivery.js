@@ -64,18 +64,7 @@ export default function TableDelivery() {
                 </Select>
               </Form.Item>
               <Form.Item className="item-form" label="Uniformes">
-                <Select
-                  className="input-add"
-                  placeholder={'Seleccionar...'}
-                  value={addingFile?.uniformId}
-                  onChange={(e) => {
-                    setAddingFile({...addingFile, uniformId: e});
-                  }}
-                  showSearch
-                  filterOption={(input, option) => {
-                    return option.children.toLowerCase().includes(input.toLowerCase());
-                  }}
-                >
+                <Select showSearch>
                   {productsList.map((product) => {
                     return (
                       <Option key={product.id} value={product.id}>

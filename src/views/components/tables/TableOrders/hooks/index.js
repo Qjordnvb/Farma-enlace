@@ -1,4 +1,4 @@
-import {useState, useRef, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../assets/img/btn-edit.png';
@@ -6,25 +6,18 @@ import BtnEdit from '../../../../../assets/img/btn-edit.png';
 export const useCustomOrders = () => {
   const [form] = Form.useForm();
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const {getColumnSearchProps} = useUtils();
   const [editingKey, setEditingKey] = useState('');
-  const [isAdd, setIsAdd] = useState(false);
-  const [addingFile, setAddingFile] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editingFile, setEditingFile] = useState(null);
-  const [options, setOptions] = useState([]);
-  const inputFileRef = useRef(null);
-  const sucursales = ['1', '2', '3', '4', '5'];
+  /*const inputFileRef = useRef(null);*/
+
   const tallas = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
-  const distribuciones = [
-    'Distribución Administrativa 1',
-    'Distribución Administrativa 2',
-    'Distribución Administrativa 3'
-  ];
-  const {getColumnSearchProps, bulkSizeUpdate, getEmployees, updateEmployeeSize} = useUtils();
+
+  const {getColumnSearchProps, getEmployees, updateEmployeeSize} = useUtils();
   const [dataSource, setDataSource] = useState([]);
 
   const onSelectChange = (newSelectedRowKeys) => {
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
+
   const getEmployeesTable = () => {
     getEmployees().then((res) => {
       setDataSource(res);
@@ -34,11 +27,6 @@ export const useCustomOrders = () => {
   useEffect(() => {
     getEmployeesTable();
   }, []);
-
-  const onEditFile = (record) => {
-    setIsEditing(true);
-    setEditingFile({...record});
-  };
 
   const rowSelection = {
     selectedRowKeys,
@@ -71,14 +59,16 @@ export const useCustomOrders = () => {
     );
   };
 
-  const isEditing = (record) => record.key === editingKey;
+  const isEditing = (record) => {
+    //console.log('record', record, editingKey);
+    return record.id === editingKey;
+  };
 
   const edit = (record) => {
     form.setFieldsValue({
-      cantidadCompra: '',
       ...record
     });
-    setEditingKey(record.key);
+    setEditingKey(record.id);
   };
 
   const cancel = () => {
@@ -87,20 +77,13 @@ export const useCustomOrders = () => {
 
   const save = async (key) => {
     try {
-      const row = await form.validateFields();
+      let row = await form.validateFields();
       const newData = [...dataSource];
-      const index = newData.findIndex((item) => key === item.key);
-
-      if (index > -1) {
-        const item = newData[index];
-        newData.splice(index, 1, {...item, ...row});
-        setDataSource(newData);
-        setEditingKey('');
-      } else {
-        newData.push(row);
-        setDataSource(newData);
-        setEditingKey('');
-      }
+      const index = newData.findIndex((item) => key === item.id);
+      updateEmployeeSize({TALLA: row.TALLA, CEDULA: newData[index].CEDULA}).then(() => {
+        getEmployeesTable();
+        cancel();
+      });
     } catch (errInfo) {
       // eslint-disable-next-line no-console
       console.log('Validate Failed:', errInfo);
@@ -146,9 +129,9 @@ export const useCustomOrders = () => {
     },
     {
       title: 'Sucursal',
-      dataIndex: 'SUCURSAL',
-      ...getColumnSearchProps('SUCURSAL'),
-      sorter: (a, b) => a.SUCURSAL.length - b.SUCURSAL.length,
+      dataIndex: 'NOMBRE_SUCURSAL',
+      ...getColumnSearchProps('Sucursal'),
+      sorter: (a, b) => a.NOMBRE_SUCURSAL.length - b.NOMBRE_SUCURSAL.length,
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -188,10 +171,10 @@ export const useCustomOrders = () => {
     },
     {
       title: 'Talla',
-      dataIndex: 'talla',
+      dataIndex: 'TALLA',
       editable: true,
       ...getColumnSearchProps('Talla'),
-      sorter: (a, b) => a.talla.length - b.talla.length,
+      sorter: (a, b) => a.TALLA.length - b.TALLA.length,
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -202,7 +185,9 @@ export const useCustomOrders = () => {
         return editable ? (
           <span>
             <Typography.Link
-              onClick={() => save(record.key)}
+              onClick={async () => {
+                await save(record.id);
+              }}
               style={{
                 marginRight: 8
               }}
@@ -238,7 +223,7 @@ export const useCustomOrders = () => {
     };
   });
 
-  const onAddFile = (record) => {
+  /* const onAddFile = (record) => {
     setIsAdd(true);
     setAddingFile({...record});
     setDataSource(() => {
@@ -260,7 +245,7 @@ export const useCustomOrders = () => {
       getEmployeesTable();
       resetEditing();
     });
-  };
+  };*/
 
   return {
     columns,
