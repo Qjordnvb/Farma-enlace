@@ -150,9 +150,9 @@ export const useCustomOrders = () => {
     },
     {
       title: 'Distribución Administrativa',
-      dataIndex: 'DISTRIBUCION',
+      dataIndex: 'NOMBRE_CENTRO_COSTOS',
       ...getColumnSearchProps('Distribución Administrativa'),
-      sorter: (a, b) => a.DISTRIBUCION.length - b.DISTRIBUCION.length,
+      sorter: (a, b) => a.NOMBRE_CENTRO_COSTOS.length - b.NOMBRE_CENTRO_COSTOS.length,
       sortDirections: ['descend', 'ascend']
     },
     {
