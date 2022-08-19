@@ -6,6 +6,7 @@ export const useCustomIntake = () => {
 
   const [isAdd, setIsAdd] = useState(false);
   const [addingFile, setAddingFile] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const {getColumnSearchProps, createOrder, getOrders, getEmployees, getTableParameters} =
     useUtils();
   const [options, setOptions] = useState([]);
@@ -68,6 +69,7 @@ export const useCustomIntake = () => {
 
   const [employeesList, setEmployeesList] = useState([]);
   const [productsList, setProductsList] = useState([]);
+
   const getOrdersTable = () => {
     getOrders().then((res) => {
       setDataSource(res);
@@ -111,49 +113,49 @@ export const useCustomIntake = () => {
     },
     {
       title: 'Cédula',
-      dataIndex: 'ci',
-      ...getColumnSearchProps('ci'),
+      dataIndex: ['employee', 'CEDULA'],
+      ...getColumnSearchProps('Cédula'),
       sorter: (a, b) => a.ci.length - b.ci.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Colaborador',
-      dataIndex: 'collaborator',
+      dataIndex: ['employee', 'COLABORADOR'],
       ...getColumnSearchProps('collaborator'),
       sorter: (a, b) => a.collaborator.length - b.collaborator.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Cargo',
-      dataIndex: 'position',
+      dataIndex: ['employee', 'CARGO'],
       ...getColumnSearchProps('Cargo'),
       sorter: (a, b) => a.position.length - b.position.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Distribución Administrativa',
-      dataIndex: 'administrativeDistribution',
+      dataIndex: ['employee', 'NOMBRE_CENTRO_COSTOS'],
       ...getColumnSearchProps('administrativeDistribution'),
       sorter: (a, b) => a.administrativeDistribution.length - b.administrativeDistribution.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Código oficina ',
-      dataIndex: 'officePosition',
+      dataIndex: ['employee', 'CODIGO_OFICINA'],
       ...getColumnSearchProps('officePosition'),
       sorter: (a, b) => a.idOfi.length - b.officePosition.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Nombre de la oficina',
-      dataIndex: 'officeName',
+      dataIndex: ['employee', 'NOMBRE_OFICINA'],
       ...getColumnSearchProps('officeName'),
       sorter: (a, b) => a.officeName.length - b.officeName.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Talla',
-      dataIndex: 'size',
+      dataIndex: ['employee', 'TALLA'],
       with: 50,
       ...getColumnSearchProps('size'),
       sorter: (a, b) => a.size.length - b.size.length,
@@ -161,7 +163,7 @@ export const useCustomIntake = () => {
     },
     {
       title: 'Descripcion',
-      dataIndex: 'description',
+      dataIndex: ['producto', 'descripcion'],
       ...getColumnSearchProps('description'),
       sorter: (a, b) => a.description.length - b.description.length,
       sortDirections: ['descend', 'ascend']

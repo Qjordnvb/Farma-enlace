@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../assets/img/btn-edit.png';
@@ -7,11 +7,11 @@ export const useCustomOrders = () => {
   const [form] = Form.useForm();
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [editingKey, setEditingKey] = useState('');
-  /*const inputFileRef = useRef(null);*/
+  const inputFileRef = useRef(null);
 
   const tallas = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 
-  const {getColumnSearchProps, getEmployees, updateEmployeeSize} = useUtils();
+  const {getColumnSearchProps, getEmployees, updateEmployeeSize, bulkSizeUpdate} = useUtils();
   const [dataSource, setDataSource] = useState([]);
 
   const onSelectChange = (newSelectedRowKeys) => {
@@ -60,7 +60,6 @@ export const useCustomOrders = () => {
   };
 
   const isEditing = (record) => {
-    //console.log('record', record, editingKey);
     return record.id === editingKey;
   };
 
@@ -222,6 +221,15 @@ export const useCustomOrders = () => {
       })
     };
   });
+  const handleInputFile = () => {
+    let file = inputFileRef.current.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    bulkSizeUpdate(formData).then(() => {
+      getEmployeesTable();
+      //TODO: Show success or error message, maybe add modal
+    });
+  };
 
   /* const onAddFile = (record) => {
     setIsAdd(true);
@@ -231,14 +239,7 @@ export const useCustomOrders = () => {
     });
   };
 
-  const handleInputFile = () => {
-    let file = inputFileRef.current.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-    bulkSizeUpdate(formData).then(() => {
-      //TODO: Show success or error message, maybe add modal
-    });
-  };
+
 
   const onSizeUpdate = () => {
     updateEmployeeSize(editingFile).then(() => {
@@ -256,6 +257,8 @@ export const useCustomOrders = () => {
     form,
     cancel,
     rowSelection,
-    setDataSource
+    setDataSource,
+    inputFileRef,
+    handleInputFile
   };
 };
