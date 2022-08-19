@@ -6,9 +6,19 @@ import btnDownload from '../../../../assets/img/btn-generate.png';
 import {useCustomOrders} from './hooks';
 import './style-orders.css';
 import '../TableParameter/TableReasons/style-reasons.css';
+import btnCarga from '../../../../assets/img/btn-carga.svg';
 
 const TableOrders = () => {
-  const {form, EditableCell, mergedColumns, dataSource, cancel, rowSelection} = useCustomOrders();
+  const {
+    form,
+    EditableCell,
+    mergedColumns,
+    dataSource,
+    cancel,
+    rowSelection,
+    inputFileRef,
+    handleInputFile
+  } = useCustomOrders();
 
   return (
     <div className="container-table pt-16">
@@ -30,7 +40,18 @@ const TableOrders = () => {
           rowSelection={rowSelection}
         />
       </Form>
-      <div className="flex justify-end items-end flex-col">
+      <label htmlFor="file" className="py-8">
+        <img src={btnCarga} alt="download" width="230px" height="70px" />
+        <input
+          style={{visibility: 'hidden'}}
+          id="file"
+          type="file"
+          accept=".xlsx"
+          ref={inputFileRef}
+          onChange={handleInputFile}
+        />
+      </label>
+      <div className="flex justify-end items-end flex-col -mt-12">
         <CSVLink filename={'TableOrders.xlsx'} data={dataSource} className="pt-2">
           <img
             className="btn-download"

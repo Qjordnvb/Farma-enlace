@@ -2,7 +2,6 @@ import React from 'react';
 import {Table, Form, Modal, Select} from 'antd';
 import {CSVLink} from 'react-csv';
 import Button from 'views/components/button/Button';
-import btnCarga from '../../../../../assets/img/btn-carga.svg';
 import btnNew from '../../../../../assets/img/btn-new.svg';
 import btnDownload from '../../../../../assets/img/btn-order.svg';
 
@@ -109,11 +108,7 @@ const TableIntake = () => {
           </Modal>
         </>
       )}
-      <label htmlFor="file" className="py-8">
-        <img src={btnCarga} alt="download" width="230px" height="70px" />
-        <input style={{visibility: 'hidden'}} id="file" type="file" accept=".xlsx" />
-      </label>
-      <div className="flex justify-end items-end flex-col -mt-10">
+      <div className="flex justify-end items-end flex-col mt-10">
         <Button onClick={onAddFile} className="rounded-lg my-1 mr-2">
           <img src={btnNew} alt="new" width="220px" height="50px" />
         </Button>
