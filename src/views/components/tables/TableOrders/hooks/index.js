@@ -102,70 +102,70 @@ export const useCustomOrders = () => {
       title: 'Cédula',
       dataIndex: 'CEDULA',
       ...getColumnSearchProps('CEDULA'),
-      sorter: (a, b) => a.CEDULA.length - b.CEDULA.length,
+      sorter: (a, b) => +a.CEDULA - +b.CEDULA,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Colaborador',
       dataIndex: 'COLABORADOR',
       ...getColumnSearchProps('COLABORADOR'),
-      sorter: (a, b) => a.COLABORADOR.length - b.COLABORADOR.length,
+      sorter: (a, b) => a.COLABORADOR.localeCompare(b.COLABORADOR),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Cargo',
       dataIndex: 'CARGO',
       ...getColumnSearchProps('CARGO'),
-      sorter: (a, b) => a.CARGO.length - b.CARGO.length,
+      sorter: (a, b) => a.CARGO.localeCompare(b.CARGO),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Género',
       dataIndex: 'GENERO',
       ...getColumnSearchProps('GENERO'),
-      sorter: (a, b) => a.GENERO.length - b.GENERO.length,
+      sorter: (a, b) => a.GENERO.localeCompare(b.GENERO),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Sucursal',
       dataIndex: 'NOMBRE_SUCURSAL',
       ...getColumnSearchProps('Sucursal'),
-      sorter: (a, b) => a.NOMBRE_SUCURSAL.length - b.NOMBRE_SUCURSAL.length,
+      sorter: (a, b) => a.NOMBRE_SUCURSAL.localeCompare(b.NOMBRE_SUCURSAL),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Región',
       dataIndex: 'REGION',
       ...getColumnSearchProps('REGION'),
-      sorter: (a, b) => a.REGION.length - b.REGION.length,
+      sorter: (a, b) => a.REGION.localeCompare(b.REGION),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Fecha de ingreso',
       dataIndex: 'FECHA_INGRESO',
       ...getColumnSearchProps('Fecha de ingreso'),
-      sorter: (a, b) => a.FECHA_INGRESO.length - b.FECHA_INGRESO.length,
+      sorter: (a, b) => a.FECHA_INGRESO.localeCompare(b.FECHA_INGRESO),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Distribución Administrativa',
       dataIndex: 'NOMBRE_CENTRO_COSTOS',
       ...getColumnSearchProps('Distribución Administrativa'),
-      sorter: (a, b) => a.NOMBRE_CENTRO_COSTOS.length - b.NOMBRE_CENTRO_COSTOS.length,
+      sorter: (a, b) => a.NOMBRE_CENTRO_COSTOS.localeCompare(b.NOMBRE_CENTRO_COSTOS),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Número oficina',
       dataIndex: 'CODIGO_OFICINA',
       ...getColumnSearchProps('Número oficina'),
-      sorter: (a, b) => a.CODIGO_OFICINA.length - b.CODIGO_OFICINA.length,
+      sorter: (a, b) => a.CODIGO_OFICINA.localeCompare(b.CODIGO_OFICINA),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Nombre de la oficina',
       dataIndex: 'NOMBRE_OFICINA',
       ...getColumnSearchProps('NOMBRE_OFICINA'),
-      sorter: (a, b) => a.NOMBRE_OFICINA.length - b.NOMBRE_OFICINA.length,
+      sorter: (a, b) => a.NOMBRE_OFICINA.localeCompare(b.NOMBRE_OFICINA),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -173,7 +173,7 @@ export const useCustomOrders = () => {
       dataIndex: 'TALLA',
       editable: true,
       ...getColumnSearchProps('Talla'),
-      sorter: (a, b) => a.TALLA.length - b.TALLA.length,
+      sorter: (a, b) => a.TALLA.localeCompare(b.TALLA),
       sortDirections: ['descend', 'ascend']
     },
     {
