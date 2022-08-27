@@ -46,13 +46,13 @@ const TableOrders = () => {
           style={{visibility: 'hidden'}}
           id="file"
           type="file"
-          accept=".xlsx"
+          accept=".json"
           ref={inputFileRef}
           onChange={handleInputFile}
         />
       </label>
       <div className="flex justify-end items-end flex-col -mt-12">
-        <CSVLink filename={'TableOrders.xlsx'} data={dataSource} className="pt-2">
+        <CSVLink filename={'TableOrders.csv'} data={dataSource} className="pt-2">
           <img
             className="btn-download"
             src={btnDownload}

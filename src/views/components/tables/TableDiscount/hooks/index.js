@@ -1,10 +1,10 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useUtils} from 'hooks';
 
 export const useCustomDiscount = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
-  const {getColumnSearchProps} = useUtils();
+  const {getColumnSearchProps, getOrders} = useUtils();
 
   const [dataSource, setDataSource] = useState([
     {
@@ -48,6 +48,16 @@ export const useCustomDiscount = () => {
     }
   ]);
 
+  const getOrdersTable = () => {
+    getOrders().then((res) => {
+      setDataSource(res);
+    });
+  };
+
+  useEffect(() => {
+    getOrdersTable();
+  }, []);
+
   const onSelectChange = (newSelectedRowKeys) => {
     setSelectedRowKeys(newSelectedRowKeys);
   };
@@ -61,52 +71,52 @@ export const useCustomDiscount = () => {
     {
       title: 'N°',
       width: 70,
-      dataIndex: 'n',
+      dataIndex: 'id',
       sorter: (a, b) => a.n.length - b.n.length,
       sortDirections: ['descend', 'ascend']
     },
 
     {
       title: 'Colaborador',
-      dataIndex: 'colaborador',
-      ...getColumnSearchProps('Colaborador'),
-      sorter: (a, b) => a.colaborador.length - b.colaborador.length,
+      dataIndex: ['employee', 'COLABORADOR'],
+      ...getColumnSearchProps('COLABORADOR'),
+      sorter: (a, b) => a.COLABORADOR.length - b.COLABORADOR.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Cargo',
-      dataIndex: 'cargo',
-      ...getColumnSearchProps('Cargo'),
-      sorter: (a, b) => a.cargo.length - b.cargo.length,
+      dataIndex: ['employee', 'CARGO'],
+      ...getColumnSearchProps('CARGO'),
+      sorter: (a, b) => a.employee.CARGO.length - b.employee.CARGO.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Distribución Administrativa',
-      dataIndex: 'distribution',
+      dataIndex: ['employee', 'NOMBRE_CENTRO_COSTOS'],
       ...getColumnSearchProps('Distribución Administrativa'),
-      sorter: (a, b) => a.distribution.length - b.distribution.length,
+      sorter: (a, b) => a.NOMBRE_CENTRO_COSTOS.length - b.NOMBRE_CENTRO_COSTOS.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Código oficina ',
-      dataIndex: 'idOfi',
+      dataIndex: ['employee', 'CODIGO_OFICINA'],
       ...getColumnSearchProps('Código oficina '),
-      sorter: (a, b) => a.idOfi.length - b.idOfi.length,
+      sorter: (a, b) => a.CODIGO_OFICINA.length - b.CODIGO_OFICINA.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Nombre de la oficina',
-      dataIndex: 'nameOfi',
-      ...getColumnSearchProps('nameOfi'),
-      sorter: (a, b) => a.nameOfi.length - b.nameOfi.length,
+      dataIndex: ['employee', 'NOMBRE_OFICINA'],
+      ...getColumnSearchProps('NOMBRE_OFICINA'),
+      sorter: (a, b) => a.NOMBRE_OFICINA.length - b.NOMBRE_OFICINA.length,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Talla',
-      dataIndex: 'talla',
+      dataIndex: ['employee', 'TALLA'],
       with: 50,
-      ...getColumnSearchProps('Talla'),
-      sorter: (a, b) => a.talla.length - b.talla.length,
+      ...getColumnSearchProps('TALLA'),
+      sorter: (a, b) => a.TALLA.length - b.TALLA.length,
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -118,9 +128,9 @@ export const useCustomDiscount = () => {
     },
     {
       title: 'Fecha',
-      dataIndex: 'fecha',
+      dataIndex: 'requestDate',
       ...getColumnSearchProps('Fecha'),
-      sorter: (a, b) => a.fecha.length - b.fecha.length,
+      sorter: (a, b) => a.requestDate.length - b.requestDate.length,
       sortDirections: ['descend', 'ascend']
     },
     {

@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../assets/img/btn-edit.png';
@@ -7,63 +7,71 @@ export const useCustomInventory = () => {
   const [form] = Form.useForm();
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const {getColumnSearchProps} = useUtils();
-  const [dataSource, setDataSource] = useState([
-    {
-      key: '1',
-      description: ` 0008765464`,
-      prendas: 'Camisa',
-      talla: `M`,
-      marca: 'Económica',
-      stock: '10',
-      cantidad: '10',
-      stockMin: '1',
-      stockMax: '100',
-      cantidadCompra: '10',
-      prenda1: '12',
-      prenda2: '3',
-      prenda3: '4',
-      prenda4: '5',
-      prenda5: '2',
-      prenda6: '1'
-    },
-    {
-      key: '2',
-      description: ` 00087654623`,
-      prendas: 'Camisa',
-      talla: `M`,
-      marca: 'Económica',
-      stock: '10',
-      cantidad: '10',
-      stockMin: '1',
-      stockMax: '100',
-      cantidadCompra: '10',
-      prenda1: '12',
-      prenda2: '3',
-      prenda3: '4',
-      prenda4: '5',
-      prenda5: '2',
-      prenda6: '1'
-    },
-    {
-      key: '3',
-      description: ` 0008765462323`,
-      prendas: 'Camisa',
-      talla: `M`,
-      marca: 'Económica',
-      stock: '10',
-      cantidad: '10',
-      stockMin: '1',
-      stockMax: '100',
-      cantidadCompra: '10',
-      prenda1: '12',
-      prenda2: '3',
-      prenda3: '4',
-      prenda4: '5',
-      prenda5: '2',
-      prenda6: '1'
-    }
-  ]);
+  const [dataSource, setDataSource] = useState([]);
+  const [data, setData] = useState([]);
+
   const [editingKey, setEditingKey] = useState('');
+  const {getAllDescriptions, getGarmentsTableParameters} = useUtils();
+
+  const [garmentsList, setGarmentsList] = useState([]);
+
+  const [garmentColumns, setGarmentsColumns] = useState([]);
+
+  useEffect(() => {
+    let getColumns = garmentsList.map((garment) => {
+      return {
+        title: garment.description,
+        dataIndex: `garment${garment.id}`,
+        editable: true
+      };
+    });
+    setGarmentsColumns(getColumns);
+  }, [garmentsList]);
+
+  useEffect(() => {
+    getGarmentsTableParameters().then((res) => {
+      setGarmentsList(res);
+
+      getAllDescriptions().then((res) => {
+        setDataSource(res);
+      });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    let formatData1 = dataSource.map((product) => {
+      if (product.garmentTypes.length > 0) {
+        let formatGarment = product.garmentTypes.reduce(function (res, garmentType) {
+          res[`garment${garmentType.garments[0].garmentId}_obj`] = {
+            ...garmentType,
+            ...garmentType.garments[0]
+          };
+
+          res[`garment${garmentType.garments[0].garmentId}`] = garmentType.quantity;
+
+          delete res[`garment${garmentType.garments[0].garmentId}`].garments;
+          return res;
+        }, {});
+
+        return {...product, ...formatGarment};
+      } else {
+        return {...product};
+      }
+    });
+    formatData1.map((product) => {
+      let newProduct = product;
+      garmentsList.map((garment) => {
+        let index = `garment${garment.id}`;
+        if (!newProduct[index]) {
+          newProduct[index] = 0;
+        }
+      });
+      return newProduct;
+    });
+    setData(formatData1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataSource]);
 
   const onSelectChange = (newSelectedRowKeys) => {
     setSelectedRowKeys(newSelectedRowKeys);
@@ -139,53 +147,12 @@ export const useCustomInventory = () => {
   const columns = [
     {
       title: 'Descripción',
-      dataIndex: 'description',
+      dataIndex: 'descripcion',
       ...getColumnSearchProps('Descripción'),
       sorter: (a, b) => a.description.length - b.description.length,
       sortDirections: ['descend', 'ascend']
     },
-    {
-      title: 'Mandil blanco',
-      dataIndex: 'prenda1',
-      ...getColumnSearchProps('Mandil blanco'),
-      sorter: (a, b) => a.prenda1.length - b.prenda1.length,
-      sortDirections: ['descend', 'ascend']
-    },
-    {
-      title: 'Mandil azul',
-      dataIndex: 'prenda2',
-      ...getColumnSearchProps('Mandil azul'),
-      sorter: (a, b) => a.prenda2.length - b.prenda2.length,
-      sortDirections: ['descend', 'ascend']
-    },
-    {
-      title: 'Camiseta',
-      dataIndex: 'prenda3',
-      ...getColumnSearchProps('Camiseta'),
-      sorter: (a, b) => a.prenda3.length - b.prenda3.length,
-      sortDirections: ['descend', 'ascend']
-    },
-    {
-      title: 'Buso',
-      dataIndex: 'prenda4',
-      ...getColumnSearchProps('Buso'),
-      sorter: (a, b) => a.prenda4.length - b.prenda4.length,
-      sortDirections: ['descend', 'ascend']
-    },
-    {
-      title: 'Chompa',
-      dataIndex: 'prenda5',
-      ...getColumnSearchProps('Chompa'),
-      sorter: (a, b) => a.prenda5.length - b.prenda5.length,
-      sortDirections: ['descend', 'ascend']
-    },
-    {
-      title: 'Escarapela',
-      dataIndex: 'prenda6',
-      ...getColumnSearchProps('Escarapela'),
-      sorter: (a, b) => a.prenda6.length - b.prenda6.length,
-      sortDirections: ['descend', 'ascend']
-    },
+    ...garmentColumns,
     {
       title: 'Talla',
       dataIndex: 'talla',
@@ -281,6 +248,7 @@ export const useCustomInventory = () => {
     form,
     cancel,
     rowSelection,
-    setDataSource
+    setDataSource,
+    data
   };
 };

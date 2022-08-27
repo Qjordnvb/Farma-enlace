@@ -7,16 +7,13 @@ import './style.css';
 import '../TableParameter/TableReasons/style-reasons.css';
 
 const TableInventory = () => {
-  const {form, EditableCell, mergedColumns, dataSource, cancel, rowSelection} =
-    useCustomInventory();
+  const {form, EditableCell, mergedColumns, data, cancel, rowSelection} = useCustomInventory();
 
   const headers = [
     {label: 'Descripcion', key: 'description'},
     {label: 'Prendas', key: 'prendas'},
     {label: 'Cantidad', key: 'cantidadCompra'}
   ];
-
-  const data = dataSource;
 
   return (
     <div className="container-table pt-16">
@@ -28,7 +25,7 @@ const TableInventory = () => {
               cell: EditableCell
             }
           }}
-          dataSource={dataSource}
+          dataSource={data}
           columns={mergedColumns}
           rowClassName="editable-row"
           pagination={{
