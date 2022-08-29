@@ -1,10 +1,7 @@
 import React from 'react';
 import {Table, Form, Modal, Select} from 'antd';
-import {CSVLink} from 'react-csv';
 import Button from 'views/components/button/Button';
 import btnNew from '../../../../../assets/img/btn-new.svg';
-import btnDownload from '../../../../../assets/img/btn-order.svg';
-
 import {useCustomIntake} from './hooks';
 import './style.css';
 import '../../TableParameter/TableReasons/style-reasons.css';
@@ -21,7 +18,8 @@ const TableIntake = () => {
     addingFile,
     setAddingFile,
     employeesList,
-    productsList
+    productsList,
+    createConsumptionOrders
   } = useCustomIntake();
 
   // eslint-disable-next-line no-console
@@ -35,6 +33,7 @@ const TableIntake = () => {
         pagination={{
           pageSize: 3
         }}
+        rowKey={(record) => record.id}
       />
       {isAdd && (
         <>
@@ -71,7 +70,7 @@ const TableIntake = () => {
                   >
                     {employeesList.map((employee) => {
                       return (
-                        <Select.Option key={employee.id} value={employee.id}>
+                        <Select.Option key={employee.id} value={employee.CEDULA}>
                           {employee.COLABORADOR}
                         </Select.Option>
                       );
@@ -112,15 +111,9 @@ const TableIntake = () => {
         <Button onClick={onAddFile} className="rounded-lg my-1 mr-2">
           <img src={btnNew} alt="new" width="220px" height="50px" />
         </Button>
-        <CSVLink filename={'TableOrderIntake.xlsx'} data={dataSource} className="pt-2">
-          <img
-            className="btn-download"
-            src={btnDownload}
-            alt="btnDownload"
-            width="290px"
-            height="40px"
-          />
-        </CSVLink>
+        <Button onClick={createConsumptionOrders} className="rounded-lg my-5 mr-2 p-4">
+          Generar orden de consumo
+        </Button>
       </div>
     </div>
   );

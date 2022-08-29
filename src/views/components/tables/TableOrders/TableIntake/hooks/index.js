@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import {useUtils} from 'hooks';
-
+import axios from 'axios';
 export const useCustomIntake = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
@@ -95,13 +95,43 @@ export const useCustomIntake = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onSelectChange = (newSelectedRowKeys) => {
+  /*const onSelectChange = (newSelectedRowKeys) => {
+    console.log('selectedRowKeys changed: ', newSelectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
-  };
+  };*/
 
   const rowSelection = {
     selectedRowKeys,
-    onChange: onSelectChange
+    onChange: (selectedRowKeys, selectedRows) => {
+      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+      setSelectedRowKeys(selectedRowKeys);
+    }
+  };
+
+  const createConsumptionOrders = () => {
+    selectedRowKeys.map(() => {
+      let data =
+        '<tem:CARGARXML>\n    <tem:cabecera>\n        <wfc:bodega_origen>\n        001\n        </wfc:bodega_origen>\n        <wfc:cedulaEmpleado>\n        1003195995\n        </wfc:cedulaEmpleado>\n        <wfc:centro_destino>\n        1201201200\n        </wfc:centro_destino>\n        <wfc:listaDetalle>\n            <wfc:NodoDetalle>\n                <wfc:cantidad>\n                3\n                </wfc:cantidad>\n                <wfc:codigoProd>\n                04203\n                </wfc:codigoProd>\n                <wfc:secuencia>\n                1\n                </wfc:secuencia>\n            </wfc:NodoDetalle>\n        </wfc:listaDetalle>\n    </tem:cabecera>\n</tem:CARGARXML>';
+
+      let config = {
+        method: 'post',
+        url: 'http://192.168.251.178/ws_uniformesOC/Service1.svc?wsdl',
+        headers: {
+          'Content-Type': 'application/xml'
+        },
+        data: data
+      };
+
+      axios(config)
+        .then(function (response) {
+          // eslint-disable-next-line no-console
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          // eslint-disable-next-line no-console
+          console.log('error xml request', error);
+        });
+    });
   };
 
   const columns = [
@@ -247,6 +277,8 @@ export const useCustomIntake = () => {
     setOptions,
     onAddOrder,
     employeesList,
-    productsList
+    productsList,
+    selectedRowKeys,
+    createConsumptionOrders
   };
 };
