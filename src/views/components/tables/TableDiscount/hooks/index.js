@@ -56,6 +56,7 @@ export const useCustomDiscount = () => {
 
   useEffect(() => {
     getOrdersTable();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSelectChange = (newSelectedRowKeys) => {

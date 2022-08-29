@@ -16,5 +16,5 @@ export const Api = axios.create({
 });
 
 export const Apilocal = axios.create({
-  baseURL: 'http://localhost:3002/'
+  baseURL: 'http://159.223.195.98:3002/'
 });

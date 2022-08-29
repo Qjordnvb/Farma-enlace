@@ -29,8 +29,8 @@ export const StyledContainerLayout = styled.div.attrs({
   box-shadow: inset 0px 0px 22.473px rgba(255, 255, 255, 0.6);
   filter: drop-shadow(0px 6.91477px 6.91477px rgba(0, 0, 0, 0.25));
   backdrop-filter: blur(20px);
-  max-height: 100%;
-  height: 100vh;
+
+  height: 100%;
 
   header {
     display: flex;

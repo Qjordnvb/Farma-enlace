@@ -26,6 +26,7 @@ export const useCustomOrders = () => {
 
   useEffect(() => {
     getEmployeesTable();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const rowSelection = {

@@ -57,6 +57,7 @@ export const useCustomDelivery = () => {
 
   useEffect(() => {
     formatAllDeliveries(dataSource);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataSource, garments]);
 
   useEffect(() => {

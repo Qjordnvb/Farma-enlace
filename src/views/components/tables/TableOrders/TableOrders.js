@@ -1,12 +1,12 @@
 import React from 'react';
 import {Form, Table} from 'antd';
 import {CSVLink} from 'react-csv';
+import btnCarga from '../../../../assets/img/btn-carga.svg';
 import btnDownload from '../../../../assets/img/btn-generate.png';
 
 import {useCustomOrders} from './hooks';
 import './style-orders.css';
 import '../TableParameter/TableReasons/style-reasons.css';
-import btnCarga from '../../../../assets/img/btn-carga.svg';
 
 const TableOrders = () => {
   const {

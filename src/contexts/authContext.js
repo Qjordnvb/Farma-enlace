@@ -25,13 +25,13 @@ export default function AuthContextProvider({children}) {
   const userLogin = useCallback(
     async function (usuario, password, app, tokenApp) {
       const response = await UserLogin(usuario, password, app, tokenApp);
-//console.log("estas es la respuestaaaaaaaaaaaaaaa",response);
-    //  if (!response.msg_error==='El nombre de usuario o la contraseña son incorrectos.') {
+      //console.log("estas es la respuestaaaaaaaaaaaaaaa",response);
+      if (response.user) {
         setIsAuthenticated(true);
         window.localStorage.setItem(MY_AUTH_APP, JSON.stringify(response));
-      //}else{
-     //   alert("Error: Usuario o contraseña incorrectos");
-      //}
+      } else {
+        alert('Error: Usuario o contraseña incorrectos');
+      }
     },
     [UserLogin]
   );

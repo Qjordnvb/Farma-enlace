@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
+import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
-import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
 
 export const useCustomReplacement = () => {
   const [isAdd, setIsAdd] = useState(false);

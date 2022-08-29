@@ -92,6 +92,7 @@ export const useCustomIntake = () => {
     getOrdersTable();
     getEmployeesList();
     getProductsList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSelectChange = (newSelectedRowKeys) => {

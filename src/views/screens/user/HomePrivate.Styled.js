@@ -61,7 +61,7 @@ export const StyledSelectOption = styled.div.attrs({
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 20px;
     width: 120px;
     text-align: center;
