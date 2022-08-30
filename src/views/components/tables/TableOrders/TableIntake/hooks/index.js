@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react';
-import {useUtils} from 'hooks';
 import axios from 'axios';
+import moment from 'moment';
+import {useUtils} from 'hooks';
+
 export const useCustomIntake = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
@@ -10,68 +12,16 @@ export const useCustomIntake = () => {
   const {getColumnSearchProps, createOrder, getOrders, getEmployees, getTableParameters} =
     useUtils();
   const [options, setOptions] = useState([]);
-  const [dataSource, setDataSource] = useState([
-    {
-      key: '1',
-      n: `1`,
-      id: `1121313114`,
-      colaborador: `ABAD GAONA LADY ABIGAIL 1`,
-      cargo: `ASISTENTE SENIOR 1`,
-      distribution: 'Distribución Administrativa',
-      idOfi: `2321`,
-      nameOfi: `Farmados 1`,
-      talla: `M`,
-      description: `asfaweadw`,
-      fechaSolicitud: `2/03/2022`,
-      motivo: `asfaweadw`,
-      ultimaReposicion: `2/03/2022`,
-      estadoSolicitud: `Pendiente 1`,
-      fechaOC: `2/03/2022`,
-      numeroOC: `1231`
-    },
-    {
-      key: '2',
-      n: `2`,
-      id: `1121313115`,
-      colaborador: `ABAD GAONA LADY ABIGAIL 1`,
-      cargo: `ASISTENTE SENIOR 1`,
-      distribution: 'Distribución Administrativa',
-      idOfi: `2321`,
-      nameOfi: `Farmados 1`,
-      talla: `M`,
-      description: `asfaweadw`,
-      fechaSolicitud: `2/03/2022`,
-      motivo: `asfaweadw`,
-      ultimaReposicion: `2/03/2022`,
-      estadoSolicitud: `Pendiente 1`,
-      fechaOC: `2/03/2022`,
-      numeroOC: `1231`
-    },
-    {
-      key: '3',
-      n: `3`,
-      id: `1121313116`,
-      colaborador: `ABAD GAONA LADY ABIGAIL 1`,
-      cargo: `ASISTENTE SENIOR 1`,
-      distribution: 'Distribución Administrativa',
-      idOfi: `2321`,
-      nameOfi: `Farmados 1`,
-      talla: `M`,
-      description: `asfaweadw`,
-      fechaSolicitud: `2/03/2022`,
-      motivo: `asfaweadw`,
-      ultimaReposicion: `2/03/2022`,
-      estadoSolicitud: `Pendiente 1`,
-      fechaOC: `2/03/2022`,
-      numeroOC: `1231`
-    }
-  ]);
-
+  const [dataSource, setDataSource] = useState([]);
+  const [dateRange, setDateRange] = useState({
+    from: moment().startOf('month'),
+    to: moment().endOf('month')
+  });
   const [employeesList, setEmployeesList] = useState([]);
   const [productsList, setProductsList] = useState([]);
 
-  const getOrdersTable = () => {
-    getOrders().then((res) => {
+  const getOrdersTable = (dateRange) => {
+    getOrders(dateRange).then((res) => {
       setDataSource(res);
     });
   };
@@ -94,6 +44,10 @@ export const useCustomIntake = () => {
     getProductsList();
   }, []);
 
+  useEffect(() => {
+    getOrdersTable(dateRange);
+  }, [dateRange]);
+
   /*const onSelectChange = (newSelectedRowKeys) => {
     console.log('selectedRowKeys changed: ', newSelectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
@@ -101,8 +55,7 @@ export const useCustomIntake = () => {
 
   const rowSelection = {
     selectedRowKeys,
-    onChange: (selectedRowKeys, selectedRows) => {
-      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+    onChange: (selectedRowKeys) => {
       setSelectedRowKeys(selectedRowKeys);
     }
   };
@@ -262,6 +215,17 @@ export const useCustomIntake = () => {
     });
   };
 
+  const onDatePickerChange = (dates) => {
+    if (dates) {
+      setDateRange({
+        from: dates[0],
+        to: dates[1]
+      });
+    } else {
+      setDateRange({});
+    }
+  };
+
   return {
     columns,
     rowSelection,
@@ -278,6 +242,8 @@ export const useCustomIntake = () => {
     employeesList,
     productsList,
     selectedRowKeys,
-    createConsumptionOrders
+    createConsumptionOrders,
+    onDatePickerChange,
+    dateRange
   };
 };
