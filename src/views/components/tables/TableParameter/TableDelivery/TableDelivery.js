@@ -43,6 +43,7 @@ export default function TableDelivery() {
                   placeholder={'000001'}
                   value={addingFile?.reason}
                   onChange={(e) => {
+                    console.log('e', e);
                     setAddingFile({
                       ...addingFile,
                       reasonId: e
@@ -53,6 +54,7 @@ export default function TableDelivery() {
                   filterOption={(input, option) => {
                     return option.children.toLowerCase().includes(input.toLowerCase());
                   }}
+                  mode={'multiple'}
                 >
                   {reasonsList.map((reason) => {
                     return (
@@ -64,7 +66,18 @@ export default function TableDelivery() {
                 </Select>
               </Form.Item>
               <Form.Item className="item-form" label="Uniformes">
-                <Select showSearch>
+                <Select
+                  filterOption={(input, option) => {
+                    return option.children.toLowerCase().includes(input.toLowerCase());
+                  }}
+                  onChange={(e) => {
+                    setAddingFile({
+                      ...addingFile,
+                      uniformId: e
+                    });
+                  }}
+                  showSearch
+                >
                   {productsList.map((product) => {
                     return (
                       <Option key={product.id} value={product.id}>

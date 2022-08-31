@@ -1,11 +1,13 @@
 import React from 'react';
-import {Table, Form, Modal, Select} from 'antd';
+import {Table, Form, Modal, Select, DatePicker} from 'antd';
+import moment from 'moment';
 import Button from 'views/components/button/Button';
 import btnNew from '../../../../../assets/img/btn-new.svg';
 import {useCustomIntake} from './hooks';
 import './style.css';
 import '../../TableParameter/TableReasons/style-reasons.css';
 
+const {RangePicker} = DatePicker;
 const TableIntake = () => {
   const {
     dataSource,
@@ -19,7 +21,9 @@ const TableIntake = () => {
     setAddingFile,
     employeesList,
     productsList,
-    createConsumptionOrders
+    createConsumptionOrders,
+    onDatePickerChange,
+    dateRange
   } = useCustomIntake();
 
   // eslint-disable-next-line no-console
@@ -108,6 +112,16 @@ const TableIntake = () => {
         </>
       )}
       <div className="flex justify-end items-end flex-col mt-10">
+        <RangePicker
+          ranges={{
+            Today: [moment(), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')]
+          }}
+          showTime
+          format="YYYY/MM/DD"
+          onChange={onDatePickerChange}
+          value={[dateRange.from, dateRange.to]}
+        />
         <Button onClick={onAddFile} className="rounded-lg my-1 mr-2">
           <img src={btnNew} alt="new" width="220px" height="50px" />
         </Button>
