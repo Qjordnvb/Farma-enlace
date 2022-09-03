@@ -18,6 +18,28 @@
   text-align: center;
 }
 
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div.ant-table-header
+  > table
+  > thead
+  > tr
+  > th
+  > div
+  > span.ant-table-column-title {
+  font-size: 12px !important;
+}
+
 .btn-edit img {
   width: 99px;
   height: auto;
@@ -154,7 +176,7 @@ input.input-add {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 14.8856px;
+  font-size: 12px;
   line-height: 19px;
   /* identical to box height, or 125% */
 

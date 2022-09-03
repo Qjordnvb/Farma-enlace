@@ -127,11 +127,13 @@ function TableReasons() {
                     />
                   </Form.Item>
                   <Form.Item
-                    className={`item-form ${addingFile?.payment === 'NO' ? 'input-disabled' : ''}`}
+                    className={`item-form w-1/5 ${
+                      addingFile?.payment === 'NO' ? 'input-disabled' : ''
+                    }`}
                     label="Cuotas"
                   >
                     <Input
-                      className="input-add"
+                      className="input-add "
                       value={addingFile?.dues}
                       placeholder="1 a 100"
                       onChange={(e) => {

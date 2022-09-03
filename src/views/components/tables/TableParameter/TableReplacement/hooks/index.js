@@ -199,6 +199,7 @@ export const useCustomReplacement = () => {
     },
     {
       title: 'Acción',
+      fixed: 'right',
       dataIndex: 'accion',
       render: (_, record) => {
         const editable = isEditing(record);

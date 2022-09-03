@@ -107,6 +107,13 @@
   color: #ffffff;
 }
 
+input.input-add {
+  padding: 0.4rem;
+  background: #ffffff;
+  border: 0.930349px solid #4d4e4e;
+  border-radius: 9.30349px;
+}
+
 .input-add:focus {
   border-color: #4d4e4e;
   box-shadow: none;
@@ -115,7 +122,7 @@
 }
 
 .input-add:hover {
-  border-color: #4d4e4e;
+  border-color: #4d4e4e !important;
 }
 
 .ant-row.ant-form-item-row {

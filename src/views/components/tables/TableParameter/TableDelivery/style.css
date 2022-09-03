@@ -6,6 +6,28 @@
   background-color: #eeeeee;
 }
 
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div.ant-table-header
+  > table
+  > thead
+  > tr
+  > th
+  > div
+  > span.ant-table-column-title {
+  font-size: 12px !important;
+}
+
 .ant-table-tbody > tr.ant-table-row:hover > td:nth-child(odd) {
   background-color: #eeeeee;
 }
@@ -149,7 +171,7 @@ input.input-add,
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 14.8856px;
+  font-size: 12px;
   line-height: 19px;
   /* identical to box height, or 125% */
 

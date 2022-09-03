@@ -24,7 +24,7 @@ const TableDescription = () => {
           pagination={{
             onChange: cancel
           }}
-          scroll={{y: 500}}
+          scroll={{y: 500, x: 2000}}
         />
         <div className="flex justify-end">
           <img src={btnSave} className="btn-save" alt="btnDownload" />
