@@ -122,9 +122,9 @@ export const useCustomOrders = () => {
     },
     {
       title: 'Género',
-      dataIndex: 'GENERO',
-      ...getColumnSearchProps('GENERO'),
-      sorter: (a, b) => a.GENERO.localeCompare(b.GENERO),
+      dataIndex: 'SEXO',
+      ...getColumnSearchProps('SEXO'),
+      sorter: (a, b) => a.SEXO?.localeCompare(b.SEXO),
       sortDirections: ['descend', 'ascend']
     },
     {

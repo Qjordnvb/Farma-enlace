@@ -168,17 +168,17 @@ export const useCustomReplacement = () => {
     {
       key: '7',
       title: 'Sugerido mínimo',
-      dataIndex: 'sugeridoMinimo',
-      ...getColumnSearchProps('sugeridoMinimo'),
-      sorter: (a, b) => a.sugeridoMinimo.length - b.sugeridoMinimo.length,
+      dataIndex: 'totalAverage',
+      ...getColumnSearchProps('totalAverage'),
+      sorter: (a, b) => a.totalAverage - b.totalAverage,
       sortDirections: ['descend', 'ascend']
     },
     {
       key: '8',
       title: 'Sugerido máximo',
-      dataIndex: 'sugeridoMaximo',
-      ...getColumnSearchProps('sugeridoMaximo'),
-      sorter: (a, b) => a.sugeridoMaximo.length - b.sugeridoMaximo.length,
+      dataIndex: 'max',
+      ...getColumnSearchProps('max'),
+      sorter: (a, b) => a.max - b.max,
       sortDirections: ['descend', 'ascend']
     },
     {

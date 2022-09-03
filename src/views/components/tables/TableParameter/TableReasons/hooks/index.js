@@ -22,7 +22,6 @@ export const useCustomReasons = () => {
 
   useEffect(() => {
     // eslint-disable-next-line no-console
-    console.log('adding file', addingFile);
   }, [addingFile]);
 
   const onChange = (record, selectedRows) => {

@@ -132,9 +132,13 @@ export const useUtils = () => {
     }
   }
 
-  async function getOrders() {
+  async function getOrders(dateRange) {
     try {
-      const request = await Apilocal.get('/orders/findAll');
+      let url = '/orders/findAll';
+      if (dateRange) {
+        url += `?from=${dateRange.from}&to=${dateRange.to}`;
+      }
+      const request = await Apilocal.get(url);
       return request.data;
     } catch (e) {
       // eslint-disable-next-line no-console
