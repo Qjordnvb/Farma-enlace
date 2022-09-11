@@ -16,7 +16,7 @@ const TableDiscount = () => {
         columns={columns}
         dataSource={dataSource}
         pagination={{
-          pageSize: 1
+          pageSize: 20
         }}
       />
       <CSVLink filename={'TableDiscount.xlsx'} data={dataSource} className="pt-2 flex justify-end">

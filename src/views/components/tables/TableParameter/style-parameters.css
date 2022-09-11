@@ -217,3 +217,13 @@ button.ant-btn.ant-btn-primary.ant-btn-sm:hover {
   > svg:hover {
   fill: #ffffff !important;
 }
+
+.ant-pagination-item-active a {
+  background-color: #2bc155;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  width: 100% !important;
+}

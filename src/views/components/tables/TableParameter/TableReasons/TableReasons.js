@@ -26,7 +26,7 @@ function TableReasons() {
       <div>
         <Table
           pagination={{
-            pageSize: 10
+            pageSize: 20
           }}
           columns={columns}
           dataSource={dataSource}

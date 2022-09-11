@@ -268,27 +268,6 @@ span.anticon.anticon-caret-up.ant-table-column-sorter-up.active {
   > div
   > div
   > ul
-  > li.ant-pagination-item.ant-pagination-item.ant-pagination-item-active {
-  border-color: #2bc155;
-  background-color: #2bc155;
-  border-radius: 5px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  text-transform: uppercase;
-}
-
-#root
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > ul
   > li.ant-pagination-item.ant-pagination-item.ant-pagination-item-active
   > a {
   color: #ffffff;
@@ -308,21 +287,6 @@ span.anticon.anticon-caret-up.ant-table-column-sorter-up.active {
   > a {
   color: #2bc155;
 }
-#root
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > ul
-  > li.ant-pagination-item.ant-pagination-item {
-  border-color: #2bc155;
-  border-radius: 5px;
-  font-weight: 700;
-}
 
 li.ant-pagination-item.ant-pagination-item {
   border-color: #2bc155;
@@ -332,6 +296,18 @@ li.ant-pagination-item.ant-pagination-item {
   font-weight: 600;
   font-size: 16px;
   text-transform: uppercase;
+  width: auto;
+  height: 31.5px;
+}
+
+.ant-pagination-item-active a {
+  background-color: #2bc155;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  width: 100% !important;
 }
 
 #root > div > div > div > div > div > div > div > div > ul > li.ant-pagination-next > button,
@@ -629,4 +605,59 @@ span > a {
   > tr
   > th {
   font-size: 12px !important;
+}
+
+.ant-picker.ant-picker-range.ant-picker-focused {
+  border-color: #2bc155 !important;
+}
+
+.ant-picker-range .ant-picker-active-bar {
+  background: #2bc155 !important;
+}
+
+.ant-picker-input > input {
+  color: #2bc155 !important;
+
+  font-weight: 600;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner,
+.ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner,
+.ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner {
+  background: #2bc155 !important;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-in-range {
+  background: #bfedcc !important;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-in-range:before {
+  background: #bfedcc !important;
+}
+.ant-picker-cell-in-view.ant-picker-cell-range-end:not(.ant-picker-cell-range-end-single):before,
+.ant-picker-cell-in-view.ant-picker-cell-range-start:not(.ant-picker-cell-range-start-single).ant-picker-cell-range-hover-start:before {
+  background: white !important;
+}
+
+.ant-picker-panel
+  > :not(.ant-picker-date-panel)
+  .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-start:before {
+  background: #bfedcc !important;
+}
+
+.ant-picker-focused,
+.ant-picker:hover {
+  border-color: #2bc155 !important;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner:before {
+  border: 1px solid #2bc155 !important;
+}
+
+.ant-picker-ranges .ant-picker-preset > .ant-tag-blue {
+  color: black !important;
+  font-weight: 300;
+  background: #bfedcc !important;
+  border-color: #bfedcc !important;
+  cursor: pointer;
 }

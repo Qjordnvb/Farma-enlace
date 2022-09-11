@@ -251,3 +251,13 @@ input.input-add {
 li.ant-pagination-item.ant-pagination-item-1.ant-pagination-item-active {
   border-color: #2bc155;
 }
+
+.ant-pagination-item-active a {
+  background-color: #2bc155;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  width: 100% !important;
+}

@@ -63,3 +63,13 @@ input.input-add,
   border-color: #4d4e4e;
   border-radius: 9.30349px;
 }
+
+.ant-pagination-item-active a {
+  background-color: #2bc155;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  width: 100% !important;
+}

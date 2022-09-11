@@ -42,3 +42,13 @@ input.input-add,
   height: 40px;
   border-color: #2bc155 !important;
 }
+
+.ant-pagination-item-active a {
+  background-color: #2bc155;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  width: 100% !important;
+}
