@@ -29,7 +29,7 @@ const TableInventory = () => {
           columns={mergedColumns}
           rowClassName="editable-row"
           pagination={{
-            pageSize: 3,
+            pageSize: 20,
             onChange: cancel
           }}
           rowSelection={rowSelection}

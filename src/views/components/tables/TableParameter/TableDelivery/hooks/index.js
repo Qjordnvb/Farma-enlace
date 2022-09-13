@@ -114,6 +114,7 @@ export const useCustomDelivery = () => {
       key: '3',
       title: 'Descripción',
       dataIndex: 'descripcion',
+      width: '10%',
       ...getColumnSearchProps('descripcion'),
       sorter: (a, b) => a.descripcion.length - b.descripcion.length,
       sortDirections: ['descend', 'ascend']
@@ -128,6 +129,7 @@ export const useCustomDelivery = () => {
       key: '5',
       title: 'Reposición',
       dataIndex: 'replacement',
+      width: '9.5%',
       ...getColumnSearchProps('replacement'),
       sorter: (a, b) => a.replacement.length - b.replacement.length,
       sortDirections: ['descend', 'ascend']

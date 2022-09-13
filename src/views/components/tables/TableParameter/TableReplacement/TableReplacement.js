@@ -46,7 +46,7 @@ function TableReplacement() {
       </div>
       <StyledGridList>
         <div className="btn-add">
-          <CSVLink filename={'TableContent.csv'} data={dataSource} className="btn-download">
+          <CSVLink filename={'TableContent.xlsx'} data={dataSource} className="btn-download">
             <img className="btn-download" src={btnDownload} alt="btnDownload" />
           </CSVLink>
         </div>

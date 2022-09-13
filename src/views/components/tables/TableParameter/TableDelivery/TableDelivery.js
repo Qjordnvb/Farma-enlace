@@ -22,7 +22,14 @@ export default function TableDelivery() {
   } = useCustomDelivery();
   return (
     <div>
-      <Table columns={columns} dataSource={formatDataSource} />
+      <Table
+        pagination={{
+          pageSize: 20
+        }}
+        scroll={{y: 400}}
+        columns={columns}
+        dataSource={formatDataSource}
+      />
       {isAdd && (
         <>
           <Modal
@@ -43,7 +50,6 @@ export default function TableDelivery() {
                   placeholder={'000001'}
                   value={addingFile?.reason}
                   onChange={(e) => {
-                    console.log('e', e);
                     setAddingFile({
                       ...addingFile,
                       reasonId: e

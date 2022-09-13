@@ -20,7 +20,7 @@ const TableParameter = () => {
         loading={loading}
       />
       <div className="flex justify-end">
-        <CSVLink filename={'TableContent.csv'} data={dataSource} className="btn-download">
+        <CSVLink filename={'TableContent.xlsx'} data={dataSource} className="btn-download">
           <img className="btn-download" src={btnDownload} alt="btnDownload" />
         </CSVLink>
       </div>

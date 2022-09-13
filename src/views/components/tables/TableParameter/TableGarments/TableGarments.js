@@ -28,8 +28,9 @@ function TableGarments() {
       <div>
         <Table
           pagination={{
-            pageSize: 5
+            pageSize: 20
           }}
+          scroll={{y: 400}}
           columns={columns}
           dataSource={dataSource}
           rowClassName={(record) => {

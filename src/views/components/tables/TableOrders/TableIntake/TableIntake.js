@@ -35,7 +35,7 @@ const TableIntake = () => {
         columns={columns}
         dataSource={dataSource}
         pagination={{
-          pageSize: 3
+          pageSize: 20
         }}
         rowKey={(record) => record.id}
       />

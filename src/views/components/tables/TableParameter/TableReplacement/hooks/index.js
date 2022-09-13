@@ -201,6 +201,7 @@ export const useCustomReplacement = () => {
       title: 'Acción',
       fixed: 'right',
       dataIndex: 'accion',
+      width: 90,
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (

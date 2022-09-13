@@ -22,13 +22,14 @@ const TableDescription = () => {
           columns={mergedColumns}
           rowClassName="editable-row"
           pagination={{
-            onChange: cancel
+            onChange: cancel,
+            pageSize: 20
           }}
           scroll={{y: 500, x: 2000}}
         />
         <div className="flex justify-end">
           <img src={btnSave} className="btn-save" alt="btnDownload" />
-          <CSVLink filename={'TableContent.csv'} data={data} className="btn-download">
+          <CSVLink filename={'TableContent.xlsx'} data={data} className="btn-download">
             <img className="btn-download" src={btnDownload} alt="btnDownload" />
           </CSVLink>
         </div>

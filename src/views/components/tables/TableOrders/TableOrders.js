@@ -34,7 +34,7 @@ const TableOrders = () => {
           columns={mergedColumns}
           rowClassName="editable-row"
           pagination={{
-            pageSize: 3,
+            pageSize: 20,
             onChange: cancel
           }}
           rowSelection={rowSelection}
@@ -52,7 +52,7 @@ const TableOrders = () => {
         />
       </label>
       <div className="flex justify-end items-end flex-col -mt-12">
-        <CSVLink filename={'TableOrders.csv'} data={dataSource} className="pt-2">
+        <CSVLink filename={'TableOrders.xlsx'} data={dataSource} className="pt-2">
           <img
             className="btn-download"
             src={btnDownload}
