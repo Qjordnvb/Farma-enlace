@@ -1,4 +1,6 @@
 import {useState, useEffect} from 'react';
+import {DeleteFilled} from '@ant-design/icons';
+import {Typography} from 'antd';
 import {useUtils} from 'hooks';
 
 export const useCustomDelivery = () => {
@@ -12,7 +14,8 @@ export const useCustomDelivery = () => {
     getGarmentsTableParameters,
     getTableParameters,
     getReasonsTableParameters,
-    createDelivery
+    createDelivery,
+    deleteUniformDelivery
   } = useUtils();
   const [garments, setGarments] = useState([]);
   const [garmentsColumns, setGarmentsColumns] = useState([]);
@@ -61,7 +64,7 @@ export const useCustomDelivery = () => {
   }, [dataSource, garments]);
 
   useEffect(() => {
-    getGarmentsTableParameters().then((res) => {
+    getGarmentsTableParameters(true).then((res) => {
       setGarments(res);
     });
     getAllDeliveries().then((response) => {
@@ -71,7 +74,7 @@ export const useCustomDelivery = () => {
     getTableParameters().then((res) => {
       setProductsList(res);
     });
-    getReasonsTableParameters().then((res) => {
+    getReasonsTableParameters(true).then((res) => {
       setReasonsList(res);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -96,6 +99,14 @@ export const useCustomDelivery = () => {
     });
   };
 
+  const onDelete = (id) => {
+    deleteUniformDelivery(id).then(() => {
+      getAllDeliveries().then((response) => {
+        setDataSource(response);
+      });
+    });
+  };
+
   const columns = [
     {
       key: '1',
@@ -106,8 +117,8 @@ export const useCustomDelivery = () => {
       key: '2',
       title: 'Motivo',
       dataIndex: 'reason',
-      ...getColumnSearchProps('reason'),
-      sorter: (a, b) => a.reason.length - b.reason.length,
+      ...getColumnSearchProps('motivo'),
+      sorter: (a, b) => a.reason.localeCompare(b.reason),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -116,7 +127,7 @@ export const useCustomDelivery = () => {
       dataIndex: 'descripcion',
       width: '10%',
       ...getColumnSearchProps('descripcion'),
-      sorter: (a, b) => a.descripcion.length - b.descripcion.length,
+      sorter: (a, b) => a.descripcion?.localeCompare(b.descripcion),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -130,25 +141,67 @@ export const useCustomDelivery = () => {
       title: 'Reposición',
       dataIndex: 'replacement',
       width: '9.5%',
-      ...getColumnSearchProps('replacement'),
-      sorter: (a, b) => a.replacement.length - b.replacement.length,
+      ...getColumnSearchProps('reposición'),
+      sorter: (a, b) => a.replacement.localeCompare(b.replacement),
       sortDirections: ['descend', 'ascend']
     },
     {
       key: '6',
       title: 'Cálculo',
       dataIndex: 'calculation',
-      ...getColumnSearchProps('calculation'),
-      sorter: (a, b) => a.calculation.length - b.calculation.length,
+      ...getColumnSearchProps('cálculo'),
+      sorter: (a, b) => a.calculation.localeCompare(b.calculation),
       sortDirections: ['descend', 'ascend']
     },
     {
       key: '7',
       title: 'Cobro',
       dataIndex: 'payment',
-      ...getColumnSearchProps('payment'),
-      sorter: (a, b) => a.payment.length - b.payment.length,
+      ...getColumnSearchProps('cobro'),
+      sorter: (a, b) => a.payment.localeCompare(b.payment),
       sortDirections: ['descend', 'ascend']
+    },
+    {
+      key: '8',
+      title: 'Valor',
+      dataIndex: 'valor_pos',
+
+      ...getColumnSearchProps('valor'),
+      sorter: (a, b) => a.valor_pos.localeCompare(b.valor_pos),
+      sortDirections: ['descend', 'ascend'],
+      render: (_) => {
+        return <div>${_}</div>;
+      }
+    },
+    {
+      key: '4',
+      title: 'Porcentajes',
+      children: [
+        {title: 'Empleado', dataIndex: 'personalDiscount'},
+        {title: 'Empresa', dataIndex: 'companyDiscount'}
+      ],
+      dataIndex: 'prendas'
+    },
+    {
+      title: 'Ver',
+      dataIndex: 'accion',
+      render: (_, record) => {
+        return (
+          <span>
+            <Typography.Link
+              onClick={() => {
+                console.log('record', record);
+                onDelete(record.id);
+              }}
+              style={{
+                marginRight: 8
+              }}
+            >
+              <DeleteFilled />
+            </Typography.Link>
+          </span>
+        );
+      }
     }
   ];
 
@@ -187,6 +240,7 @@ export const useCustomDelivery = () => {
     onAddFile,
     productsList,
     reasonsList,
-    onCreateDelivery
+    onCreateDelivery,
+    onDelete
   };
 };

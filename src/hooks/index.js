@@ -32,9 +32,13 @@ export const useUtils = () => {
     }
   }
 
-  async function getReasonsTableParameters() {
+  async function getReasonsTableParameters(active) {
     try {
-      const request = await Apilocal.get('/parameterizedReasons/findAll');
+      let url = '/parameterizedReasons/findAll';
+      if (active) {
+        url += '?active=true';
+      }
+      const request = await Apilocal.get(url);
       return request.data;
     } catch (e) {
       // eslint-disable-next-line no-console
@@ -82,9 +86,13 @@ export const useUtils = () => {
     }
   }
 
-  async function getGarmentsTableParameters() {
+  async function getGarmentsTableParameters(active) {
     try {
-      const request = await Apilocal.get('/prenda/findAll');
+      let url = '/prenda/findAll';
+      if (active) {
+        url += '?active=true';
+      }
+      const request = await Apilocal.get(url);
       return request.data;
     } catch (e) {
       // eslint-disable-next-line no-console
@@ -129,6 +137,18 @@ export const useUtils = () => {
     } catch (e) {
       // eslint-disable-next-line no-console
       console.log('ERROR - getAllDeliveries', e);
+    }
+  }
+
+  async function deleteUniformDelivery(id) {
+    try {
+      const request = await Apilocal.post('/uniformDelivery/delete', {id});
+
+      return request.data;
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      return false;
     }
   }
 
@@ -281,19 +301,6 @@ export const useUtils = () => {
           >
             Resetear
           </Button>
-          <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              confirm({
-                closeDropdown: false
-              });
-              setSearchText(selectedKeys[0]);
-              setSearchedColumn(dataIndex);
-            }}
-          >
-            Filtrar
-          </Button>
         </Space>
       </div>
     ),
@@ -348,6 +355,7 @@ export const useUtils = () => {
     createOrder,
     bulkSizeUpdate,
     getEmployees,
-    updateEmployeeSize
+    updateEmployeeSize,
+    deleteUniformDelivery
   };
 };

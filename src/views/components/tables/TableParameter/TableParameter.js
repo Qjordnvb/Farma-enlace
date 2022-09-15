@@ -12,7 +12,10 @@ const TableParameter = () => {
     <>
       <Table
         pagination={{
-          pageSize: 20
+          pageSize: 20,
+          pageSizeOptions: [10, 20, 30, 40],
+          total: dataSource.length,
+          showSizeChanger: true
         }}
         scroll={{y: 400, x: 2000}}
         columns={columns}

@@ -25,7 +25,7 @@ export const useCustomDescription = () => {
   const [garmentColumns, setGarmentsColumns] = useState([]);
 
   useEffect(() => {
-    getGarmentsTableParameters().then((res) => {
+    getGarmentsTableParameters(true).then((res) => {
       setGarmentsList(res);
 
       getAllDescriptions().then((res) => {
@@ -169,14 +169,14 @@ export const useCustomDescription = () => {
       title: 'Código Producto',
       dataIndex: 'codigo',
       ...getColumnSearchProps('codigo'),
-      sorter: (a, b) => a.codigo.length - b.codigo.length,
+      sorter: (a, b) => a.codigo.localeCompare(b.codigo),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Descripción',
       dataIndex: 'descripcion',
       ...getColumnSearchProps('descripcion'),
-      sorter: (a, b) => a.descripcion.length - b.descripcion.length,
+      sorter: (a, b) => a.descripcion?.localeCompare(b.descripcion),
       sortDirections: ['descend', 'ascend']
     },
     ...garmentColumns,
@@ -185,14 +185,14 @@ export const useCustomDescription = () => {
       title: 'Marca',
       dataIndex: 'marca',
       ...getColumnSearchProps('marca'),
-      sorter: (a, b) => a.marca.length - b.marca.length,
+      sorter: (a, b) => a.marca.localeCompare(b.marca),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Región',
       dataIndex: 'region',
       ...getColumnSearchProps('region'),
-      sorter: (a, b) => a.region?.length - b.region?.length,
+      sorter: (a, b) => a.region?.localeCompare(b.region),
       sortDirections: ['descend', 'ascend']
     },
     {

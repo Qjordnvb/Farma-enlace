@@ -55,13 +55,14 @@ export const useCustomGarments = () => {
       title: 'Descripción',
       dataIndex: 'description',
       ...getColumnSearchProps('description'),
-      sorter: (a, b) => a.description.length - b.description.length,
+      sorter: (a, b) => a.description.localeCompare(b.description),
       sortDirections: ['descend', 'ascend']
     },
     {
       key: '3',
       title: 'Estado',
       dataIndex: 'active',
+      sorter: (a, b) => a.active - b.active,
       ...getColumnSearchProps('active'),
       render: (record) => {
         return <div>{record ? <p>Activo</p> : <p>Inactivo</p>}</div>;

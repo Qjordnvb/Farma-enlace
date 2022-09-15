@@ -6,47 +6,7 @@ export const useCustomDiscount = () => {
 
   const {getColumnSearchProps, getOrders} = useUtils();
 
-  const [dataSource, setDataSource] = useState([
-    {
-      key: '1',
-      n: `1`,
-      colaborador: `ABAD GAONA LADY ABIGAIL 1`,
-      cargo: `ASISTENTE SENIOR 1`,
-      distribution: 'Distribución Administrativa',
-      idOfi: `2321`,
-      nameOfi: `Farmados 1`,
-      talla: `M`,
-      kits: `asfaweadw`,
-      fecha: `2/03/2022`,
-      cuotas: `4`
-    },
-    {
-      key: '2',
-      n: `2`,
-      colaborador: `ABAD GAONA LADY ABIGAIL 1`,
-      cargo: `ASISTENTE SENIOR 1`,
-      distribution: 'Distribución Administrativa',
-      idOfi: `2321`,
-      nameOfi: `Farmados 1`,
-      talla: `M`,
-      kits: `asfaweadw`,
-      fecha: `2/03/2022`,
-      cuotas: `4`
-    },
-    {
-      key: '3',
-      n: `3`,
-      colaborador: `ABAD GAONA LADY ABIGAIL 1`,
-      cargo: `ASISTENTE SENIOR 1`,
-      distribution: 'Distribución Administrativa',
-      idOfi: `2321`,
-      nameOfi: `Farmados 1`,
-      talla: `M`,
-      kits: `asfaweadw`,
-      fecha: `2/03/2022`,
-      cuotas: `4`
-    }
-  ]);
+  const [dataSource, setDataSource] = useState([]);
 
   const getOrdersTable = () => {
     getOrders().then((res) => {
@@ -137,6 +97,34 @@ export const useCustomDiscount = () => {
     {
       title: 'Cuotas',
       dataIndex: 'cuotas',
+      ...getColumnSearchProps('Cuotas'),
+      sorter: (a, b) => a.cuotas.length - b.cuotas.length,
+      sortDirections: ['descend', 'ascend']
+    },
+    {
+      title: 'Valor',
+      dataIndex: 'cuotas',
+      ...getColumnSearchProps('Cuotas'),
+      sorter: (a, b) => a.cuotas.length - b.cuotas.length,
+      sortDirections: ['descend', 'ascend']
+    },
+    {
+      title: 'N° Orden de Consumo',
+      dataIndex: 'cuotas',
+      ...getColumnSearchProps('Cuotas'),
+      sorter: (a, b) => a.cuotas.length - b.cuotas.length,
+      sortDirections: ['descend', 'ascend']
+    },
+    {
+      title: 'última modificación',
+      dataIndex: 'status',
+      ...getColumnSearchProps('Cuotas'),
+      sorter: (a, b) => a.cuotas.length - b.cuotas.length,
+      sortDirections: ['descend', 'ascend']
+    },
+    {
+      title: 'Estado',
+      dataIndex: 'status',
       ...getColumnSearchProps('Cuotas'),
       sorter: (a, b) => a.cuotas.length - b.cuotas.length,
       sortDirections: ['descend', 'ascend']
