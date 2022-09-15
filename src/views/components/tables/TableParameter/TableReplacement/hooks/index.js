@@ -93,7 +93,7 @@ export const useCustomReplacement = () => {
       const row = await form.validateFields();
 
       const {porcentaje, reposicion} = row;
-      editRepositionParameter({porcentaje, reposicion, id: key}).then(() => {
+      editRepositionParameter({porcentaje: porcentaje + '%', reposicion, id: key}).then(() => {
         getAllRepositionParameters().then((res) => {
           setDataSource(res);
           setEditingKey(null);
@@ -246,6 +246,7 @@ export const useCustomReplacement = () => {
   };
 
   const onEditReplacement = async () => {
+    console.log('editing file', editingFile);
     editRepositionParameter({...editingFile, id: editId}).then(() => {
       getAllRepositionParameters().then((res) => {
         setDataSource(res);

@@ -37,9 +37,9 @@ export const useCustomReasons = () => {
   };
 
   const onSwitchChange = (record, selectedRows) => {
-    switchActiveReason(record.id, selectedRows).then((res) => {
+    switchActiveReason(record.id, selectedRows).then(() => {
       // eslint-disable-next-line no-console
-      console.log('res', res);
+      dataReasonsTable();
     });
   };
 
@@ -49,7 +49,7 @@ export const useCustomReasons = () => {
       title: 'Motivo',
       dataIndex: 'reason',
       ...getColumnSearchProps('reason'),
-      sorter: (a, b) => a.reason.length - b.reason.length,
+      sorter: (a, b) => a.reason.localeCompare(b.reason),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -57,7 +57,7 @@ export const useCustomReasons = () => {
       title: 'Reposición automática',
       dataIndex: 'replacement',
       ...getColumnSearchProps('replacement'),
-      sorter: (a, b) => a.replacement.length - b.replacement.length,
+      sorter: (a, b) => a.replacement.localeCompare(b.replacement),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -65,7 +65,7 @@ export const useCustomReasons = () => {
       title: 'Reposición',
       dataIndex: 'replacementAuto',
       ...getColumnSearchProps('replacementAuto'),
-      sorter: (a, b) => a.replacementManual.length - b.replacementManual.length,
+      sorter: (a, b) => a.replacementAuto.localeCompare(b.replacementAuto),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -73,7 +73,7 @@ export const useCustomReasons = () => {
       title: 'Cobro',
       dataIndex: 'payment',
       ...getColumnSearchProps('payment'),
-      sorter: (a, b) => a.payment.length - b.payment.length,
+      sorter: (a, b) => a.payment.localeCompare(b.payment),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -89,7 +89,7 @@ export const useCustomReasons = () => {
       title: 'Cálculo',
       dataIndex: 'calculation',
       ...getColumnSearchProps('calculation'),
-      sorter: (a, b) => a.calculation.length - b.calculation.length,
+      sorter: (a, b) => a.calculation.localeCompare(b.calculation),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -97,7 +97,7 @@ export const useCustomReasons = () => {
       title: 'Descuento Personal',
       dataIndex: 'personalDiscount',
       ...getColumnSearchProps('personalDiscount'),
-      sorter: (a, b) => a.discountPersonal.length - b.discountPersonal.length,
+      sorter: (a, b) => a.personalDiscount.length - b.personalDiscount.length,
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -105,7 +105,7 @@ export const useCustomReasons = () => {
       title: 'Descuento Farmaenlace',
       dataIndex: 'companyDiscount',
       ...getColumnSearchProps('companyDiscount'),
-      sorter: (a, b) => a.discountCompany.length - b.discountCompany.length,
+      sorter: (a, b) => a.companyDiscount.length - b.companyDiscount.length,
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -147,7 +147,11 @@ export const useCustomReasons = () => {
     });
   };
   const onCreateReason = async () => {
-    await addReason({...addingFile});
+    await addReason({
+      ...addingFile,
+      personalDiscount: addingFile.personalDiscount + '%',
+      companyDiscount: addingFile.companyDiscount + '%'
+    });
     dataReasonsTable();
   };
 

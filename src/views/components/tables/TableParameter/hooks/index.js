@@ -24,7 +24,7 @@ export const useCustomUniforms = () => {
       dataIndex: 'codigo',
       width: '15%',
       ...getColumnSearchProps('codigo'),
-      sorter: (a, b) => a.codigo.length - b.codigo.length,
+      sorter: (a, b) => +a.codigo - +b.codigo,
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -32,7 +32,7 @@ export const useCustomUniforms = () => {
       dataIndex: 'marca',
       width: '15%',
       ...getColumnSearchProps('marca'),
-      sorter: (c, d) => c.marca.length - d.marca.length,
+      sorter: (c, d) => c.marca.localeCompare(d.marca),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -40,7 +40,7 @@ export const useCustomUniforms = () => {
       dataIndex: 'descripcion',
       width: '20%',
       ...getColumnSearchProps('descripcion'),
-      sorter: (e, f) => e.description.length - f.description.length,
+      sorter: (e, f) => e.descripcion.localeCompare(f.descripcion),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -48,7 +48,7 @@ export const useCustomUniforms = () => {
       dataIndex: 'genero',
       width: '10%',
       ...getColumnSearchProps('genero'),
-      sorter: (g, h) => g.genero.length - h.genero.length,
+      sorter: (g, h) => g.genero.localeCompare(h.genero),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -56,7 +56,7 @@ export const useCustomUniforms = () => {
       dataIndex: 'talla',
       width: '5%',
       ...getColumnSearchProps('talla'),
-      sorter: (i, j) => i.talla.length - j.talla.length,
+      sorter: (i, j) => i.talla.localeCompare(j.talla),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -64,7 +64,7 @@ export const useCustomUniforms = () => {
       dataIndex: 'region',
       width: '10%',
       ...getColumnSearchProps('region'),
-      sorter: (k, l) => k.region?.length - l.region?.length,
+      sorter: (k, l) => k.region?.localeCompare(l.region),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -72,7 +72,7 @@ export const useCustomUniforms = () => {
       dataIndex: 'pvp',
       width: '15%',
       ...getColumnSearchProps('pvp'),
-      sorter: (m, n) => m.ppt.length - n.ppt.length,
+      sorter: (m, n) => +m.pvp - +n.pvp,
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -80,7 +80,7 @@ export const useCustomUniforms = () => {
       dataIndex: 'status',
       width: '10%',
       ...getColumnSearchProps('status'),
-      sorter: (o, p) => o.estado.length - p.estado.length,
+      sorter: (o, p) => o.status.localeCompare(p.status),
       sortDirections: ['descend', 'ascend']
     }
   ];

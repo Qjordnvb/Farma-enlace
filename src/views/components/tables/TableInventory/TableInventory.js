@@ -30,7 +30,8 @@ const TableInventory = () => {
           rowClassName="editable-row"
           pagination={{
             pageSize: 20,
-            onChange: cancel
+            onChange: cancel,
+            showSizeChanger: true
           }}
           rowSelection={rowSelection}
         />

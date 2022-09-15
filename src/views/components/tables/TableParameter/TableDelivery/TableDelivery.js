@@ -29,6 +29,7 @@ export default function TableDelivery() {
         scroll={{y: 400}}
         columns={columns}
         dataSource={formatDataSource}
+        showSizeChanger
       />
       {isAdd && (
         <>

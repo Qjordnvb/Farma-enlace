@@ -30,7 +30,7 @@ function TableReasons() {
           }}
           columns={columns}
           dataSource={dataSource}
-          rowClassName={(record) => record.replacement === 'NO' && 'disabled-row'}
+          rowClassName={(record) => (!record.active ? 'disabled-row' : '')}
           rowKey={(record) => record.id}
           scroll={{y: 500}}
         ></Table>

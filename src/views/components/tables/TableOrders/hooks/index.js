@@ -110,7 +110,7 @@ export const useCustomOrders = () => {
       title: 'Colaborador',
       dataIndex: 'COLABORADOR',
       ...getColumnSearchProps('COLABORADOR'),
-      sorter: (a, b) => a.COLABORADOR.localeCompare(b.COLABORADOR),
+      sorter: (a, b) => a?.COLABORADOR?.localeCompare(b?.COLABORADOR),
       sortDirections: ['descend', 'ascend']
     },
     {

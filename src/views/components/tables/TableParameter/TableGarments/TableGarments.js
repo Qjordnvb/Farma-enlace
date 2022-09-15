@@ -28,7 +28,9 @@ function TableGarments() {
       <div>
         <Table
           pagination={{
-            pageSize: 20
+            pageSize: 20,
+            showSizeChanger: true,
+            locale: {items_per_page: '/ หน้า'}
           }}
           scroll={{y: 400}}
           columns={columns}
