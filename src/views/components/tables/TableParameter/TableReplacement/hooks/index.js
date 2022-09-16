@@ -201,7 +201,7 @@ export const useCustomReplacement = () => {
       title: 'Acción',
       fixed: 'right',
       dataIndex: 'accion',
-      width: 90,
+      width: '7.5%',
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
@@ -212,10 +212,10 @@ export const useCustomReplacement = () => {
                 marginRight: 8
               }}
             >
-              Save
+              Guardar
             </Typography.Link>
             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <a>Cancel</a>
+              <a>Cancelar</a>
             </Popconfirm>
           </span>
         ) : (
@@ -246,7 +246,6 @@ export const useCustomReplacement = () => {
   };
 
   const onEditReplacement = async () => {
-    console.log('editing file', editingFile);
     editRepositionParameter({...editingFile, id: editId}).then(() => {
       getAllRepositionParameters().then((res) => {
         setDataSource(res);

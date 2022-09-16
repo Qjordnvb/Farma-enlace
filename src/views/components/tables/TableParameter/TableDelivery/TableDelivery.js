@@ -26,7 +26,7 @@ export default function TableDelivery() {
         pagination={{
           pageSize: 20
         }}
-        scroll={{y: 400}}
+        scroll={{y: 400, x: 2000}}
         columns={columns}
         dataSource={formatDataSource}
         showSizeChanger

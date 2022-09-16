@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
-import {Switch} from 'antd';
+import {DeleteFilled} from '@ant-design/icons';
+import {Switch, Typography} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 
@@ -91,6 +92,17 @@ export const useCustomGarments = () => {
             >
               <img src={BtnEdit} alt="btn-edit" />
             </div>
+            <Typography.Link
+              // onClick={() => {
+              //   onDelete(record.id);
+              // }}
+              style={{
+                marginRight: 8,
+                marginTop: -14
+              }}
+            >
+              <DeleteFilled />
+            </Typography.Link>
           </div>
         );
       }

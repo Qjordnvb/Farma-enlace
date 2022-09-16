@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import {DeleteFilled} from '@ant-design/icons';
 import {Typography} from 'antd';
 import {useUtils} from 'hooks';
+import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 
 export const useCustomDelivery = () => {
   const [isAdd, setIsAdd] = useState(false);
@@ -117,6 +118,7 @@ export const useCustomDelivery = () => {
       key: '2',
       title: 'Motivo',
       dataIndex: 'reason',
+      width: '10%',
       ...getColumnSearchProps('motivo'),
       sorter: (a, b) => a.reason.localeCompare(b.reason),
       sortDirections: ['descend', 'ascend']
@@ -149,6 +151,7 @@ export const useCustomDelivery = () => {
       key: '6',
       title: 'Cálculo',
       dataIndex: 'calculation',
+      width: '10%',
       ...getColumnSearchProps('cálculo'),
       sorter: (a, b) => a.calculation.localeCompare(b.calculation),
       sortDirections: ['descend', 'ascend']
@@ -157,6 +160,7 @@ export const useCustomDelivery = () => {
       key: '7',
       title: 'Cobro',
       dataIndex: 'payment',
+      width: '7.5%',
       ...getColumnSearchProps('cobro'),
       sorter: (a, b) => a.payment.localeCompare(b.payment),
       sortDirections: ['descend', 'ascend']
@@ -164,6 +168,7 @@ export const useCustomDelivery = () => {
     {
       key: '8',
       title: 'Valor',
+      width: '7.5%',
       dataIndex: 'valor_pos',
 
       ...getColumnSearchProps('valor'),
@@ -187,10 +192,9 @@ export const useCustomDelivery = () => {
       dataIndex: 'accion',
       render: (_, record) => {
         return (
-          <span>
+          <span className="flex items-center">
             <Typography.Link
               onClick={() => {
-                console.log('record', record);
                 onDelete(record.id);
               }}
               style={{
@@ -199,6 +203,14 @@ export const useCustomDelivery = () => {
             >
               <DeleteFilled />
             </Typography.Link>
+            <div
+              // onClick={() => {
+              //   onEditFile(record);
+              // }}
+              className="btn-edit mt-2"
+            >
+              <img src={BtnEdit} alt="btn-edit" />
+            </div>
           </span>
         );
       }

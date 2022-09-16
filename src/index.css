@@ -352,39 +352,14 @@ li.ant-pagination-item.ant-pagination-item {
   fill: #2bc155;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > ul
-  > li.ant-pagination-options
-  > div
-  > div
-  > span.ant-select-selection-item {
-  color: #2bc155;
-  font-weight: 400;
+.ant-select-selection-item {
+  color: #2bc155 !important;
+  font-weight: 400 !important;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > ul
-  > li.ant-pagination-options
-  > div
-  > div {
-  border-color: #2bc155;
-  border-radius: 5px;
+.ant-select-selector {
+  border-color: #2bc155 !important;
+  border-radius: 5px !important;
 }
 
 .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
@@ -472,9 +447,9 @@ li.ant-pagination-item.ant-pagination-item {
   height: 35px;
 }
 
-.ant-pagination-options {
+/* .ant-pagination-options {
   display: none !important;
-}
+} */
 
 .ant-table-tbody > tr.ant-table-row-selected > td {
   background: rgb(241, 247, 242) !important;
@@ -660,4 +635,21 @@ span > a {
   background: #bfedcc !important;
   border-color: #bfedcc !important;
   cursor: pointer;
+}
+
+.ant-popover-inner-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ant-popover-message-title {
+  visibility: hidden;
+  font-size: 0;
+}
+
+html:lang(es) .ant-popover-message-title::before {
+  visibility: visible;
+  content: '¿Seguro quieres cancelar esta acción?';
+  font-size: 12px;
 }

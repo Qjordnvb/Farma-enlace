@@ -1,6 +1,8 @@
 import {useEffect, useState} from 'react';
-import {Switch} from 'antd';
+import {DeleteFilled} from '@ant-design/icons';
+import {Switch, Typography} from 'antd';
 import {useUtils} from 'hooks';
+import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 
 export const useCustomReasons = () => {
   const [isAdd, setIsAdd] = useState(false);
@@ -111,6 +113,7 @@ export const useCustomReasons = () => {
     {
       key: '9',
       title: 'Acción',
+      width: '12%',
       render: (record) => {
         return (
           <div className="flex-action">
@@ -121,6 +124,20 @@ export const useCustomReasons = () => {
                 onSwitchChange(record, selectedRows);
               }}
             />
+            <div className="btn-edit">
+              <img src={BtnEdit} alt="btn-edit" />
+            </div>
+            <Typography.Link
+              // onClick={() => {
+              //   onDelete(record.id);
+              // }}
+              style={{
+                marginRight: 8,
+                marginTop: -14
+              }}
+            >
+              <DeleteFilled />
+            </Typography.Link>
           </div>
         );
       }

@@ -198,6 +198,7 @@ export const useCustomDescription = () => {
     {
       title: 'Acción',
       dataIndex: 'accion',
+      width: '7.5%',
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
@@ -208,10 +209,10 @@ export const useCustomDescription = () => {
                 marginRight: 8
               }}
             >
-              Save
+              Guardar
             </Typography.Link>
             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <a>Cancel</a>
+              <a>Cancelar</a>
             </Popconfirm>
           </span>
         ) : (

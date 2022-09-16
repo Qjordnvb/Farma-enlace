@@ -32,7 +32,7 @@ function TableReasons() {
           dataSource={dataSource}
           rowClassName={(record) => (!record.active ? 'disabled-row' : '')}
           rowKey={(record) => record.id}
-          scroll={{y: 500}}
+          scroll={{y: 500, x: 2000}}
         ></Table>
 
         {isAdd && (

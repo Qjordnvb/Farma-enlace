@@ -47,6 +47,7 @@ export const useCustomIntake = () => {
 
   useEffect(() => {
     getOrdersTable(dateRange);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dateRange]);
 
   /*const onSelectChange = (newSelectedRowKeys) => {
