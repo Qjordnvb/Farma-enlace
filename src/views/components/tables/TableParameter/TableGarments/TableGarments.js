@@ -28,7 +28,7 @@ function TableGarments() {
       <div>
         <Table
           pagination={{
-            pageSize: 20,
+            pageSizeOptions: [10, 20, 30, 40],
             showSizeChanger: true,
             locale: {items_per_page: '/ หน้า'}
           }}

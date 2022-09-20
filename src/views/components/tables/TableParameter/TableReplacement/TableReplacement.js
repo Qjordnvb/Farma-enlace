@@ -31,7 +31,7 @@ function TableReplacement() {
       <div>
         <Table
           pagination={{
-            pageSize: 20
+            pageSizeOptions: [10, 20, 30, 40]
           }}
           scroll={{y: 420, x: 2000}}
           columns={mergedColumns}

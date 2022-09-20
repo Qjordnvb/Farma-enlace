@@ -34,7 +34,7 @@ const TableOrders = () => {
           columns={mergedColumns}
           rowClassName="editable-row"
           pagination={{
-            pageSize: 20,
+            pageSizeOptions: [10, 20, 30, 40],
             onChange: cancel
           }}
           rowSelection={rowSelection}

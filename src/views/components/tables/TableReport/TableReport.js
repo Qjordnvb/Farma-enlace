@@ -16,7 +16,7 @@ const TableReport = () => {
         columns={columns}
         dataSource={dataSource}
         pagination={{
-          pageSize: 20
+          pageSizeOptions: [10, 20, 30, 40]
         }}
       />
       <CSVLink filename={'TableReport.xlsx'} data={dataSource} className="pt-2 flex justify-end">

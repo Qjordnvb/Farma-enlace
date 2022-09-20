@@ -35,7 +35,7 @@ const TableIntake = () => {
         columns={columns}
         dataSource={dataSource}
         pagination={{
-          pageSize: 20
+          pageSizeOptions: [10, 20, 30, 40]
         }}
         rowKey={(record) => record.id}
       />
@@ -111,7 +111,7 @@ const TableIntake = () => {
           </Modal>
         </>
       )}
-      <div className="flex justify-end items-end flex-col mt-10">
+      <div className="flex justify-end items-end flex-col">
         <RangePicker
           ranges={{
             Today: [moment(), moment()],

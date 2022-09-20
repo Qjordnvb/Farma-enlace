@@ -22,7 +22,7 @@ const TableDescription = () => {
           rowClassName="editable-row"
           pagination={{
             onChange: cancel,
-            pageSize: 20,
+            pageSizeOptions: [10, 20, 30, 40],
             total: mergedColumns.length,
             showSizeChanger: true
           }}
