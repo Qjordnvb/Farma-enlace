@@ -141,11 +141,14 @@ export const useCustomDelivery = () => {
     {
       key: '5',
       title: 'Reposición',
-      dataIndex: 'replacement',
+      dataIndex: 'replacementAuto',
       width: '9.5%',
       ...getColumnSearchProps('reposición'),
-      sorter: (a, b) => a.replacement.localeCompare(b.replacement),
-      sortDirections: ['descend', 'ascend']
+      sorter: (a, b) => a.replacementAuto.localeCompare(b.replacementAuto),
+      sortDirections: ['descend', 'ascend'],
+      render: (_) => {
+        return <div>{_} días</div>;
+      }
     },
     {
       key: '6',
@@ -169,10 +172,10 @@ export const useCustomDelivery = () => {
       key: '8',
       title: 'Valor',
       width: '7.5%',
-      dataIndex: 'valor_pos',
+      dataIndex: 'price',
 
       ...getColumnSearchProps('valor'),
-      sorter: (a, b) => a.valor_pos.localeCompare(b.valor_pos),
+      sorter: (a, b) => a.price.localeCompare(b.price),
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
         return <div>${_}</div>;

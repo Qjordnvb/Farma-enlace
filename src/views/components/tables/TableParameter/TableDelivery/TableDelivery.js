@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Table, Modal, Form, Select} from 'antd';
 import './style.css';
 
@@ -20,12 +20,27 @@ export default function TableDelivery() {
     productsList,
     onCreateDelivery
   } = useCustomDelivery();
+
+  const [currentLength, setCurrentLength] = useState(0);
+  useEffect(() => {
+    setCurrentLength(formatDataSource.length);
+  }, [formatDataSource]);
+
+  const onChange = (pagination, filters, sorter, extra) => {
+    if (extra.action === 'filter') {
+      setCurrentLength(extra.currentDataSource.length);
+    }
+  };
+
   return (
     <div>
       <Table
         pagination={{
-          pageSize: 20
+          pageSize: 20,
+          showSizeChanger: true,
+          total: currentLength
         }}
+        onChange={onChange}
         scroll={{y: 400, x: 2000}}
         columns={columns}
         dataSource={formatDataSource}

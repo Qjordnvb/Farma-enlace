@@ -21,15 +21,14 @@ export const useCustomInventory = () => {
     let getColumns = garmentsList.map((garment) => {
       return {
         title: garment.description,
-        dataIndex: `garment${garment.id}`,
-        editable: true
+        dataIndex: `garment${garment.id}`
       };
     });
     setGarmentsColumns(getColumns);
   }, [garmentsList]);
 
   useEffect(() => {
-    getGarmentsTableParameters().then((res) => {
+    getGarmentsTableParameters(true).then((res) => {
       setGarmentsList(res);
 
       getAllDescriptions().then((res) => {
@@ -108,14 +107,15 @@ export const useCustomInventory = () => {
     );
   };
 
-  const isEditing = (record) => record.key === editingKey;
+  const isEditing = (record) => record.id === editingKey;
 
   const edit = (record) => {
+    console.log('record', record);
     form.setFieldsValue({
       cantidadCompra: '',
       ...record
     });
-    setEditingKey(record.key);
+    setEditingKey(record.id);
   };
 
   const cancel = () => {

@@ -4,6 +4,7 @@ import './style.css';
 import Button from 'views/components/button/Button';
 import {StyledGridList} from 'views/screens/user/dataGridParameters/gridList/GridList.Styled';
 import {useCustomGarments} from './hooks';
+import {useEffect, useState} from 'react';
 
 function TableGarments() {
   const {
@@ -22,6 +23,17 @@ function TableGarments() {
     onEditGarment
   } = useCustomGarments();
 
+  const [currentLength, setCurrentLength] = useState(0);
+  useEffect(() => {
+    setCurrentLength(dataSource.length);
+  }, [dataSource]);
+
+  const onChange = (pagination, filters, sorter, extra) => {
+    if (extra.action === 'filter') {
+      setCurrentLength(extra.currentDataSource.length);
+    }
+  };
+
   return (
     <>
       {' '}
@@ -30,8 +42,9 @@ function TableGarments() {
           pagination={{
             pageSize: 20,
             showSizeChanger: true,
-            locale: {items_per_page: '/ หน้า'}
+            total: currentLength
           }}
+          onChange={onChange}
           scroll={{y: 400}}
           columns={columns}
           dataSource={dataSource}
