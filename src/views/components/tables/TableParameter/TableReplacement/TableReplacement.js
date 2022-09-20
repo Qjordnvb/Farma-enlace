@@ -1,38 +1,37 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Table, Form /*Modal, Input, Form*/} from 'antd';
+
 import './style.css';
-import {CSVLink} from 'react-csv';
+
 import {StyledGridList} from 'views/screens/user/dataGridParameters/gridList/GridList.Styled';
 import btnDownload from '../../../../../assets/img/btn-download.png';
+import {useUtils} from '../../../../../hooks';
 import {useCustomReplacement} from './hooks';
 
 function TableReplacement() {
   const {dataSource, form, mergedColumns, EditableCell} = useCustomReplacement();
+  const {handleExport} = useUtils();
+  const [currentLength, setCurrentLength] = useState(0);
+  useEffect(() => {
+    setCurrentLength(dataSource.length);
+  }, [dataSource]);
 
-  {
-    /* //   id: 1,
-  //   n: '1',
-  //   codigo: '115105',
-  //   descripcion: 'ZP PRV KIT ECO HOMBRE T-M-38',
-  //   talla: 'M',
-  //   genero: 'HOMBRE',
-  //   porcentaje: '30%',
-  //   replacement: '15 días',
-  //   sugeridoMinimo: '10',
-  //   sugeridoMaximo: '20',
-  //   ultimaM: '10',
-  //   fechaM: '10/10/2020'
-  //  */
-  }
-
+  const onChange = (pagination, filters, sorter, extra) => {
+    if (extra.action === 'filter') {
+      setCurrentLength(extra.currentDataSource.length);
+    }
+  };
   return (
     <Form form={form} component={false}>
       {' '}
       <div>
         <Table
           pagination={{
-            pageSizeOptions: [10, 20, 30, 40]
+            pageSizeOptions: [10, 20, 30, 40],
+            showSizeChanger: true,
+            total: currentLength
           }}
+          onChange={onChange}
           scroll={{y: 420, x: 2000}}
           columns={mergedColumns}
           dataSource={dataSource}
@@ -46,9 +45,14 @@ function TableReplacement() {
       </div>
       <StyledGridList>
         <div className="btn-add">
-          <CSVLink filename={'TableContent.xlsx'} data={dataSource} className="btn-download">
-            <img className="btn-download" src={btnDownload} alt="btnDownload" />
-          </CSVLink>
+          <img
+            className="btn-download"
+            src={btnDownload}
+            alt="btnDownload"
+            onClick={() => {
+              handleExport(dataSource, 'PARÁMETROS DE REPOSICIÓN');
+            }}
+          />
         </div>
       </StyledGridList>
     </Form>

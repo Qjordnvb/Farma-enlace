@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import moment from 'moment';
 import {useUtils} from 'hooks';
 
 export const useCustomDiscount = () => {
@@ -74,10 +75,10 @@ export const useCustomDiscount = () => {
     },
     {
       title: 'Talla',
-      dataIndex: ['employee', 'TALLA'],
+      dataIndex: ['producto', 'talla'],
       with: 50,
-      ...getColumnSearchProps('TALLA'),
-      sorter: (a, b) => a.TALLA.length - b.TALLA.length,
+      ...getColumnSearchProps('talla '),
+      sorter: (a, b) => a.producto?.talla.localeCompare(b.producto?.talla),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -92,7 +93,10 @@ export const useCustomDiscount = () => {
       dataIndex: 'requestDate',
       ...getColumnSearchProps('Fecha'),
       sorter: (a, b) => a.requestDate.length - b.requestDate.length,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      render: (_) => {
+        return <div>{moment(_).format('YYYY-MM-DD')}</div>;
+      }
     },
     {
       title: 'Cuotas',
@@ -103,9 +107,9 @@ export const useCustomDiscount = () => {
     },
     {
       title: 'Valor',
-      dataIndex: 'cuotas',
+      dataIndex: ['producto', 'price'],
       ...getColumnSearchProps('Cuotas'),
-      sorter: (a, b) => a.cuotas.length - b.cuotas.length,
+      sorter: (a, b) => a.producto?.cuotas - b.producto.cuotas,
       sortDirections: ['descend', 'ascend']
     },
     {

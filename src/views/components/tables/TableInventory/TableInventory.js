@@ -1,19 +1,26 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Form, Table} from 'antd';
-import {CSVLink} from 'react-csv';
+
 import btnDownload from '../../../../assets/img/btn-generate.png';
+import {useUtils} from '../../../../hooks';
 import {useCustomInventory} from './hooks';
 import './style.css';
 import '../TableParameter/TableReasons/style-reasons.css';
 
 const TableInventory = () => {
-  const {form, EditableCell, mergedColumns, data, cancel, rowSelection} = useCustomInventory();
+  const {form, EditableCell, mergedColumns, data, rowSelection} = useCustomInventory();
+  const {handleExport} = useUtils();
 
-  const headers = [
-    {label: 'Descripcion', key: 'description'},
-    {label: 'Prendas', key: 'prendas'},
-    {label: 'Cantidad', key: 'cantidadCompra'}
-  ];
+  const [currentLength, setCurrentLength] = useState(0);
+  useEffect(() => {
+    setCurrentLength(data.length);
+  }, [data]);
+
+  const onChange = (pagination, filters, sorter, extra) => {
+    if (extra.action === 'filter') {
+      setCurrentLength(extra.currentDataSource.length);
+    }
+  };
 
   return (
     <div className="container-table pt-16">
@@ -30,22 +37,24 @@ const TableInventory = () => {
           rowClassName="editable-row"
           pagination={{
             pageSizeOptions: [10, 20, 30, 40],
-            onChange: cancel,
-            showSizeChanger: true
+            showSizeChanger: true,
+            total: currentLength
           }}
+          onChange={onChange}
           rowSelection={rowSelection}
         />
       </Form>
       <div className="flex justify-end items-end flex-col">
-        <CSVLink filename={'TableInventory.xlsx'} data={data} headers={headers} className="pt-2">
-          <img
-            className="btn-download"
-            src={btnDownload}
-            alt="btnDownload"
-            width="250px"
-            height="40px"
-          />
-        </CSVLink>
+        <img
+          className="btn-download"
+          src={btnDownload}
+          alt="btnDownload"
+          width="250px"
+          height="40px"
+          onClick={() => {
+            handleExport(data, 'INVENTARIO');
+          }}
+        />
       </div>
     </div>
   );

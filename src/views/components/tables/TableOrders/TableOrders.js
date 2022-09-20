@@ -1,24 +1,28 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Form, Table} from 'antd';
-import {CSVLink} from 'react-csv';
 import btnCarga from '../../../../assets/img/btn-carga.svg';
 import btnDownload from '../../../../assets/img/btn-generate.png';
-
+import {useUtils} from '../../../../hooks';
 import {useCustomOrders} from './hooks';
 import './style-orders.css';
 import '../TableParameter/TableReasons/style-reasons.css';
 
 const TableOrders = () => {
-  const {
-    form,
-    EditableCell,
-    mergedColumns,
-    dataSource,
-    cancel,
-    rowSelection,
-    inputFileRef,
-    handleInputFile
-  } = useCustomOrders();
+  const {form, EditableCell, mergedColumns, dataSource, inputFileRef, handleInputFile} =
+    useCustomOrders();
+
+  const {handleExport} = useUtils();
+
+  const [currentLength, setCurrentLength] = useState(0);
+  useEffect(() => {
+    setCurrentLength(dataSource.length);
+  }, [dataSource]);
+
+  const onChange = (pagination, filters, sorter, extra) => {
+    if (extra.action === 'filter') {
+      setCurrentLength(extra.currentDataSource.length);
+    }
+  };
 
   return (
     <div className="container-table pt-16">
@@ -35,9 +39,10 @@ const TableOrders = () => {
           rowClassName="editable-row"
           pagination={{
             pageSizeOptions: [10, 20, 30, 40],
-            onChange: cancel
+            showSizeChanger: true,
+            total: currentLength
           }}
-          rowSelection={rowSelection}
+          onChange={onChange}
         />
       </Form>
       <label htmlFor="file" className="py-8">
@@ -52,7 +57,11 @@ const TableOrders = () => {
         />
       </label>
       <div className="flex justify-end items-end flex-col -mt-12">
-        <CSVLink filename={'TableOrders.xlsx'} data={dataSource} className="pt-2">
+        <div
+          onClick={() => {
+            handleExport(dataSource, 'ACTUALIZACIÓN DE TALLAS');
+          }}
+        >
           <img
             className="btn-download"
             src={btnDownload}
@@ -60,7 +69,7 @@ const TableOrders = () => {
             width="250px"
             height="40px"
           />
-        </CSVLink>
+        </div>
       </div>
     </div>
   );

@@ -1,13 +1,24 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Table} from 'antd';
-import {CSVLink} from 'react-csv';
 import btnDownload from '../../../../assets/img/btn-discount.png';
+import {useUtils} from '../../../../hooks';
 import {useCustomDiscount} from './hooks';
 import './style.css';
 import '../TableParameter/TableReasons/style-reasons.css';
 
 const TableDiscount = () => {
   const {columns, rowSelection, dataSource} = useCustomDiscount();
+  const {handleExport} = useUtils();
+  const [currentLength, setCurrentLength] = useState(0);
+  useEffect(() => {
+    setCurrentLength(dataSource.length);
+  }, [dataSource]);
+
+  const onChange = (pagination, filters, sorter, extra) => {
+    if (extra.action === 'filter') {
+      setCurrentLength(extra.currentDataSource.length);
+    }
+  };
   return (
     <div className="container-table pt-16">
       <Table
@@ -16,18 +27,25 @@ const TableDiscount = () => {
         columns={columns}
         dataSource={dataSource}
         pagination={{
-          pageSizeOptions: [10, 20, 30, 40]
+          pageSizeOptions: [10, 20, 30, 40],
+          showSizeChanger: true,
+          total: currentLength
         }}
+        onChange={onChange}
+        rowKey={(record) => record.id}
       />
-      <CSVLink filename={'TableDiscount.xlsx'} data={dataSource} className="pt-2 flex justify-end">
+      <div className="ml-auto">
         <img
-          className="btn-download"
+          className="ml-auto"
           src={btnDownload}
           alt="btnDownload"
           width="250px"
           height="40px"
+          onClick={() => {
+            handleExport(dataSource, 'DESCUENTO');
+          }}
         />
-      </CSVLink>
+      </div>
     </div>
   );
 };

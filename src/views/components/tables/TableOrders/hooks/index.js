@@ -1,5 +1,6 @@
 import {useState, useEffect, useRef} from 'react';
 import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
+import moment from 'moment';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../assets/img/btn-edit.png';
 
@@ -34,8 +35,8 @@ export const useCustomOrders = () => {
     onChange: onSelectChange
   };
 
-  const EditableCell = ({editing, dataIndex, title, inputType, children, ...restProps}) => {
-    const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
+  const EditableCell = ({editing, dataIndex, title, children, ...restProps}) => {
+    const inputNode = title === 'Talla' ? <Input maxLength={5} /> : <InputNumber />;
     return (
       <td {...restProps}>
         {editing ? (
@@ -47,7 +48,11 @@ export const useCustomOrders = () => {
             rules={[
               {
                 required: true,
-                message: `Please Input ${title}!`
+                message: `Por favor ingrese ${title}!`
+              },
+              {
+                pattern: '^[a-zA-Z]',
+                message: 'Numeros no estan permitidos'
               }
             ]}
           >
@@ -146,7 +151,10 @@ export const useCustomOrders = () => {
       dataIndex: 'FECHA_INGRESO',
       ...getColumnSearchProps('Fecha de ingreso'),
       sorter: (a, b) => a.FECHA_INGRESO.localeCompare(b.FECHA_INGRESO),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      render: (_) => {
+        return <div>{moment(_).calendar()}</div>;
+      }
     },
     {
       title: 'Distribución Administrativa',

@@ -1,3 +1,4 @@
+import {useEffect, useState} from 'react';
 import {Table, Modal, Input, Form, Select} from 'antd';
 import {Option} from 'antd/es/mentions';
 import './style.css';
@@ -22,6 +23,17 @@ function TableGarments() {
     onEditGarment
   } = useCustomGarments();
 
+  const [currentLength, setCurrentLength] = useState(0);
+  useEffect(() => {
+    setCurrentLength(dataSource.length);
+  }, [dataSource]);
+
+  const onChange = (pagination, filters, sorter, extra) => {
+    if (extra.action === 'filter') {
+      setCurrentLength(extra.currentDataSource.length);
+    }
+  };
+
   return (
     <>
       {' '}
@@ -30,8 +42,9 @@ function TableGarments() {
           pagination={{
             pageSizeOptions: [10, 20, 30, 40],
             showSizeChanger: true,
-            locale: {items_per_page: '/ หน้า'}
+            total: currentLength
           }}
+          onChange={onChange}
           scroll={{y: 400}}
           columns={columns}
           dataSource={dataSource}

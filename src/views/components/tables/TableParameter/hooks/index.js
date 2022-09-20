@@ -1,22 +1,94 @@
 import {useState, useEffect} from 'react';
+import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
 import {useUtils} from 'hooks';
+import BtnEdit from '../../../../../assets/img/btn-edit.png';
+
 export const useCustomUniforms = () => {
-  const {getColumnSearchProps, getTableParameters} = useUtils();
+  const {getColumnSearchProps, getTableParameters, editPrice} = useUtils();
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
+  const [editingKey, setEditingKey] = useState(null);
+  const isEditing = (record) => record?.id === editingKey;
+  const [form] = Form.useForm();
 
-  const dataTable = async function () {
+  const dataTable = function () {
     setLoading(true);
-    const response = await getTableParameters();
-
-    setDataSource(response);
-    setLoading(false);
+    getTableParameters()
+      .then((response) => {
+        setDataSource(response);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
     dataTable();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const edit = (record) => {
+    form.setFieldsValue({
+      ...record
+    });
+    setEditingKey(record.id);
+  };
+
+  const cancel = () => {
+    setEditingKey('');
+  };
+
+  const save = async (key) => {
+    try {
+      const row = await form.validateFields();
+
+      const {price} = row;
+      editPrice({price, id: key}).then(() => {
+        dataTable();
+        isEditing(null);
+        setEditingKey(null);
+      });
+    } catch (errInfo) {
+      // eslint-disable-next-line no-console
+      console.log('Validate Failed:', errInfo);
+    }
+  };
+
+  const EditableCell = ({editing, dataIndex, title, children, ...restProps}) => {
+    const inputNode =
+      title === 'Precio Uniforme' ? (
+        <InputNumber
+          defaultValue={0}
+          formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+          parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+        />
+      ) : (
+        <Input />
+      );
+    return (
+      <td {...restProps}>
+        {editing ? (
+          <Form.Item
+            name={dataIndex}
+            style={{
+              margin: 0
+            }}
+            rules={[
+              {
+                required: true,
+                message: `Por favor inserte un precio`
+              }
+            ]}
+          >
+            {inputNode}
+          </Form.Item>
+        ) : (
+          children
+        )}
+      </td>
+    );
+  };
 
   const columns = [
     {
@@ -68,12 +140,18 @@ export const useCustomUniforms = () => {
       sortDirections: ['descend', 'ascend']
     },
     {
-      title: 'PPT Maestro',
-      dataIndex: 'pvp',
-      width: '15%',
-      ...getColumnSearchProps('pvp'),
-      sorter: (m, n) => +m.pvp - +n.pvp,
-      sortDirections: ['descend', 'ascend']
+      title: 'Precio Uniforme',
+      dataIndex: 'price',
+      width: '10%',
+      ...getColumnSearchProps('precio'),
+      sorter: (m, n) => {
+        return m.price - n.price;
+      },
+      sortDirections: ['descend', 'ascend'],
+      editable: true,
+      render: (_) => {
+        return <div>${_}</div>;
+      }
     },
     {
       title: 'Estado',
@@ -82,14 +160,62 @@ export const useCustomUniforms = () => {
       ...getColumnSearchProps('status'),
       sorter: (o, p) => o.status.localeCompare(p.status),
       sortDirections: ['descend', 'ascend']
+    },
+    {
+      title: 'Acción',
+      fixed: 'right',
+      dataIndex: 'accion',
+      width: '7.5%',
+      render: (_, record) => {
+        const editable = isEditing(record);
+        return editable ? (
+          <span>
+            <Typography.Link
+              onClick={() => save(record.id)}
+              style={{
+                marginRight: 8
+              }}
+            >
+              Guardar
+            </Typography.Link>
+            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+              <a>Cancelar</a>
+            </Popconfirm>
+          </span>
+        ) : (
+          <div onClick={() => edit(record)} className="btn-edit">
+            <img src={BtnEdit} alt="btn-edit" />
+          </div>
+        );
+      }
     }
   ];
 
+  const mergedColumns = columns.map((col) => {
+    if (!col.editable) {
+      return col;
+    }
+
+    return {
+      ...col,
+      onCell: (record) => ({
+        record,
+        inputType: col.dataIndex === 'reposicion' ? 'number' : 'text',
+        dataIndex: col.dataIndex,
+        title: col.title,
+        editing: isEditing(record)
+      })
+    };
+  });
+
   return {
     columns,
+    mergedColumns,
     dataSource,
     dataTable,
     setDataSource,
-    loading
+    loading,
+    form,
+    EditableCell
   };
 };

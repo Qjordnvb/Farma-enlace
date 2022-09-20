@@ -3,6 +3,7 @@ import {SearchOutlined} from '@ant-design/icons';
 import {Button, Input, Space} from 'antd';
 import Highlighter from 'react-highlight-words';
 import './styles.css';
+import * as XLSX from 'xlsx';
 import {Api, Apilocal} from 'services/Api';
 
 export const useUtils = () => {
@@ -29,6 +30,36 @@ export const useUtils = () => {
       // eslint-disable-next-line no-console
       console.log(error);
       return false;
+    }
+  }
+
+  async function getAllRepositionParameters() {
+    try {
+      const request = await Apilocal.get('/products/findWithReplacement');
+      return request.data;
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('ERROR - getAllDescriptions', e);
+    }
+  }
+
+  async function editRepositionParameter(data) {
+    try {
+      const request = await Apilocal.post('/products/editReplacement', {...data});
+      return request.data;
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('ERROR - getAllDescriptions', e);
+    }
+  }
+
+  async function editPrice(data) {
+    try {
+      const request = await Apilocal.post('/products/editPrice', {...data});
+      return request.data;
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('ERROR - getAllDescriptions', e);
     }
   }
 
@@ -100,29 +131,21 @@ export const useUtils = () => {
     }
   }
 
+  async function deleteGarment(id) {
+    try {
+      const request = await Apilocal.post('/prenda/delete', {id});
+
+      return request.data;
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      return false;
+    }
+  }
+
   async function getAllDescriptions() {
     try {
       const request = await Apilocal.get('/uniformDescription/findAll');
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - getAllDescriptions', e);
-    }
-  }
-
-  async function getAllRepositionParameters() {
-    try {
-      const request = await Apilocal.get('/products/findWithReplacement');
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - getAllDescriptions', e);
-    }
-  }
-
-  async function editRepositionParameter(data) {
-    try {
-      const request = await Apilocal.post('/products/editReplacement', {...data});
       return request.data;
     } catch (e) {
       // eslint-disable-next-line no-console
@@ -333,6 +356,13 @@ export const useUtils = () => {
       )
   });
 
+  const handleExport = (dataSource, title) => {
+    let workbook = XLSX.utils.book_new();
+    let jsonToSheet = XLSX.utils.json_to_sheet(dataSource);
+    XLSX.utils.book_append_sheet(workbook, jsonToSheet, title);
+    XLSX.writeFile(workbook, `${title}.xlsx`);
+  };
+
   return {
     LoginRequest,
     UserLogin,
@@ -356,6 +386,9 @@ export const useUtils = () => {
     bulkSizeUpdate,
     getEmployees,
     updateEmployeeSize,
-    deleteUniformDelivery
+    deleteUniformDelivery,
+    editPrice,
+    deleteGarment,
+    handleExport
   };
 };

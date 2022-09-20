@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Table, Modal, Input, Form, Switch, Select} from 'antd';
 import './style-reasons.css';
 import Button from 'views/components/button/Button';
@@ -20,14 +20,28 @@ function TableReasons() {
 
   const cal = ['Fecha de ingreso del colaborador', 'Fecha de última reposición'];
 
+  const [currentLength, setCurrentLength] = useState(0);
+  useEffect(() => {
+    setCurrentLength(dataSource.length);
+  }, [dataSource]);
+
+  const onChange = (pagination, filters, sorter, extra) => {
+    if (extra.action === 'filter') {
+      setCurrentLength(extra.currentDataSource.length);
+    }
+  };
+
   return (
     <>
       {' '}
       <div>
         <Table
           pagination={{
-            pageSizeOptions: [10, 20, 30, 40]
+            pageSizeOptions: [10, 20, 30, 40],
+            showSizeChanger: true,
+            total: currentLength
           }}
+          onChange={onChange}
           columns={columns}
           dataSource={dataSource}
           rowClassName={(record) => (!record.active ? 'disabled-row' : '')}
