@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Table, Form, Modal, Select, DatePicker} from 'antd';
 import moment from 'moment';
 import Button from 'views/components/button/Button';
@@ -26,6 +26,17 @@ const TableIntake = () => {
     dateRange
   } = useCustomIntake();
 
+  const [currentLength, setCurrentLength] = useState(0);
+  useEffect(() => {
+    setCurrentLength(dataSource.length);
+  }, [dataSource]);
+
+  const onChange = (pagination, filters, sorter, extra) => {
+    if (extra.action === 'filter') {
+      setCurrentLength(extra.currentDataSource.length);
+    }
+  };
+
   // eslint-disable-next-line no-console
   return (
     <div className="container-table pt-16">
@@ -35,8 +46,11 @@ const TableIntake = () => {
         columns={columns}
         dataSource={dataSource}
         pagination={{
-          pageSize: 20
+          pageSize: 20,
+          showSizeChanger: true,
+          total: currentLength
         }}
+        onChange={onChange}
         rowKey={(record) => record.id}
       />
       {isAdd && (

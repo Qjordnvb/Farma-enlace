@@ -10,7 +10,8 @@ export const useCustomGarments = () => {
     getGarmentsTableParameters,
     switchActiveGarment,
     addGarment,
-    editGarmentDescription
+    editGarmentDescription,
+    deleteGarment
   } = useUtils();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -38,6 +39,12 @@ export const useCustomGarments = () => {
   const onSwitchChange = (record, selectedRows) => {
     switchActiveGarment(record.id, selectedRows).then(async () => {
       await dataReasonsTable();
+    });
+  };
+
+  const onDelete = (id) => {
+    deleteGarment(id).then(() => {
+      dataReasonsTable();
     });
   };
 
@@ -93,9 +100,9 @@ export const useCustomGarments = () => {
               <img src={BtnEdit} alt="btn-edit" />
             </div>
             <Typography.Link
-              // onClick={() => {
-              //   onDelete(record.id);
-              // }}
+              onClick={() => {
+                onDelete(record.id);
+              }}
               style={{
                 marginRight: 8,
                 marginTop: -14

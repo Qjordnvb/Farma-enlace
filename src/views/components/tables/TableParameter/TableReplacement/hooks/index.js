@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
+import moment from 'moment';
 
 export const useCustomReplacement = () => {
   const [isAdd, setIsAdd] = useState(false);
@@ -10,39 +11,19 @@ export const useCustomReplacement = () => {
   const [editId, setEditId] = useState();
   const {getColumnSearchProps, getAllRepositionParameters, editRepositionParameter} = useUtils();
   const [editingKey, setEditingKey] = useState(null);
+  const [currentLength, setCurrentLength] = useState(0);
+
   const [form] = Form.useForm();
   const isEditing = (record) => record?.id === editingKey;
 
-  const [dataSource, setDataSource] = useState([
-    {
-      id: 1,
-      n: '1',
-      codigo: '115105',
-      descripcion: 'ZP PRV KIT ECO HOMBRE T-M-38',
-      talla: 'M',
-      genero: 'HOMBRE',
-      porcentaje: '30%',
-      replacement: '10 días',
-      sugeridoMinimo: '10',
-      sugeridoMaximo: '20',
-      ultimaM: 'jjarrin',
-      fechaM: '10/10/2020'
-    },
-    {
-      id: 2,
-      n: '2',
-      codigo: '115105',
-      descripcion: 'ZP PRV KIT ECO HOMBRE T-M-38',
-      talla: 'M',
-      genero: 'HOMBRE',
-      porcentaje: '30%',
-      replacement: '15 días',
-      sugeridoMinimo: '10',
-      sugeridoMaximo: '20',
-      ultimaM: 'jjalvarez',
-      fechaM: '10/10/2020'
-    }
-  ]);
+  const [dataSource, setDataSource] = useState([]);
+
+  const onTableChange = (pagination, filters, sorter, extra) => {
+    setCurrentLength(extra.currentDataSource.length);
+  };
+  useEffect(() => {
+    setCurrentLength(dataSource.length);
+  }, [dataSource]);
 
   useEffect(() => {
     getAllRepositionParameters().then((res) => {
@@ -51,8 +32,24 @@ export const useCustomReplacement = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const EditableCell = ({editing, dataIndex, title, inputType, children, ...restProps}) => {
-    const inputNode = inputType === 'garments' ? <InputNumber /> : <Input />;
+  const EditableCell = ({editing, dataIndex, title, children, ...restProps}) => {
+    let inputNode;
+    if (title === 'Porcentajes') {
+      inputNode = (
+        <InputNumber
+          defaultValue={15}
+          min={0}
+          max={100}
+          formatter={(value) => `${value}%`}
+          parser={(value) => value.replace('%', '')}
+        />
+      );
+    } else if (dataIndex === 'reposicion') {
+      inputNode = <InputNumber min={0} />;
+    } else {
+      inputNode = <Input />;
+    }
+
     return (
       <td {...restProps}>
         {editing ? (
@@ -64,7 +61,7 @@ export const useCustomReplacement = () => {
             rules={[
               {
                 required: true,
-                message: `Please enter input ${title}!`
+                message: `Por favor ingrese un ${title.toLowerCase()}!`
               }
             ]}
           >
@@ -91,9 +88,15 @@ export const useCustomReplacement = () => {
   const save = async (key) => {
     try {
       const row = await form.validateFields();
-
+      const {user} = JSON.parse(window.localStorage.getItem('MY_AUTH_APP'));
+      console.log('auth', user);
       const {porcentaje, reposicion} = row;
-      editRepositionParameter({porcentaje: porcentaje + '%', reposicion, id: key}).then(() => {
+      editRepositionParameter({
+        porcentaje,
+        reposicion,
+        id: key,
+        ultimaActualizacion: user.nombrecorto
+      }).then(() => {
         getAllRepositionParameters().then((res) => {
           setDataSource(res);
           setEditingKey(null);
@@ -154,7 +157,15 @@ export const useCustomReplacement = () => {
       ...getColumnSearchProps('porcentaje'),
       sorter: (a, b) => a.porcentaje.length - b.porcentaje.length,
       sortDirections: ['descend', 'ascend'],
-      editable: true
+      editable: true,
+      render: (_) => {
+        return (
+          <div>
+            {_}
+            {_ && '%'}
+          </div>
+        );
+      }
     },
     {
       key: '6',
@@ -163,7 +174,14 @@ export const useCustomReplacement = () => {
       ...getColumnSearchProps('reposicion'),
       sorter: (a, b) => a.reposicion.length - b.reposicion.length,
       sortDirections: ['descend', 'ascend'],
-      editable: true
+      editable: true,
+      render: (_) => {
+        return (
+          <div>
+            {_} {_ && 'dias'}
+          </div>
+        );
+      }
     },
     {
       key: '7',
@@ -195,7 +213,10 @@ export const useCustomReplacement = () => {
       dataIndex: 'updatedAt',
       ...getColumnSearchProps('fechaM'),
       sorter: (a, b) => a.updatedAt.length - b.updatedAt.length,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      render: (_) => {
+        return <div>{moment(_).format('YYYY-MM-DD')}</div>;
+      }
     },
     {
       title: 'Acción',
@@ -287,6 +308,8 @@ export const useCustomReplacement = () => {
     onEditReplacement,
     EditableCell,
     mergedColumns,
-    form
+    form,
+    onTableChange,
+    currentLength
   };
 };

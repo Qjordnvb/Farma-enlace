@@ -1,33 +1,55 @@
-import React from 'react';
-import {Table} from 'antd';
-import {CSVLink} from 'react-csv';
+import React, {useState, useEffect} from 'react';
+import {Table, Form} from 'antd';
 import btnDownload from '../../../../assets/img/btn-download.png';
+import {useUtils} from '../../../../hooks';
 import {useCustomUniforms} from './hooks';
 
 import './style-parameters.css';
 
 const TableParameter = () => {
-  const {dataSource, columns, loading} = useCustomUniforms();
+  const {dataSource, mergedColumns, loading, form, EditableCell} = useCustomUniforms();
+  const {handleExport} = useUtils();
+  const [currentLength, setCurrentLength] = useState(0);
+  useEffect(() => {
+    setCurrentLength(dataSource.length);
+  }, [dataSource]);
+
+  const onChange = (pagination, filters, sorter, extra) => {
+    if (extra.action === 'filter') {
+      setCurrentLength(extra.currentDataSource.length);
+    }
+  };
+
   return (
-    <>
+    <Form form={form} component={false}>
       <Table
         pagination={{
           pageSize: 20,
           pageSizeOptions: [10, 20, 30, 40],
-          total: dataSource.length,
+          total: currentLength,
           showSizeChanger: true
         }}
         scroll={{y: 400, x: 2000}}
-        columns={columns}
+        columns={mergedColumns}
         dataSource={dataSource}
         loading={loading}
+        components={{
+          body: {
+            cell: EditableCell
+          }
+        }}
+        onChange={onChange}
+        rowClassName="editable-row"
       />
-      <div className="flex justify-end">
-        <CSVLink filename={'TableContent.xlsx'} data={dataSource} className="btn-download">
-          <img className="btn-download" src={btnDownload} alt="btnDownload" />
-        </CSVLink>
+      <div
+        className="flex justify-end"
+        onClick={() => {
+          handleExport(dataSource, 'Productos');
+        }}
+      >
+        <img className="btn-download" src={btnDownload} alt="btnDownload" />
       </div>
-    </>
+    </Form>
   );
 };
 

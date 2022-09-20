@@ -31,7 +31,8 @@
     "react-router-dom": "6.3.*",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.5",
-    "twin.macro": "^2.8.2"
+    "twin.macro": "^2.8.2",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {DeleteFilled} from '@ant-design/icons';
-import {Switch, Typography} from 'antd';
+import {Switch, Typography, Form, Popconfirm} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 
@@ -10,6 +10,10 @@ export const useCustomReasons = () => {
   const {getColumnSearchProps, getReasonsTableParameters, addReason, switchActiveReason} =
     useUtils();
   const [dataSource, setDataSource] = useState([]);
+  const [form] = Form.useForm();
+  const [editingKey, setEditingKey] = useState(null);
+
+  const isEditing = (record) => record?.id === editingKey;
 
   const dataReasonsTable = function () {
     getReasonsTableParameters().then((response) => {
@@ -45,6 +49,34 @@ export const useCustomReasons = () => {
     });
   };
 
+  const edit = (record) => {
+    form.setFieldsValue({
+      ...record
+    });
+    setEditingKey(record.id);
+  };
+
+  const cancel = () => {
+    setEditingKey('');
+  };
+
+  const save = async (key) => {
+    try {
+      const row = await form.validateFields();
+
+      const {price} = row;
+      console.log(price, key);
+      /* editPrice({price, id: key}).then(() => {
+        dataTable();
+        isEditing(null);
+        setEditingKey(null);
+      });*/
+    } catch (errInfo) {
+      // eslint-disable-next-line no-console
+      console.log('Validate Failed:', errInfo);
+    }
+  };
+
   const columns = [
     {
       key: '1',
@@ -68,7 +100,10 @@ export const useCustomReasons = () => {
       dataIndex: 'replacementAuto',
       ...getColumnSearchProps('replacementAuto'),
       sorter: (a, b) => a.replacementAuto.localeCompare(b.replacementAuto),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      render: (_) => {
+        return <div>{_} días</div>;
+      }
     },
     {
       key: '4',
@@ -100,7 +135,10 @@ export const useCustomReasons = () => {
       dataIndex: 'personalDiscount',
       ...getColumnSearchProps('personalDiscount'),
       sorter: (a, b) => a.personalDiscount.length - b.personalDiscount.length,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      render: (_) => {
+        return <div>{_}%</div>;
+      }
     },
     {
       key: '8',
@@ -108,13 +146,17 @@ export const useCustomReasons = () => {
       dataIndex: 'companyDiscount',
       ...getColumnSearchProps('companyDiscount'),
       sorter: (a, b) => a.companyDiscount.length - b.companyDiscount.length,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      render: (_) => {
+        return <div>{_}%</div>;
+      }
     },
     {
       key: '9',
       title: 'Acción',
       width: '12%',
       render: (record) => {
+        const editable = isEditing(record);
         return (
           <div className="flex-action">
             <Switch
@@ -124,9 +166,25 @@ export const useCustomReasons = () => {
                 onSwitchChange(record, selectedRows);
               }}
             />
-            <div className="btn-edit">
-              <img src={BtnEdit} alt="btn-edit" />
-            </div>
+            {editable ? (
+              <span>
+                <Typography.Link
+                  onClick={() => save(record.id)}
+                  style={{
+                    marginRight: 8
+                  }}
+                >
+                  Guardar
+                </Typography.Link>
+                <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+                  <a>Cancelar</a>
+                </Popconfirm>
+              </span>
+            ) : (
+              <div onClick={() => edit(record)} className="btn-edit">
+                <img src={BtnEdit} alt="btn-edit" />
+              </div>
+            )}
             <Typography.Link
               // onClick={() => {
               //   onDelete(record.id);
@@ -166,8 +224,8 @@ export const useCustomReasons = () => {
   const onCreateReason = async () => {
     await addReason({
       ...addingFile,
-      personalDiscount: addingFile.personalDiscount + '%',
-      companyDiscount: addingFile.companyDiscount + '%'
+      personalDiscount: addingFile.personalDiscount,
+      companyDiscount: addingFile.companyDiscount
     });
     dataReasonsTable();
   };
