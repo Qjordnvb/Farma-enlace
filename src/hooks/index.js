@@ -77,6 +77,18 @@ export const useUtils = () => {
     }
   }
 
+  async function deleteReason(id) {
+    try {
+      let url = '/parameterizedReasons/delete';
+
+      const request = await Apilocal.post(url, {id});
+      return request.data;
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('ERROR - getGarmentsTableParameters', e);
+    }
+  }
+
   async function addReason(data) {
     try {
       const request = await Apilocal.post('/parameterizedReasons/create', {...data});
@@ -389,6 +401,7 @@ export const useUtils = () => {
     deleteUniformDelivery,
     editPrice,
     deleteGarment,
-    handleExport
+    handleExport,
+    deleteReason
   };
 };

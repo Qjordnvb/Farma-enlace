@@ -159,7 +159,10 @@ export const useCustomIntake = () => {
       dataIndex: 'requestDate',
       ...getColumnSearchProps('requestDate'),
       sorter: (a, b) => a.requestDate - b.requestDate,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      render: (_) => {
+        return <div>{moment(_).format('YYYY-MM-DD')}</div>;
+      }
     },
     {
       title: 'Motivo',
@@ -187,7 +190,10 @@ export const useCustomIntake = () => {
       dataIndex: 'dateConsumptionOrder',
       ...getColumnSearchProps('dateConsumptionOrder'),
       sorter: (a, b) => a.dateConsumptionOrder?.localeCompare(b?.dateConsumptionOrder),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      render: (_) => {
+        return <div>{moment(_).format('YYYY-MM-DD')}</div>;
+      }
     },
     {
       title: 'N° Orden de consumo',
