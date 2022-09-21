@@ -163,7 +163,7 @@ export const useCustomInventory = () => {
       title: 'Stock',
       dataIndex: 'stock',
       ...getColumnSearchProps('Stock'),
-      sorter: (a, b) => a.stock.length - b.stock.length,
+      sorter: (a, b) => a.stock - b.stock,
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -175,16 +175,16 @@ export const useCustomInventory = () => {
     },
     {
       title: 'Stock mínimo',
-      dataIndex: 'stockMin',
-      ...getColumnSearchProps('Stock mínimo'),
-      sorter: (a, b) => a.stockMin.length - b.stockMin.length,
+      dataIndex: 'totalAverage',
+      ...getColumnSearchProps('stock mínimo'),
+      sorter: (a, b) => a.totalAverage - b.totalAverage,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Stock máximo',
-      dataIndex: 'stockMax',
+      dataIndex: 'max',
       ...getColumnSearchProps('Stock máximo'),
-      sorter: (a, b) => a.stockMax.length - b.stockMax.length,
+      sorter: (a, b) => a.max - b.max,
       sortDirections: ['descend', 'ascend']
     },
     {

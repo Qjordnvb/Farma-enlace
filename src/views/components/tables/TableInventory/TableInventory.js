@@ -42,6 +42,7 @@ const TableInventory = () => {
           }}
           onChange={onChange}
           rowSelection={rowSelection}
+          rowKey={(record) => record.id}
         />
       </Form>
       <div className="flex justify-end items-end flex-col">

@@ -2,7 +2,6 @@ import {useState, useEffect} from 'react';
 import {DeleteFilled} from '@ant-design/icons';
 import {Typography} from 'antd';
 import {useUtils} from 'hooks';
-import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 
 export const useCustomDelivery = () => {
   const [isAdd, setIsAdd] = useState(false);
@@ -185,8 +184,20 @@ export const useCustomDelivery = () => {
       key: '4',
       title: 'Porcentajes',
       children: [
-        {title: 'Empleado', dataIndex: 'personalDiscount'},
-        {title: 'Empresa', dataIndex: 'companyDiscount'}
+        {
+          title: 'Empleado',
+          dataIndex: 'personalDiscount',
+          render: (_) => {
+            return <div>{_}%</div>;
+          }
+        },
+        {
+          title: 'Empresa',
+          dataIndex: 'companyDiscount',
+          render: (_) => {
+            return <div>{_}%</div>;
+          }
+        }
       ],
       dataIndex: 'prendas'
     },
@@ -195,7 +206,7 @@ export const useCustomDelivery = () => {
       dataIndex: 'accion',
       render: (_, record) => {
         return (
-          <span className="flex items-center">
+          <span className="flex items-center justify-center	">
             <Typography.Link
               onClick={() => {
                 onDelete(record.id);
@@ -206,14 +217,6 @@ export const useCustomDelivery = () => {
             >
               <DeleteFilled />
             </Typography.Link>
-            <div
-              // onClick={() => {
-              //   onEditFile(record);
-              // }}
-              className="btn-edit mt-2"
-            >
-              <img src={BtnEdit} alt="btn-edit" />
-            </div>
           </span>
         );
       }

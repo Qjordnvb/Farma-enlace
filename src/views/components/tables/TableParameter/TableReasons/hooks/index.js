@@ -7,8 +7,13 @@ import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 export const useCustomReasons = () => {
   const [isAdd, setIsAdd] = useState(false);
   const [addingFile, setAddingFile] = useState({});
-  const {getColumnSearchProps, getReasonsTableParameters, addReason, switchActiveReason} =
-    useUtils();
+  const {
+    getColumnSearchProps,
+    getReasonsTableParameters,
+    addReason,
+    switchActiveReason,
+    deleteReason
+  } = useUtils();
   const [dataSource, setDataSource] = useState([]);
   const [form] = Form.useForm();
   const [editingKey, setEditingKey] = useState(null);
@@ -76,6 +81,12 @@ export const useCustomReasons = () => {
       // eslint-disable-next-line no-console
       console.log('Validate Failed:', errInfo);
     }
+  };
+
+  const onDelete = (id) => {
+    deleteReason(id).then(() => {
+      dataReasonsTable();
+    });
   };
 
   const columns = [
@@ -190,9 +201,9 @@ export const useCustomReasons = () => {
             </div>
 
             <Typography.Link
-              // onClick={() => {
-              //   onDelete(record.id);
-              // }}
+              onClick={() => {
+                onDelete(record.id);
+              }}
               style={{
                 marginRight: 8,
                 marginTop: -14
