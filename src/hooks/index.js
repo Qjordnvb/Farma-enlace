@@ -165,6 +165,26 @@ export const useUtils = () => {
     }
   }
 
+  async function editAmountToBuy(id, amountToBuy) {
+    try {
+      const request = await Apilocal.post('/uniformDescription/editAmount', {id, amountToBuy});
+      return request.data;
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('ERROR - getAllDescriptions', e);
+    }
+  }
+
+  async function getStock() {
+    try {
+      const request = await Apilocal.get('/uniformDescription/stock');
+      return request.data;
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('ERROR - getAllDescriptions', e);
+    }
+  }
+
   async function getAllDeliveries() {
     try {
       const request = await Apilocal.get('/uniformDelivery/findAll');
@@ -402,6 +422,8 @@ export const useUtils = () => {
     editPrice,
     deleteGarment,
     handleExport,
-    deleteReason
+    deleteReason,
+    editAmountToBuy,
+    getStock
   };
 };

@@ -49,15 +49,15 @@ export const useCustomDescription = () => {
   useEffect(() => {
     let formatData1 = dataTable.map((product) => {
       if (product.garmentTypes.length > 0) {
-        let formatGarment = product.garmentTypes.reduce(function (res, garmentType) {
-          res[`garment${garmentType.garments[0].garmentId}_obj`] = {
+        let formatGarment = product.garmentTypes?.reduce(function (res, garmentType) {
+          res[`garment${garmentType?.garments[0]?.garmentId}_obj`] = {
             ...garmentType,
-            ...garmentType.garments[0]
+            ...garmentType?.garments[0]
           };
 
-          res[`garment${garmentType.garments[0].garmentId}`] = garmentType.quantity;
+          res[`garment${garmentType?.garments[0]?.garmentId}`] = garmentType?.quantity;
 
-          delete res[`garment${garmentType.garments[0].garmentId}`].garments;
+          delete res[`garment${garmentType?.garments[0]?.garmentId}`]?.garments;
           return res;
         }, {});
 

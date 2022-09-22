@@ -42,7 +42,51 @@ const TableDiscount = () => {
           width="250px"
           height="40px"
           onClick={() => {
-            handleExport(dataSource, 'DESCUENTO');
+            let selectedData = [];
+            if (rowSelection.selectedRowKeys && rowSelection.selectedRowKeys.length > 0) {
+              rowSelection.selectedRowKeys.map((key) => {
+                let findRow = dataSource.filter((value) => value.id === key);
+                if (findRow && findRow.length > 0) {
+                  selectedData.push(findRow[0]);
+                }
+              });
+            } else {
+              selectedData = dataSource;
+            }
+
+            selectedData = selectedData.map((row) => {
+              const {
+                COLABORADOR,
+                CARGO,
+                NOMBRE_CENTRO_COSTOS,
+                CODIGO_OFICINA,
+                NOMBRE_OFICINA,
+                TALLA,
+                descripcion,
+                requestDate,
+                dues,
+                price,
+                consumptionOrderNumber,
+                ultimaActualizacion,
+                requestStatus
+              } = row;
+              return {
+                COLABORADOR,
+                CARGO,
+                NOMBRE_CENTRO_COSTOS,
+                CODIGO_OFICINA,
+                NOMBRE_OFICINA,
+                TALLA,
+                DESCRIPCION: descripcion,
+                FECHA: requestDate,
+                CUOTAS: dues,
+                PRICE: price,
+                'NUMERO ORDEN DE CONSUMO': consumptionOrderNumber,
+                'ULTIMA ACTUALIZACION': ultimaActualizacion,
+                ESTADO: requestStatus
+              };
+            });
+            handleExport(selectedData, 'DESCUENTO');
           }}
         />
       </div>

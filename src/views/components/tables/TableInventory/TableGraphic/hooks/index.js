@@ -1,152 +1,159 @@
+import {useEffect, useState} from 'react';
+
+import {useUtils} from '../../../../../../hooks';
 export const useCustomGraphic = () => {
-  const data = [
+  const {getStock} = useUtils();
+  const [stock, setStock] = useState([]);
+
+  useEffect(() => {
+    getStock().then((res) => {
+      setStock(res.stock);
+    });
+  }, []);
+  let test = [
     {
-      month: 'Jan',
-      type: 'Camiseta',
-      value: 125
+      id: 1,
+      date: '2022-09-22T02:01:54.921Z',
+      codigo: '0000115106',
+      descripcion: 'ZP PRV MANDIL ECO SIERRA T-S-36',
+      productId: 1,
+      stock: 220,
+      createdAt: '2022-09-22T02:01:54.925Z',
+      updatedAt: '2022-09-22T02:01:54.925Z'
     },
     {
-      month: 'Jan',
-      type: 'Mandil',
-      value: 51
+      id: 2,
+      date: '2022-09-22T02:01:54.921Z',
+      codigo: '0000115108',
+      descripcion: 'ZP PRV MANDIL ECO SIERRA T-L-40',
+      productId: 2,
+      stock: 231,
+      createdAt: '2022-09-22T02:01:54.925Z',
+      updatedAt: '2022-09-22T02:01:54.925Z'
     },
     {
-      month: 'Feb',
-      type: 'Chaqueta',
-      value: 132
+      id: 3,
+      date: '2022-09-22T02:01:54.921Z',
+      codigo: '0000115114',
+      descripcion: 'ZP PRV MANDIL ECO COSTA T-XS-34',
+      productId: 3,
+      stock: 137,
+      createdAt: '2022-09-22T02:01:54.925Z',
+      updatedAt: '2022-09-22T02:01:54.925Z'
     },
     {
-      month: 'Feb',
-      type: 'Escarpela',
-      value: 91
+      id: 1,
+      date: '2022-09-23T02:01:54.921Z',
+      codigo: '0000115106',
+      descripcion: 'ZP PRV MANDIL ECO SIERRA T-S-36',
+      productId: 1,
+      stock: 250,
+      createdAt: '2022-09-22T02:01:54.925Z',
+      updatedAt: '2022-09-22T02:01:54.925Z'
     },
     {
-      month: 'Mar',
-      type: 'Camiseta',
-      value: 141
+      id: 2,
+      date: '2022-09-23T02:01:54.921Z',
+      codigo: '0000115108',
+      descripcion: 'ZP PRV MANDIL ECO SIERRA T-L-40',
+      productId: 2,
+      stock: 211,
+      createdAt: '2022-09-22T02:01:54.925Z',
+      updatedAt: '2022-09-22T02:01:54.925Z'
     },
     {
-      month: 'Mar',
-      type: 'Mandil',
-      value: 34
+      id: 3,
+      date: '2022-09-23T02:01:54.921Z',
+      codigo: '0000115114',
+      descripcion: 'ZP PRV MANDIL ECO COSTA T-XS-34',
+      productId: 3,
+      stock: 100,
+      createdAt: '2022-09-22T02:01:54.925Z',
+      updatedAt: '2022-09-22T02:01:54.925Z'
     },
     {
-      month: 'Apr',
-      type: 'Chaqueta',
-      value: 158
+      id: 1,
+      date: '2022-09-24T02:01:54.921Z',
+      codigo: '0000115106',
+      descripcion: 'ZP PRV MANDIL ECO SIERRA T-S-36',
+      productId: 1,
+      stock: 360,
+      createdAt: '2022-09-22T02:01:54.925Z',
+      updatedAt: '2022-09-22T02:01:54.925Z'
     },
     {
-      month: 'Apr',
-      type: 'Escarpela',
-      value: 47
+      id: 2,
+      date: '2022-09-24T02:01:54.921Z',
+      codigo: '0000115108',
+      descripcion: 'ZP PRV MANDIL ECO SIERRA T-L-40',
+      productId: 2,
+      stock: 158,
+      createdAt: '2022-09-22T02:01:54.925Z',
+      updatedAt: '2022-09-22T02:01:54.925Z'
     },
     {
-      month: 'May',
-      type: 'Camiseta',
-      value: 133
+      id: 3,
+      date: '2022-09-24T02:01:54.921Z',
+      codigo: '0000115114',
+      descripcion: 'ZP PRV MANDIL ECO COSTA T-XS-34',
+      productId: 3,
+      stock: 97,
+      createdAt: '2022-09-22T02:01:54.925Z',
+      updatedAt: '2022-09-22T02:01:54.925Z'
     },
     {
-      month: 'May',
-      type: 'Mandil',
-      value: 63
+      id: 1,
+      date: '2022-09-25T02:01:54.921Z',
+      codigo: '0000115106',
+      descripcion: 'ZP PRV MANDIL ECO SIERRA T-S-36',
+      productId: 1,
+      stock: 45,
+      createdAt: '2022-09-22T02:01:54.925Z',
+      updatedAt: '2022-09-22T02:01:54.925Z'
     },
     {
-      month: 'June',
-      type: 'Chaqueta',
-      value: 143
+      id: 2,
+      date: '2022-09-25T02:01:54.921Z',
+      codigo: '0000115108',
+      descripcion: 'ZP PRV MANDIL ECO SIERRA T-L-40',
+      productId: 2,
+      stock: 600,
+      createdAt: '2022-09-22T02:01:54.925Z',
+      updatedAt: '2022-09-22T02:01:54.925Z'
     },
     {
-      month: 'June',
-      type: 'Escarpela',
-      value: 58
-    },
-    {
-      month: 'July',
-      type: 'Camiseta',
-      value: 176
-    },
-    {
-      month: 'July',
-      type: 'Mandil',
-      value: 56
-    },
-    {
-      month: 'Aug',
-      type: 'Chaqueta',
-      value: 194
-    },
-    {
-      month: 'Aug',
-      type: 'Escarpela',
-      value: 77
-    },
-    {
-      month: 'Sep',
-      type: 'Camiseta',
-      value: 115
-    },
-    {
-      month: 'Sep',
-      type: 'Mandil',
-      value: 99
-    },
-    {
-      month: 'Oct',
-      type: 'Chaqueta',
-      value: 134
-    },
-    {
-      month: 'Oct',
-      type: 'Escarpela',
-      value: 106
-    },
-    {
-      month: 'Nov',
-      type: 'Camiseta',
-      value: 110
-    },
-    {
-      month: 'Nov',
-      type: 'Mandil',
-      value: 88
-    },
-    {
-      month: 'Dec',
-      type: 'Chaqueta',
-      value: 91
-    },
-    {
-      month: 'Dec',
-      type: 'Escarpela',
-      value: 56
+      id: 3,
+      date: '2022-09-25T02:01:54.921Z',
+      codigo: '0000115114',
+      descripcion: 'ZP PRV MANDIL ECO COSTA T-XS-34',
+      productId: 3,
+      stock: 300,
+      createdAt: '2022-09-22T02:01:54.925Z',
+      updatedAt: '2022-09-22T02:01:54.925Z'
     }
   ];
   const config = {
-    data,
-    xField: 'month',
-    yField: 'value',
+    data: test,
+    xField: 'date',
+    yField: 'stock',
 
-    seriesField: 'type',
-    color: ({type}) => {
-      return type === 'Camiseta'
-        ? '#F4664A'
-        : type === 'Mandil'
-        ? '#81BB00'
-        : type === 'Chaqueta'
-        ? '#30BF78'
-        : '#2F54EB';
-    },
-    lineStyle: ({type}) => {
-      if (type === 'Escarpela') {
-        return {
-          lineDash: [4, 4],
-          opacity: 1
-        };
+    seriesField: 'descripcion',
+    xAxis: {
+      type: 'time',
+      time: {
+        unit: 'month',
+        minUnit: 'day',
+        stepSize: 1,
+        round: true
       }
-      return {
-        opacity: 0.5
-      };
+    },
+    animation: {
+      appear: {
+        animation: 'path-in',
+        duration: 5000
+      }
     }
   };
-  return {data, config};
+
+  return {stock, config};
 };

@@ -1,55 +1,25 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {useUtils} from 'hooks';
+import moment from 'moment';
 
 export const useCustomReport = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
-  const {getColumnSearchProps} = useUtils();
+  const {getColumnSearchProps, getOrders} = useUtils();
 
-  const [dataSource, setDataSource] = useState([
-    {
-      key: '1',
-      n: `1`,
-      colaborador: `ABAD GAONA LADY ABIGAIL 1`,
-      cargo: `ASISTENTE SENIOR 1`,
-      distribution: 'Distribución Administrativa',
-      idCentroGestion: `2321`,
-      centroG: `Farmados 1`,
-      talla: `M`,
-      kits: `asfaweadw`,
-      fecha: `2/03/2022`,
-      motivo: `Personal nuevo`,
-      ultimaReposicion: `15 dias`
-    },
-    {
-      key: '2',
-      n: `2`,
-      colaborador: `ABAD GAONA LADY ABIGAIL 1`,
-      cargo: `ASISTENTE SENIOR 1`,
-      distribution: 'Distribución Administrativa',
-      idCentroGestion: `2321`,
-      centroG: `Farmados 1`,
-      talla: `M`,
-      kits: `asfaweadw`,
-      fecha: `2/03/2022`,
-      motivo: `Personal nuevo`,
-      ultimaReposicion: `15 dias`
-    },
-    {
-      key: '3',
-      n: `3`,
-      colaborador: `ABAD GAONA LADY ABIGAIL 1`,
-      cargo: `ASISTENTE SENIOR 1`,
-      distribution: 'Distribución Administrativa',
-      idCentroGestion: `2321`,
-      centroG: `Farmados 1`,
-      talla: `M`,
-      kits: `asfaweadw`,
-      fecha: `2/03/2022`,
-      motivo: `Personal nuevo`,
-      ultimaReposicion: `15 dias`
-    }
-  ]);
+  const [dataSource, setDataSource] = useState([]);
+
+  const getOrdersData = () => {
+    getOrders().then((res) => {
+      let formatOrders = res.map((order) => {
+        return {...order, ...order.producto, ...order.employee, ...order.parameterizedReason};
+      });
+      setDataSource(formatOrders);
+    });
+  };
+  useEffect(() => {
+    getOrdersData();
+  }, []);
 
   const onSelectChange = (newSelectedRowKeys) => {
     setSelectedRowKeys(newSelectedRowKeys);
@@ -71,44 +41,44 @@ export const useCustomReport = () => {
     {
       title: 'N°',
       width: 70,
-      dataIndex: 'n',
-      sorter: (a, b) => a.n.length - b.n.length,
+      dataIndex: 'id',
+      sorter: (a, b) => a.id - b.id,
       sortDirections: ['descend', 'ascend']
     },
 
     {
       title: 'Colaborador',
-      dataIndex: 'colaborador',
+      dataIndex: 'COLABORADOR',
       ...getColumnSearchProps('Colaborador'),
-      sorter: (a, b) => a.colaborador.length - b.colaborador.length,
+      sorter: (a, b) => a.COLABORADOR.localeCompare(b.COLABORADOR),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Cargo',
-      dataIndex: 'cargo',
+      dataIndex: 'CARGO',
       ...getColumnSearchProps('Cargo'),
-      sorter: (a, b) => a.cargo.length - b.cargo.length,
+      sorter: (a, b) => a.CARGO.localeCompare(b.CARGO),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Distribución Administrativa',
-      dataIndex: 'distribution',
+      dataIndex: 'NOMBRE_CENTRO_COSTOS',
       ...getColumnSearchProps('Distribución Administrativa'),
-      sorter: (a, b) => a.distribution.length - b.distribution.length,
+      sorter: (a, b) => a.NOMBRE_CENTRO_COSTOS?.localeCompare(b.NOMBRE_CENTRO_COSTOS),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Código Centro de Gestión',
-      dataIndex: 'idCentroGestion',
-      ...getColumnSearchProps('Código Centro de Gestión'),
-      sorter: (a, b) => a.idCentroGestion.length - b.idCentroGestion.length,
+      dataIndex: 'CODIGO_CENTRO_COSTOS',
+      ...getColumnSearchProps('codigo centro de gestion'),
+      sorter: (a, b) => a.CODIGO_CENTRO_COSTOS?.localeCompare(b.CODIGO_CENTRO_COSTOS),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Centro de Gestión',
-      dataIndex: 'centroG',
-      ...getColumnSearchProps('Centro de Gestión'),
-      sorter: (a, b) => a.centroG.length - b.centroG.length,
+      dataIndex: 'NOMBRE_CENTRO_COSTOS',
+      ...getColumnSearchProps('nombre centro de costos'),
+      sorter: (a, b) => a.NOMBRE_CENTRO_COSTOS?.localeCompare(b.NOMBRE_CENTRO_COSTOS),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -116,35 +86,38 @@ export const useCustomReport = () => {
       dataIndex: 'talla',
       with: 40,
       ...getColumnSearchProps('Talla'),
-      sorter: (a, b) => a.talla.length - b.talla.length,
+      sorter: (a, b) => a.talla - b.talla,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Kits',
-      dataIndex: 'kits',
+      dataIndex: 'descripcion',
       ...getColumnSearchProps('Kits '),
-      sorter: (a, b) => a.kits.length - b.kits.length,
+      sorter: (a, b) => a.descripcion.localeCompare(b.descripcion),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Fecha',
-      dataIndex: 'fecha',
+      dataIndex: 'requestDate',
       ...getColumnSearchProps('Fecha'),
-      sorter: (a, b) => a.fecha.length - b.fecha.length,
-      sortDirections: ['descend', 'ascend']
+      sorter: (a, b) => a.requestDate.length - b.requestDate.length,
+      sortDirections: ['descend', 'ascend'],
+      render: (_) => {
+        return <div>{moment(_).format('YYYY-MM-DD')}</div>;
+      }
     },
     {
       title: 'Motivo',
-      dataIndex: 'motivo',
+      dataIndex: 'reason',
       ...getColumnSearchProps('Motivo'),
-      sorter: (a, b) => a.motivo.length - b.motivo.length,
+      sorter: (a, b) => a.reason.localeCompare(b.reason),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Tiempo desde la última reposición',
-      dataIndex: 'ultimaReposicion',
+      dataIndex: 'timeSinceLastReplacement',
       ...getColumnSearchProps('Tiempo desde la última reposición'),
-      sorter: (a, b) => a.ultimaReposicion.length - b.ultimaReposicion.length,
+      sorter: (a, b) => a.timeSinceLastReplacement - b.timeSinceLastReplacement,
       sortDirections: ['descend', 'ascend']
     }
   ];
