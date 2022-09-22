@@ -11,7 +11,7 @@ export const useCustomInventory = () => {
   const [data, setData] = useState([]);
 
   const [editingKey, setEditingKey] = useState('');
-  const {getAllDescriptions, getGarmentsTableParameters} = useUtils();
+  const {getAllDescriptions, getGarmentsTableParameters, editAmountToBuy} = useUtils();
 
   const [garmentsList, setGarmentsList] = useState([]);
 
@@ -41,15 +41,15 @@ export const useCustomInventory = () => {
   useEffect(() => {
     let formatData1 = dataSource.map((product) => {
       if (product.garmentTypes.length > 0) {
-        let formatGarment = product.garmentTypes.reduce(function (res, garmentType) {
-          res[`garment${garmentType.garments[0].garmentId}_obj`] = {
+        let formatGarment = product.garmentTypes?.reduce(function (res, garmentType) {
+          res[`garment${garmentType?.garments[0]?.garmentId}_obj`] = {
             ...garmentType,
             ...garmentType.garments[0]
           };
 
-          res[`garment${garmentType.garments[0].garmentId}`] = garmentType.quantity;
+          res[`garment${garmentType?.garments[0]?.garmentId}`] = garmentType.quantity;
 
-          delete res[`garment${garmentType.garments[0].garmentId}`].garments;
+          delete res[`garment${garmentType?.garments[0]?.garmentId}`].garments;
           return res;
         }, {});
 
@@ -81,8 +81,8 @@ export const useCustomInventory = () => {
     onChange: onSelectChange
   };
 
-  const EditableCell = ({editing, dataIndex, title, inputType, children, ...restProps}) => {
-    const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
+  const EditableCell = ({editing, dataIndex, title, children, ...restProps}) => {
+    const inputNode = dataIndex === 'amountToBuy' ? <InputNumber /> : <Input />;
     return (
       <td {...restProps}>
         {editing ? (
@@ -94,7 +94,7 @@ export const useCustomInventory = () => {
             rules={[
               {
                 required: true,
-                message: `Please Input ${title}!`
+                message: `Por favor ingrese ${title}!`
               }
             ]}
           >
@@ -121,22 +121,19 @@ export const useCustomInventory = () => {
     setEditingKey('');
   };
 
-  const save = async (key) => {
+  const save = async (id) => {
     try {
       const row = await form.validateFields();
-      const newData = [...dataSource];
-      const index = newData.findIndex((item) => key === item.key);
+      setEditingKey('');
+      editAmountToBuy(id, row.amountToBuy).then(() => {
+        getGarmentsTableParameters(true).then((res) => {
+          setGarmentsList(res);
 
-      if (index > -1) {
-        const item = newData[index];
-        newData.splice(index, 1, {...item, ...row});
-        setDataSource(newData);
-        setEditingKey('');
-      } else {
-        newData.push(row);
-        setDataSource(newData);
-        setEditingKey('');
-      }
+          getAllDescriptions().then((res) => {
+            setDataSource(res);
+          });
+        });
+      });
     } catch (errInfo) {
       // eslint-disable-next-line no-console
       console.log('Validate Failed:', errInfo);
@@ -168,9 +165,9 @@ export const useCustomInventory = () => {
     },
     {
       title: 'Cantidad sugerida',
-      dataIndex: 'cantidad',
+      dataIndex: 'suggestion',
       ...getColumnSearchProps('Cantidad'),
-      sorter: (a, b) => a.cantidad.length - b.cantidad.length,
+      sorter: (a, b) => a.suggestion - b.suggestion,
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -188,11 +185,33 @@ export const useCustomInventory = () => {
       sortDirections: ['descend', 'ascend']
     },
     {
+      title: 'Prioridad',
+      dataIndex: 'priority',
+      ...getColumnSearchProps('prioridad'),
+      sorter: (a, b) => a.priority.localeCompare(b.priority),
+      sortDirections: ['descend', 'ascend'],
+      defaultSortOrder: 'ascend',
+
+      render: (_) => {
+        let color = {
+          Alta: 'red',
+          Media: 'orange',
+          Baja: 'green'
+        };
+        return {
+          props: {
+            style: {background: color[_]}
+          },
+          children: <div>{_}</div>
+        };
+      }
+    },
+    {
       title: 'Cantidad a comprar',
-      dataIndex: 'cantidadCompra',
+      dataIndex: 'amountToBuy',
       editable: true,
       ...getColumnSearchProps('Cantidad a comprar'),
-      sorter: (a, b) => a.cantidadCompra.length - b.cantidadCompra.length,
+      sorter: (a, b) => a.amountToBuy - b.amountToBuy,
       sortDirections: ['descend', 'ascend']
     },
 
@@ -205,7 +224,7 @@ export const useCustomInventory = () => {
         return editable ? (
           <span>
             <Typography.Link
-              onClick={() => save(record.key)}
+              onClick={() => save(record.id)}
               style={{
                 marginRight: 8
               }}

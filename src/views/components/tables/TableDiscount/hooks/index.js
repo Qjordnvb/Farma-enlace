@@ -11,7 +11,10 @@ export const useCustomDiscount = () => {
 
   const getOrdersTable = () => {
     getOrders().then((res) => {
-      setDataSource(res);
+      let formatOrders = res.map((order) => {
+        return {...order, ...order.producto, ...order.employee, ...order.parameterizedReason};
+      });
+      setDataSource(formatOrders);
     });
   };
 
@@ -34,58 +37,63 @@ export const useCustomDiscount = () => {
       title: 'N°',
       width: 70,
       dataIndex: 'id',
-      sorter: (a, b) => a.n.length - b.n.length,
+      sorter: (a, b) => a.id - b.id,
       sortDirections: ['descend', 'ascend']
     },
-
     {
       title: 'Colaborador',
-      dataIndex: ['employee', 'COLABORADOR'],
+      dataIndex: 'COLABORADOR',
       ...getColumnSearchProps('COLABORADOR'),
-      sorter: (a, b) => a.COLABORADOR.length - b.COLABORADOR.length,
-      sortDirections: ['descend', 'ascend']
+      sorter: (a, b) => a.COLABORADOR?.localeCompare(b?.COLABORADOR),
+      sortDirections: ['descend', 'ascend'],
+      width: '10%',
+      onFilter: (value, record) => {
+        return record?.COLABORADOR?.toLowerCase().includes(value.toLowerCase());
+      }
     },
     {
       title: 'Cargo',
-      dataIndex: ['employee', 'CARGO'],
+      dataIndex: 'CARGO',
       ...getColumnSearchProps('CARGO'),
-      sorter: (a, b) => a.employee.CARGO.length - b.employee.CARGO.length,
+      sorter: (a, b) => a.CARGO?.localeCompare(b.CARGO),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Distribución Administrativa',
-      dataIndex: ['employee', 'NOMBRE_CENTRO_COSTOS'],
+      dataIndex: 'NOMBRE_CENTRO_COSTOS',
       ...getColumnSearchProps('Distribución Administrativa'),
-      sorter: (a, b) => a.NOMBRE_CENTRO_COSTOS.length - b.NOMBRE_CENTRO_COSTOS.length,
+      sorter: (a, b) => a.NOMBRE_CENTRO_COSTOS?.localeCompare(b.NOMBRE_CENTRO_COSTOS),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Código oficina ',
-      dataIndex: ['employee', 'CODIGO_OFICINA'],
+      dataIndex: 'CODIGO_OFICINA',
       ...getColumnSearchProps('Código oficina '),
-      sorter: (a, b) => a.CODIGO_OFICINA.length - b.CODIGO_OFICINA.length,
+      sorter: (a, b) => +a.CODIGO_OFICINA - +b.CODIGO_OFICINA,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Nombre de la oficina',
       dataIndex: ['employee', 'NOMBRE_OFICINA'],
       ...getColumnSearchProps('NOMBRE_OFICINA'),
-      sorter: (a, b) => a.NOMBRE_OFICINA.length - b.NOMBRE_OFICINA.length,
+      sorter: (a, b) => a.NOMBRE_OFICINA.localeCompare(b.NOMBRE_OFICINA),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Talla',
-      dataIndex: ['producto', 'talla'],
+      dataIndex: 'TALLA',
       with: 50,
       ...getColumnSearchProps('talla '),
-      sorter: (a, b) => a.producto?.talla.localeCompare(b.producto?.talla),
+      sorter: (a, b) => {
+        return a.TALLA?.localeCompare(b?.TALLA);
+      },
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Kits',
-      dataIndex: 'kits',
+      dataIndex: 'descripcion',
       ...getColumnSearchProps('Kits '),
-      sorter: (a, b) => a.kits.length - b.kits.length,
+      sorter: (a, b) => a.descripcion.localeCompare(b.descripcion),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -100,37 +108,37 @@ export const useCustomDiscount = () => {
     },
     {
       title: 'Cuotas',
-      dataIndex: 'cuotas',
+      dataIndex: 'dues',
       ...getColumnSearchProps('Cuotas'),
-      sorter: (a, b) => a.cuotas.length - b.cuotas.length,
+      sorter: (a, b) => a.dues - b.dues,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Valor',
-      dataIndex: ['producto', 'price'],
+      dataIndex: 'price',
       ...getColumnSearchProps('Cuotas'),
-      sorter: (a, b) => a.producto?.cuotas - b.producto.cuotas,
+      sorter: (a, b) => a.cuotas - b.cuotas,
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'N° Orden de Consumo',
-      dataIndex: 'cuotas',
-      ...getColumnSearchProps('Cuotas'),
-      sorter: (a, b) => a.cuotas.length - b.cuotas.length,
+      dataIndex: 'consumptionOrderNumber',
+      ...getColumnSearchProps('numero orden de consumo'),
+      sorter: (a, b) => a.consumptionOrderNumber?.localeCompare(b.consumptionOrderNumber),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'última modificación',
-      dataIndex: 'status',
-      ...getColumnSearchProps('Cuotas'),
-      sorter: (a, b) => a.cuotas.length - b.cuotas.length,
+      dataIndex: 'ultimaActualizacion',
+      ...getColumnSearchProps('ultima actualizacion'),
+      sorter: (a, b) => a.ultimaActualizacion?.localeCompare(b.ultimaActualizacion),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Estado',
-      dataIndex: 'status',
-      ...getColumnSearchProps('Cuotas'),
-      sorter: (a, b) => a.cuotas.length - b.cuotas.length,
+      dataIndex: 'requestStatus',
+      ...getColumnSearchProps('estado'),
+      sorter: (a, b) => a.requestStatus?.localeCompare(b.requestStatus),
       sortDirections: ['descend', 'ascend']
     }
   ];

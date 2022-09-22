@@ -95,7 +95,7 @@ export const useCustomReplacement = () => {
         porcentaje,
         reposicion,
         id: key,
-        ultimaActualizacion: user.nombrecorto
+        ultimaActualizacion: user && user.nombrecorto ? user.nombrecorto : 'jjarrin'
       }).then(() => {
         getAllRepositionParameters().then((res) => {
           setDataSource(res);
