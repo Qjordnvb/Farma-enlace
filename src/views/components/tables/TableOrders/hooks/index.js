@@ -36,7 +36,8 @@ export const useCustomOrders = () => {
   };
 
   const EditableCell = ({editing, dataIndex, title, children, ...restProps}) => {
-    const inputNode = title === 'Talla' ? <Input maxLength={5} /> : <InputNumber />;
+    const inputNode =
+      title === 'Talla' || title === 'Talla mandil' ? <Input maxLength={5} /> : <InputNumber />;
     return (
       <td {...restProps}>
         {editing ? (
@@ -85,7 +86,11 @@ export const useCustomOrders = () => {
       let row = await form.validateFields();
       const newData = [...dataSource];
       const index = newData.findIndex((item) => key === item.id);
-      updateEmployeeSize({TALLA: row.TALLA, CEDULA: newData[index].CEDULA}).then(() => {
+      updateEmployeeSize({
+        TALLA: row.TALLA,
+        TALLA_MANDIL: row.TALLA_MANDIL,
+        CEDULA: newData[index].CEDULA
+      }).then(() => {
         getEmployeesTable();
         cancel();
       });
@@ -182,7 +187,15 @@ export const useCustomOrders = () => {
       dataIndex: 'TALLA',
       editable: true,
       ...getColumnSearchProps('Talla'),
-      sorter: (a, b) => a.TALLA.localeCompare(b.TALLA),
+      sorter: (a, b) => a.TALLA?.localeCompare(b.TALLA),
+      sortDirections: ['descend', 'ascend']
+    },
+    {
+      title: 'Talla mandil',
+      dataIndex: 'TALLA_MANDIL',
+      editable: true,
+      ...getColumnSearchProps('talla mandil'),
+      sorter: (a, b) => a?.TALLA_MANDIL?.localeCompare(b?.TALLA_MANDIL),
       sortDirections: ['descend', 'ascend']
     },
     {

@@ -2,8 +2,10 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import {useUtils} from 'hooks';
+import 'moment/locale/es';
 
 export const useCustomIntake = () => {
+  moment.locale('es');
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const [isAdd, setIsAdd] = useState(false);
@@ -155,6 +157,13 @@ export const useCustomIntake = () => {
       sortDirections: ['descend', 'ascend']
     },
     {
+      title: 'Uniforme a enviar',
+      dataIndex: ['correctSize', 'descripcion'],
+      ...getColumnSearchProps('description'),
+      sorter: (a, b) => a?.correctSize?.descripcion?.localeCompare(b?.correctSize?.descripcion),
+      sortDirections: ['descend', 'ascend']
+    },
+    {
       title: 'Fecha de solicitud',
       dataIndex: 'requestDate',
       ...getColumnSearchProps('requestDate'),
@@ -173,10 +182,13 @@ export const useCustomIntake = () => {
     },
     {
       title: 'Tiempo desde la última reposición',
-      dataIndex: 'timeSinceLastReplacement',
-      ...getColumnSearchProps('timeSinceLastReplacement'),
-      sorter: (a, b) => a.timeSinceLastReplacement?.localeCompare(b.timeSinceLastReplacement),
-      sortDirections: ['descend', 'ascend']
+      dataIndex: 'dateConsumptionOrder',
+      ...getColumnSearchProps('tiempo desde la última reposición'),
+      sorter: (a, b) => a.dateConsumptionOrder?.localeCompare(b.dateConsumptionOrder),
+      sortDirections: ['descend', 'ascend'],
+      render: (_) => {
+        return <div>{moment(_).from(new Date())}</div>;
+      }
     },
     {
       title: 'Estado de la solicitud',
@@ -195,6 +207,19 @@ export const useCustomIntake = () => {
         return <div>{moment(_).format('YYYY-MM-DD')}</div>;
       }
     },
+    {
+      title: 'Proxima reposicion',
+      dataIndex: 'nextReplacement',
+      ...getColumnSearchProps('proxima reposicion'),
+      sorter: (a, b) =>
+        new Date(a.nextReplacement).valueOf() - new Date(b.nextReplacement).valueOf(),
+      sortDirections: ['descend', 'ascend'],
+      render: (_) => {
+        return <div>{moment(_).format('YYYY-MM-DD')}</div>;
+      },
+      defaultSortOrder: 'ascend'
+    },
+
     {
       title: 'N° Orden de consumo',
       dataIndex: 'consumptionOrderNumber',
