@@ -37,7 +37,11 @@ export const useCustomOrders = () => {
 
   const EditableCell = ({editing, dataIndex, title, children, ...restProps}) => {
     const inputNode =
-      title === 'Talla' || title === 'Talla mandil' ? <Input maxLength={5} /> : <InputNumber />;
+      title === 'Talla uniforme' || title === 'Talla mandil' ? (
+        <Input maxLength={5} />
+      ) : (
+        <InputNumber />
+      );
     return (
       <td {...restProps}>
         {editing ? (
@@ -183,7 +187,7 @@ export const useCustomOrders = () => {
       sortDirections: ['descend', 'ascend']
     },
     {
-      title: 'Talla',
+      title: 'Talla uniforme',
       dataIndex: 'TALLA',
       editable: true,
       ...getColumnSearchProps('Talla'),

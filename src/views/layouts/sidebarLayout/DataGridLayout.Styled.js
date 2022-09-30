@@ -56,4 +56,7 @@ export const StyledOptionData = styled.div.attrs({
       }
     }
   }
+  @media only screen and (max-width: 1366px) {
+    max-width: 1000px;
+  }
 `;

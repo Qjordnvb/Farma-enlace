@@ -4,7 +4,6 @@ import {NavLink, Routes, Route} from 'react-router-dom';
 import useViews from 'views';
 
 import './style.css';
-import {StyledOptionDataList} from './GridList.Styled';
 
 export default function GridList() {
   const {useComponents} = useViews();
@@ -14,7 +13,7 @@ export default function GridList() {
 
   return (
     <>
-      <StyledOptionDataList>
+      <div className={'container-table-header'}>
         <NavLink className={({isActive}) => (isActive ? 'active' : '')} to="garments">
           <span>prenda parametrizadas</span>
           <div className={({isActive}) => (isActive ? 'div-bg' : '')} />
@@ -23,7 +22,8 @@ export default function GridList() {
           <span>motivos parametrizados</span>
           <div className={({isActive}) => (isActive ? 'div-bg' : '')} />
         </NavLink>
-      </StyledOptionDataList>
+      </div>
+
       <>
         <div className="container-table">
           <Routes>

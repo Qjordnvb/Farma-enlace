@@ -9,7 +9,7 @@ export const useCustomIntake = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const [isAdd, setIsAdd] = useState(false);
-  const [addingFile, setAddingFile] = useState(null);
+  const [addingFile, setAddingFile] = useState({});
   // eslint-disable-next-line no-unused-vars
   const {getColumnSearchProps, createOrder, getOrders, getEmployees, getTableParameters} =
     useUtils();
@@ -21,6 +21,29 @@ export const useCustomIntake = () => {
   });
   const [employeesList, setEmployeesList] = useState([]);
   const [productsList, setProductsList] = useState([]);
+  const [filteredSizes, setFilteredSizes] = useState([]);
+  const [selectedColaborador, setSelectedColaborador] = useState({});
+  useEffect(() => {
+    if (addingFile?.colaborador) {
+      let findColaborador = employeesList.filter(
+        (value) => value.CEDULA === addingFile.colaborador
+      );
+      if (findColaborador[0]) {
+        setSelectedColaborador({...findColaborador[0]});
+        let getSizes = productsList.filter((product) => {
+          let splitProduct = product.descripcion.split(' ');
+          let kitType = splitProduct[2];
+
+          if (kitType === 'MANDIL') {
+            return product.talla === findColaborador[0].TALLA_MANDIL;
+          } else if (kitType === 'KIT') {
+            return product.talla === findColaborador[0].TALLA;
+          }
+        });
+        setFilteredSizes(getSizes);
+      }
+    }
+  }, [addingFile, employeesList, productsList]);
 
   const getOrdersTable = (dateRange) => {
     getOrders(dateRange).then((res) => {
@@ -103,21 +126,30 @@ export const useCustomIntake = () => {
       dataIndex: ['employee', 'CEDULA'],
       ...getColumnSearchProps('Cédula'),
       sorter: (a, b) => +a?.employee?.CEDULA - +b?.employee?.CEDULA,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      onFilter: (value, record) => {
+        return record.employee?.CEDULA?.toString().toLowerCase().includes(value);
+      }
     },
     {
       title: 'Colaborador',
       dataIndex: ['employee', 'COLABORADOR'],
       ...getColumnSearchProps('collaborator'),
       sorter: (a, b) => a.employee?.COLABORADOR?.localeCompare(b.employee?.COLABORADOR),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      onFilter: (value, record) => {
+        return record.employee?.COLABORADOR?.toString().toLowerCase().includes(value);
+      }
     },
     {
       title: 'Cargo',
       dataIndex: ['employee', 'CARGO'],
       ...getColumnSearchProps('Cargo'),
       sorter: (a, b) => a?.employee?.CARGO?.localeCompare(b?.employee?.CARGO),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      onFilter: (value, record) => {
+        return record.employee?.CARGO?.toString().toLowerCase().includes(value);
+      }
     },
     {
       title: 'Distribución Administrativa',
@@ -125,21 +157,30 @@ export const useCustomIntake = () => {
       ...getColumnSearchProps('administrativeDistribution'),
       sorter: (a, b) =>
         a?.employee?.NOMBRE_CENTRO_COSTOS?.localeCompare(b?.employee?.NOMBRE_CENTRO_COSTOS),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      onFilter: (value, record) => {
+        return record.employee?.NOMBRE_CENTRO_COSTOS?.toString().toLowerCase().includes(value);
+      }
     },
     {
       title: 'Código oficina ',
       dataIndex: ['employee', 'CODIGO_OFICINA'],
       ...getColumnSearchProps('officePosition'),
       sorter: (a, b) => a?.employee?.CODIGO_OFICINA?.localeCompare(b?.employee?.CODIGO_OFICINA),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      onFilter: (value, record) => {
+        return record.employee?.CODIGO_OFICINA?.toString().toLowerCase().includes(value);
+      }
     },
     {
       title: 'Nombre de la oficina',
       dataIndex: ['employee', 'NOMBRE_OFICINA'],
       ...getColumnSearchProps('officeName'),
       sorter: (a, b) => a?.employee?.NOMBRE_OFICINA?.localeCompare(b?.employee?.NOMBRE_OFICINA),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      onFilter: (value, record) => {
+        return record.employee?.CODIGO_OFICINA?.toString().toLowerCase().includes(value);
+      }
     },
     {
       title: 'Talla',
@@ -147,14 +188,20 @@ export const useCustomIntake = () => {
       with: 50,
       ...getColumnSearchProps('size'),
       sorter: (a, b) => a?.employee?.TALLA?.localeCompare(b?.employee?.TALLA),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      onFilter: (value, record) => {
+        return record.employee?.TALLA?.toString().toLowerCase().includes(value);
+      }
     },
     {
       title: 'Descripcion',
       dataIndex: ['producto', 'descripcion'],
       ...getColumnSearchProps('description'),
       sorter: (a, b) => a?.producto?.descripcion?.localeCompare(b?.producto?.descripcion),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      onFilter: (value, record) => {
+        return record.producto?.descripcion?.toString().toLowerCase().includes(value);
+      }
     },
     {
       title: 'Uniforme a enviar',
@@ -277,6 +324,8 @@ export const useCustomIntake = () => {
     selectedRowKeys,
     createConsumptionOrders,
     onDatePickerChange,
-    dateRange
+    dateRange,
+    selectedColaborador,
+    filteredSizes
   };
 };
