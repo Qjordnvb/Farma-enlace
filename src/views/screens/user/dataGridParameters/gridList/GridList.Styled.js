@@ -24,20 +24,18 @@ export const StyledOptionDataList = styled.div.attrs({
   align-items: center;
   justify-content: space-around;
   padding: 16px;
-  margin: auto;
-  margin-top: 3.2%;
+  margin: 3.2% auto auto;
   max-width: 1200px;
   width: 100%;
 
   /* Tono 1 */
-
   background: #ffffff;
   border-radius: 0px;
 
   a {
     display: flex;
     align-items: center;
-    flex-direction: column reverse;
+    flex-direction: column-reverse;
     justify-content: center;
     font-family: 'Inter';
     font-style: normal;
@@ -52,6 +50,7 @@ export const StyledOptionDataList = styled.div.attrs({
     text-transform: uppercase;
 
     color: #000000;
+
     &.active {
       background: linear-gradient(190.08deg, #2bc155 9.78%, #26d0ce 111.09%);
       height: 6px;
@@ -59,6 +58,7 @@ export const StyledOptionDataList = styled.div.attrs({
       max-width: 550px;
       width: 100%;
       transition: all 0.4s ease-in-out;
+
       span {
         background: linear-gradient(190.08deg, #2bc155 9.78%, #26d0ce 111.09%);
         -webkit-background-clip: text;
@@ -68,5 +68,8 @@ export const StyledOptionDataList = styled.div.attrs({
         margin-bottom: 25px;
       }
     }
+  }
+  @media only screen and (max-width: 1366px) {
+    max-width: 1000px;
   }
 `;

@@ -8,7 +8,7 @@ import './style.css';
 import '../TableParameter/TableReasons/style-reasons.css';
 
 const TableInventory = () => {
-  const {form, EditableCell, mergedColumns, data, rowSelection} = useCustomInventory();
+  const {form, EditableCell, mergedColumns, data, rowSelection, loading} = useCustomInventory();
   const {handleExport} = useUtils();
 
   const [currentLength, setCurrentLength] = useState(0);
@@ -32,6 +32,7 @@ const TableInventory = () => {
               cell: EditableCell
             }
           }}
+          loading={loading}
           dataSource={data}
           columns={mergedColumns}
           rowClassName="editable-row"

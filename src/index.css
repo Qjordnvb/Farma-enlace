@@ -653,3 +653,9 @@ html:lang(es) .ant-popover-message-title::before {
   content: '¿Seguro quieres cancelar esta acción?';
   font-size: 12px;
 }
+
+@media only screen and (max-width: 1366px) {
+  .container-table {
+    width: 1000px;
+  }
+}

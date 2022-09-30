@@ -17,6 +17,8 @@ export const useCustomInventory = () => {
 
   const [garmentColumns, setGarmentsColumns] = useState([]);
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     let getColumns = garmentsList.map((garment) => {
       return {
@@ -123,18 +125,22 @@ export const useCustomInventory = () => {
 
   const save = async (id) => {
     try {
+      setLoading(true);
       const row = await form.validateFields();
       setEditingKey('');
+
       editAmountToBuy(id, row.amountToBuy).then(() => {
         getGarmentsTableParameters(true).then((res) => {
           setGarmentsList(res);
 
           getAllDescriptions().then((res) => {
             setDataSource(res);
+            setLoading(false);
           });
         });
       });
     } catch (errInfo) {
+      setLoading(false);
       // eslint-disable-next-line no-console
       console.log('Validate Failed:', errInfo);
     }
@@ -268,6 +274,7 @@ export const useCustomInventory = () => {
     cancel,
     rowSelection,
     setDataSource,
-    data
+    data,
+    loading
   };
 };

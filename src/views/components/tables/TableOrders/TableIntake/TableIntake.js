@@ -20,10 +20,11 @@ const TableIntake = () => {
     addingFile,
     setAddingFile,
     employeesList,
-    productsList,
+    filteredSizes,
     createConsumptionOrders,
     onDatePickerChange,
-    dateRange
+    dateRange,
+    selectedColaborador
   } = useCustomIntake();
 
   const [currentLength, setCurrentLength] = useState(0);
@@ -70,7 +71,7 @@ const TableIntake = () => {
           >
             <Form id="modalAdd" className="w-full">
               <div className="flex flex-col justify-around">
-                <Form.Item className="item-form" label="Colaboradores">
+                <Form.Item className=" item-form " label="Colaboradores">
                   <Select
                     placeholder={'Colaboradores'}
                     value={addingFile?.colaborador}
@@ -95,6 +96,22 @@ const TableIntake = () => {
                     })}
                   </Select>
                 </Form.Item>
+                {Object.keys(selectedColaborador).length > 0 && (
+                  <div className={'flex text-neutral-500'}>
+                    <p>
+                      Talla uniforme:{' '}
+                      {selectedColaborador.TALLA ? selectedColaborador.TALLA : 'No disponible'}
+                    </p>
+                    <p className={'mx-2'}>-</p>
+                    <p>
+                      Talla uniforme:{' '}
+                      {selectedColaborador.TALLA_MANDIL
+                        ? selectedColaborador.TALLA_MANDIL
+                        : 'No disponible'}
+                    </p>
+                  </div>
+                )}
+
                 <Form.Item className="item-form" label="Descripcion">
                   <Select
                     placeholder={'Descripcion'}
@@ -111,7 +128,7 @@ const TableIntake = () => {
                       return option.children.toLowerCase().includes(input.toLowerCase());
                     }}
                   >
-                    {productsList.map((product) => {
+                    {filteredSizes.map((product) => {
                       return (
                         <Select.Option key={product.id} value={product.id}>
                           {product.descripcion}

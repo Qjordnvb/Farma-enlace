@@ -60,6 +60,7 @@ export const useCustomUniforms = () => {
       title === 'Precio Uniforme' ? (
         <InputNumber
           defaultValue={0}
+          min={0}
           formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
         />
@@ -97,7 +98,8 @@ export const useCustomUniforms = () => {
       width: '15%',
       ...getColumnSearchProps('codigo'),
       sorter: (a, b) => +a.codigo - +b.codigo,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      defaultSortOrder: 'ascend'
     },
     {
       title: 'Marca',
