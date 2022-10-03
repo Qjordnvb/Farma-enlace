@@ -104,7 +104,7 @@ const TableIntake = () => {
                     </p>
                     <p className={'mx-2'}>-</p>
                     <p>
-                      Talla uniforme:{' '}
+                      Talla mandil:{' '}
                       {selectedColaborador.TALLA_MANDIL
                         ? selectedColaborador.TALLA_MANDIL
                         : 'No disponible'}
