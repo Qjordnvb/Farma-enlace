@@ -9,7 +9,7 @@ export const useCustomOrders = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [editingKey, setEditingKey] = useState('');
   const inputFileRef = useRef(null);
-
+  const [loading, setLoading] = useState(false);
   const tallas = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 
   const {getColumnSearchProps, getEmployees, updateEmployeeSize, bulkSizeUpdate} = useUtils();
@@ -20,9 +20,15 @@ export const useCustomOrders = () => {
   };
 
   const getEmployeesTable = () => {
-    getEmployees().then((res) => {
-      setDataSource(res);
-    });
+    setLoading(true);
+    getEmployees()
+      .then((res) => {
+        setDataSource(res);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -87,18 +93,21 @@ export const useCustomOrders = () => {
 
   const save = async (key) => {
     try {
+      setLoading(true);
       let row = await form.validateFields();
       const newData = [...dataSource];
       const index = newData.findIndex((item) => key === item.id);
       updateEmployeeSize({
-        TALLA: row.TALLA,
-        TALLA_MANDIL: row.TALLA_MANDIL,
+        TALLA: row.TALLA?.toUpperCase(),
+        TALLA_MANDIL: row.TALLA_MANDIL?.toUpperCase(),
         CEDULA: newData[index].CEDULA
       }).then(() => {
+        setLoading(false);
         getEmployeesTable();
         cancel();
       });
     } catch (errInfo) {
+      setLoading(false);
       // eslint-disable-next-line no-console
       console.log('Validate Failed:', errInfo);
     }
@@ -110,15 +119,15 @@ export const useCustomOrders = () => {
       dataIndex: 'id',
       ...getColumnSearchProps('N°'),
       sorter: (a, b) => a.id - b.id,
-      sortDirections: ['descend', 'ascend'],
-      defaultSortOrder: 'ascend'
+      sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Cédula',
       dataIndex: 'CEDULA',
       ...getColumnSearchProps('CEDULA'),
       sorter: (a, b) => +a.CEDULA - +b.CEDULA,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      defaultSortOrder: 'ascend'
     },
     {
       title: 'Colaborador',
@@ -192,7 +201,10 @@ export const useCustomOrders = () => {
       editable: true,
       ...getColumnSearchProps('Talla'),
       sorter: (a, b) => a.TALLA?.localeCompare(b.TALLA),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      onFilter: (value, record) => {
+        return value?.toLowerCase() === record?.TALLA?.toLowerCase();
+      }
     },
     {
       title: 'Talla mandil',
@@ -200,7 +212,10 @@ export const useCustomOrders = () => {
       editable: true,
       ...getColumnSearchProps('talla mandil'),
       sorter: (a, b) => a?.TALLA_MANDIL?.localeCompare(b?.TALLA_MANDIL),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      onFilter: (value, record) => {
+        return value?.toLowerCase() === record?.TALLA_MANDIL?.toLowerCase();
+      }
     },
     {
       title: 'Acción',
@@ -286,6 +301,7 @@ export const useCustomOrders = () => {
     rowSelection,
     setDataSource,
     inputFileRef,
-    handleInputFile
+    handleInputFile,
+    loading
   };
 };

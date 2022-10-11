@@ -25,6 +25,7 @@ const DataGridInventory = lazy(() => import('./user/dataGridInventory/DataGridIn
 const DataGridDiscount = lazy(() => import('./user/dataGridDiscount/DataGridDiscount'));
 // Grid Report
 const DataGridReport = lazy(() => import('./user/dataGridReport/DataGridReport'));
+const ConfigPrivate = lazy(() => import('./user/ConfigPrivate'));
 
 const useScreens = () => {
   return {
@@ -45,7 +46,8 @@ const useScreens = () => {
     // discount
     DataGridDiscount,
     // report
-    DataGridReport
+    DataGridReport,
+    ConfigPrivate
   };
 };
 

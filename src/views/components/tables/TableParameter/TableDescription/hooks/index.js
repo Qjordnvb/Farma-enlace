@@ -10,6 +10,7 @@ export const useCustomDescription = () => {
   // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState(originData);
   const [editingKey, setEditingKey] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const isEditing = (record) => record.id === editingKey;
 
@@ -25,11 +26,13 @@ export const useCustomDescription = () => {
   const [garmentColumns, setGarmentsColumns] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     getGarmentsTableParameters(true).then((res) => {
       setGarmentsList(res);
 
       getAllDescriptions().then((res) => {
         setDataTable(res);
+        setLoading(false);
       });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -125,6 +128,7 @@ export const useCustomDescription = () => {
 
   const save = async (key) => {
     try {
+      setLoading(true);
       let findRow = data.find((obj) => obj.id === key);
 
       const row = await form.validateFields();
@@ -136,9 +140,14 @@ export const useCustomDescription = () => {
             garmentTypeId: findRow[`${rowKey}_obj`].garmentTypeId,
             uniformId: key
           }).then(() => {
-            getAllDescriptions().then((res) => {
-              setDataTable(res);
-            });
+            getAllDescriptions()
+              .then((res) => {
+                setDataTable(res);
+                setLoading(false);
+              })
+              .catch(() => {
+                setLoading(false);
+              });
             setEditingKey('');
           });
         } else {
@@ -146,12 +155,17 @@ export const useCustomDescription = () => {
             quantity: row[rowKey],
             garmentId: Number(rowKey.substring(7, 9)),
             uniformId: key
-          }).then(() => {
-            getAllDescriptions().then((res) => {
-              setDataTable(res);
+          })
+            .then(() => {
+              getAllDescriptions().then((res) => {
+                setDataTable(res);
+                setLoading(false);
+              });
+              setEditingKey('');
+            })
+            .catch(() => {
+              setLoading(false);
             });
-            setEditingKey('');
-          });
         }
       });
     } catch (errInfo) {
@@ -246,6 +260,7 @@ export const useCustomDescription = () => {
     EditableCell,
     data,
     mergedColumns,
-    cancel
+    cancel,
+    loading
   };
 };

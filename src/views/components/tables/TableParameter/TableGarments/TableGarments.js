@@ -20,7 +20,8 @@ function TableGarments() {
     resetAdd,
     onAddFile,
     onCreateGarment,
-    onEditGarment
+    onEditGarment,
+    loading
   } = useCustomGarments();
 
   const [currentLength, setCurrentLength] = useState(0);
@@ -51,6 +52,7 @@ function TableGarments() {
           rowClassName={(record) => {
             return record.active ? null : 'disabled-row';
           }}
+          loading={loading}
         ></Table>
         {isEditing && (
           <>

@@ -8,7 +8,6 @@ import Options2 from '../../../assets/img/option-2.png';
 import Options3 from '../../../assets/img/option-3.png';
 import Options4 from '../../../assets/img/option-4.png';
 import Options5 from '../../../assets/img/option-5.png';
-import OptionsImg from '../../../assets/img/options.png';
 
 import {StyledContainerInicio, StyledSelectOption} from './HomePrivate.Styled';
 
@@ -30,7 +29,11 @@ function HomePrivate() {
 
         <StyledSelectOption className="select-option">
           <h3 className="text-primary-500">Selecciona una función</h3>
-          <img className="img-options mt-12" src={OptionsImg} alt="options" />
+          <img
+            className="img-options mt-12"
+            src={'http://localhost:3002/static/home.jpg'}
+            alt="options"
+          />
           <div className="flex justify-evenly w-10/12 mt-12 flex-wrap">
             <a href={`${DATA}parameters/uniforms`}>
               <img src={Options1} alt="option-1" />

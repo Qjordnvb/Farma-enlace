@@ -14,7 +14,8 @@ function TableReasons() {
     setAddingFile,
     resetAdd,
     onAddFile,
-    onCreateReason
+    onCreateReason,
+    loading
   } = useCustomReasons();
   const {Option} = Select;
 
@@ -47,6 +48,7 @@ function TableReasons() {
           rowClassName={(record) => (!record.active ? 'disabled-row' : '')}
           rowKey={(record) => record.id}
           scroll={{y: 500, x: 2000}}
+          loading={loading}
         ></Table>
 
         {isAdd && (

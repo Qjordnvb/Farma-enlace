@@ -18,7 +18,8 @@ export default function TableDelivery() {
     onAddFile,
     reasonsList,
     productsList,
-    onCreateDelivery
+    onCreateDelivery,
+    loading
   } = useCustomDelivery();
 
   const [currentLength, setCurrentLength] = useState(0);
@@ -45,6 +46,7 @@ export default function TableDelivery() {
         columns={columns}
         dataSource={formatDataSource}
         showSizeChanger
+        loading={loading}
       />
       {isAdd && (
         <>

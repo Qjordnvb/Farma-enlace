@@ -23,6 +23,7 @@ export const useCustomDelivery = () => {
   const [reasonsList, setReasonsList] = useState([]);
   const [dataSource, setDataSource] = useState([]);
   const [formatDataSource, setFormatDataSource] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const formatAllDeliveries = (data) => {
     let newData = data.map((delivery) => {
@@ -64,7 +65,9 @@ export const useCustomDelivery = () => {
   }, [dataSource, garments]);
 
   useEffect(() => {
+    setLoading(true);
     getGarmentsTableParameters(true).then((res) => {
+      setLoading(false);
       setGarments(res);
     });
     getAllDeliveries().then((response) => {
@@ -92,17 +95,21 @@ export const useCustomDelivery = () => {
   }, [garments]);
 
   const onCreateDelivery = () => {
+    setLoading(true);
     createDelivery({...addingFile}).then(() => {
       getAllDeliveries().then((res) => {
         formatAllDeliveries(res);
+        setLoading(false);
       });
     });
   };
 
   const onDelete = (id) => {
+    setLoading(true);
     deleteUniformDelivery(id).then(() => {
       getAllDeliveries().then((response) => {
         setDataSource(response);
+        setLoading(false);
       });
     });
   };
@@ -259,6 +266,7 @@ export const useCustomDelivery = () => {
     productsList,
     reasonsList,
     onCreateDelivery,
-    onDelete
+    onDelete,
+    loading
   };
 };

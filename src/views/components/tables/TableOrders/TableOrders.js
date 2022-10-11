@@ -8,7 +8,7 @@ import './style-orders.css';
 import '../TableParameter/TableReasons/style-reasons.css';
 
 const TableOrders = () => {
-  const {form, EditableCell, mergedColumns, dataSource, inputFileRef, handleInputFile} =
+  const {form, EditableCell, mergedColumns, dataSource, inputFileRef, handleInputFile, loading} =
     useCustomOrders();
 
   const {handleExport} = useUtils();
@@ -37,6 +37,7 @@ const TableOrders = () => {
           dataSource={dataSource}
           columns={mergedColumns}
           rowClassName="editable-row"
+          loading={loading}
           pagination={{
             pageSizeOptions: [10, 20, 30, 40],
             showSizeChanger: true,

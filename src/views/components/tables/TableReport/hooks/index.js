@@ -4,16 +4,18 @@ import moment from 'moment';
 
 export const useCustomReport = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   const {getColumnSearchProps, getOrders} = useUtils();
 
   const [dataSource, setDataSource] = useState([]);
 
   const getOrdersData = () => {
+    setLoading(true);
     getOrders().then((res) => {
       let formatOrders = res.map((order) => {
         return {...order, ...order.producto, ...order.employee, ...order.parameterizedReason};
       });
+      setLoading(false);
       setDataSource(formatOrders);
     });
   };
@@ -31,13 +33,6 @@ export const useCustomReport = () => {
   };
 
   const columns = [
-    //  idCentroGestion: `2321`,
-    // centroG: `Farmados 1`,
-    // talla: `M`,
-    // kits: `asfaweadw`,
-    // fecha: `2/03/2022`,
-    // motivo: `Personal nuevo`,
-    // ultimaReposicion: `15 dias`
     {
       title: 'N°',
       width: 70,
@@ -126,6 +121,7 @@ export const useCustomReport = () => {
     columns,
     rowSelection,
     dataSource,
-    setDataSource
+    setDataSource,
+    loading
   };
 };

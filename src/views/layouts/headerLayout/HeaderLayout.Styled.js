@@ -76,7 +76,7 @@ export const StyledContainerLayout = styled.div.attrs({
       line-height: 20px;
       color: #ffffff;
       background: #2bc155;
-      margin-right: 20px;
+
       /* sombra 1 */
 
       box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);

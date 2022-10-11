@@ -210,7 +210,7 @@ export const useUtils = () => {
   async function getOrders(dateRange) {
     try {
       let url = '/orders/findAll';
-      if (dateRange) {
+      if (dateRange?.from && dateRange?.to) {
         url += `?from=${dateRange.from}&to=${dateRange.to}`;
       }
       const request = await Apilocal.get(url);

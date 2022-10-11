@@ -17,23 +17,25 @@ export const useCustomReasons = () => {
   const [dataSource, setDataSource] = useState([]);
   const [form] = Form.useForm();
   const [editingKey, setEditingKey] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   const isEditing = (record) => record?.id === editingKey;
 
   const dataReasonsTable = function () {
-    getReasonsTableParameters().then((response) => {
-      setDataSource(response);
-    });
+    setLoading(true);
+    getReasonsTableParameters()
+      .then((response) => {
+        setLoading(false);
+        setDataSource(response);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
     dataReasonsTable();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-  }, [addingFile]);
 
   const onChange = (record, selectedRows) => {
     let auxArray = JSON.parse(JSON.stringify(dataSource));
@@ -48,10 +50,15 @@ export const useCustomReasons = () => {
   };
 
   const onSwitchChange = (record, selectedRows) => {
-    switchActiveReason(record.id, selectedRows).then(() => {
-      // eslint-disable-next-line no-console
-      dataReasonsTable();
-    });
+    setLoading(true);
+    switchActiveReason(record.id, selectedRows)
+      .then(() => {
+        // eslint-disable-next-line no-console
+        dataReasonsTable();
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
 
   const edit = (record) => {
@@ -84,9 +91,14 @@ export const useCustomReasons = () => {
   };
 
   const onDelete = (id) => {
-    deleteReason(id).then(() => {
-      dataReasonsTable();
-    });
+    setLoading(true);
+    deleteReason(id)
+      .then(() => {
+        dataReasonsTable();
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
 
   const columns = [
@@ -237,6 +249,7 @@ export const useCustomReasons = () => {
     });
   };
   const onCreateReason = async () => {
+    setLoading(true);
     await addReason({
       ...addingFile,
       personalDiscount: addingFile.personalDiscount,
@@ -256,6 +269,7 @@ export const useCustomReasons = () => {
     resetAdd,
     onAddFile,
     onChange,
-    onCreateReason
+    onCreateReason,
+    loading
   };
 };
