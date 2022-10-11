@@ -6,7 +6,7 @@ import {useUtils} from '../../../../../hooks';
 import {useCustomDescription} from './hooks';
 
 const TableDescription = () => {
-  const {form, EditableCell, data, mergedColumns, cancel} = useCustomDescription();
+  const {form, EditableCell, data, mergedColumns, cancel, loading} = useCustomDescription();
   const {handleExport} = useUtils();
   const [currentLength, setCurrentLength] = useState(0);
   useEffect(() => {
@@ -39,6 +39,7 @@ const TableDescription = () => {
           }}
           onChange={onChange}
           scroll={{y: 500, x: 2000}}
+          loading={loading}
         />
         <div
           className="flex justify-end"

@@ -4,18 +4,24 @@ import {useUtils} from 'hooks';
 
 export const useCustomDiscount = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   const {getColumnSearchProps, getOrders} = useUtils();
 
   const [dataSource, setDataSource] = useState([]);
 
   const getOrdersTable = () => {
-    getOrders().then((res) => {
-      let formatOrders = res.map((order) => {
-        return {...order, ...order.producto, ...order.employee, ...order.parameterizedReason};
+    setLoading(true);
+    getOrders()
+      .then((res) => {
+        let formatOrders = res.map((order) => {
+          return {...order, ...order.producto, ...order.employee, ...order.parameterizedReason};
+        });
+        setDataSource(formatOrders);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
       });
-      setDataSource(formatOrders);
-    });
   };
 
   useEffect(() => {
@@ -147,6 +153,7 @@ export const useCustomDiscount = () => {
     columns,
     rowSelection,
     dataSource,
-    setDataSource
+    setDataSource,
+    loading
   };
 };

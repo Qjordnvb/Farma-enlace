@@ -7,6 +7,9 @@ import Logo from '../../../assets/img/logo.png';
 // import IcoProfile from '../../../assets/img/user-solid.svg';
 
 import {StyledContainerLayout} from './HeaderLayout.Styled';
+import {NavLink} from 'react-router-dom';
+import {DATA} from '../../../config/paths';
+import Ico6Green from '../../../assets/img/Settings.svg';
 
 function HeaderLayout({children}) {
   const navigate = useNavigate();
@@ -24,6 +27,13 @@ function HeaderLayout({children}) {
             <img src={IcoBtn} alt="ico-btn" />
             Inicio
           </button>
+
+          <NavLink
+            to={`${DATA}settings`}
+            className={'w-10 mx-8'}
+            children={<img src={Ico6Green} className={'w-10 '} alt="ico-1" />}
+          />
+
           <AppMenu
             children={
               <svg

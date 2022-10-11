@@ -19,11 +19,18 @@ export const useCustomGarments = () => {
   const [isAdd, setIsAdd] = useState(false);
   const [addingFile, setAddingFile] = useState(null);
   const [dataSource, setDataSource] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const dataReasonsTable = function () {
-    getGarmentsTableParameters().then((response) => {
-      setDataSource(response);
-    });
+  const dataReasonsTable = () => {
+    setLoading(true);
+    getGarmentsTableParameters()
+      .then((response) => {
+        setLoading(false);
+        setDataSource(response);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -37,12 +44,14 @@ export const useCustomGarments = () => {
   };
 
   const onSwitchChange = (record, selectedRows) => {
+    setLoading(true);
     switchActiveGarment(record.id, selectedRows).then(async () => {
-      await dataReasonsTable();
+      dataReasonsTable();
     });
   };
 
   const onDelete = (id) => {
+    setLoading(true);
     deleteGarment(id).then(() => {
       dataReasonsTable();
     });
@@ -131,14 +140,16 @@ export const useCustomGarments = () => {
   };
 
   const onCreateGarment = async () => {
+    setLoading(true);
     await addGarment({...addingFile}).then(async () => {
-      await dataReasonsTable();
+      dataReasonsTable();
     });
   };
 
   const onEditGarment = async () => {
+    setLoading(true);
     editGarmentDescription({...editingFile}).then(async () => {
-      await dataReasonsTable();
+      dataReasonsTable();
     });
   };
 
@@ -158,6 +169,7 @@ export const useCustomGarments = () => {
     resetAdd,
     onAddFile,
     onCreateGarment,
-    onEditGarment
+    onEditGarment,
+    loading
   };
 };

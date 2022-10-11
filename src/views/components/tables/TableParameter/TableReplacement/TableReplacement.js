@@ -9,7 +9,7 @@ import {useUtils} from '../../../../../hooks';
 import {useCustomReplacement} from './hooks';
 
 function TableReplacement() {
-  const {dataSource, form, mergedColumns, EditableCell} = useCustomReplacement();
+  const {dataSource, form, mergedColumns, EditableCell, loading} = useCustomReplacement();
   const {handleExport} = useUtils();
   const [currentLength, setCurrentLength] = useState(0);
   useEffect(() => {
@@ -41,6 +41,7 @@ function TableReplacement() {
             }
           }}
           rowClassName="editable-row"
+          loading={loading}
         ></Table>
       </div>
       <StyledGridList>

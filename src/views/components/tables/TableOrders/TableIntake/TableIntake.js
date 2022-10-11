@@ -24,7 +24,8 @@ const TableIntake = () => {
     createConsumptionOrders,
     onDatePickerChange,
     dateRange,
-    selectedColaborador
+    selectedColaborador,
+    loading
   } = useCustomIntake();
 
   const [currentLength, setCurrentLength] = useState(0);
@@ -53,6 +54,7 @@ const TableIntake = () => {
         }}
         onChange={onChange}
         rowKey={(record) => record.id}
+        loading={loading}
       />
       {isAdd && (
         <>

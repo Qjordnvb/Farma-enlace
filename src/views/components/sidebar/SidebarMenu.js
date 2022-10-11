@@ -14,6 +14,7 @@ import Ico3Green from '../../../assets/img/inventario.png';
 import Ico1 from '../../../assets/img/parametrizacion.png';
 
 import Ico5Green from '../../../assets/img/reporteria.png';
+
 // StyledComponents
 import {StyledContainerSidebar} from './Sidebar.Styled';
 

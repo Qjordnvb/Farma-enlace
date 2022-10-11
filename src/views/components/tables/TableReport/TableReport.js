@@ -7,7 +7,7 @@ import './style.css';
 import '../TableParameter/TableReasons/style-reasons.css';
 
 const TableReport = () => {
-  const {columns, rowSelection, dataSource} = useCustomReport();
+  const {columns, rowSelection, dataSource, loading} = useCustomReport();
   const {handleExport} = useUtils();
 
   const [currentLength, setCurrentLength] = useState(0);
@@ -34,6 +34,7 @@ const TableReport = () => {
           total: currentLength
         }}
         onChange={onChange}
+        loading={loading}
       />
       <div className="flex items-end">
         {' '}

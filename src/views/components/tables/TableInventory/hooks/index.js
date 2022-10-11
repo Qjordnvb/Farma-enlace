@@ -30,13 +30,23 @@ export const useCustomInventory = () => {
   }, [garmentsList]);
 
   useEffect(() => {
-    getGarmentsTableParameters(true).then((res) => {
-      setGarmentsList(res);
+    setLoading(true);
+    getGarmentsTableParameters(true)
+      .then((res) => {
+        setGarmentsList(res);
 
-      getAllDescriptions().then((res) => {
-        setDataSource(res);
+        getAllDescriptions()
+          .then((res) => {
+            setDataSource(res);
+            setLoading(false);
+          })
+          .catch((e) => {
+            console.error(e);
+          });
+      })
+      .catch((e) => {
+        console.error(e);
       });
-    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -12,7 +12,7 @@ export const useCustomReplacement = () => {
   const {getColumnSearchProps, getAllRepositionParameters, editRepositionParameter} = useUtils();
   const [editingKey, setEditingKey] = useState(null);
   const [currentLength, setCurrentLength] = useState(0);
-
+  const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   const isEditing = (record) => record?.id === editingKey;
 
@@ -26,9 +26,15 @@ export const useCustomReplacement = () => {
   }, [dataSource]);
 
   useEffect(() => {
-    getAllRepositionParameters().then((res) => {
-      setDataSource(res);
-    });
+    setLoading(true);
+    getAllRepositionParameters()
+      .then((res) => {
+        setDataSource(res);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -87,6 +93,7 @@ export const useCustomReplacement = () => {
 
   const save = async (key) => {
     try {
+      setLoading(true);
       const row = await form.validateFields();
       const {user} = JSON.parse(window.localStorage.getItem('MY_AUTH_APP'));
 
@@ -98,6 +105,7 @@ export const useCustomReplacement = () => {
         ultimaActualizacion: user && user.nombrecorto ? user.nombrecorto : 'jjarrin'
       }).then(() => {
         getAllRepositionParameters().then((res) => {
+          setLoading(false);
           setDataSource(res);
           setEditingKey(null);
           isEditing(null);
@@ -267,10 +275,16 @@ export const useCustomReplacement = () => {
   };
 
   const onEditReplacement = async () => {
+    setLoading(true);
     editRepositionParameter({...editingFile, id: editId}).then(() => {
-      getAllRepositionParameters().then((res) => {
-        setDataSource(res);
-      });
+      getAllRepositionParameters()
+        .then((res) => {
+          setLoading(false);
+          setDataSource(res);
+        })
+        .catch(() => {
+          setLoading(false);
+        });
     });
   };
 
@@ -310,6 +324,7 @@ export const useCustomReplacement = () => {
     mergedColumns,
     form,
     onTableChange,
-    currentLength
+    currentLength,
+    loading
   };
 };

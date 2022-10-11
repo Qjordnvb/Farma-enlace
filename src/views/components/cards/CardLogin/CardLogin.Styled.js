@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import tw from 'twin.macro';
 
 // Assets
-import BgFarma from '../../../../assets/img/bg-login.png';
 import BgLoading from '../../../../assets/img/loading.png';
 
 export const StyledContainerLogin = styled.div.attrs({
@@ -13,7 +12,7 @@ export const StyledContainerLogin = styled.div.attrs({
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-image: url(${BgFarma});
+  background-image: url(${'http://localhost:3002/static/login.jpg'});
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;

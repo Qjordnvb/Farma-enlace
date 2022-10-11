@@ -7,7 +7,7 @@ import 'moment/locale/es';
 export const useCustomIntake = () => {
   moment.locale('es');
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   const [isAdd, setIsAdd] = useState(false);
   const [addingFile, setAddingFile] = useState({});
   // eslint-disable-next-line no-unused-vars
@@ -23,6 +23,7 @@ export const useCustomIntake = () => {
   const [productsList, setProductsList] = useState([]);
   const [filteredSizes, setFilteredSizes] = useState([]);
   const [selectedColaborador, setSelectedColaborador] = useState({});
+
   useEffect(() => {
     if (addingFile?.colaborador) {
       let findColaborador = employeesList.filter(
@@ -48,6 +49,7 @@ export const useCustomIntake = () => {
   const getOrdersTable = (dateRange) => {
     getOrders(dateRange).then((res) => {
       setDataSource(res);
+      setLoading(false);
     });
   };
 
@@ -64,7 +66,7 @@ export const useCustomIntake = () => {
   };
 
   useEffect(() => {
-    getOrdersTable();
+    setLoading(true);
     getEmployeesList();
     getProductsList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -118,7 +120,7 @@ export const useCustomIntake = () => {
       title: 'N°',
       width: 70,
       dataIndex: 'id',
-      sorter: (a, b) => a.id.length - b.id.length,
+      sorter: (a, b) => a.id - b.id,
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -129,7 +131,8 @@ export const useCustomIntake = () => {
       sortDirections: ['descend', 'ascend'],
       onFilter: (value, record) => {
         return record.employee?.CEDULA?.toString().toLowerCase().includes(value);
-      }
+      },
+      defaultSortOrder: 'ascend'
     },
     {
       title: 'Colaborador',
@@ -289,7 +292,9 @@ export const useCustomIntake = () => {
   };
 
   const onAddOrder = () => {
+    setLoading(true);
     createOrder(addingFile).then(() => {
+      setLoading(false);
       getOrdersTable();
       resetAdd();
     });
@@ -326,6 +331,7 @@ export const useCustomIntake = () => {
     onDatePickerChange,
     dateRange,
     selectedColaborador,
-    filteredSizes
+    filteredSizes,
+    loading
   };
 };

@@ -7,7 +7,7 @@ import './style.css';
 import '../TableParameter/TableReasons/style-reasons.css';
 
 const TableDiscount = () => {
-  const {columns, rowSelection, dataSource} = useCustomDiscount();
+  const {columns, rowSelection, dataSource, loading} = useCustomDiscount();
   const {handleExport} = useUtils();
   const [currentLength, setCurrentLength] = useState(0);
   useEffect(() => {
@@ -33,6 +33,7 @@ const TableDiscount = () => {
         }}
         onChange={onChange}
         rowKey={(record) => record.id}
+        loading={loading}
       />
       <div className="ml-auto">
         <img
