@@ -18,7 +18,7 @@ function ConfigPrivate() {
     login: false
   });
   const [homeKey, setHomeKey] = useState(Date.now());
-
+  const [loginKey, setLoginKey] = useState(Date.now);
   const homeProps = {
     onRemove: (file) => {
       const index = fileList.indexOf(file);
@@ -44,7 +44,7 @@ function ConfigPrivate() {
       setLoginList([file]);
       return false;
     },
-    loginList
+    fileList: loginList
   };
 
   const userMenu = [
@@ -57,9 +57,16 @@ function ConfigPrivate() {
   const handleUpload = (type) => {
     const formData = new FormData();
     formData.append('type', type);
-    fileList.forEach((file) => {
-      formData.append('image', file);
-    });
+    if (type === 'home') {
+      fileList.forEach((file) => {
+        formData.append('image', file);
+      });
+    } else if (type === 'login') {
+      loginList.forEach((file) => {
+        formData.append('image', file);
+      });
+    }
+
     setUploading({...uploading, [type]: true});
 
     fetch('http://localhost:3002/load/images', {
@@ -68,12 +75,25 @@ function ConfigPrivate() {
     })
       .then((res) => res.json())
       .then(() => {
-        setFileList([]);
-        setHomeKey(Date.now());
+        if (type === 'home') {
+          setFileList([]);
+          setHomeKey(Date.now());
+        } else if (type === 'login') {
+          console.log('login');
+          setLoginList([]);
+          setLoginKey(Date.now());
+        }
+
         message.success('Imagen cargada con éxito.');
       })
       .catch(() => {
-        setHomeKey(Date.now());
+        if (type === 'home') {
+          setFileList([]);
+          setHomeKey(Date.now());
+        } else if (type === 'login') {
+          setLoginList([]);
+          setLoginKey(Date.now());
+        }
         message.error('La carga falló por favor inténtelo nuevamente.');
       })
       .finally(() => {
@@ -98,7 +118,7 @@ function ConfigPrivate() {
                 <img
                   key={homeKey}
                   className={'w-48'}
-                  src="http://localhost:3002/static/home.jpg"
+                  src={`http://localhost:3002/static/home.jpg`}
                   alt=""
                 />
               )}
@@ -130,9 +150,9 @@ function ConfigPrivate() {
                 <Oval />
               ) : (
                 <img
-                  key={homeKey}
+                  key={loginKey}
                   className={'w-48'}
-                  src="http://localhost:3002/static/login.jpg"
+                  src={`http://localhost:3002/static/login.jpg`}
                   alt=""
                 />
               )}
@@ -144,7 +164,7 @@ function ConfigPrivate() {
             <Button
               type="primary"
               onClick={() => handleUpload('login')}
-              disabled={fileList.length === 0}
+              disabled={loginList.length === 0}
               loading={uploading.login}
               style={{
                 marginTop: 16

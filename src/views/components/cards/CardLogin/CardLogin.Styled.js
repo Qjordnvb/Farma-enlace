@@ -12,7 +12,7 @@ export const StyledContainerLogin = styled.div.attrs({
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-image: url(${'http://localhost:3002/static/login.jpg'});
+  background-image: url(${'http://159.223.195.98:3002/static/login.jpg'});
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
