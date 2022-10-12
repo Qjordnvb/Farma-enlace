@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import {DeleteFilled} from '@ant-design/icons';
-import {Switch, Typography} from 'antd';
+import {message, Switch, Typography} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 
@@ -45,16 +45,26 @@ export const useCustomGarments = () => {
 
   const onSwitchChange = (record, selectedRows) => {
     setLoading(true);
-    switchActiveGarment(record.id, selectedRows).then(async () => {
-      dataReasonsTable();
-    });
+    switchActiveGarment(record.id, selectedRows)
+      .then(async () => {
+        dataReasonsTable();
+        message.success('Operación realizada con éxito');
+      })
+      .catch(() => {
+        message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
+      });
   };
 
   const onDelete = (id) => {
     setLoading(true);
-    deleteGarment(id).then(() => {
-      dataReasonsTable();
-    });
+    deleteGarment(id)
+      .then(() => {
+        dataReasonsTable();
+        message.success('Operación realizada con éxito');
+      })
+      .catch(() => {
+        message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
+      });
   };
 
   const columns = [
@@ -141,16 +151,26 @@ export const useCustomGarments = () => {
 
   const onCreateGarment = async () => {
     setLoading(true);
-    await addGarment({...addingFile}).then(async () => {
-      dataReasonsTable();
-    });
+    await addGarment({...addingFile})
+      .then(async () => {
+        dataReasonsTable();
+        message.success('Operación realizada con éxito');
+      })
+      .catch(() => {
+        message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
+      });
   };
 
   const onEditGarment = async () => {
     setLoading(true);
-    editGarmentDescription({...editingFile}).then(async () => {
-      dataReasonsTable();
-    });
+    editGarmentDescription({...editingFile})
+      .then(async () => {
+        dataReasonsTable();
+        message.success('Operación realizada con éxito');
+      })
+      .catch(() => {
+        message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
+      });
   };
 
   return {

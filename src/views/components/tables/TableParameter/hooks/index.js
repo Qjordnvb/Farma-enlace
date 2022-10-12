@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
+import {Form, Input, InputNumber, message, Popconfirm, Typography} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../assets/img/btn-edit.png';
 
@@ -48,10 +48,11 @@ export const useCustomUniforms = () => {
         dataTable();
         isEditing(null);
         setEditingKey(null);
+        message.success('Operación realizada con éxito');
       });
     } catch (errInfo) {
       // eslint-disable-next-line no-console
-      console.log('Validate Failed:', errInfo);
+      message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
     }
   };
 

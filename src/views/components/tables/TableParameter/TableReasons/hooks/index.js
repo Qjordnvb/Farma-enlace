@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {DeleteFilled} from '@ant-design/icons';
-import {Switch, Typography, Form, Popconfirm} from 'antd';
+import {Switch, Typography, Form, Popconfirm, message} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 
@@ -55,9 +55,11 @@ export const useCustomReasons = () => {
       .then(() => {
         // eslint-disable-next-line no-console
         dataReasonsTable();
+        message.success('Operación realizada con éxito');
       })
       .catch(() => {
         setLoading(false);
+        message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
       });
   };
 
@@ -95,9 +97,11 @@ export const useCustomReasons = () => {
     deleteReason(id)
       .then(() => {
         dataReasonsTable();
+        message.success('Operación realizada con éxito');
       })
       .catch(() => {
         setLoading(false);
+        message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
       });
   };
 
@@ -108,7 +112,8 @@ export const useCustomReasons = () => {
       dataIndex: 'reason',
       ...getColumnSearchProps('reason'),
       sorter: (a, b) => a.reason.localeCompare(b.reason),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      defaultSortOrder: 'ascend'
     },
     {
       key: '2',
@@ -240,22 +245,29 @@ export const useCustomReasons = () => {
     setAddingFile({
       reason: '',
       replacement: 'NO',
-      replacementAuto: '0 ',
+      replacementAuto: '0',
       payment: 'NO',
       dues: '0',
       calculation: 'Fecha de ingreso del colaborador',
-      personalDiscount: '0%',
-      companyDiscount: '0%'
+      personalDiscount: '0',
+      companyDiscount: '0'
     });
   };
   const onCreateReason = async () => {
     setLoading(true);
-    await addReason({
+    addReason({
       ...addingFile,
       personalDiscount: addingFile.personalDiscount,
       companyDiscount: addingFile.companyDiscount
-    });
-    dataReasonsTable();
+    })
+      .then(() => {
+        dataReasonsTable();
+        message.success('Operación realizada con éxito');
+      })
+      .catch(() => {
+        setLoading(false);
+        message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
+      });
   };
 
   return {

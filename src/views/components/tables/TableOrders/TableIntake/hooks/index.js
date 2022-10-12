@@ -237,7 +237,9 @@ export const useCustomIntake = () => {
       sorter: (a, b) => a.dateConsumptionOrder?.localeCompare(b.dateConsumptionOrder),
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
-        return <div>{moment(_).from(new Date())}</div>;
+        let duration = moment.duration(moment(new Date()).diff(_));
+        let days = duration.asDays();
+        return <div>{days.toFixed()} dias</div>;
       }
     },
     {
@@ -257,19 +259,6 @@ export const useCustomIntake = () => {
         return <div>{moment(_).format('YYYY-MM-DD')}</div>;
       }
     },
-    {
-      title: 'Proxima reposicion',
-      dataIndex: 'nextReplacement',
-      ...getColumnSearchProps('proxima reposicion'),
-      sorter: (a, b) =>
-        new Date(a.nextReplacement).valueOf() - new Date(b.nextReplacement).valueOf(),
-      sortDirections: ['descend', 'ascend'],
-      render: (_) => {
-        return <div>{moment(_).format('YYYY-MM-DD')}</div>;
-      },
-      defaultSortOrder: 'ascend'
-    },
-
     {
       title: 'N° Orden de consumo',
       dataIndex: 'consumptionOrderNumber',

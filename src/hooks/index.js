@@ -12,273 +12,143 @@ export const useUtils = () => {
   const searchInput = useRef(null);
 
   async function LoginRequest(usuario, password) {
-    try {
-      const request = await Api.post('/usuarios/login', {usuario, password});
-      return request.data;
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-      return false;
-    }
+    const request = await Api.post('/usuarios/login', {usuario, password});
+    return request.data;
   }
 
   async function getTableParameters() {
-    try {
-      const request = await Apilocal.get('/products/findAll');
-      return request.data;
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-      return false;
-    }
+    const request = await Apilocal.get('/products/findAll');
+    return request.data;
   }
 
   async function getAllRepositionParameters() {
-    try {
-      const request = await Apilocal.get('/products/findWithReplacement');
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - getAllDescriptions', e);
-    }
+    const request = await Apilocal.get('/products/findWithReplacement');
+    return request.data;
   }
 
   async function editRepositionParameter(data) {
-    try {
-      const request = await Apilocal.post('/products/editReplacement', {...data});
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - getAllDescriptions', e);
-    }
+    const request = await Apilocal.post('/products/editReplacement', {...data});
+    return request.data;
   }
 
   async function editPrice(data) {
-    try {
-      const request = await Apilocal.post('/products/editPrice', {...data});
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - getAllDescriptions', e);
-    }
+    const request = await Apilocal.post('/products/editPrice', {...data});
+    return request.data;
   }
 
   async function getReasonsTableParameters(active) {
-    try {
-      let url = '/parameterizedReasons/findAll';
-      if (active) {
-        url += '?active=true';
-      }
-      const request = await Apilocal.get(url);
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - getGarmentsTableParameters', e);
+    let url = '/parameterizedReasons/findAll';
+    if (active) {
+      url += '?active=true';
     }
+    const request = await Apilocal.get(url);
+    return request.data;
   }
 
   async function deleteReason(id) {
-    try {
-      let url = '/parameterizedReasons/delete';
+    let url = '/parameterizedReasons/delete';
 
-      const request = await Apilocal.post(url, {id});
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - getGarmentsTableParameters', e);
-    }
+    const request = await Apilocal.post(url, {id});
+    return request.data;
   }
 
   async function addReason(data) {
-    try {
-      const request = await Apilocal.post('/parameterizedReasons/create', {...data});
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - addReason', e);
-    }
+    const request = await Apilocal.post('/parameterizedReasons/create', {...data});
+    return request.data;
   }
 
   async function switchActiveReason(id, active) {
-    try {
-      const request = await Apilocal.post('/parameterizedReasons/active', {id, active});
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - addReason', e);
-    }
+    const request = await Apilocal.post('/parameterizedReasons/active', {id, active});
+    return request.data;
   }
 
   async function addGarment(data) {
-    try {
-      const request = await Apilocal.post('/prenda/create', {...data});
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - addGarment', e);
-    }
+    const request = await Apilocal.post('/prenda/create', {...data});
+    return request.data;
   }
 
   async function editGarmentDescription(data) {
-    try {
-      const request = await Apilocal.post('/prenda/edit', {...data});
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - editGarmentDescription', e);
-    }
+    const request = await Apilocal.post('/prenda/edit', {...data});
+    return request.data;
   }
 
   async function getGarmentsTableParameters(active) {
-    try {
-      let url = '/prenda/findAll';
-      if (active) {
-        url += '?active=true';
-      }
-      const request = await Apilocal.get(url);
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - garments', e);
+    let url = '/prenda/findAll';
+    if (active) {
+      url += '?active=true';
     }
+    const request = await Apilocal.get(url);
+    return request.data;
   }
 
   async function deleteGarment(id) {
-    try {
-      const request = await Apilocal.post('/prenda/delete', {id});
-
-      return request.data;
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-      return false;
-    }
+    const request = await Apilocal.post('/prenda/delete', {id});
+    return request.data;
   }
 
   async function getAllDescriptions() {
-    try {
-      const request = await Apilocal.get('/uniformDescription/findAll');
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - getAllDescriptions', e);
-    }
+    const request = await Apilocal.get('/uniformDescription/findAll');
+    return request.data;
   }
 
   async function editAmountToBuy(id, amountToBuy) {
-    try {
-      const request = await Apilocal.post('/uniformDescription/editAmount', {id, amountToBuy});
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - getAllDescriptions', e);
-    }
+    const request = await Apilocal.post('/uniformDescription/editAmount', {id, amountToBuy});
+    return request.data;
   }
 
   async function getStock() {
-    try {
-      const request = await Apilocal.get('/uniformDescription/stock');
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - getAllDescriptions', e);
-    }
+    const request = await Apilocal.get('/uniformDescription/stock');
+    return request.data;
   }
 
   async function getAllDeliveries() {
-    try {
-      const request = await Apilocal.get('/uniformDelivery/findAll');
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - getAllDeliveries', e);
-    }
+    const request = await Apilocal.get('/uniformDelivery/findAll');
+    return request.data;
   }
 
   async function deleteUniformDelivery(id) {
-    try {
-      const request = await Apilocal.post('/uniformDelivery/delete', {id});
+    const request = await Apilocal.post('/uniformDelivery/delete', {id});
 
-      return request.data;
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-      return false;
-    }
+    return request.data;
   }
 
   async function getOrders(dateRange) {
-    try {
-      let url = '/orders/findAll';
-      if (dateRange?.from && dateRange?.to) {
-        url += `?from=${dateRange.from}&to=${dateRange.to}`;
-      }
-      const request = await Apilocal.get(url);
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - getAllDeliveries', e);
+    let url = '/orders/findAll';
+    if (dateRange?.from && dateRange?.to) {
+      url += `?from=${dateRange.from}&to=${dateRange.to}`;
     }
+    const request = await Apilocal.get(url);
+    return request.data;
   }
 
   async function createOrder(data) {
-    try {
-      const request = await Apilocal.post('/orders/create', {...data});
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - getAllDeliveries', e);
-    }
+    const request = await Apilocal.post('/orders/create', {...data});
+    return request.data;
   }
 
   async function bulkSizeUpdate(formData) {
-    try {
-      const request = await Apilocal.post('/employees/bulkUpdate', formData);
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - getAllDeliveries', e);
-    }
+    const request = await Apilocal.post('/employees/bulkUpdate', formData);
+    return request.data;
   }
 
   async function getEmployees() {
-    try {
-      const request = await Apilocal.get('/employees/findAll');
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - getAllDeliveries', e);
-    }
+    const request = await Apilocal.get('/employees/findAll');
+    return request.data;
   }
 
   async function updateEmployeeSize(data) {
-    try {
-      const request = await Apilocal.post('/employees/updateSize', {...data});
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - getAllDeliveries', e);
-    }
+    const request = await Apilocal.post('/employees/updateSize', {...data});
+    return request.data;
   }
 
   async function createDelivery(data) {
-    try {
-      const request = await Apilocal.post('/uniformDelivery/create', {...data});
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - createDelivery', e);
-    }
+    const request = await Apilocal.post('/uniformDelivery/create', {...data});
+    return request.data;
   }
 
   async function updateGarmentQuantity(data) {
-    try {
-      const request = await Apilocal.post('/uniformDescription/updateQuantity', {...data});
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - updateGarmentQuantity', e);
-    }
+    const request = await Apilocal.post('/uniformDescription/updateQuantity', {...data});
+    return request.data;
   }
 
   async function switchActiveGarment(id, active) {
@@ -292,19 +162,13 @@ export const useUtils = () => {
   }
 
   async function UserLogin(usuario, password, app, token) {
-    try {
-      const request = await Api.post(
-        'ServiceDesk/loginUsuarios',
-        {usuario, password, app},
-        {headers: {Authorization: `Bearer ${token}`}}
-      );
+    const request = await Api.post(
+      'ServiceDesk/loginUsuarios',
+      {usuario, password, app},
+      {headers: {Authorization: `Bearer ${token}`}}
+    );
 
-      return request.data;
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-      return false;
-    }
+    return request.data;
   }
 
   // function sorter and search tables

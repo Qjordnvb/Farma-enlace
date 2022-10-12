@@ -31,7 +31,7 @@ function HomePrivate() {
           <h3 className="text-primary-500">Selecciona una función</h3>
           <img
             className="img-options mt-12"
-            src={'http://localhost:3002/static/home.jpg'}
+            src={'http://159.223.195.98:3002/static/home.jpg'}
             alt="options"
           />
           <div className="flex justify-evenly w-10/12 mt-12 flex-wrap">

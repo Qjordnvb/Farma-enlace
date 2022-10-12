@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 
-import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
+import {Form, InputNumber, Popconfirm, Typography, message} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 
@@ -83,8 +83,8 @@ export const useCustomDescription = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataTable]);
 
-  const EditableCell = ({editing, dataIndex, title, inputType, children, ...restProps}) => {
-    const inputNode = inputType === 'garments' ? <InputNumber /> : <Input />;
+  const EditableCell = ({editing, dataIndex, children, ...restProps}) => {
+    const inputNode = <InputNumber />;
     return (
       <td {...restProps}>
         {editing ? (
@@ -96,7 +96,7 @@ export const useCustomDescription = () => {
             rules={[
               {
                 required: true,
-                message: `Please Input ${title}!`
+                message: `Por favor ingrese una cantidad`
               }
             ]}
           >
@@ -111,12 +111,6 @@ export const useCustomDescription = () => {
 
   const edit = (record) => {
     form.setFieldsValue({
-      garment1: '',
-      garment2: '',
-      garment3: '',
-      garment4: '',
-      garment5: '',
-      garment6: '',
       ...record
     });
     setEditingKey(record.id);
@@ -139,17 +133,23 @@ export const useCustomDescription = () => {
             quantity: row[rowKey],
             garmentTypeId: findRow[`${rowKey}_obj`].garmentTypeId,
             uniformId: key
-          }).then(() => {
-            getAllDescriptions()
-              .then((res) => {
-                setDataTable(res);
-                setLoading(false);
-              })
-              .catch(() => {
-                setLoading(false);
-              });
-            setEditingKey('');
-          });
+          })
+            .then(() => {
+              getAllDescriptions()
+                .then((res) => {
+                  setDataTable(res);
+                  setLoading(false);
+                })
+                .catch(() => {
+                  setLoading(false);
+                });
+              message.success('Operación realizada con éxito');
+              setEditingKey('');
+            })
+            .catch(() => {
+              message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
+              setLoading(false);
+            });
         } else {
           updateGarmentQuantity({
             quantity: row[rowKey],
@@ -157,6 +157,7 @@ export const useCustomDescription = () => {
             uniformId: key
           })
             .then(() => {
+              message.success('Operación realizada con éxito');
               getAllDescriptions().then((res) => {
                 setDataTable(res);
                 setLoading(false);
@@ -164,27 +165,26 @@ export const useCustomDescription = () => {
               setEditingKey('');
             })
             .catch(() => {
+              message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
               setLoading(false);
             });
         }
       });
     } catch (errInfo) {
       // eslint-disable-next-line no-console
+      message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
       console.log('Validate Failed:', errInfo);
     }
   };
 
   const columns = [
     {
-      title: 'N°',
-      dataIndex: 'id'
-    },
-    {
       title: 'Código Producto',
       dataIndex: 'codigo',
       ...getColumnSearchProps('codigo'),
       sorter: (a, b) => a.codigo.localeCompare(b.codigo),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      defaultSortOrder: 'ascend'
     },
     {
       title: 'Descripción',
@@ -213,6 +213,7 @@ export const useCustomDescription = () => {
       title: 'Acción',
       dataIndex: 'accion',
       width: '7.5%',
+      fixed: 'right',
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
