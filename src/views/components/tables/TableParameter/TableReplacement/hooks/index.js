@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
+import {Form, Input, InputNumber, message, Popconfirm, Typography} from 'antd';
 import moment from 'moment';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
@@ -103,14 +103,20 @@ export const useCustomReplacement = () => {
         reposicion,
         id: key,
         ultimaActualizacion: user && user.nombrecorto ? user.nombrecorto : 'jjarrin'
-      }).then(() => {
-        getAllRepositionParameters().then((res) => {
+      })
+        .then(() => {
+          message.success('Operación realizada con éxito');
+          getAllRepositionParameters().then((res) => {
+            setLoading(false);
+            setDataSource(res);
+            setEditingKey(null);
+            isEditing(null);
+          });
+        })
+        .catch(() => {
           setLoading(false);
-          setDataSource(res);
-          setEditingKey(null);
-          isEditing(null);
+          message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
         });
-      });
     } catch (errInfo) {
       // eslint-disable-next-line no-console
       console.log('Validate Failed:', errInfo);

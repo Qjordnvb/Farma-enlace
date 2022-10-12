@@ -216,7 +216,7 @@ export const useCustomInventory = () => {
         };
         return {
           props: {
-            style: {background: color[_]}
+            style: {background: color[_], color: '#ececec', fontWeight: 'bold'}
           },
           children: <div>{_}</div>
         };

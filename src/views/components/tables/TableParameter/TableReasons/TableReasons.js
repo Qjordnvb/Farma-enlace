@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Table, Modal, Input, Form, Switch, Select} from 'antd';
+import {Table, Modal, Input, Form, Switch, Select, InputNumber} from 'antd';
 import './style-reasons.css';
 import Button from 'views/components/button/Button';
 import {StyledGridList} from 'views/screens/user/dataGridParameters/gridList/GridList.Styled';
@@ -55,9 +55,9 @@ function TableReasons() {
           <>
             <Modal
               className="modal-add-reasons"
-              title="Agregar Prenda"
+              title="Agregar Motivo"
               visible={isAdd}
-              okText="Crear Prenda"
+              okText="Crear Motivo"
               onCancel={() => {
                 resetAdd();
               }}
@@ -96,16 +96,16 @@ function TableReasons() {
                     }`}
                     label="Reposición cantidad"
                   >
-                    <Input
-                      type="number"
+                    <InputNumber
                       id="item-form-w"
-                      className="input-add "
+                      className="input-add"
                       placeholder="Días"
+                      min={0}
                       value={addingFile?.replacementAuto}
                       onChange={(e) => {
-                        setAddingFile((pre) => {
-                          return {...pre, replacementAuto: e.target.value};
-                        });
+                        const controlledValue = Math.max(0, Math.min(365, Number(e || 0)));
+
+                        setAddingFile({...addingFile, replacementAuto: controlledValue});
                       }}
                     />
                   </Form.Item>

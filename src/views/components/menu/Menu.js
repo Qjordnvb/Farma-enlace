@@ -13,32 +13,6 @@ const menu = (
   <Menu
     items={[
       {
-        key: '1',
-        label: (
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-center"
-            href="https://www.antgroup.com"
-          >
-            Editar perfil
-          </a>
-        )
-      },
-      {
-        key: '2',
-        label: (
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-center"
-            href="https://www.aliyun.com"
-          >
-            Cambiar cuenta
-          </a>
-        )
-      },
-      {
         key: '3',
         label: (
           <Button

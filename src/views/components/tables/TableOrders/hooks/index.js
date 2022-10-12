@@ -1,8 +1,10 @@
 import {useState, useEffect, useRef} from 'react';
-import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
+import {Form, InputNumber, message, Popconfirm, Select, Typography} from 'antd';
 import moment from 'moment';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../assets/img/btn-edit.png';
+
+const {Option} = Select;
 
 export const useCustomOrders = () => {
   const [form] = Form.useForm();
@@ -44,7 +46,21 @@ export const useCustomOrders = () => {
   const EditableCell = ({editing, dataIndex, title, children, ...restProps}) => {
     const inputNode =
       title === 'Talla uniforme' || title === 'Talla mandil' ? (
-        <Input maxLength={5} />
+        <Select
+          defaultValue="lucy"
+          style={{
+            width: 120
+          }}
+        >
+          <Option value="XS">XS</Option>
+          <Option value="S">S</Option>
+          <Option value="M">M</Option>
+          <Option value="L">L</Option>
+          <Option value="XL">XL</Option>
+          <Option value="XXL">XXL</Option>
+          <Option value="XXXL">XXXL</Option>
+          <Option value="XXXXL">XXXXL</Option>
+        </Select>
       ) : (
         <InputNumber />
       );
@@ -60,10 +76,6 @@ export const useCustomOrders = () => {
               {
                 required: true,
                 message: `Por favor ingrese ${title}!`
-              },
-              {
-                pattern: '^[a-zA-Z]',
-                message: 'Numeros no estan permitidos'
               }
             ]}
           >
@@ -101,11 +113,17 @@ export const useCustomOrders = () => {
         TALLA: row.TALLA?.toUpperCase(),
         TALLA_MANDIL: row.TALLA_MANDIL?.toUpperCase(),
         CEDULA: newData[index].CEDULA
-      }).then(() => {
-        setLoading(false);
-        getEmployeesTable();
-        cancel();
-      });
+      })
+        .then(() => {
+          message.success('Operación realizada con éxito');
+          setLoading(false);
+          getEmployeesTable();
+          cancel();
+        })
+        .catch(() => {
+          setLoading(false);
+          message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
+        });
     } catch (errInfo) {
       setLoading(false);
       // eslint-disable-next-line no-console
@@ -267,10 +285,14 @@ export const useCustomOrders = () => {
     let file = inputFileRef.current.files[0];
     const formData = new FormData();
     formData.append('file', file);
-    bulkSizeUpdate(formData).then(() => {
-      getEmployeesTable();
-      //TODO: Show success or error message, maybe add modal
-    });
+    bulkSizeUpdate(formData)
+      .then(() => {
+        getEmployeesTable();
+        message.success('Operación realizada con éxito');
+      })
+      .catch(() => {
+        message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
+      });
   };
 
   /* const onAddFile = (record) => {
