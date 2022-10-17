@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Form, Table} from 'antd';
+import {CSVLink} from 'react-csv';
 import btnCarga from '../../../../assets/img/btn-carga.svg';
 import btnDownload from '../../../../assets/img/btn-generate.png';
 import {useUtils} from '../../../../hooks';
@@ -12,6 +13,15 @@ const TableOrders = () => {
     useCustomOrders();
 
   const {handleExport} = useUtils();
+  const exampleSheet = [
+    {
+      CEDULA: '0123456789',
+      NOMBRES: 'Juan',
+      APELLIDOS: 'Perez',
+      'TALLA UNIFORME': 'M',
+      'TALLA MANDIL': 'M'
+    }
+  ];
 
   const [currentLength, setCurrentLength] = useState(0);
   useEffect(() => {
@@ -46,30 +56,40 @@ const TableOrders = () => {
           onChange={onChange}
         />
       </Form>
-      <label htmlFor="file" className="py-8">
-        <img src={btnCarga} alt="download" width="230px" height="70px" />
-        <input
-          style={{visibility: 'hidden'}}
-          id="file"
-          type="file"
-          accept=".json"
-          ref={inputFileRef}
-          onChange={handleInputFile}
-        />
-      </label>
-      <div className="flex justify-end items-end flex-col -mt-12">
-        <div
-          onClick={() => {
-            handleExport(dataSource, 'ACTUALIZACIÓN DE TALLAS');
-          }}
-        >
-          <img
-            className="btn-download"
-            src={btnDownload}
-            alt="btnDownload"
-            width="250px"
-            height="40px"
-          />
+      <div className="container-buttons flex pt-6 pb-14 justify-between ">
+        <div className="flex flex-col">
+          <label htmlFor="file" className={'ml-2'}>
+            <img src={btnCarga} alt="download" width="230px" height="70px" />
+            <input
+              style={{visibility: 'hidden'}}
+              id="file"
+              type="file"
+              accept=".csv"
+              ref={inputFileRef}
+              onChange={handleInputFile}
+            />
+          </label>
+          <div className="flex flex-col items-center justify-center bg-green-500 text-center h-12  rounded-lg">
+            <CSVLink filename={'PlANTILLA - ACTUALIZACION DE TALLAS.csv'} data={exampleSheet}>
+              <h3 className={'text-neutral-50 font-bold'}>DESCARGAR PLANTILLA</h3>
+            </CSVLink>
+          </div>
+        </div>
+
+        <div className="flex justify-end items-end flex-col">
+          <div
+            onClick={() => {
+              handleExport(dataSource, 'ACTUALIZACIÓN DE TALLAS');
+            }}
+          >
+            <img
+              className="btn-download"
+              src={btnDownload}
+              alt="btnDownload"
+              width="250px"
+              height="40px"
+            />
+          </div>
         </div>
       </div>
     </div>

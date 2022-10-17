@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {Form, Table} from 'antd';
-
 import btnDownload from '../../../../assets/img/btn-generate.png';
 import {useUtils} from '../../../../hooks';
 import {useCustomInventory} from './hooks';
 import './style.css';
 import '../TableParameter/TableReasons/style-reasons.css';
 
-const TableInventory = () => {
-  const {form, EditableCell, mergedColumns, data, rowSelection, loading} = useCustomInventory();
+const TableInventory = ({setSelected}) => {
+  const {form, EditableCell, mergedColumns, data, rowSelection, loading, selectedRowKeys} =
+    useCustomInventory();
   const {handleExport} = useUtils();
 
   const [currentLength, setCurrentLength] = useState(0);
@@ -21,6 +21,9 @@ const TableInventory = () => {
       setCurrentLength(extra.currentDataSource.length);
     }
   };
+  useEffect(() => {
+    setSelected(selectedRowKeys);
+  }, [selectedRowKeys]);
 
   return (
     <div className="container-table pt-16">

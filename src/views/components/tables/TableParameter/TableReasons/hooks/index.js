@@ -1,9 +1,9 @@
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {DeleteFilled} from '@ant-design/icons';
-import {Switch, Typography, Form, Popconfirm, message} from 'antd';
+import {Switch, Typography, Form, Popconfirm, message, InputNumber, Input, Select} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
-
+const {Option} = Select;
 export const useCustomReasons = () => {
   const [isAdd, setIsAdd] = useState(false);
   const [addingFile, setAddingFile] = useState({});
@@ -12,7 +12,8 @@ export const useCustomReasons = () => {
     getReasonsTableParameters,
     addReason,
     switchActiveReason,
-    deleteReason
+    deleteReason,
+    editReason
   } = useUtils();
   const [dataSource, setDataSource] = useState([]);
   const [form] = Form.useForm();
@@ -64,6 +65,7 @@ export const useCustomReasons = () => {
   };
 
   const edit = (record) => {
+    console.log('record', record);
     form.setFieldsValue({
       ...record
     });
@@ -78,14 +80,19 @@ export const useCustomReasons = () => {
     try {
       const row = await form.validateFields();
 
-      const {price} = row;
       // eslint-disable-next-line no-console
-      console.log(price, key);
-      /* editPrice({price, id: key}).then(() => {
-        dataTable();
-        isEditing(null);
-        setEditingKey(null);
-      });*/
+      console.log('row', row, key);
+      editReason({id: key, ...row})
+        .then(() => {
+          setLoading(true);
+          dataReasonsTable();
+          isEditing(null);
+          setEditingKey(null);
+          message.success('Operación realizada con éxito');
+        })
+        .catch(() => {
+          message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
+        });
     } catch (errInfo) {
       // eslint-disable-next-line no-console
       console.log('Validate Failed:', errInfo);
@@ -105,6 +112,90 @@ export const useCustomReasons = () => {
       });
   };
 
+  const cal = ['Fecha de ingreso del colaborador', 'Fecha de última reposición'];
+
+  const EditableCell = ({editing, dataIndex, children, ...restProps}) => {
+    let inputNode;
+    if (dataIndex === 'replacementAuto' || dataIndex === 'dues') {
+      inputNode = <InputNumber defaultValue={0} min={0} />;
+    } else if (dataIndex === 'personalDiscount' || dataIndex === 'companyDiscount') {
+      inputNode = (
+        <Input
+          type={'number'}
+          max={100}
+          onChange={(e) => {
+            const controlledValue = Math.max(0, Math.min(100, Number(e.target.value)));
+            let newDiscount = 100 - controlledValue;
+            form.setFieldValue(dataIndex, controlledValue);
+            let newName = dataIndex === 'personalDiscount' ? 'companyDiscount' : 'personalDiscount';
+            form.setFieldValue(newName, newDiscount);
+          }}
+          suffix={'%'}
+        />
+      );
+    } else if (dataIndex === 'calculation') {
+      inputNode = (
+        <Select
+          defaultValue={'Fecha de ingreso del colaborador'}
+          value={addingFile?.calculation}
+          onChange={(value) => {
+            setAddingFile({...addingFile, calculation: value});
+          }}
+        >
+          {cal.map((cals, index) => {
+            return (
+              <Option key={index} value={cals}>
+                {cals}
+              </Option>
+            );
+          })}
+        </Select>
+      );
+    } else if (dataIndex === 'replacement' || dataIndex === 'payment') {
+      inputNode = <Switch />;
+    } else {
+      inputNode = <Input />;
+    }
+
+    let formNode = (
+      <Form.Item
+        name={dataIndex}
+        style={{
+          margin: 0
+        }}
+        rules={[
+          {
+            required: true,
+            message: `Por favor inserte un precio`
+          }
+        ]}
+      >
+        {inputNode}
+      </Form.Item>
+    );
+
+    if (dataIndex === 'replacement' || dataIndex === 'payment') {
+      formNode = (
+        <Form.Item
+          name={dataIndex}
+          valuePropName={'checked'}
+          style={{
+            margin: 0
+          }}
+          rules={[
+            {
+              required: true,
+              message: `Por favor inserte un precio`
+            }
+          ]}
+        >
+          {inputNode}
+        </Form.Item>
+      );
+    }
+    return <td {...restProps}>{editing ? <>{formNode}</> : children}</td>;
+  };
+
   const columns = [
     {
       key: '1',
@@ -113,7 +204,8 @@ export const useCustomReasons = () => {
       ...getColumnSearchProps('reason'),
       sorter: (a, b) => a.reason.localeCompare(b.reason),
       sortDirections: ['descend', 'ascend'],
-      defaultSortOrder: 'ascend'
+      defaultSortOrder: 'ascend',
+      editable: true
     },
     {
       key: '2',
@@ -121,7 +213,11 @@ export const useCustomReasons = () => {
       dataIndex: 'replacement',
       ...getColumnSearchProps('replacement'),
       sorter: (a, b) => a.replacement.localeCompare(b.replacement),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      editable: true,
+      render: (_) => {
+        return <div>{_ ? 'SI' : 'NO'}</div>;
+      }
     },
     {
       key: '3',
@@ -132,7 +228,8 @@ export const useCustomReasons = () => {
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
         return <div>{_} días</div>;
-      }
+      },
+      editable: true
     },
     {
       key: '4',
@@ -140,7 +237,11 @@ export const useCustomReasons = () => {
       dataIndex: 'payment',
       ...getColumnSearchProps('payment'),
       sorter: (a, b) => a.payment.localeCompare(b.payment),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      render: (_) => {
+        return <div>{_ ? 'SI' : 'NO'}</div>;
+      },
+      editable: true
     },
     {
       key: '5',
@@ -148,7 +249,8 @@ export const useCustomReasons = () => {
       dataIndex: 'dues',
       ...getColumnSearchProps('dues'),
       sorter: (a, b) => a.dues.length - b.dues.length,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      editable: true
     },
     {
       key: '6',
@@ -156,7 +258,8 @@ export const useCustomReasons = () => {
       dataIndex: 'calculation',
       ...getColumnSearchProps('calculation'),
       sorter: (a, b) => a.calculation.localeCompare(b.calculation),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      editable: true
     },
     {
       key: '7',
@@ -167,7 +270,8 @@ export const useCustomReasons = () => {
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
         return <div>{_}%</div>;
-      }
+      },
+      editable: true
     },
     {
       key: '8',
@@ -178,7 +282,8 @@ export const useCustomReasons = () => {
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
         return <div>{_}%</div>;
-      }
+      },
+      editable: true
     },
     {
       key: '9',
@@ -195,7 +300,7 @@ export const useCustomReasons = () => {
                 onSwitchChange(record, selectedRows);
               }}
             />
-            <div className="hidden">
+            <div>
               {editable ? (
                 <span>
                   <Typography.Link
@@ -270,6 +375,29 @@ export const useCustomReasons = () => {
       });
   };
 
+  const mergedColumns = columns.map((col) => {
+    if (!col.editable) {
+      return col;
+    }
+
+    return {
+      ...col,
+      onCell: (record) => ({
+        record,
+        inputType:
+          col.dataIndex === 'replacementAuto' ||
+          col.dataIndex === 'dues' ||
+          col.dataIndex === 'personalDiscount' ||
+          col.dataIndex === 'companyDiscount'
+            ? 'number'
+            : 'text',
+        dataIndex: col.dataIndex,
+        title: col.title,
+        editing: isEditing(record)
+      })
+    };
+  });
+
   return {
     dataSource,
     setDataSource,
@@ -282,6 +410,9 @@ export const useCustomReasons = () => {
     onAddFile,
     onChange,
     onCreateReason,
-    loading
+    loading,
+    EditableCell,
+    mergedColumns,
+    form
   };
 };

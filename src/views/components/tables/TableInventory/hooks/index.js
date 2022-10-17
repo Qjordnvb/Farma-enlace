@@ -285,6 +285,7 @@ export const useCustomInventory = () => {
     rowSelection,
     setDataSource,
     data,
-    loading
+    loading,
+    selectedRowKeys
   };
 };

@@ -8,14 +8,16 @@ import {useCustomReasons} from './hooks';
 function TableReasons() {
   const {
     dataSource,
-    columns,
     isAdd,
     addingFile,
     setAddingFile,
     resetAdd,
     onAddFile,
     onCreateReason,
-    loading
+    loading,
+    EditableCell,
+    mergedColumns,
+    form
   } = useCustomReasons();
   const {Option} = Select;
 
@@ -34,8 +36,7 @@ function TableReasons() {
 
   return (
     <>
-      {' '}
-      <div>
+      <Form form={form} component={false}>
         <Table
           pagination={{
             pageSizeOptions: [10, 20, 30, 40],
@@ -43,12 +44,17 @@ function TableReasons() {
             total: currentLength
           }}
           onChange={onChange}
-          columns={columns}
+          columns={mergedColumns}
           dataSource={dataSource}
-          rowClassName={(record) => (!record.active ? 'disabled-row' : '')}
+          rowClassName={(record) => (!record.active ? 'disabled-row editable-row' : 'editable-row')}
           rowKey={(record) => record.id}
           scroll={{y: 500, x: 2000}}
           loading={loading}
+          components={{
+            body: {
+              cell: EditableCell
+            }
+          }}
         ></Table>
 
         {isAdd && (
@@ -86,7 +92,7 @@ function TableReasons() {
                       className="input-switch"
                       value={addingFile?.replacement}
                       onChange={(record) => {
-                        setAddingFile({...addingFile, replacement: !record ? 'NO' : 'SI'});
+                        setAddingFile({...addingFile, replacement: record});
                       }}
                     />
                   </Form.Item>
@@ -138,7 +144,7 @@ function TableReasons() {
                       className="input-switch"
                       value={addingFile?.payment}
                       onChange={(record) => {
-                        setAddingFile({...addingFile, payment: !record ? 'NO' : 'SI'});
+                        setAddingFile({...addingFile, payment: record});
                       }}
                     />
                   </Form.Item>
@@ -213,7 +219,7 @@ function TableReasons() {
             </Modal>
           </>
         )}
-      </div>
+      </Form>
       <StyledGridList>
         <div className="btn-add">
           <Button

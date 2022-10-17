@@ -62,6 +62,11 @@ export const useUtils = () => {
     return request.data;
   }
 
+  async function editReason(data) {
+    const request = await Apilocal.post('/parameterizedReasons/edit', {...data});
+    return request.data;
+  }
+
   async function addGarment(data) {
     const request = await Apilocal.post('/prenda/create', {...data});
     return request.data;
@@ -96,8 +101,8 @@ export const useUtils = () => {
     return request.data;
   }
 
-  async function getStock() {
-    const request = await Apilocal.get('/uniformDescription/stock');
+  async function getStock(selectedKeys) {
+    const request = await Apilocal.post('/uniformDescription/stock', {selectedKeys});
     return request.data;
   }
 
@@ -288,6 +293,7 @@ export const useUtils = () => {
     handleExport,
     deleteReason,
     editAmountToBuy,
-    getStock
+    getStock,
+    editReason
   };
 };

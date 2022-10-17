@@ -1,13 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {Table} from 'antd';
+import {DatePicker, Table} from 'antd';
 import btnDownload from '../../../../assets/img/btn-discount.png';
 import {useUtils} from '../../../../hooks';
 import {useCustomDiscount} from './hooks';
 import './style.css';
 import '../TableParameter/TableReasons/style-reasons.css';
+import moment from 'moment';
+const {RangePicker} = DatePicker;
 
 const TableDiscount = () => {
-  const {columns, rowSelection, dataSource, loading} = useCustomDiscount();
+  const {columns, rowSelection, dataSource, loading, dateRange, onDatePickerChange} =
+    useCustomDiscount();
   const {handleExport} = useUtils();
   const [currentLength, setCurrentLength] = useState(0);
   useEffect(() => {
@@ -21,6 +24,18 @@ const TableDiscount = () => {
   };
   return (
     <div className="container-table pt-16">
+      <div className="flex justify-end items-end flex-col">
+        <RangePicker
+          ranges={{
+            Today: [moment(), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')]
+          }}
+          showTime
+          format="YYYY/MM/DD"
+          onChange={onDatePickerChange}
+          value={[dateRange.from, dateRange.to]}
+        />
+      </div>
       <Table
         scroll={{y: 300}}
         rowSelection={rowSelection}

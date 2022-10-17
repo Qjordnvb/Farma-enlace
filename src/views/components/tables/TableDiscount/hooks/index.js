@@ -8,10 +8,14 @@ export const useCustomDiscount = () => {
   const {getColumnSearchProps, getOrders} = useUtils();
 
   const [dataSource, setDataSource] = useState([]);
+  const [dateRange, setDateRange] = useState({
+    from: moment().startOf('month'),
+    to: moment().endOf('month')
+  });
 
-  const getOrdersTable = () => {
+  const getOrdersTable = (dateRange) => {
     setLoading(true);
-    getOrders()
+    getOrders(dateRange)
       .then((res) => {
         let formatOrders = res.map((order) => {
           return {...order, ...order.producto, ...order.employee, ...order.parameterizedReason};
@@ -25,9 +29,9 @@ export const useCustomDiscount = () => {
   };
 
   useEffect(() => {
-    getOrdersTable();
+    getOrdersTable(dateRange);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dateRange]);
 
   const onSelectChange = (newSelectedRowKeys) => {
     setSelectedRowKeys(newSelectedRowKeys);
@@ -149,11 +153,24 @@ export const useCustomDiscount = () => {
     }
   ];
 
+  const onDatePickerChange = (dates) => {
+    if (dates) {
+      setDateRange({
+        from: dates[0],
+        to: dates[1]
+      });
+    } else {
+      setDateRange({});
+    }
+  };
+
   return {
     columns,
     rowSelection,
     dataSource,
     setDataSource,
-    loading
+    loading,
+    onDatePickerChange,
+    dateRange
   };
 };

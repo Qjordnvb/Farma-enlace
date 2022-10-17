@@ -3,6 +3,7 @@ import axios from 'axios';
 import moment from 'moment';
 import {useUtils} from 'hooks';
 import 'moment/locale/es';
+import {message} from 'antd';
 
 export const useCustomIntake = () => {
   moment.locale('es');
@@ -47,22 +48,34 @@ export const useCustomIntake = () => {
   }, [addingFile, employeesList, productsList]);
 
   const getOrdersTable = (dateRange) => {
-    getOrders(dateRange).then((res) => {
-      setDataSource(res);
-      setLoading(false);
-    });
+    getOrders(dateRange)
+      .then((res) => {
+        setDataSource(res);
+        setLoading(false);
+      })
+      .catch(() => {
+        message.error('Error cargando datos');
+      });
   };
 
   const getEmployeesList = () => {
-    getEmployees().then((res) => {
-      setEmployeesList(res);
-    });
+    getEmployees()
+      .then((res) => {
+        setEmployeesList(res);
+      })
+      .catch(() => {
+        message.error('Error cargando datos');
+      });
   };
 
   const getProductsList = () => {
-    getTableParameters().then((res) => {
-      setProductsList(res);
-    });
+    getTableParameters()
+      .then((res) => {
+        setProductsList(res);
+      })
+      .catch(() => {
+        message.error('Error cargando datos');
+      });
   };
 
   useEffect(() => {
@@ -92,7 +105,32 @@ export const useCustomIntake = () => {
   const createConsumptionOrders = () => {
     selectedRowKeys.map(() => {
       let data =
-        '<tem:CARGARXML>\n    <tem:cabecera>\n        <wfc:bodega_origen>\n        001\n        </wfc:bodega_origen>\n        <wfc:cedulaEmpleado>\n        1003195995\n        </wfc:cedulaEmpleado>\n        <wfc:centro_destino>\n        1201201200\n        </wfc:centro_destino>\n        <wfc:listaDetalle>\n            <wfc:NodoDetalle>\n                <wfc:cantidad>\n                3\n                </wfc:cantidad>\n                <wfc:codigoProd>\n                04203\n                </wfc:codigoProd>\n                <wfc:secuencia>\n                1\n                </wfc:secuencia>\n            </wfc:NodoDetalle>\n        </wfc:listaDetalle>\n    </tem:cabecera>\n</tem:CARGARXML>';
+        '<tem:CARGARXML>\n' +
+        '    <tem:cabecera>\n' +
+        '        <wfc:bodega_origen>\n' +
+        '        001\n' +
+        '        </wfc:bodega_origen>\n' +
+        '        <wfc:cedulaEmpleado>\n' +
+        '        1003195995\n' +
+        '        </wfc:cedulaEmpleado>\n' +
+        '        <wfc:centro_destino>\n' +
+        '        1201201200\n' +
+        '        </wfc:centro_destino>\n' +
+        '        <wfc:listaDetalle>\n' +
+        '            <wfc:NodoDetalle>\n' +
+        '                <wfc:cantidad>\n' +
+        '                3\n' +
+        '                </wfc:cantidad>\n' +
+        '                <wfc:codigoProd>\n' +
+        '                04203\n' +
+        '                </wfc:codigoProd>\n' +
+        '                <wfc:secuencia>\n' +
+        '                1\n' +
+        '                </wfc:secuencia>\n' +
+        '            </wfc:NodoDetalle>\n' +
+        '        </wfc:listaDetalle>\n' +
+        '    </tem:cabecera>\n' +
+        '</tem:CARGARXML>';
 
       let config = {
         method: 'post',

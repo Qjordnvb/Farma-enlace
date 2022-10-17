@@ -1,15 +1,20 @@
 import {useEffect, useState} from 'react';
 
 import {useUtils} from '../../../../../../hooks';
+import {message} from 'antd';
 export const useCustomGraphic = () => {
   const {getStock} = useUtils();
   const [stock, setStock] = useState([]);
-
+  const [selectedKeys, setSelectedKeys] = useState([]);
   useEffect(() => {
-    getStock().then((res) => {
-      setStock(res.stock);
-    });
-  }, []);
+    getStock(selectedKeys)
+      .then((res) => {
+        setStock(res.stock);
+      })
+      .catch(() => {
+        message.error('Error cargando datos');
+      });
+  }, [selectedKeys]);
 
   const config = {
     data: stock,
@@ -34,5 +39,5 @@ export const useCustomGraphic = () => {
     }
   };
 
-  return {stock, config};
+  return {stock, config, selectedKeys, setSelectedKeys};
 };
