@@ -42,12 +42,14 @@ export const useCustomReplacement = () => {
     let inputNode;
     if (title === 'Porcentajes') {
       inputNode = (
-        <InputNumber
+        <Input
+          type="number"
           defaultValue={15}
-          min={0}
-          max={100}
-          formatter={(value) => `${value}%`}
-          parser={(value) => value.replace('%', '')}
+          onChange={(e) => {
+            const controlledValue = Math.max(0, Math.min(100, Number(e.target.value)));
+            form.setFieldsValue({[dataIndex]: controlledValue});
+          }}
+          suffix="%"
         />
       );
     } else if (dataIndex === 'reposicion') {
@@ -95,7 +97,11 @@ export const useCustomReplacement = () => {
     try {
       setLoading(true);
       const row = await form.validateFields();
-      const {user} = JSON.parse(window.localStorage.getItem('MY_AUTH_APP'));
+      let getUser = window.localStorage.getItem('MY_AUTH_APP');
+      let user = {};
+      if (getUser !== 'undefined') {
+        user = JSON.parse(getUser);
+      }
 
       const {porcentaje, reposicion} = row;
       editRepositionParameter({

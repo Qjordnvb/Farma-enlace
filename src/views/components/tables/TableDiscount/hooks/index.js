@@ -139,7 +139,10 @@ export const useCustomDiscount = () => {
       dataIndex: 'ultimaActualizacion',
       ...getColumnSearchProps('ultima actualizacion'),
       sorter: (a, b) => a.ultimaActualizacion?.localeCompare(b.ultimaActualizacion),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      render: (_) => {
+        return <div>{_ ? _ : 'jjarrin'}</div>;
+      }
     },
     {
       title: 'Estado',

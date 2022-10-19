@@ -284,14 +284,40 @@ export const useCustomOrders = () => {
   });
 
   const handleInputFile = async () => {
+    setLoading(true);
     let file = inputFileRef.current.files[0];
+    let errorsFound = false;
     if (file) {
       let jsonData = await excelToJson(file);
-      console.log(jsonData);
-      bulkSizeUpdate(jsonData)
+
+      let filterData = jsonData.filter((item) => {
+        let tallas = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+        let containsLetters = /[a-zA-Z]/g.test(item.CEDULA);
+        if (containsLetters) {
+          errorsFound = true;
+          message.error(`Datos incorrectos para la Cédula ${item['CEDULA']}`, 10);
+        } else if (!tallas.includes(item['TALLA UNIFORME'])) {
+          errorsFound = true;
+          message.error(`Datos incorrectos para Talla Uniforme ${item['TALLA UNIFORME']}`, 10);
+        } else if (!tallas.includes(item['TALLA MANDIL'])) {
+          errorsFound = true;
+          message.error(`Datos incorrectos para Talla Mandil ${item['TALLA MANDIL']}`, 10);
+        }
+        return (
+          tallas.includes(item['TALLA UNIFORME']) &&
+          tallas.includes(item['TALLA MANDIL'] && !containsLetters)
+        );
+      });
+      if (errorsFound) {
+        message.warning(
+          'Se encontraron errores en el archivo, la carga se realizara con los datos correctos',
+          10
+        );
+      }
+      bulkSizeUpdate(filterData)
         .then(() => {
           getEmployeesTable();
-          message.success('Operación realizada con éxito');
+          message.success('Operación realizada con éxito', 10);
         })
         .catch(() => {
           message.error('Ha ocurrido un error intentalo de nuevo mas tarde');

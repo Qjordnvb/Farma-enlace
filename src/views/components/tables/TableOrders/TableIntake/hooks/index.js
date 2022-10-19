@@ -194,13 +194,13 @@ export const useCustomIntake = () => {
     },
     {
       title: 'Talla',
-      dataIndex: ['employee', 'TALLA'],
+      dataIndex: ['correctSize', 'talla'],
       with: 50,
       ...getColumnSearchProps('size'),
-      sorter: (a, b) => a?.employee?.TALLA?.localeCompare(b?.employee?.TALLA),
+      sorter: (a, b) => a?.correctSize?.talla?.localeCompare(b?.correctSize?.talla),
       sortDirections: ['descend', 'ascend'],
       onFilter: (value, record) => {
-        return record.employee?.TALLA?.toString().toLowerCase().includes(value);
+        return record.correctSize?.talla?.toString().toLowerCase().includes(value);
       }
     },
     {

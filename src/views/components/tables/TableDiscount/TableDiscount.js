@@ -14,6 +14,7 @@ const TableDiscount = () => {
   const {handleExport} = useUtils();
   const [currentLength, setCurrentLength] = useState(0);
   useEffect(() => {
+    console.log('dataSource', dataSource);
     setCurrentLength(dataSource.length);
   }, [dataSource]);
 
