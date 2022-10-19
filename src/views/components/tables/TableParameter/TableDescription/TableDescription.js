@@ -6,12 +6,34 @@ import {useUtils} from '../../../../../hooks';
 import {useCustomDescription} from './hooks';
 
 const TableDescription = () => {
-  const {form, EditableCell, data, mergedColumns, cancel, loading} = useCustomDescription();
+  const {form, EditableCell, data, mergedColumns, cancel, loading, excelColumns, garmentColumns} =
+    useCustomDescription();
   const {handleExport} = useUtils();
   const [currentLength, setCurrentLength] = useState(0);
+
+  const [excelData, setExcelData] = useState([]);
+
   useEffect(() => {
     setCurrentLength(data.length);
   }, [data]);
+
+  useEffect(() => {
+    let formattedData = data.map((product) => {
+      let formatGarments = garmentColumns.reduce((curr, garment) => {
+        curr[garment.title] = product[garment?.dataIndex] ? product[garment?.dataIndex] : 0;
+        return curr;
+      }, {});
+
+      return {
+        'Código Producto': product.codigo,
+        Descripción: product.descripcion,
+        ...formatGarments,
+        Marca: product.marca,
+        Región: product.region
+      };
+    });
+    setExcelData(formattedData);
+  }, [data, excelColumns]);
 
   const onChange = (pagination, filters, sorter, extra) => {
     if (extra.action === 'filter') {
@@ -44,7 +66,7 @@ const TableDescription = () => {
         <div
           className="flex justify-end"
           onClick={() => {
-            handleExport(data, 'DESCRIPCIÓN UNIFORMES');
+            handleExport(excelData, 'DESCRIPCIÓN UNIFORMES');
           }}
         >
           {/*<img src={btnSave} className="btn-save" alt="btnDownload" />*/}

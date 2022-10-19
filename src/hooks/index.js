@@ -117,10 +117,13 @@ export const useUtils = () => {
     return request.data;
   }
 
-  async function getOrders(dateRange) {
+  async function getOrders(dateRange, discount) {
     let url = '/orders/findAll';
     if (dateRange?.from && dateRange?.to) {
       url += `?from=${dateRange.from}&to=${dateRange.to}`;
+    }
+    if (discount) {
+      url += `?discount=${discount}`;
     }
     const request = await Apilocal.get(url);
     return request.data;
@@ -131,8 +134,13 @@ export const useUtils = () => {
     return request.data;
   }
 
-  async function bulkSizeUpdate(formData) {
-    const request = await Apilocal.post('/employees/bulkUpdate', formData);
+  async function generateOrder(data) {
+    const request = await Apilocal.post('/orders/generate', {ids: data});
+    return request.data;
+  }
+
+  async function bulkSizeUpdate(data) {
+    const request = await Apilocal.post('/employees/bulkUpdate', {employees: data});
     return request.data;
   }
 
@@ -157,23 +165,22 @@ export const useUtils = () => {
   }
 
   async function switchActiveGarment(id, active) {
-    try {
-      const request = await Apilocal.post('/prenda/active', {id, active});
-      return request.data;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('ERROR - switchActiveGarment', e);
-    }
+    const request = await Apilocal.post('/prenda/active', {id, active});
+    return request.data;
   }
 
   async function UserLogin(usuario, password, app, token) {
-    const request = await Api.post(
-      'ServiceDesk/loginUsuarios',
-      {usuario, password, app},
-      {headers: {Authorization: `Bearer ${token}`}}
-    );
+    try {
+      const request = await Api.post(
+        'ServiceDesk/loginUsuarios',
+        {usuario, password, app},
+        {headers: {Authorization: `Bearer ${token}`}}
+      );
 
-    return request.data;
+      return request.data;
+    } catch (e) {
+      console.log('error', e);
+    }
   }
 
   // function sorter and search tables
@@ -264,6 +271,26 @@ export const useUtils = () => {
     XLSX.writeFile(workbook, `${title}.xlsx`);
   };
 
+  const excelToJson = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const data = e.target.result;
+        const workbook = XLSX.read(data, {
+          type: 'binary'
+        });
+        const sheetName = workbook.SheetNames[0];
+        const rowObject = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+        resolve(rowObject);
+      };
+      reader.onerror = () => {
+        reject([]);
+      };
+      reader.readAsBinaryString(file);
+    });
+  };
+
   return {
     LoginRequest,
     UserLogin,
@@ -294,6 +321,8 @@ export const useUtils = () => {
     deleteReason,
     editAmountToBuy,
     getStock,
-    editReason
+    editReason,
+    generateOrder,
+    excelToJson
   };
 };

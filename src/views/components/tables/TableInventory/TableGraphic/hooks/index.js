@@ -6,21 +6,34 @@ export const useCustomGraphic = () => {
   const {getStock} = useUtils();
   const [stock, setStock] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState([]);
+  const [stockData, setStockData] = useState([]);
   useEffect(() => {
-    getStock(selectedKeys)
-      .then((res) => {
-        setStock(res.stock);
-      })
-      .catch(() => {
-        message.error('Error cargando datos');
-      });
+    if (selectedKeys.length) {
+      getStock(selectedKeys)
+        .then((res) => {
+          setStock(res.stock);
+        })
+        .catch(() => {
+          message.error('Error cargando datos');
+        });
+    } else {
+      getStock([])
+        .then((res) => {
+          setStockData(res.stock);
+        })
+        .catch(() => {});
+    }
   }, [selectedKeys]);
 
   const config = {
-    data: stock,
+    data: selectedKeys.length ? stock : stockData,
     xField: 'date',
     yField: 'stock',
-
+    legend: {
+      layout: 'vertical',
+      position: 'right',
+      pageNavigator: 'PageNavigatorMarkerStyle'
+    },
     seriesField: 'descripcion',
     xAxis: {
       type: 'time',
@@ -39,5 +52,5 @@ export const useCustomGraphic = () => {
     }
   };
 
-  return {stock, config, selectedKeys, setSelectedKeys};
+  return {stock: selectedKeys.length ? stock : stockData, config, selectedKeys, setSelectedKeys};
 };

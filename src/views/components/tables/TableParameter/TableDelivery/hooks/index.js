@@ -55,7 +55,6 @@ export const useCustomDelivery = () => {
       });
       return newDelivery;
     });
-
     setFormatDataSource(newData);
   };
 
@@ -172,7 +171,10 @@ export const useCustomDelivery = () => {
       width: '7.5%',
       ...getColumnSearchProps('cobro'),
       sorter: (a, b) => a.payment.localeCompare(b.payment),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      render: (_) => {
+        return <div>{_ ? 'SI' : 'NO'}</div>;
+      }
     },
     {
       key: '8',
@@ -210,6 +212,7 @@ export const useCustomDelivery = () => {
     },
     {
       title: 'Ver',
+      fixed: 'right',
       dataIndex: 'accion',
       render: (_, record) => {
         return (

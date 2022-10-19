@@ -1,9 +1,8 @@
 import {useState, useEffect} from 'react';
-import axios from 'axios';
+import {message} from 'antd';
 import moment from 'moment';
 import {useUtils} from 'hooks';
 import 'moment/locale/es';
-import {message} from 'antd';
 
 export const useCustomIntake = () => {
   moment.locale('es');
@@ -12,14 +11,17 @@ export const useCustomIntake = () => {
   const [isAdd, setIsAdd] = useState(false);
   const [addingFile, setAddingFile] = useState({});
   // eslint-disable-next-line no-unused-vars
-  const {getColumnSearchProps, createOrder, getOrders, getEmployees, getTableParameters} =
-    useUtils();
+  const {
+    getColumnSearchProps,
+    createOrder,
+    getOrders,
+    getEmployees,
+    getTableParameters,
+    generateOrder
+  } = useUtils();
   const [options, setOptions] = useState([]);
   const [dataSource, setDataSource] = useState([]);
-  const [dateRange, setDateRange] = useState({
-    from: moment().startOf('month'),
-    to: moment().endOf('month')
-  });
+  const [dateRange, setDateRange] = useState({});
   const [employeesList, setEmployeesList] = useState([]);
   const [productsList, setProductsList] = useState([]);
   const [filteredSizes, setFilteredSizes] = useState([]);
@@ -54,6 +56,7 @@ export const useCustomIntake = () => {
         setLoading(false);
       })
       .catch(() => {
+        setLoading(false);
         message.error('Error cargando datos');
       });
   };
@@ -86,6 +89,7 @@ export const useCustomIntake = () => {
   }, []);
 
   useEffect(() => {
+    setLoading(true);
     getOrdersTable(dateRange);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dateRange]);
@@ -103,54 +107,19 @@ export const useCustomIntake = () => {
   };
 
   const createConsumptionOrders = () => {
-    selectedRowKeys.map(() => {
-      let data =
-        '<tem:CARGARXML>\n' +
-        '    <tem:cabecera>\n' +
-        '        <wfc:bodega_origen>\n' +
-        '        001\n' +
-        '        </wfc:bodega_origen>\n' +
-        '        <wfc:cedulaEmpleado>\n' +
-        '        1003195995\n' +
-        '        </wfc:cedulaEmpleado>\n' +
-        '        <wfc:centro_destino>\n' +
-        '        1201201200\n' +
-        '        </wfc:centro_destino>\n' +
-        '        <wfc:listaDetalle>\n' +
-        '            <wfc:NodoDetalle>\n' +
-        '                <wfc:cantidad>\n' +
-        '                3\n' +
-        '                </wfc:cantidad>\n' +
-        '                <wfc:codigoProd>\n' +
-        '                04203\n' +
-        '                </wfc:codigoProd>\n' +
-        '                <wfc:secuencia>\n' +
-        '                1\n' +
-        '                </wfc:secuencia>\n' +
-        '            </wfc:NodoDetalle>\n' +
-        '        </wfc:listaDetalle>\n' +
-        '    </tem:cabecera>\n' +
-        '</tem:CARGARXML>';
-
-      let config = {
-        method: 'post',
-        url: 'http://192.168.251.178/ws_uniformesOC/Service1.svc?wsdl',
-        headers: {
-          'Content-Type': 'application/xml'
-        },
-        data: data
-      };
-
-      axios(config)
-        .then(function (response) {
-          // eslint-disable-next-line no-console
-          console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-          // eslint-disable-next-line no-console
-          console.log('error xml request', error);
-        });
-    });
+    setLoading(true);
+    generateOrder(selectedRowKeys)
+      .then((res) => {
+        if (res) {
+          message.success('Ordenes creadas correctamente');
+          getOrdersTable(dateRange);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        message.error('Error creando ordenes');
+        setLoading(false);
+      });
   };
 
   const columns = [
@@ -285,7 +254,10 @@ export const useCustomIntake = () => {
       dataIndex: 'requestStatus',
       ...getColumnSearchProps('requestStatus'),
       sorter: (a, b) => a.requestStatus?.localeCompare(b.requestStatus),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      render: (_) => {
+        return <div>{_ ? _ : 'No Generado'}</div>;
+      }
     },
     {
       title: 'Fecha orden de consumo.',

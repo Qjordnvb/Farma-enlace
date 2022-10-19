@@ -19,6 +19,8 @@ export const useCustomInventory = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const [selectedItems, setSelectedItems] = useState([]);
+
   useEffect(() => {
     let getColumns = garmentsList.map((garment) => {
       return {
@@ -86,6 +88,15 @@ export const useCustomInventory = () => {
 
   const onSelectChange = (newSelectedRowKeys) => {
     setSelectedRowKeys(newSelectedRowKeys);
+    let findSelectedItems = data
+      .filter((item) => newSelectedRowKeys.includes(item.id))
+      .map((item) => {
+        return item.codigo;
+      });
+    console.log('findSelectedItems', findSelectedItems);
+
+    setSelectedItems(findSelectedItems);
+    console.log('selectedItems', selectedItems);
   };
 
   const rowSelection = {
@@ -286,6 +297,8 @@ export const useCustomInventory = () => {
     setDataSource,
     data,
     loading,
-    selectedRowKeys
+    selectedRowKeys,
+    garmentColumns,
+    selectedItems
   };
 };

@@ -27,8 +27,18 @@ function ConfigPrivate() {
       setFileList(newFileList);
     },
     beforeUpload: (file) => {
-      setFileList([file]);
-      return false;
+      console.log('file', file);
+      if (
+        !file.type.toLowerCase().includes('png') &&
+        !file.type.toLowerCase().includes('jpg') &&
+        !file.type.toLowerCase().includes('jpeg')
+      ) {
+        console.log('enters');
+        message.error('Solo se permiten archivos JPG y PNG');
+        return false;
+      } else {
+        setFileList([file]);
+      }
     },
     fileList
   };
@@ -41,7 +51,19 @@ function ConfigPrivate() {
       setLoginList(newFileList);
     },
     beforeUpload: (file) => {
-      setLoginList([file]);
+      if (
+        !file.type.toLowerCase().includes('png') &&
+        !file.type.toLowerCase().includes('jpg') &&
+        !file.type.toLowerCase().includes('jpeg')
+      ) {
+        console.log('enters');
+
+        message.error('Solo se permiten archivos JPG y PNG');
+        return false;
+      } else {
+        setLoginList([file]);
+      }
+
       return false;
     },
     fileList: loginList
@@ -69,11 +91,23 @@ function ConfigPrivate() {
 
     setUploading({...uploading, [type]: true});
 
-    fetch('http://localhost:3002/load/images', {
-      method: 'POST',
-      body: formData
-    })
-      .then((res) => res.json())
+    fetch(
+      `${
+        process.env.REACT_APP_NODE_ENV === 'production'
+          ? process.env.REACT_APP_PROD_URL
+          : process.env.REACT_APP_DEV_URL
+      }load/images`,
+      {
+        method: 'POST',
+        body: formData
+      }
+    )
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+        throw new Error('Error al subir la imagen');
+      })
       .then(() => {
         if (type === 'home') {
           setFileList([]);
@@ -94,7 +128,7 @@ function ConfigPrivate() {
           setLoginList([]);
           setLoginKey(Date.now());
         }
-        message.error('La carga falló por favor inténtelo nuevamente.');
+        message.error('La carga falló, por favor inténtelo nuevamente.');
       })
       .finally(() => {
         setUploading({...uploading, [type]: false});
@@ -118,13 +152,17 @@ function ConfigPrivate() {
                 <img
                   key={homeKey}
                   className={'w-48'}
-                  src={`http://localhost:3002/static/home.jpg`}
+                  src={`${
+                    process.env.REACT_APP_NODE_ENV === 'production'
+                      ? process.env.REACT_APP_PROD_URL
+                      : process.env.REACT_APP_DEV_URL
+                  }static/home.jpg`}
                   alt=""
                 />
               )}
             </div>
-
-            <Upload listType="picture" accept={'.jpg'} {...homeProps}>
+            <p>Image jpg/png de 400px ancho x 360px alto</p>
+            <Upload listType="picture" accept={'image/jpg, image/png'} {...homeProps}>
               <Button icon={<UploadOutlined />}>Seleccione una foto</Button>
             </Upload>
             <Button
@@ -141,6 +179,7 @@ function ConfigPrivate() {
           </div>
           <div>
             <h3>Login</h3>
+
             <div
               className={
                 'border border-emerald-500 w-52 h-52 mb-4 content-center flex items-center justify-center'
@@ -152,13 +191,17 @@ function ConfigPrivate() {
                 <img
                   key={loginKey}
                   className={'w-48'}
-                  src={`http://localhost:3002/static/login.jpg`}
+                  src={`${
+                    process.env.REACT_APP_NODE_ENV === 'production'
+                      ? process.env.REACT_APP_PROD_URL
+                      : process.env.REACT_APP_DEV_URL
+                  }static/login.jpg`}
                   alt=""
                 />
               )}
             </div>
-
-            <Upload listType="picture" accept={'.jpg'} {...loginProps}>
+            <p>Image jpg/png de 1366px ancho x 768px alto</p>
+            <Upload listType="picture" accept={'.jpg, .png'} {...loginProps}>
               <Button icon={<UploadOutlined />}>Seleccione una foto</Button>
             </Upload>
             <Button

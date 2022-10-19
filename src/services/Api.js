@@ -16,5 +16,8 @@ export const Api = axios.create({
 });
 
 export const Apilocal = axios.create({
-  baseURL: 'http://159.223.195.98:3002/'
+  baseURL:
+    process.env.REACT_APP_NODE_ENV === 'production'
+      ? process.env.REACT_APP_PROD_URL
+      : process.env.REACT_APP_DEV_URL
 });

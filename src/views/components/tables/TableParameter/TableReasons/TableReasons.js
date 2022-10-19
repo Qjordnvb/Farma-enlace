@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Table, Modal, Input, Form, Switch, Select, InputNumber} from 'antd';
+import {Table, Modal, Input, Form, Switch, Select} from 'antd';
 import './style-reasons.css';
 import Button from 'views/components/button/Button';
 import {StyledGridList} from 'views/screens/user/dataGridParameters/gridList/GridList.Styled';
@@ -102,14 +102,17 @@ function TableReasons() {
                     }`}
                     label="Reposición cantidad"
                   >
-                    <InputNumber
+                    <Input
+                      type="number"
                       id="item-form-w"
                       className="input-add"
                       placeholder="Días"
-                      min={0}
+                      min="0"
                       value={addingFile?.replacementAuto}
                       onChange={(e) => {
-                        const controlledValue = Math.max(0, Math.min(365, Number(e || 0)));
+                        const {value} = e.target;
+
+                        const controlledValue = Math.max(0, Math.min(365, Number(value || 0)));
 
                         setAddingFile({...addingFile, replacementAuto: controlledValue});
                       }}
@@ -155,12 +158,17 @@ function TableReasons() {
                     label="Cuotas"
                   >
                     <Input
-                      className="input-add "
+                      type="number"
+                      className="input-add"
                       value={addingFile?.dues}
                       placeholder="1 a 100"
+                      min={0}
                       onChange={(e) => {
+                        const {value} = e.target;
+                        //const controlledValue = Math.max(0, Math.min(100, Number(value || 0)));
+
                         setAddingFile((pre) => {
-                          return {...pre, dues: e.target.value};
+                          return {...pre, dues: value};
                         });
                       }}
                     />

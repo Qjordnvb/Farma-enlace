@@ -14,9 +14,9 @@ export const StyledContainerLogin = styled.div.attrs({
   flex-direction: column;
   background-image: url(${'http://159.223.195.98:3002/static/login.jpg'});
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   height: 100vh;
-
+  background-position: center;
   ${(props) => props.isLoading && `background-image: url(${BgLoading});  align-items: flex-end;`}
 `;
 

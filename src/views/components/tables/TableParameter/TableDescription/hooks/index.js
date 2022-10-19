@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 
-import {Form, InputNumber, Popconfirm, Typography, message} from 'antd';
+import {Form, Input, Popconfirm, Typography, message} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 
@@ -24,7 +24,7 @@ export const useCustomDescription = () => {
   const [dataTable, setDataTable] = useState([]);
   const [garmentsList, setGarmentsList] = useState([]);
   const [garmentColumns, setGarmentsColumns] = useState([]);
-
+  const [excelColumns, setExcelColumns] = useState({});
   useEffect(() => {
     setLoading(true);
     getGarmentsTableParameters(true).then((res) => {
@@ -71,12 +71,17 @@ export const useCustomDescription = () => {
     });
     formatData1.map((product) => {
       let newProduct = product;
+      let excelCols = {};
       garmentsList.map((garment) => {
+        excelCols[garment.description] = product[`garment${garment.id}`]
+          ? product[`garment${garment.id}`]
+          : 0;
         let index = `garment${garment.id}`;
         if (!newProduct[index]) {
           newProduct[index] = 0;
         }
       });
+      setExcelColumns({...excelColumns, ...excelCols});
       return newProduct;
     });
     setData(formatData1);
@@ -84,7 +89,7 @@ export const useCustomDescription = () => {
   }, [dataTable]);
 
   const EditableCell = ({editing, dataIndex, children, ...restProps}) => {
-    const inputNode = <InputNumber />;
+    const inputNode = <Input type={'number'} />;
     return (
       <td {...restProps}>
         {editing ? (
@@ -262,6 +267,8 @@ export const useCustomDescription = () => {
     data,
     mergedColumns,
     cancel,
-    loading
+    loading,
+    excelColumns,
+    garmentColumns
   };
 };

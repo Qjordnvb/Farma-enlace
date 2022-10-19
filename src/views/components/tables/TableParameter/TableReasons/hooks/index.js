@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {DeleteFilled} from '@ant-design/icons';
-import {Switch, Typography, Form, Popconfirm, message, InputNumber, Input, Select} from 'antd';
+import {Switch, Typography, Form, Popconfirm, message, Input, Select} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
 const {Option} = Select;
@@ -117,7 +117,7 @@ export const useCustomReasons = () => {
   const EditableCell = ({editing, dataIndex, children, ...restProps}) => {
     let inputNode;
     if (dataIndex === 'replacementAuto' || dataIndex === 'dues') {
-      inputNode = <InputNumber defaultValue={0} min={0} />;
+      inputNode = <Input type={'number'} />;
     } else if (dataIndex === 'personalDiscount' || dataIndex === 'companyDiscount') {
       inputNode = (
         <Input
@@ -288,6 +288,7 @@ export const useCustomReasons = () => {
     {
       key: '9',
       title: 'Acción',
+      fixed: 'right',
       width: '12%',
       render: (record) => {
         const editable = isEditing(record);

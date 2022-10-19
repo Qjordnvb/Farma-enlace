@@ -6,22 +6,27 @@ export const useCustomReport = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [loading, setLoading] = useState(false);
   const {getColumnSearchProps, getOrders} = useUtils();
+  const [dateRange, setDateRange] = useState({});
 
   const [dataSource, setDataSource] = useState([]);
 
-  const getOrdersData = () => {
+  const getOrdersData = (dateRange) => {
     setLoading(true);
-    getOrders().then((res) => {
-      let formatOrders = res.map((order) => {
-        return {...order, ...order.producto, ...order.employee, ...order.parameterizedReason};
+    getOrders(dateRange)
+      .then((res) => {
+        let formatOrders = res.map((order) => {
+          return {...order, ...order.producto, ...order.employee, ...order.parameterizedReason};
+        });
+        setLoading(false);
+        setDataSource(formatOrders);
+      })
+      .catch(() => {
+        setLoading(false);
       });
-      setLoading(false);
-      setDataSource(formatOrders);
-    });
   };
   useEffect(() => {
-    getOrdersData();
-  }, []);
+    getOrdersData(dateRange);
+  }, [dateRange]);
 
   const onSelectChange = (newSelectedRowKeys) => {
     setSelectedRowKeys(newSelectedRowKeys);
@@ -38,7 +43,8 @@ export const useCustomReport = () => {
       width: 70,
       dataIndex: 'id',
       sorter: (a, b) => a.id - b.id,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      defaultSortOrder: 'descend'
     },
 
     {
@@ -117,11 +123,24 @@ export const useCustomReport = () => {
     }
   ];
 
+  const onDatePickerChange = (dates) => {
+    if (dates) {
+      setDateRange({
+        from: dates[0],
+        to: dates[1]
+      });
+    } else {
+      setDateRange({});
+    }
+  };
+
   return {
     columns,
     rowSelection,
     dataSource,
     setDataSource,
-    loading
+    loading,
+    onDatePickerChange,
+    dateRange
   };
 };

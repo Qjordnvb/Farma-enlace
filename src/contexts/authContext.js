@@ -26,6 +26,7 @@ export default function AuthContextProvider({children}) {
     async function (usuario, password, app, tokenApp) {
       const response = await UserLogin(usuario, password, app, tokenApp);
       //console.log("estas es la respuestaaaaaaaaaaaaaaa",response);
+
       setIsAuthenticated(true);
       window.localStorage.setItem(MY_AUTH_APP, JSON.stringify(response));
     },

@@ -8,14 +8,11 @@ export const useCustomDiscount = () => {
   const {getColumnSearchProps, getOrders} = useUtils();
 
   const [dataSource, setDataSource] = useState([]);
-  const [dateRange, setDateRange] = useState({
-    from: moment().startOf('month'),
-    to: moment().endOf('month')
-  });
+  const [dateRange, setDateRange] = useState({});
 
   const getOrdersTable = (dateRange) => {
     setLoading(true);
-    getOrders(dateRange)
+    getOrders(dateRange, 'descuento')
       .then((res) => {
         let formatOrders = res.map((order) => {
           return {...order, ...order.producto, ...order.employee, ...order.parameterizedReason};

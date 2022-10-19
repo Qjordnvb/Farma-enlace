@@ -10,8 +10,27 @@ const TableParameter = () => {
   const {dataSource, mergedColumns, loading, form, EditableCell} = useCustomUniforms();
   const {handleExport} = useUtils();
   const [currentLength, setCurrentLength] = useState(0);
+  const [excelData, setExcelData] = useState([]);
+
   useEffect(() => {
     setCurrentLength(dataSource.length);
+  }, [dataSource]);
+
+  useEffect(() => {
+    let formattedData = dataSource.map((product) => {
+      return {
+        Código: product.codigo,
+        Marca: product.marca,
+        Descripción: product.descripcion,
+        Clase: product.clase,
+        Talla: product.talla,
+        Región: product.region,
+        Género: product.genero,
+        'Precio Uniforme': product.price,
+        Estado: product.status
+      };
+    });
+    setExcelData(formattedData);
   }, [dataSource]);
 
   const onChange = (pagination, filters, sorter, extra) => {
@@ -43,7 +62,7 @@ const TableParameter = () => {
       <div
         className="flex justify-end"
         onClick={() => {
-          handleExport(dataSource, 'Productos');
+          handleExport(excelData, 'Productos');
         }}
       >
         <img className="btn-download" src={btnDownload} alt="btnDownload" />

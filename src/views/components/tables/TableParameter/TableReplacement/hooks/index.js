@@ -225,7 +225,7 @@ export const useCustomReplacement = () => {
       key: '10',
       title: 'Fecha de modificación',
       dataIndex: 'updatedAt',
-      ...getColumnSearchProps('fechaM'),
+      ...getColumnSearchProps('Fecha de modificación'),
       sorter: (a, b) => a.updatedAt.length - b.updatedAt.length,
       sortDirections: ['descend', 'ascend'],
       render: (_) => {

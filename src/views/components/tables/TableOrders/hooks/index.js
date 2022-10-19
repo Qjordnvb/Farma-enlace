@@ -14,7 +14,8 @@ export const useCustomOrders = () => {
   const [loading, setLoading] = useState(false);
   const tallas = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 
-  const {getColumnSearchProps, getEmployees, updateEmployeeSize, bulkSizeUpdate} = useUtils();
+  const {getColumnSearchProps, getEmployees, updateEmployeeSize, bulkSizeUpdate, excelToJson} =
+    useUtils();
   const [dataSource, setDataSource] = useState([]);
 
   const onSelectChange = (newSelectedRowKeys) => {
@@ -281,18 +282,21 @@ export const useCustomOrders = () => {
       })
     };
   });
-  const handleInputFile = () => {
+
+  const handleInputFile = async () => {
     let file = inputFileRef.current.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-    bulkSizeUpdate(formData)
-      .then(() => {
-        getEmployeesTable();
-        message.success('Operación realizada con éxito');
-      })
-      .catch(() => {
-        message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
-      });
+    if (file) {
+      let jsonData = await excelToJson(file);
+      console.log(jsonData);
+      bulkSizeUpdate(jsonData)
+        .then(() => {
+          getEmployeesTable();
+          message.success('Operación realizada con éxito');
+        })
+        .catch(() => {
+          message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
+        });
+    }
   };
 
   /* const onAddFile = (record) => {

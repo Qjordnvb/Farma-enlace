@@ -49,9 +49,8 @@ export const StyledSelectOption = styled.div.attrs({
     line-height: 20px;
   }
 
-  img-options {
-    width: 300px;
-    height: 270px;
+  .img-options {
+    height: 400px;
   }
 
   a {

@@ -37,7 +37,7 @@ const TableDiscount = () => {
         />
       </div>
       <Table
-        scroll={{y: 300}}
+        scroll={{x: 2000, y: 300}}
         rowSelection={rowSelection}
         columns={columns}
         dataSource={dataSource}
@@ -47,7 +47,9 @@ const TableDiscount = () => {
           total: currentLength
         }}
         onChange={onChange}
-        rowKey={(record) => record.id}
+        rowKey={(record) => {
+          return record.id;
+        }}
         loading={loading}
       />
       <div className="ml-auto">
@@ -75,31 +77,25 @@ const TableDiscount = () => {
                 COLABORADOR,
                 CARGO,
                 NOMBRE_CENTRO_COSTOS,
+                CODIGO_CENTRO_COSTOS,
                 CODIGO_OFICINA,
                 NOMBRE_OFICINA,
-                TALLA,
-                descripcion,
                 requestDate,
                 dues,
                 price,
-                consumptionOrderNumber,
-                ultimaActualizacion,
-                requestStatus
+                CEDULA
               } = row;
               return {
-                COLABORADOR,
-                CARGO,
-                NOMBRE_CENTRO_COSTOS,
-                CODIGO_OFICINA,
-                NOMBRE_OFICINA,
-                TALLA,
-                DESCRIPCION: descripcion,
-                FECHA: requestDate,
-                CUOTAS: dues,
-                PRICE: price,
-                'NUMERO ORDEN DE CONSUMO': consumptionOrderNumber,
-                'ULTIMA ACTUALIZACION': ultimaActualizacion,
-                ESTADO: requestStatus
+                'Código oficina': CODIGO_OFICINA,
+                'Nombre oficina': NOMBRE_OFICINA,
+                'Codigo centro de costos': CODIGO_CENTRO_COSTOS,
+                'Nombre centro de costos': NOMBRE_CENTRO_COSTOS,
+                Cedula: CEDULA,
+                Nombres: COLABORADOR,
+                Cargo: CARGO,
+                'Valor (Valor cubierto por el colaborador)': price,
+                Cuotas: dues,
+                'Fecha de consumo (Dia/Mes/Año)': moment(requestDate).format('DD-MM-YYYY')
               };
             });
             handleExport(selectedData, 'DESCUENTO');

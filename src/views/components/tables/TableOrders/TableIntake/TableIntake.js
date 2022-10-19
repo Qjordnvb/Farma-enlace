@@ -42,6 +42,18 @@ const TableIntake = () => {
   // eslint-disable-next-line no-console
   return (
     <div className="container-table pt-16">
+      <div className="flex justify-end items-end flex-col">
+        <RangePicker
+          ranges={{
+            Today: [moment(), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')]
+          }}
+          showTime
+          format="YYYY/MM/DD"
+          onChange={onDatePickerChange}
+          value={[dateRange.from, dateRange.to]}
+        />
+      </div>
       <Table
         scroll={{x: 2500, y: 300}}
         rowSelection={rowSelection}
@@ -145,16 +157,6 @@ const TableIntake = () => {
         </>
       )}
       <div className="flex justify-end items-end flex-col">
-        <RangePicker
-          ranges={{
-            Today: [moment(), moment()],
-            'This Month': [moment().startOf('month'), moment().endOf('month')]
-          }}
-          showTime
-          format="YYYY/MM/DD"
-          onChange={onDatePickerChange}
-          value={[dateRange.from, dateRange.to]}
-        />
         <Button onClick={onAddFile} className="rounded-lg my-1 mr-2">
           <img src={btnNew} alt="new" width="220px" height="50px" />
         </Button>
