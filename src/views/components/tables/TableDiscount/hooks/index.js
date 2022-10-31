@@ -83,16 +83,16 @@ export const useCustomDiscount = () => {
       title: 'Nombre de la oficina',
       dataIndex: ['employee', 'NOMBRE_OFICINA'],
       ...getColumnSearchProps('NOMBRE_OFICINA'),
-      sorter: (a, b) => a.NOMBRE_OFICINA.localeCompare(b.NOMBRE_OFICINA),
+      sorter: (a, b) => a.NOMBRE_OFICINA?.localeCompare(b.NOMBRE_OFICINA),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Talla',
-      dataIndex: 'TALLA',
+      dataIndex: ['correctSize', 'talla'],
       with: 50,
       ...getColumnSearchProps('talla '),
       sorter: (a, b) => {
-        return a.TALLA?.localeCompare(b?.TALLA);
+        return a.correctSize?.talla?.localeCompare(b?.correctSize?.talla);
       },
       sortDirections: ['descend', 'ascend']
     },
@@ -100,7 +100,7 @@ export const useCustomDiscount = () => {
       title: 'Kits',
       dataIndex: 'descripcion',
       ...getColumnSearchProps('Kits '),
-      sorter: (a, b) => a.descripcion.localeCompare(b.descripcion),
+      sorter: (a, b) => a.descripcion?.localeCompare(b.descripcion),
       sortDirections: ['descend', 'ascend']
     },
     {
