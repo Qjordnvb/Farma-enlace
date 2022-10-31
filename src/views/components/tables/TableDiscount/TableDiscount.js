@@ -6,6 +6,7 @@ import {useCustomDiscount} from './hooks';
 import './style.css';
 import '../TableParameter/TableReasons/style-reasons.css';
 import moment from 'moment';
+
 const {RangePicker} = DatePicker;
 
 const TableDiscount = () => {
@@ -14,7 +15,6 @@ const TableDiscount = () => {
   const {handleExport} = useUtils();
   const [currentLength, setCurrentLength] = useState(0);
   useEffect(() => {
-    console.log('dataSource', dataSource);
     setCurrentLength(dataSource.length);
   }, [dataSource]);
 

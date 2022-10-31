@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {DeleteFilled} from '@ant-design/icons';
-import {Switch, Typography, Form, Popconfirm, message, Input, Select} from 'antd';
+import {Form, Input, message, Popconfirm, Select, Switch, Typography} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../../assets/img/btn-edit.png';
+
 const {Option} = Select;
 export const useCustomReasons = () => {
   const [isAdd, setIsAdd] = useState(false);
@@ -81,7 +82,6 @@ export const useCustomReasons = () => {
       const row = await form.validateFields();
 
       // eslint-disable-next-line no-console
-      console.log('row', row, key);
       editReason({id: key, ...row})
         .then(() => {
           setLoading(true);
