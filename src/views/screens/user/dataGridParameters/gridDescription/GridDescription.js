@@ -11,7 +11,7 @@ function GridDescription() {
   return (
     <>
       {' '}
-      <div className="container-table pt-16">
+      <div className="container-table pt-2">
         <TableDescription />
       </div>
     </>

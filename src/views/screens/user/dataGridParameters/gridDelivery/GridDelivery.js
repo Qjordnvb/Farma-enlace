@@ -9,7 +9,7 @@ function GridDelivery() {
   return (
     <>
       {' '}
-      <div className="container-table pt-16">
+      <div className="container-table">
         <TableDelivery />
       </div>
     </>

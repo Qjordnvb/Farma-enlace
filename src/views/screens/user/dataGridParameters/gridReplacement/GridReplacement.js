@@ -11,7 +11,7 @@ function GridReplacement() {
   return (
     <>
       {' '}
-      <div className="container-table pt-16">
+      <div className="container-table pt-2">
         <TableReplacement />
       </div>
     </>

@@ -30,7 +30,7 @@ export const StyledSelectOption = styled.div.attrs({
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  margin-top: 20px;
   background: #ffffff;
   padding: 30px 10px 30px 10px;
   width: 60%;

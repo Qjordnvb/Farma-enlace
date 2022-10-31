@@ -24,7 +24,7 @@ export const StyledOptionDataList = styled.div.attrs({
   align-items: center;
   justify-content: space-around;
   padding: 16px;
-  margin: 3.2% auto auto;
+  margin: 10px auto 0px;
   max-width: 1200px;
   width: 100%;
 
@@ -69,6 +69,7 @@ export const StyledOptionDataList = styled.div.attrs({
       }
     }
   }
+
   @media only screen and (max-width: 1366px) {
     max-width: 1000px;
   }
