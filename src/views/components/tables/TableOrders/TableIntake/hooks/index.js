@@ -204,7 +204,7 @@ export const useCustomIntake = () => {
       }
     },
     {
-      title: 'Descripcion',
+      title: 'Descripción',
       dataIndex: ['producto', 'descripcion'],
       ...getColumnSearchProps('description'),
       sorter: (a, b) => a?.producto?.descripcion?.localeCompare(b?.producto?.descripcion),
@@ -260,7 +260,7 @@ export const useCustomIntake = () => {
       }
     },
     {
-      title: 'Fecha orden de consumo.',
+      title: 'Fecha orden de consumo',
       dataIndex: 'dateConsumptionOrder',
       ...getColumnSearchProps('dateConsumptionOrder'),
       sorter: (a, b) => a.dateConsumptionOrder?.localeCompare(b?.dateConsumptionOrder),

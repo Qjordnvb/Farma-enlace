@@ -20,7 +20,7 @@ const menu = (
             className="bg-transparent rounded-lg px-3"
             onClick={handleLogout}
           >
-            <span className="text-sm -mt-3">Cerrar sesion</span>
+            <span className="text-sm -mt-3">Cerrar sesión</span>
           </Button>
         )
       }

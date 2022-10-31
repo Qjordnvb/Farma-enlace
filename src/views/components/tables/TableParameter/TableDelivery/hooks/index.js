@@ -211,18 +211,16 @@ export const useCustomDelivery = () => {
       dataIndex: 'prendas'
     },
     {
-      title: 'Ver',
+      title: 'Acción',
       fixed: 'right',
       dataIndex: 'accion',
+      width: '5%',
       render: (_, record) => {
         return (
           <span className="flex items-center justify-center	">
             <Typography.Link
               onClick={() => {
                 onDelete(record.id);
-              }}
-              style={{
-                marginRight: 8
               }}
             >
               <DeleteFilled />

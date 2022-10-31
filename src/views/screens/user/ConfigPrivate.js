@@ -71,7 +71,7 @@ function ConfigPrivate() {
 
   const userMenu = [
     {
-      name: 'Imagenes',
+      name: 'Imágenes',
       path: ''
     }
   ];
@@ -138,7 +138,7 @@ function ConfigPrivate() {
   return (
     <>
       <DataGridLayout titleGrid="Configuración" userMenuLinks={userMenu}>
-        <div className={'container-table pt-16 flex justify-around pb-24'}>
+        <div className={'container-table pt-2 flex justify-around pb-24'}>
           <div>
             <h3>Home</h3>
             <div

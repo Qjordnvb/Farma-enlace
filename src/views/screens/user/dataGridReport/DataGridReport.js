@@ -11,7 +11,7 @@ function DataGridReport() {
   const {TableReport} = useTables();
   const userMenu = [
     {
-      name: 'Envios',
+      name: 'Envíos',
       path: ''
     }
   ];
