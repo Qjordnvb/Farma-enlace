@@ -169,6 +169,11 @@ export const useUtils = () => {
     return request.data;
   }
 
+  async function bulkUploadConsumptionOrders(data) {
+    const request = await Apilocal.post('/orders/bulkUpload', {orders: data});
+    return request.data;
+  }
+
   async function UserLogin(usuario, password, app, token) {
     try {
       const request = await Api.post(
@@ -323,6 +328,7 @@ export const useUtils = () => {
     getStock,
     editReason,
     generateOrder,
-    excelToJson
+    excelToJson,
+    bulkUploadConsumptionOrders
   };
 };
