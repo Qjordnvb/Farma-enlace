@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react';
 
-import {Form, Input, Popconfirm, Typography, message} from 'antd';
+import {Form, Input, message, Popconfirm, Typography} from 'antd';
 import {useUtils} from 'hooks';
-import BtnEdit from '../../../../../../assets/img/btn-edit.png';
+import BtnEdit from '../../../../../../assets/edit-icon.svg';
 
 export const useCustomDescription = () => {
   const originData = [];
@@ -43,7 +43,8 @@ export const useCustomDescription = () => {
       return {
         title: garment.description,
         dataIndex: `garment${garment.id}`,
-        editable: true
+        editable: true,
+        width: '5%'
       };
     });
     setGarmentsColumns(getColumns);
@@ -187,16 +188,18 @@ export const useCustomDescription = () => {
       title: 'Código Producto',
       dataIndex: 'codigo',
       ...getColumnSearchProps('codigo'),
-      sorter: (a, b) => a.codigo.localeCompare(b.codigo),
+      sorter: (a, b) => a.codigo?.localeCompare(b.codigo),
       sortDirections: ['descend', 'ascend'],
-      defaultSortOrder: 'ascend'
+      defaultSortOrder: 'ascend',
+      width: '8%'
     },
     {
       title: 'Descripción',
       dataIndex: 'descripcion',
       ...getColumnSearchProps('descripcion'),
       sorter: (a, b) => a.descripcion?.localeCompare(b.descripcion),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      width: '12%'
     },
     ...garmentColumns,
 
@@ -204,20 +207,22 @@ export const useCustomDescription = () => {
       title: 'Marca',
       dataIndex: 'marca',
       ...getColumnSearchProps('marca'),
-      sorter: (a, b) => a.marca.localeCompare(b.marca),
-      sortDirections: ['descend', 'ascend']
+      sorter: (a, b) => a.marca?.localeCompare(b.marca),
+      sortDirections: ['descend', 'ascend'],
+      width: '8%'
     },
     {
       title: 'Región',
       dataIndex: 'region',
       ...getColumnSearchProps('region'),
       sorter: (a, b) => a.region?.localeCompare(b.region),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      width: '8%'
     },
     {
       title: 'Acción',
       dataIndex: 'accion',
-      width: '7.5%',
+      width: '3%',
       fixed: 'right',
       render: (_, record) => {
         const editable = isEditing(record);
@@ -236,7 +241,7 @@ export const useCustomDescription = () => {
             </Popconfirm>
           </span>
         ) : (
-          <div disabled={editingKey !== ''} onClick={() => edit(record)} className="btn-edit">
+          <div onClick={() => edit(record)} className="btn-edit">
             <img src={BtnEdit} alt="btn-edit" />
           </div>
         );

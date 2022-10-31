@@ -1,8 +1,8 @@
-import {useState, useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {DeleteFilled} from '@ant-design/icons';
 import {message, Switch, Typography} from 'antd';
 import {useUtils} from 'hooks';
-import BtnEdit from '../../../../../../assets/img/btn-edit.png';
+import BtnEdit from '../../../../../../assets/edit-icon.svg';
 
 export const useCustomGarments = () => {
   const {
@@ -82,7 +82,7 @@ export const useCustomGarments = () => {
       title: 'Descripción',
       dataIndex: 'description',
       ...getColumnSearchProps('description'),
-      sorter: (a, b) => a.description.localeCompare(b.description),
+      sorter: (a, b) => a.description?.localeCompare(b.description),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -116,15 +116,15 @@ export const useCustomGarments = () => {
               }}
               className="btn-edit"
             >
-              <img src={BtnEdit} alt="btn-edit" />
+              <img src={BtnEdit} className="w-2" alt="btn-edit" />
             </div>
             <Typography.Link
               onClick={() => {
                 onDelete(record.id);
               }}
               style={{
-                marginRight: 8,
-                marginTop: -14
+                display: 'flex',
+                alignItems: 'center'
               }}
             >
               <DeleteFilled />

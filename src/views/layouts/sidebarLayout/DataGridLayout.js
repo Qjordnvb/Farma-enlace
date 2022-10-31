@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
 
 import useViews from 'views';
-import Button from 'views/components/button/Button';
+
 import SidebarMenu from 'views/components/sidebar';
 import BgFigures from '../../../assets/img/bg-figures.png';
 import Logo from '../../../assets/img/logo.png';
 import {StyledContainerDataGrid, StyledOptionData} from './DataGridLayout.Styled';
 
-function DataGridLayout({children, titleGrid, userMenuLinks}) {
+function DataGridLayout({children, userMenuLinks}) {
   const {useLayouts} = useViews();
   const {HeaderLayout} = useLayouts();
   return (
@@ -21,14 +21,14 @@ function DataGridLayout({children, titleGrid, userMenuLinks}) {
           <SidebarMenu />
         </div>
         <StyledContainerDataGrid>
-          <Button
+          {/*<Button
             className="btn-data my-12"
             variant="primary"
             width="433px"
             height="60px"
             label={titleGrid}
             roundedVariant="full"
-          />
+          />*/}
 
           <StyledOptionData>
             {_.map(userMenuLinks, (link) => {
