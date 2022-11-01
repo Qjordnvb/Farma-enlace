@@ -93,10 +93,7 @@ export const useCustomInventory = () => {
       .map((item) => {
         return item.codigo;
       });
-    console.log('findSelectedItems', findSelectedItems);
-
     setSelectedItems(findSelectedItems);
-    console.log('selectedItems', selectedItems);
   };
 
   const rowSelection = {

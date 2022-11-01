@@ -27,13 +27,11 @@ function ConfigPrivate() {
       setFileList(newFileList);
     },
     beforeUpload: (file) => {
-      console.log('file', file);
       if (
         !file.type.toLowerCase().includes('png') &&
         !file.type.toLowerCase().includes('jpg') &&
         !file.type.toLowerCase().includes('jpeg')
       ) {
-        console.log('enters');
         message.error('Solo se permiten archivos JPG y PNG');
         return false;
       } else {
@@ -56,8 +54,6 @@ function ConfigPrivate() {
         !file.type.toLowerCase().includes('jpg') &&
         !file.type.toLowerCase().includes('jpeg')
       ) {
-        console.log('enters');
-
         message.error('Solo se permiten archivos JPG y PNG');
         return false;
       } else {
