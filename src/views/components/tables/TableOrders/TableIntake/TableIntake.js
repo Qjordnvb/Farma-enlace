@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {Table, Form, Modal, Select, DatePicker} from 'antd';
+import {DatePicker, Form, Modal, Select, Table} from 'antd';
 import moment from 'moment';
 import Button from 'views/components/button/Button';
 import btnNew from '../../../../../assets/img/btn-new.svg';
 import {useCustomIntake} from './hooks';
 import './style.css';
 import '../../TableParameter/TableReasons/style-reasons.css';
+import btnCarga from '../../../../../assets/img/btn-carga.svg';
+import {useUtils} from '../../../../../hooks';
 
 const {RangePicker} = DatePicker;
 const TableIntake = () => {
@@ -25,10 +27,22 @@ const TableIntake = () => {
     onDatePickerChange,
     dateRange,
     selectedColaborador,
-    loading
+    loading,
+    inputFileRef,
+    handleInputFile
   } = useCustomIntake();
 
+  const {handleExport} = useUtils();
+
   const [currentLength, setCurrentLength] = useState(0);
+
+  const exampleSheet = [
+    {
+      CEDULA: '',
+      CODIGO: ''
+    }
+  ];
+
   useEffect(() => {
     setCurrentLength(dataSource.length);
   }, [dataSource]);
@@ -41,7 +55,7 @@ const TableIntake = () => {
 
   // eslint-disable-next-line no-console
   return (
-    <div className="container-table pt-16">
+    <div className="container-table pt-2">
       <div className="flex justify-end items-end flex-col">
         <RangePicker
           ranges={{
@@ -156,13 +170,37 @@ const TableIntake = () => {
           </Modal>
         </>
       )}
-      <div className="flex justify-end items-end flex-col">
-        <Button onClick={onAddFile} className="rounded-lg my-1 mr-2">
-          <img src={btnNew} alt="new" width="220px" height="50px" />
-        </Button>
-        <Button onClick={createConsumptionOrders} className="rounded-lg my-5 mr-2 p-4">
-          Generar orden de consumo
-        </Button>
+      <div className="flex justify-between">
+        <div>
+          <label htmlFor="file">
+            <img src={btnCarga} alt="download" width="230px" height="70px" />
+            <input
+              style={{visibility: 'hidden'}}
+              id="file"
+              type="file"
+              accept=".xlsx, .xls"
+              ref={inputFileRef}
+              onChange={handleInputFile}
+            />
+          </label>
+          <div
+            className="button__add"
+            onClick={() => {
+              handleExport(exampleSheet, 'PLANTILLA - CARGA MASIVA DE ORDENES');
+            }}
+          >
+            <h3 className={'text-neutral-50 font-bold mb-0'}>DESCARGAR PLANTILLA</h3>
+          </div>
+        </div>
+        <div className={'flex flex-col'}>
+          <Button onClick={onAddFile} className="rounded-lg  mr-2 flex justify-center">
+            <img src={btnNew} alt="new" width="220px" height="50px" />
+          </Button>
+
+          <Button onClick={createConsumptionOrders} className="rounded-lg my-5 mr-2 p-4">
+            Generar orden de consumo
+          </Button>
+        </div>
       </div>
     </div>
   );

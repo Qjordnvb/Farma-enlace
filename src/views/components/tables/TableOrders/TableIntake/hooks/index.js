@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {message} from 'antd';
 import moment from 'moment';
 import {useUtils} from 'hooks';
@@ -17,7 +17,9 @@ export const useCustomIntake = () => {
     getOrders,
     getEmployees,
     getTableParameters,
-    generateOrder
+    generateOrder,
+    excelToJson,
+    bulkUploadConsumptionOrders
   } = useUtils();
   const [options, setOptions] = useState([]);
   const [dataSource, setDataSource] = useState([]);
@@ -26,6 +28,7 @@ export const useCustomIntake = () => {
   const [productsList, setProductsList] = useState([]);
   const [filteredSizes, setFilteredSizes] = useState([]);
   const [selectedColaborador, setSelectedColaborador] = useState({});
+  const inputFileRef = useRef(null);
 
   useEffect(() => {
     if (addingFile?.colaborador) {
@@ -310,6 +313,15 @@ export const useCustomIntake = () => {
     }
   };
 
+  const handleInputFile = async () => {
+    setLoading(true);
+    let file = inputFileRef.current.files[0];
+    if (file) {
+      let jsonData = await excelToJson(file);
+      await bulkUploadConsumptionOrders(jsonData);
+    }
+  };
+
   return {
     columns,
     rowSelection,
@@ -331,6 +343,8 @@ export const useCustomIntake = () => {
     dateRange,
     selectedColaborador,
     filteredSizes,
-    loading
+    loading,
+    inputFileRef,
+    handleInputFile
   };
 };

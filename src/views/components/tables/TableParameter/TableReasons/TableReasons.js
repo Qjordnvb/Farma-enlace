@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Table, Modal, Input, Form, Switch, Select} from 'antd';
+import {Form, Input, Modal, Select, Switch, Table} from 'antd';
 import './style-reasons.css';
 import Button from 'views/components/button/Button';
 import {StyledGridList} from 'views/screens/user/dataGridParameters/gridList/GridList.Styled';
@@ -21,7 +21,11 @@ function TableReasons() {
   } = useCustomReasons();
   const {Option} = Select;
 
-  const cal = ['Fecha de ingreso del colaborador', 'Fecha de última reposición'];
+  const cal = [
+    'Fecha de ingreso del colaborador',
+    'Fecha de última reposición',
+    'Reposición  anterior'
+  ];
 
   const [currentLength, setCurrentLength] = useState(0);
   useEffect(() => {

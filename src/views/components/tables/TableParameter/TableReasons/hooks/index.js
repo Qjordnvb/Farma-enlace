@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {DeleteFilled} from '@ant-design/icons';
 import {Form, Input, message, Popconfirm, Select, Switch, Typography} from 'antd';
 import {useUtils} from 'hooks';
+
 import BtnEdit from '../../../../../../assets/edit-icon.svg';
 
 const {Option} = Select;
@@ -82,7 +83,6 @@ export const useCustomReasons = () => {
       const row = await form.validateFields();
 
       // eslint-disable-next-line no-console
-      console.log('row', row, key);
       editReason({id: key, ...row})
         .then(() => {
           setLoading(true);
