@@ -1,6 +1,5 @@
 import {DATA} from 'config/paths';
 import useViews from 'views';
-import Button from 'views/components/button/Button';
 
 import Logo from '../../../assets/img/logo.png';
 import Options1 from '../../../assets/img/option-1.png';
@@ -18,17 +17,17 @@ function HomePrivate() {
   return (
     <HeaderLayout>
       <StyledContainerInicio className="flex flex-col items-center justify-center">
-        <Button
+        {/*<Button
           className="btn-inicio my-12"
           variant="primary"
           label="Bienvenido"
           roundedVariant="full"
           width="433px"
           height="60px"
-        />
+        />*/}
 
         <StyledSelectOption className="select-option">
-          <h3 className="text-primary-500">Selecciona una función</h3>
+          <h3 className="text-primary-500">Bienvenido</h3>
           <img
             className="img-options mt-12"
             src={'http://159.223.195.98:3002/static/home.jpg'}

@@ -5,6 +5,7 @@ export const StyledContainerLayout = styled.div.attrs({
   className: 'StyledContainerLayout'
 })`
   ${tw``}
+  min-height: 100vh;
   .div-logo {
     position: absolute;
     left: 0;

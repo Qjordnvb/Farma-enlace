@@ -24,7 +24,7 @@ const TableDiscount = () => {
     }
   };
   return (
-    <div className="container-table pt-16">
+    <div className="container-table pt-2">
       <div className="flex justify-end items-end flex-col">
         <RangePicker
           ranges={{
@@ -38,7 +38,7 @@ const TableDiscount = () => {
         />
       </div>
       <Table
-        scroll={{x: 2000, y: 300}}
+        scroll={{x: 2000, y: 400}}
         rowSelection={rowSelection}
         columns={columns}
         dataSource={dataSource}
