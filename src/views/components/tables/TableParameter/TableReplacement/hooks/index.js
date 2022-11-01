@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {Form, Input, InputNumber, message, Popconfirm, Typography} from 'antd';
 import moment from 'moment';
 import {useUtils} from 'hooks';
-import BtnEdit from '../../../../../../assets/img/btn-edit.png';
+import BtnEdit from '../../../../../../assets/edit-icon.svg';
 
 export const useCustomReplacement = () => {
   const [isAdd, setIsAdd] = useState(false);
@@ -136,7 +136,8 @@ export const useCustomReplacement = () => {
       dataIndex: 'id',
       sorter: (a, b) => a.id - b.id,
       sortDirections: ['descend', 'ascend'],
-      defaultSortOrder: 'ascend'
+      defaultSortOrder: 'ascend',
+      width: '4%'
     },
     {
       key: '1',
@@ -144,7 +145,8 @@ export const useCustomReplacement = () => {
       dataIndex: 'codigo',
       ...getColumnSearchProps('codigo'),
       sorter: (a, b) => a.codigo.length - b.codigo.length,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      width: '8%'
     },
     {
       key: '2',
@@ -152,7 +154,8 @@ export const useCustomReplacement = () => {
       dataIndex: 'descripcion',
       ...getColumnSearchProps('descripcion'),
       sorter: (a, b) => a.descripcion.length - b.descripcion.length,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      width: '10%'
     },
     {
       key: '3',
@@ -160,15 +163,17 @@ export const useCustomReplacement = () => {
       dataIndex: 'talla',
       ...getColumnSearchProps('talla'),
       sorter: (a, b) => a.talla.length - b.talla.length,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      width: '5%'
     },
     {
       key: '4',
-      title: 'Genero',
+      title: 'Género',
       dataIndex: 'genero',
       ...getColumnSearchProps('genero'),
       sorter: (a, b) => a.genero.length - b.genero.length,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      width: '6%'
     },
     {
       key: '5',
@@ -178,6 +183,7 @@ export const useCustomReplacement = () => {
       sorter: (a, b) => a.porcentaje.length - b.porcentaje.length,
       sortDirections: ['descend', 'ascend'],
       editable: true,
+      width: '7%',
       render: (_) => {
         return (
           <div>
@@ -192,7 +198,7 @@ export const useCustomReplacement = () => {
       title: 'Reposición',
       dataIndex: 'reposicion',
       ...getColumnSearchProps('reposicion'),
-      sorter: (a, b) => a.reposicion.length - b.reposicion.length,
+      sorter: (a, b) => a.reposicion - b.reposicion,
       sortDirections: ['descend', 'ascend'],
       editable: true,
       render: (_) => {
@@ -201,7 +207,8 @@ export const useCustomReplacement = () => {
             {_} {_ && 'dias'}
           </div>
         );
-      }
+      },
+      width: '6%'
     },
     {
       key: '7',
@@ -209,7 +216,8 @@ export const useCustomReplacement = () => {
       dataIndex: 'totalAverage',
       ...getColumnSearchProps('totalAverage'),
       sorter: (a, b) => a.totalAverage - b.totalAverage,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      width: '8%'
     },
     {
       key: '8',
@@ -217,32 +225,35 @@ export const useCustomReplacement = () => {
       dataIndex: 'max',
       ...getColumnSearchProps('max'),
       sorter: (a, b) => a.max - b.max,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      width: '8%'
     },
     {
       key: '9',
       title: 'Última modificación',
       dataIndex: 'ultimaActualizacion',
       ...getColumnSearchProps('ultimaActualizacion'),
-      sorter: (a, b) => a.ultimaActualizacion.length - b.ultimaActualizacion.length,
-      sortDirections: ['descend', 'ascend']
+      sorter: (a, b) => a.ultimaActualizacion?.localeCompare(b.ultimaActualizacion),
+      sortDirections: ['descend', 'ascend'],
+      width: '8%'
     },
     {
       key: '10',
       title: 'Fecha de modificación',
       dataIndex: 'updatedAt',
       ...getColumnSearchProps('Fecha de modificación'),
-      sorter: (a, b) => a.updatedAt.length - b.updatedAt.length,
+      sorter: (a, b) => a.updatedAt?.localeCompare(b.updatedAt),
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
         return <div>{moment(_).format('YYYY-MM-DD')}</div>;
-      }
+      },
+      width: '9%'
     },
     {
       title: 'Acción',
       fixed: 'right',
       dataIndex: 'accion',
-      width: '7.5%',
+      width: '5%',
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
@@ -261,7 +272,7 @@ export const useCustomReplacement = () => {
           </span>
         ) : (
           <div disabled={editingKey !== ''} onClick={() => edit(record)} className="btn-edit">
-            <img src={BtnEdit} alt="btn-edit" />
+            <img src={BtnEdit} className="w-6" alt="btn-edit" />
           </div>
         );
       }

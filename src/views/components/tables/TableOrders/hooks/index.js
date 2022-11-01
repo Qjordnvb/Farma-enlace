@@ -1,8 +1,8 @@
-import {useState, useEffect, useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {Form, InputNumber, message, Popconfirm, Select, Typography} from 'antd';
 import moment from 'moment';
 import {useUtils} from 'hooks';
-import BtnEdit from '../../../../../assets/img/btn-edit.png';
+import BtnEdit from '../../../../../assets/edit-icon.svg';
 
 const {Option} = Select;
 
@@ -138,7 +138,8 @@ export const useCustomOrders = () => {
       dataIndex: 'id',
       ...getColumnSearchProps('N°'),
       sorter: (a, b) => a.id - b.id,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      width: '4%'
     },
     {
       title: 'Cédula',
@@ -159,7 +160,7 @@ export const useCustomOrders = () => {
       title: 'Cargo',
       dataIndex: 'CARGO',
       ...getColumnSearchProps('CARGO'),
-      sorter: (a, b) => a.CARGO.localeCompare(b.CARGO),
+      sorter: (a, b) => a.CARGO?.localeCompare(b.CARGO),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -173,21 +174,21 @@ export const useCustomOrders = () => {
       title: 'Sucursal',
       dataIndex: 'NOMBRE_SUCURSAL',
       ...getColumnSearchProps('Sucursal'),
-      sorter: (a, b) => a.NOMBRE_SUCURSAL.localeCompare(b.NOMBRE_SUCURSAL),
+      sorter: (a, b) => a.NOMBRE_SUCURSAL?.localeCompare(b.NOMBRE_SUCURSAL),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Región',
       dataIndex: 'REGION',
       ...getColumnSearchProps('REGION'),
-      sorter: (a, b) => a.REGION.localeCompare(b.REGION),
+      sorter: (a, b) => a.REGION?.localeCompare(b.REGION),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Fecha de ingreso',
       dataIndex: 'FECHA_INGRESO',
       ...getColumnSearchProps('Fecha de ingreso'),
-      sorter: (a, b) => a.FECHA_INGRESO.localeCompare(b.FECHA_INGRESO),
+      sorter: (a, b) => a.FECHA_INGRESO?.localeCompare(b.FECHA_INGRESO),
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
         return <div>{moment(_).calendar()}</div>;
@@ -197,21 +198,21 @@ export const useCustomOrders = () => {
       title: 'Distribución Administrativa',
       dataIndex: 'NOMBRE_CENTRO_COSTOS',
       ...getColumnSearchProps('Distribución Administrativa'),
-      sorter: (a, b) => a.NOMBRE_CENTRO_COSTOS.localeCompare(b.NOMBRE_CENTRO_COSTOS),
+      sorter: (a, b) => a.NOMBRE_CENTRO_COSTOS?.localeCompare(b.NOMBRE_CENTRO_COSTOS),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Número oficina',
       dataIndex: 'CODIGO_OFICINA',
       ...getColumnSearchProps('Número oficina'),
-      sorter: (a, b) => a.CODIGO_OFICINA.localeCompare(b.CODIGO_OFICINA),
+      sorter: (a, b) => a.CODIGO_OFICINA?.localeCompare(b.CODIGO_OFICINA),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Nombre de la oficina',
       dataIndex: 'NOMBRE_OFICINA',
       ...getColumnSearchProps('NOMBRE_OFICINA'),
-      sorter: (a, b) => a.NOMBRE_OFICINA.localeCompare(b.NOMBRE_OFICINA),
+      sorter: (a, b) => a.NOMBRE_OFICINA?.localeCompare(b.NOMBRE_OFICINA),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -239,7 +240,8 @@ export const useCustomOrders = () => {
     {
       title: 'Acción',
       dataIndex: 'accion',
-      width: '7.5%',
+      width: '5%',
+      fixed: 'right',
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
@@ -259,9 +261,9 @@ export const useCustomOrders = () => {
             </Popconfirm>
           </span>
         ) : (
-          <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-            <img src={BtnEdit} alt="btn-edit" />
-          </Typography.Link>
+          <div onClick={() => edit(record)} className="btn-edit">
+            <img src={BtnEdit} className="w-6" alt="btn-edit" />
+          </div>
         );
       }
     }
@@ -290,18 +292,15 @@ export const useCustomOrders = () => {
     if (file) {
       let jsonData = await excelToJson(file);
 
-      let filterData = jsonData.filter((item) => {
+      jsonData.map((item) => {
         let tallas = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
         let containsLetters = /[a-zA-Z]/g.test(item.CEDULA);
         if (containsLetters) {
           errorsFound = true;
-          message.error(`Datos incorrectos para la Cédula ${item['CEDULA']}`, 10);
         } else if (!tallas.includes(item['TALLA UNIFORME'])) {
           errorsFound = true;
-          message.error(`Datos incorrectos para Talla Uniforme ${item['TALLA UNIFORME']}`, 10);
         } else if (!tallas.includes(item['TALLA MANDIL'])) {
           errorsFound = true;
-          message.error(`Datos incorrectos para Talla Mandil ${item['TALLA MANDIL']}`, 10);
         }
         return (
           tallas.includes(item['TALLA UNIFORME']) &&
@@ -309,19 +308,17 @@ export const useCustomOrders = () => {
         );
       });
       if (errorsFound) {
-        message.warning(
-          'Se encontraron errores en el archivo, la carga se realizara con los datos correctos',
-          10
-        );
+        message.error('Se encontraron errores en el archivo', 10);
+      } else {
+        bulkSizeUpdate(jsonData)
+          .then(() => {
+            getEmployeesTable();
+            message.success('Operación realizada con éxito', 10);
+          })
+          .catch(() => {
+            message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
+          });
       }
-      bulkSizeUpdate(filterData)
-        .then(() => {
-          getEmployeesTable();
-          message.success('Operación realizada con éxito', 10);
-        })
-        .catch(() => {
-          message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
-        });
     }
   };
 

@@ -1,7 +1,7 @@
-import {useState, useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {Form, Input, InputNumber, message, Popconfirm, Typography} from 'antd';
 import {useUtils} from 'hooks';
-import BtnEdit from '../../../../../assets/img/btn-edit.png';
+import BtnEdit from '../../../../../assets/edit-icon.svg';
 
 export const useCustomUniforms = () => {
   const {getColumnSearchProps, getTableParameters, editPrice} = useUtils();
@@ -96,7 +96,7 @@ export const useCustomUniforms = () => {
     {
       title: 'Código',
       dataIndex: 'codigo',
-      width: '15%',
+      width: '7%',
       ...getColumnSearchProps('codigo'),
       sorter: (a, b) => +a.codigo - +b.codigo,
       sortDirections: ['descend', 'ascend'],
@@ -105,25 +105,25 @@ export const useCustomUniforms = () => {
     {
       title: 'Marca',
       dataIndex: 'marca',
-      width: '15%',
+      width: '8%',
       ...getColumnSearchProps('marca'),
-      sorter: (c, d) => c.marca.localeCompare(d.marca),
+      sorter: (c, d) => c.marca?.localeCompare(d.marca),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Descripción',
       dataIndex: 'descripcion',
-      width: '20%',
+      width: '18%',
       ...getColumnSearchProps('descripcion'),
-      sorter: (e, f) => e.descripcion.localeCompare(f.descripcion),
+      sorter: (e, f) => e.descripcion?.localeCompare(f.descripcion),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Género',
       dataIndex: 'genero',
-      width: '10%',
+      width: '7%',
       ...getColumnSearchProps('genero'),
-      sorter: (g, h) => g.genero.localeCompare(h.genero),
+      sorter: (g, h) => g.genero?.localeCompare(h.genero),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -131,13 +131,13 @@ export const useCustomUniforms = () => {
       dataIndex: 'talla',
       width: '5%',
       ...getColumnSearchProps('talla'),
-      sorter: (i, j) => i.talla.localeCompare(j.talla),
+      sorter: (i, j) => i.talla?.localeCompare(j.talla),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Región',
       dataIndex: 'region',
-      width: '10%',
+      width: '7%',
       ...getColumnSearchProps('region'),
       sorter: (k, l) => k.region?.localeCompare(l.region),
       sortDirections: ['descend', 'ascend']
@@ -145,7 +145,7 @@ export const useCustomUniforms = () => {
     {
       title: 'Precio Uniforme',
       dataIndex: 'price',
-      width: '10%',
+      width: '6%',
       ...getColumnSearchProps('precio'),
       sorter: (m, n) => {
         return m.price - n.price;
@@ -159,16 +159,16 @@ export const useCustomUniforms = () => {
     {
       title: 'Estado',
       dataIndex: 'status',
-      width: '10%',
+      width: '6%',
       ...getColumnSearchProps('status'),
-      sorter: (o, p) => o.status.localeCompare(p.status),
+      sorter: (o, p) => o.status?.localeCompare(p.status),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Acción',
       fixed: 'right',
       dataIndex: 'accion',
-      width: '7.5%',
+      width: '6%',
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (

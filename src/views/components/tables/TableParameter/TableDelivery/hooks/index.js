@@ -1,6 +1,6 @@
-import {useState, useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {DeleteFilled} from '@ant-design/icons';
-import {Typography} from 'antd';
+import {message, Typography} from 'antd';
 import {useUtils} from 'hooks';
 
 export const useCustomDelivery = () => {
@@ -65,20 +65,36 @@ export const useCustomDelivery = () => {
 
   useEffect(() => {
     setLoading(true);
-    getGarmentsTableParameters(true).then((res) => {
-      setLoading(false);
-      setGarments(res);
-    });
-    getAllDeliveries().then((response) => {
-      setDataSource(response);
-    });
+    getGarmentsTableParameters(true)
+      .then((res) => {
+        setLoading(false);
+        setGarments(res);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+    getAllDeliveries()
+      .then((response) => {
+        setDataSource(response);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
 
-    getTableParameters().then((res) => {
-      setProductsList(res);
-    });
-    getReasonsTableParameters(true).then((res) => {
-      setReasonsList(res);
-    });
+    getTableParameters()
+      .then((res) => {
+        setProductsList(res);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+    getReasonsTableParameters(true)
+      .then((res) => {
+        setReasonsList(res);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -95,12 +111,33 @@ export const useCustomDelivery = () => {
 
   const onCreateDelivery = () => {
     setLoading(true);
-    createDelivery({...addingFile}).then(() => {
-      getAllDeliveries().then((res) => {
-        formatAllDeliveries(res);
+    createDelivery({...addingFile})
+      .then(() => {
+        getAllDeliveries()
+          .then((res) => {
+            formatAllDeliveries(res);
+            setLoading(false);
+          })
+          .catch(() => {
+            setLoading(false);
+          });
+      })
+      .catch((e) => {
+        if (e.response && e.response.data && e.response.data.failedIds) {
+          const {failedIds, messageError} = e.response.data;
+          failedIds.forEach(async (failed) => {
+            let getUniform = productsList.find((uniform) => uniform.id === failed.uniform);
+            let getReason = reasonsList.find((reason) => reason.id === failed.reason);
+            await message.error(
+              messageError
+                ? `${messageError}: ${getUniform.descripcion} - ${getReason.reason} `
+                : `No se pudo crear la entrega para el uniforme ${getUniform.descripcion} y el motivo ${getReason.reason}`,
+              10
+            );
+          });
+        }
         setLoading(false);
       });
-    });
   };
 
   const onDelete = (id) => {
@@ -117,7 +154,8 @@ export const useCustomDelivery = () => {
     {
       key: '1',
       title: 'N°',
-      dataIndex: 'id'
+      dataIndex: 'id',
+      width: '5%'
     },
     {
       key: '2',
@@ -125,7 +163,7 @@ export const useCustomDelivery = () => {
       dataIndex: 'reason',
       width: '10%',
       ...getColumnSearchProps('motivo'),
-      sorter: (a, b) => a.reason.localeCompare(b.reason),
+      sorter: (a, b) => a.reason?.localeCompare(b.reason),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -147,9 +185,9 @@ export const useCustomDelivery = () => {
       key: '5',
       title: 'Reposición',
       dataIndex: 'replacementAuto',
-      width: '9.5%',
+      width: '8%',
       ...getColumnSearchProps('reposición'),
-      sorter: (a, b) => a.replacementAuto.localeCompare(b.replacementAuto),
+      sorter: (a, b) => a.replacementAuto?.localeCompare(b.replacementAuto),
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
         return <div>{_} días</div>;
@@ -159,18 +197,18 @@ export const useCustomDelivery = () => {
       key: '6',
       title: 'Cálculo',
       dataIndex: 'calculation',
-      width: '10%',
+      width: '9%',
       ...getColumnSearchProps('cálculo'),
-      sorter: (a, b) => a.calculation.localeCompare(b.calculation),
+      sorter: (a, b) => a.calculation?.localeCompare(b.calculation),
       sortDirections: ['descend', 'ascend']
     },
     {
       key: '7',
       title: 'Cobro',
       dataIndex: 'payment',
-      width: '7.5%',
+      width: '7%',
       ...getColumnSearchProps('cobro'),
-      sorter: (a, b) => a.payment.localeCompare(b.payment),
+      sorter: (a, b) => a.payment?.localeCompare(b.payment),
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
         return <div>{_ ? 'SI' : 'NO'}</div>;
@@ -179,11 +217,11 @@ export const useCustomDelivery = () => {
     {
       key: '8',
       title: 'Valor',
-      width: '7.5%',
+      width: '7%',
       dataIndex: 'price',
 
       ...getColumnSearchProps('valor'),
-      sorter: (a, b) => a.price.localeCompare(b.price),
+      sorter: (a, b) => a.price?.localeCompare(b.price),
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
         return <div>${_}</div>;

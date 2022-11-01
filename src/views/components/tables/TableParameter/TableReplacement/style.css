@@ -39,9 +39,14 @@
   > span.ant-table-column-title {
   font-size: 12px !important;
 }
+.btn-edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .btn-edit img {
-  width: 99px;
+  width: 20px;
   height: auto;
 }
 

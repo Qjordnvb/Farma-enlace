@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Table, Modal, Form, Select} from 'antd';
+import {Form, message, Modal, Select, Table} from 'antd';
 import './style.css';
 
 import btnAdd from '../../../../../assets/img/add.png';
@@ -51,15 +51,19 @@ export default function TableDelivery() {
       {isAdd && (
         <>
           <Modal
-            title="Agregar Prenda"
+            title="Agregar Entrega"
             visible={isAdd}
-            okText="Crear Prenda"
+            okText="Crear Entrega"
             onCancel={() => {
               resetAdd();
             }}
-            onOk={() => {
-              onCreateDelivery();
-              resetAdd();
+            onOk={async () => {
+              if (addingFile.reasonId.length > 0 && addingFile.uniformId) {
+                onCreateDelivery();
+                resetAdd();
+              } else {
+                await message.warning('Debe seleccionar un motivo y un uniforme', 10);
+              }
             }}
           >
             <Form id="modalDelivery">

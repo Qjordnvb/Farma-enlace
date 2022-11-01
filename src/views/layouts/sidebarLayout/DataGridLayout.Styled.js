@@ -14,14 +14,10 @@ export const StyledOptionData = styled.div.attrs({
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin: auto;
-  position: absolute;
   max-width: 1200px;
   width: 100%;
   height: 60px;
-
-  top: 230px;
-
+  margin: 70px auto auto;
   /* Tono 1 */
 
   background: #ffffff;
@@ -41,11 +37,13 @@ export const StyledOptionData = styled.div.attrs({
     text-transform: uppercase;
 
     color: #000000;
+
     &.active {
       background: linear-gradient(190.08deg, #2bc155 9.78%, #26d0ce 111.09%);
       height: 6px;
       margin-top: 25px;
       transition: all 0.4s ease-in-out;
+
       span {
         background: linear-gradient(190.08deg, #2bc155 9.78%, #26d0ce 111.09%);
         -webkit-background-clip: text;
@@ -56,6 +54,7 @@ export const StyledOptionData = styled.div.attrs({
       }
     }
   }
+
   @media only screen and (max-width: 1366px) {
     max-width: 1000px;
   }

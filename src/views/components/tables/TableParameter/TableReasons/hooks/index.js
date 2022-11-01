@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {DeleteFilled} from '@ant-design/icons';
 import {Form, Input, message, Popconfirm, Select, Switch, Typography} from 'antd';
 import {useUtils} from 'hooks';
-import BtnEdit from '../../../../../../assets/img/btn-edit.png';
+
+import BtnEdit from '../../../../../../assets/edit-icon.svg';
 
 const {Option} = Select;
 export const useCustomReasons = () => {
@@ -202,19 +203,21 @@ export const useCustomReasons = () => {
       title: 'Motivo',
       dataIndex: 'reason',
       ...getColumnSearchProps('reason'),
-      sorter: (a, b) => a.reason.localeCompare(b.reason),
+      sorter: (a, b) => a.reason?.localeCompare(b.reason),
       sortDirections: ['descend', 'ascend'],
       defaultSortOrder: 'ascend',
-      editable: true
+      editable: true,
+      width: '10%'
     },
     {
       key: '2',
       title: 'Reposición automática',
       dataIndex: 'replacement',
       ...getColumnSearchProps('replacement'),
-      sorter: (a, b) => a.replacement.localeCompare(b.replacement),
+      sorter: (a, b) => a.replacement - b.replacement,
       sortDirections: ['descend', 'ascend'],
       editable: true,
+      width: '8%',
       render: (_) => {
         return <div>{_ ? 'SI' : 'NO'}</div>;
       }
@@ -224,8 +227,11 @@ export const useCustomReasons = () => {
       title: 'Reposición',
       dataIndex: 'replacementAuto',
       ...getColumnSearchProps('replacementAuto'),
-      sorter: (a, b) => a.replacementAuto.localeCompare(b.replacementAuto),
+      sorter: (a, b) => {
+        return a.replacementAuto - b.replacementAuto;
+      },
       sortDirections: ['descend', 'ascend'],
+      width: '8%',
       render: (_) => {
         return <div>{_} días</div>;
       },
@@ -236,8 +242,11 @@ export const useCustomReasons = () => {
       title: 'Cobro',
       dataIndex: 'payment',
       ...getColumnSearchProps('payment'),
-      sorter: (a, b) => a.payment.localeCompare(b.payment),
+      sorter: (a, b) => {
+        return a?.payment - b?.payment;
+      },
       sortDirections: ['descend', 'ascend'],
+      width: '8%',
       render: (_) => {
         return <div>{_ ? 'SI' : 'NO'}</div>;
       },
@@ -248,26 +257,29 @@ export const useCustomReasons = () => {
       title: 'Cuotas',
       dataIndex: 'dues',
       ...getColumnSearchProps('dues'),
-      sorter: (a, b) => a.dues.length - b.dues.length,
+      sorter: (a, b) => a.dues - b.dues,
       sortDirections: ['descend', 'ascend'],
-      editable: true
+      editable: true,
+      width: '8%'
     },
     {
       key: '6',
       title: 'Cálculo',
       dataIndex: 'calculation',
       ...getColumnSearchProps('calculation'),
-      sorter: (a, b) => a.calculation.localeCompare(b.calculation),
+      sorter: (a, b) => a.calculation?.localeCompare(b.calculation),
       sortDirections: ['descend', 'ascend'],
-      editable: true
+      editable: true,
+      width: '10%'
     },
     {
       key: '7',
       title: 'Descuento Personal',
       dataIndex: 'personalDiscount',
       ...getColumnSearchProps('personalDiscount'),
-      sorter: (a, b) => a.personalDiscount.length - b.personalDiscount.length,
+      sorter: (a, b) => a.personalDiscount - b.personalDiscount,
       sortDirections: ['descend', 'ascend'],
+      width: '8%',
       render: (_) => {
         return <div>{_}%</div>;
       },
@@ -278,8 +290,9 @@ export const useCustomReasons = () => {
       title: 'Descuento Farmaenlace',
       dataIndex: 'companyDiscount',
       ...getColumnSearchProps('companyDiscount'),
-      sorter: (a, b) => a.companyDiscount.length - b.companyDiscount.length,
+      sorter: (a, b) => a.companyDiscount - b.companyDiscount,
       sortDirections: ['descend', 'ascend'],
+      width: '8%',
       render: (_) => {
         return <div>{_}%</div>;
       },
@@ -289,7 +302,7 @@ export const useCustomReasons = () => {
       key: '9',
       title: 'Acción',
       fixed: 'right',
-      width: '12%',
+      width: '7%',
       render: (record) => {
         const editable = isEditing(record);
         return (
@@ -318,7 +331,7 @@ export const useCustomReasons = () => {
                 </span>
               ) : (
                 <div onClick={() => edit(record)} className="btn-edit">
-                  <img src={BtnEdit} alt="btn-edit" />
+                  <img src={BtnEdit} className="w-6" alt="btn-edit" />
                 </div>
               )}
             </div>
@@ -328,8 +341,8 @@ export const useCustomReasons = () => {
                 onDelete(record.id);
               }}
               style={{
-                marginRight: 8,
-                marginTop: -14
+                display: 'flex',
+                alignItems: 'center'
               }}
             >
               <DeleteFilled />

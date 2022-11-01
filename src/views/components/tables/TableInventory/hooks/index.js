@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
 import {useUtils} from 'hooks';
-import BtnEdit from '../../../../../assets/img/btn-edit.png';
+import BtnEdit from '../../../../../assets/edit-icon.svg';
 
 export const useCustomInventory = () => {
   const [form] = Form.useForm();
@@ -42,12 +42,12 @@ export const useCustomInventory = () => {
             setDataSource(res);
             setLoading(false);
           })
-          .catch((e) => {
-            console.error(e);
+          .catch(() => {
+            setLoading(false);
           });
       })
-      .catch((e) => {
-        console.error(e);
+      .catch(() => {
+        setLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -98,7 +98,8 @@ export const useCustomInventory = () => {
 
   const rowSelection = {
     selectedRowKeys,
-    onChange: onSelectChange
+    onChange: onSelectChange,
+    columnWidth: '1.5%'
   };
 
   const EditableCell = ({editing, dataIndex, title, children, ...restProps}) => {
@@ -169,53 +170,52 @@ export const useCustomInventory = () => {
       title: 'Descripción',
       dataIndex: 'descripcion',
       ...getColumnSearchProps('Descripción'),
-      sorter: (a, b) => a.description.length - b.description.length,
-      sortDirections: ['descend', 'ascend']
+      sorter: (a, b) => a.descripcion?.localeCompare(b.descripcion),
+      sortDirections: ['descend', 'ascend'],
+      fixed: 'left',
+      width: '10%'
     },
-    ...garmentColumns,
     {
       title: 'Talla',
       dataIndex: 'talla',
       ...getColumnSearchProps('Ralla'),
-      sorter: (a, b) => a.talla.length - b.talla.length,
-      sortDirections: ['descend', 'ascend']
+      sorter: (a, b) => a.talla?.localeCompare(b.talla),
+      sortDirections: ['descend', 'ascend'],
+      width: '8%'
     },
     {
       title: 'Stock',
       dataIndex: 'stock',
       ...getColumnSearchProps('Stock'),
       sorter: (a, b) => a.stock - b.stock,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      width: '7%'
     },
-    {
-      title: 'Cantidad sugerida',
-      dataIndex: 'suggestion',
-      ...getColumnSearchProps('Cantidad'),
-      sorter: (a, b) => a.suggestion - b.suggestion,
-      sortDirections: ['descend', 'ascend']
-    },
+
     {
       title: 'Stock mínimo',
       dataIndex: 'totalAverage',
       ...getColumnSearchProps('stock mínimo'),
       sorter: (a, b) => a.totalAverage - b.totalAverage,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      width: '7%'
     },
     {
       title: 'Stock máximo',
       dataIndex: 'max',
       ...getColumnSearchProps('Stock máximo'),
       sorter: (a, b) => a.max - b.max,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      width: '7%'
     },
     {
       title: 'Prioridad',
       dataIndex: 'priority',
       ...getColumnSearchProps('prioridad'),
-      sorter: (a, b) => a.priority.localeCompare(b.priority),
+      sorter: (a, b) => a.priority?.localeCompare(b.priority),
       sortDirections: ['descend', 'ascend'],
       defaultSortOrder: 'ascend',
-
+      width: '8%',
       render: (_) => {
         let color = {
           Alta: 'red',
@@ -231,18 +231,28 @@ export const useCustomInventory = () => {
       }
     },
     {
+      title: 'Cantidad sugerida',
+      dataIndex: 'suggestion',
+      ...getColumnSearchProps('Cantidad'),
+      sorter: (a, b) => a.suggestion - b.suggestion,
+      sortDirections: ['descend', 'ascend'],
+      width: '6%'
+    },
+    {
       title: 'Cantidad a comprar',
       dataIndex: 'amountToBuy',
       editable: true,
       ...getColumnSearchProps('Cantidad a comprar'),
       sorter: (a, b) => a.amountToBuy - b.amountToBuy,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      width: '6%'
     },
 
     {
       title: 'Acción',
       dataIndex: 'accion',
-      width: '7.5%',
+      width: '6%',
+      fixed: 'right',
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
@@ -260,9 +270,9 @@ export const useCustomInventory = () => {
             </Popconfirm>
           </span>
         ) : (
-          <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-            <img src={BtnEdit} alt="btn-edit" />
-          </Typography.Link>
+          <div onClick={() => edit(record)} className="btn-edit">
+            <img src={BtnEdit} className="w-6" alt="btn-edit" />
+          </div>
         );
       }
     }

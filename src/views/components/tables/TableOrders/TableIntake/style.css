@@ -52,3 +52,21 @@ input.input-add,
   text-transform: uppercase;
   width: 100% !important;
 }
+
+.button__add {
+  background: #2bc155;
+  border-radius: 9.30349px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #ffffff;
+  height: 32px;
+  width: 230px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useUtils} from 'hooks';
 import moment from 'moment';
 
@@ -51,14 +51,14 @@ export const useCustomReport = () => {
       title: 'Colaborador',
       dataIndex: 'COLABORADOR',
       ...getColumnSearchProps('Colaborador'),
-      sorter: (a, b) => a.COLABORADOR.localeCompare(b.COLABORADOR),
+      sorter: (a, b) => a.COLABORADOR?.localeCompare(b.COLABORADOR),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Cargo',
       dataIndex: 'CARGO',
       ...getColumnSearchProps('Cargo'),
-      sorter: (a, b) => a.CARGO.localeCompare(b.CARGO),
+      sorter: (a, b) => a.CARGO?.localeCompare(b.CARGO),
       sortDirections: ['descend', 'ascend']
     },
     {
@@ -85,7 +85,7 @@ export const useCustomReport = () => {
     {
       title: 'Talla',
       dataIndex: 'talla',
-      with: 40,
+      width: '6%',
       ...getColumnSearchProps('Talla'),
       sorter: (a, b) => a.talla - b.talla,
       sortDirections: ['descend', 'ascend']
@@ -94,14 +94,14 @@ export const useCustomReport = () => {
       title: 'Kits',
       dataIndex: 'descripcion',
       ...getColumnSearchProps('Kits '),
-      sorter: (a, b) => a.descripcion.localeCompare(b.descripcion),
+      sorter: (a, b) => a.descripcion?.localeCompare(b.descripcion),
       sortDirections: ['descend', 'ascend']
     },
     {
       title: 'Fecha',
       dataIndex: 'requestDate',
       ...getColumnSearchProps('Fecha'),
-      sorter: (a, b) => a.requestDate.length - b.requestDate.length,
+      sorter: (a, b) => a.requestDate?.localeCompare(b.requestDate),
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
         return <div>{moment(_).format('YYYY-MM-DD')}</div>;
@@ -111,7 +111,7 @@ export const useCustomReport = () => {
       title: 'Motivo',
       dataIndex: 'reason',
       ...getColumnSearchProps('Motivo'),
-      sorter: (a, b) => a.reason.localeCompare(b.reason),
+      sorter: (a, b) => a.reason?.localeCompare(b.reason),
       sortDirections: ['descend', 'ascend']
     },
     {
