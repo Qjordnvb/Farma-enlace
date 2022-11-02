@@ -10,7 +10,7 @@ export const useCustomInventory = () => {
   const [dataSource, setDataSource] = useState([]);
   const [data, setData] = useState([]);
 
-  const [editingKey, setEditingKey] = useState('');
+  const [editingKeys, setEditingKeys] = useState([]);
   const {getAllDescriptions, getGarmentsTableParameters, editAmountToBuy} = useUtils();
 
   const [garmentsList, setGarmentsList] = useState([]);
@@ -102,13 +102,13 @@ export const useCustomInventory = () => {
     columnWidth: '1.5%'
   };
 
-  const EditableCell = ({editing, dataIndex, title, children, ...restProps}) => {
+  const EditableCell = ({editing, dataIndex, title, children, record, ...restProps}) => {
     const inputNode = dataIndex === 'amountToBuy' ? <InputNumber /> : <Input />;
     return (
       <td {...restProps}>
         {editing ? (
           <Form.Item
-            name={dataIndex}
+            name={`${dataIndex}_${record.id}`}
             style={{
               margin: 0
             }}
@@ -128,27 +128,27 @@ export const useCustomInventory = () => {
     );
   };
 
-  const isEditing = (record) => record.id === editingKey;
+  const isEditing = (record) => editingKeys.indexOf(record.id) !== -1;
 
   const edit = (record) => {
-    form.setFieldsValue({
-      cantidadCompra: '',
-      ...record
-    });
-    setEditingKey(record.id);
+    form.setFieldValue(`amountToBuy_${record.id}`, record.amountToBuy);
+    setEditingKeys([...editingKeys, record.id]);
   };
 
   const cancel = () => {
-    setEditingKey('');
+    setEditingKeys([]);
   };
 
   const save = async (id) => {
     try {
       setLoading(true);
       const row = await form.validateFields();
-      setEditingKey('');
+      const newEditingKeys = [...editingKeys];
+      const getIndex = newEditingKeys.indexOf(id);
+      newEditingKeys.splice(getIndex, 1);
+      setEditingKeys(newEditingKeys);
 
-      editAmountToBuy(id, row.amountToBuy).then(() => {
+      editAmountToBuy(id, row[`amountToBuy_${id}`]).then(() => {
         getGarmentsTableParameters(true).then((res) => {
           setGarmentsList(res);
 
@@ -247,7 +247,6 @@ export const useCustomInventory = () => {
       sortDirections: ['descend', 'ascend'],
       width: '6%'
     },
-
     {
       title: 'Acción',
       dataIndex: 'accion',
@@ -281,7 +280,6 @@ export const useCustomInventory = () => {
     if (!col.editable) {
       return col;
     }
-
     return {
       ...col,
       onCell: (record) => ({
