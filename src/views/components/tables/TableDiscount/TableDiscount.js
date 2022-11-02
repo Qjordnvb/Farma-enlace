@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {DatePicker, Table} from 'antd';
+import {DatePicker, message, Select, Table} from 'antd';
 import btnDownload from '../../../../assets/img/btn-discount.png';
 import {useUtils} from '../../../../hooks';
 import {useCustomDiscount} from './hooks';
@@ -10,9 +10,18 @@ import moment from 'moment';
 const {RangePicker} = DatePicker;
 
 const TableDiscount = () => {
-  const {columns, rowSelection, dataSource, loading, dateRange, onDatePickerChange} =
-    useCustomDiscount();
-  const {handleExport} = useUtils();
+  const {
+    columns,
+    rowSelection,
+    dataSource,
+    loading,
+    dateRange,
+    onDatePickerChange,
+    onStatusChange,
+    status,
+    getOrdersTable
+  } = useCustomDiscount();
+  const {handleExport, updateDiscountStatus} = useUtils();
   const [currentLength, setCurrentLength] = useState(0);
   useEffect(() => {
     setCurrentLength(dataSource.length);
@@ -25,7 +34,20 @@ const TableDiscount = () => {
   };
   return (
     <div className="container-table pt-2">
-      <div className="flex justify-end items-end flex-col">
+      <div className="flex justify-end items-end">
+        <div className={'mr-4'}>
+          <Select
+            onChange={onStatusChange}
+            className={'w-48 mr-4'}
+            placeholder={'Estado de orden'}
+            showSearch={true}
+            options={[
+              {label: 'Todos', value: 'Todos'},
+              {label: 'No generado', value: 'No generado'},
+              {label: 'Generado', value: 'Generado'}
+            ]}
+          ></Select>
+        </div>
         <RangePicker
           ranges={{
             Today: [moment(), moment()],
@@ -62,44 +84,50 @@ const TableDiscount = () => {
           height="40px"
           onClick={() => {
             let selectedData = [];
-            if (rowSelection.selectedRowKeys && rowSelection.selectedRowKeys.length > 0) {
-              rowSelection.selectedRowKeys.map((key) => {
-                let findRow = dataSource.filter((value) => value.id === key);
-                if (findRow && findRow.length > 0) {
-                  selectedData.push(findRow[0]);
+            updateDiscountStatus(rowSelection.selectedRowKeys)
+              .then(() => {
+                if (rowSelection.selectedRowKeys && rowSelection.selectedRowKeys.length > 0) {
+                  rowSelection.selectedRowKeys.map((key) => {
+                    let findRow = dataSource.filter((value) => value.id === key);
+                    if (findRow && findRow.length > 0) {
+                      selectedData.push(findRow[0]);
+                    }
+                  });
+                } else {
+                  selectedData = dataSource;
                 }
+                getOrdersTable(dateRange, status);
+                selectedData = selectedData.map((row) => {
+                  const {
+                    COLABORADOR,
+                    CARGO,
+                    NOMBRE_CENTRO_COSTOS,
+                    CODIGO_CENTRO_COSTOS,
+                    CODIGO_OFICINA,
+                    NOMBRE_OFICINA,
+                    requestDate,
+                    dues,
+                    price,
+                    CEDULA
+                  } = row;
+                  return {
+                    'Código oficina': CODIGO_OFICINA,
+                    'Nombre oficina': NOMBRE_OFICINA,
+                    'Codigo centro de costos': CODIGO_CENTRO_COSTOS,
+                    'Nombre centro de costos': NOMBRE_CENTRO_COSTOS,
+                    Cedula: CEDULA,
+                    Nombres: COLABORADOR,
+                    Cargo: CARGO,
+                    'Valor (Valor cubierto por el colaborador)': price,
+                    Cuotas: dues,
+                    'Fecha de consumo (Dia/Mes/Año)': moment(requestDate).format('DD-MM-YYYY')
+                  };
+                });
+                handleExport(selectedData, 'DESCUENTO');
+              })
+              .catch(() => {
+                message.error('Error al generar descuento');
               });
-            } else {
-              selectedData = dataSource;
-            }
-
-            selectedData = selectedData.map((row) => {
-              const {
-                COLABORADOR,
-                CARGO,
-                NOMBRE_CENTRO_COSTOS,
-                CODIGO_CENTRO_COSTOS,
-                CODIGO_OFICINA,
-                NOMBRE_OFICINA,
-                requestDate,
-                dues,
-                price,
-                CEDULA
-              } = row;
-              return {
-                'Código oficina': CODIGO_OFICINA,
-                'Nombre oficina': NOMBRE_OFICINA,
-                'Codigo centro de costos': CODIGO_CENTRO_COSTOS,
-                'Nombre centro de costos': NOMBRE_CENTRO_COSTOS,
-                Cedula: CEDULA,
-                Nombres: COLABORADOR,
-                Cargo: CARGO,
-                'Valor (Valor cubierto por el colaborador)': price,
-                Cuotas: dues,
-                'Fecha de consumo (Dia/Mes/Año)': moment(requestDate).format('DD-MM-YYYY')
-              };
-            });
-            handleExport(selectedData, 'DESCUENTO');
           }}
         />
       </div>

@@ -117,7 +117,7 @@ export const useUtils = () => {
     return request.data;
   }
 
-  async function getOrders(dateRange, discount) {
+  async function getOrders({dateRange, discount, status, discountStatus}) {
     let url = '/orders/findAll';
     if (dateRange?.from && dateRange?.to) {
       url += `?from=${dateRange.from}&to=${dateRange.to}`;
@@ -125,6 +125,14 @@ export const useUtils = () => {
     if (discount) {
       url += `?discount=${discount}`;
     }
+    if (status) {
+      url += `?status=${status}`;
+    }
+
+    if (discountStatus) {
+      url += `?discountStatus=${discountStatus}`;
+    }
+
     const request = await Apilocal.get(url);
     return request.data;
   }
@@ -136,6 +144,11 @@ export const useUtils = () => {
 
   async function generateOrder(data) {
     const request = await Apilocal.post('/orders/generate', {ids: data});
+    return request.data;
+  }
+
+  async function updateDiscountStatus(data) {
+    const request = await Apilocal.post('/orders/updateDiscountStatus', {ids: data});
     return request.data;
   }
 
@@ -329,6 +342,7 @@ export const useUtils = () => {
     editReason,
     generateOrder,
     excelToJson,
-    bulkUploadConsumptionOrders
+    bulkUploadConsumptionOrders,
+    updateDiscountStatus
   };
 };

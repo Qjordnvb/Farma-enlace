@@ -29,7 +29,8 @@ const TableIntake = () => {
     selectedColaborador,
     loading,
     inputFileRef,
-    handleInputFile
+    handleInputFile,
+    onStatusChange
   } = useCustomIntake();
 
   const {handleExport} = useUtils();
@@ -56,7 +57,22 @@ const TableIntake = () => {
   // eslint-disable-next-line no-console
   return (
     <div className="container-table pt-2">
-      <div className="flex justify-end items-end flex-col">
+      <div className="flex justify-end items-end">
+        <div className={'mr-4'}>
+          <Select
+            onChange={onStatusChange}
+            className={'w-48 mr-4'}
+            placeholder={'Estado de orden'}
+            showSearch={true}
+            options={[
+              {label: 'Todos', value: 'Todos'},
+              {label: 'No generado', value: 'No generado'},
+              {label: 'Pendiente', value: 'Pendiente'},
+              {label: 'Generado', value: 'Generado'}
+            ]}
+          ></Select>
+        </div>
+
         <RangePicker
           ranges={{
             Today: [moment(), moment()],

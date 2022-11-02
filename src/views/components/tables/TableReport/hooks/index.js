@@ -12,7 +12,7 @@ export const useCustomReport = () => {
 
   const getOrdersData = (dateRange) => {
     setLoading(true);
-    getOrders(dateRange)
+    getOrders({dateRange})
       .then((res) => {
         let formatOrders = res.map((order) => {
           return {...order, ...order.producto, ...order.employee, ...order.parameterizedReason};

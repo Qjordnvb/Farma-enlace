@@ -28,6 +28,7 @@ export const useCustomIntake = () => {
   const [productsList, setProductsList] = useState([]);
   const [filteredSizes, setFilteredSizes] = useState([]);
   const [selectedColaborador, setSelectedColaborador] = useState({});
+  const [status, setStatus] = useState('Todos');
   const inputFileRef = useRef(null);
 
   useEffect(() => {
@@ -52,8 +53,8 @@ export const useCustomIntake = () => {
     }
   }, [addingFile, employeesList, productsList]);
 
-  const getOrdersTable = (dateRange) => {
-    getOrders(dateRange)
+  const getOrdersTable = (dateRange, status) => {
+    getOrders({dateRange, status})
       .then((res) => {
         setDataSource(res);
         setLoading(false);
@@ -93,9 +94,9 @@ export const useCustomIntake = () => {
 
   useEffect(() => {
     setLoading(true);
-    getOrdersTable(dateRange);
+    getOrdersTable(dateRange, status);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateRange]);
+  }, [dateRange, status]);
 
   /*const onSelectChange = (newSelectedRowKeys) => {
     console.log('selectedRowKeys changed: ', newSelectedRowKeys);
@@ -322,6 +323,15 @@ export const useCustomIntake = () => {
     }
   };
 
+  const onStatusChange = (value) => {
+    console.log('value', value);
+    if (value) {
+      setStatus(value);
+    } else {
+      setStatus(null);
+    }
+  };
+
   return {
     columns,
     rowSelection,
@@ -345,6 +355,7 @@ export const useCustomIntake = () => {
     filteredSizes,
     loading,
     inputFileRef,
-    handleInputFile
+    handleInputFile,
+    onStatusChange
   };
 };
