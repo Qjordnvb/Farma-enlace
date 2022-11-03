@@ -60,7 +60,7 @@ const TableDescription = () => {
             showSizeChanger: true
           }}
           onChange={onChange}
-          scroll={{y: 500, x: 2000}}
+          scroll={{y: 500, x: 1200}}
           loading={loading}
         />
         <div

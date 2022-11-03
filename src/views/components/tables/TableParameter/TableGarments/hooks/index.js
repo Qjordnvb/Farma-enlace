@@ -116,7 +116,7 @@ export const useCustomGarments = () => {
               }}
               className="btn-edit"
             >
-              <img src={BtnEdit} className="w-2" alt="btn-edit" />
+              <img src={BtnEdit} alt="btn-edit" />
             </div>
             <Typography.Link
               onClick={() => {

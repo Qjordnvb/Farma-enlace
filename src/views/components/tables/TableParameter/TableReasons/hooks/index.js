@@ -207,7 +207,7 @@ export const useCustomReasons = () => {
       sortDirections: ['descend', 'ascend'],
       defaultSortOrder: 'ascend',
       editable: true,
-      width: '10%'
+      width: 10
     },
     {
       key: '2',
@@ -217,7 +217,7 @@ export const useCustomReasons = () => {
       sorter: (a, b) => a.replacement - b.replacement,
       sortDirections: ['descend', 'ascend'],
       editable: true,
-      width: '8%',
+      width: 8,
       render: (_) => {
         return <div>{_ ? 'SI' : 'NO'}</div>;
       }
@@ -231,7 +231,7 @@ export const useCustomReasons = () => {
         return a.replacementAuto - b.replacementAuto;
       },
       sortDirections: ['descend', 'ascend'],
-      width: '8%',
+      width: 10,
       render: (_) => {
         return <div>{_} días</div>;
       },
@@ -246,7 +246,7 @@ export const useCustomReasons = () => {
         return a?.payment - b?.payment;
       },
       sortDirections: ['descend', 'ascend'],
-      width: '8%',
+      width: 8,
       render: (_) => {
         return <div>{_ ? 'SI' : 'NO'}</div>;
       },
@@ -260,7 +260,7 @@ export const useCustomReasons = () => {
       sorter: (a, b) => a.dues - b.dues,
       sortDirections: ['descend', 'ascend'],
       editable: true,
-      width: '8%'
+      width: 8
     },
     {
       key: '6',
@@ -270,7 +270,7 @@ export const useCustomReasons = () => {
       sorter: (a, b) => a.calculation?.localeCompare(b.calculation),
       sortDirections: ['descend', 'ascend'],
       editable: true,
-      width: '10%'
+      width: 15
     },
     {
       key: '7',
@@ -279,7 +279,7 @@ export const useCustomReasons = () => {
       ...getColumnSearchProps('personalDiscount'),
       sorter: (a, b) => a.personalDiscount - b.personalDiscount,
       sortDirections: ['descend', 'ascend'],
-      width: '8%',
+      width: 8,
       render: (_) => {
         return <div>{_}%</div>;
       },
@@ -292,7 +292,7 @@ export const useCustomReasons = () => {
       ...getColumnSearchProps('companyDiscount'),
       sorter: (a, b) => a.companyDiscount - b.companyDiscount,
       sortDirections: ['descend', 'ascend'],
-      width: '8%',
+      width: 8,
       render: (_) => {
         return <div>{_}%</div>;
       },
@@ -302,7 +302,7 @@ export const useCustomReasons = () => {
       key: '9',
       title: 'Acción',
       fixed: 'right',
-      width: '7%',
+      width: 8,
       render: (record) => {
         const editable = isEditing(record);
         return (

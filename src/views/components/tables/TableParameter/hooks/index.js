@@ -96,7 +96,7 @@ export const useCustomUniforms = () => {
     {
       title: 'Código',
       dataIndex: 'codigo',
-      width: '7%',
+      width: 8,
       ...getColumnSearchProps('codigo'),
       sorter: (a, b) => +a.codigo - +b.codigo,
       sortDirections: ['descend', 'ascend'],
@@ -105,7 +105,7 @@ export const useCustomUniforms = () => {
     {
       title: 'Marca',
       dataIndex: 'marca',
-      width: '8%',
+      width: 8,
       ...getColumnSearchProps('marca'),
       sorter: (c, d) => c.marca?.localeCompare(d.marca),
       sortDirections: ['descend', 'ascend']
@@ -113,7 +113,7 @@ export const useCustomUniforms = () => {
     {
       title: 'Descripción',
       dataIndex: 'descripcion',
-      width: '18%',
+      width: 22,
       ...getColumnSearchProps('descripcion'),
       sorter: (e, f) => e.descripcion?.localeCompare(f.descripcion),
       sortDirections: ['descend', 'ascend']
@@ -121,7 +121,7 @@ export const useCustomUniforms = () => {
     {
       title: 'Género',
       dataIndex: 'genero',
-      width: '7%',
+      width: 8,
       ...getColumnSearchProps('genero'),
       sorter: (g, h) => g.genero?.localeCompare(h.genero),
       sortDirections: ['descend', 'ascend']
@@ -129,7 +129,7 @@ export const useCustomUniforms = () => {
     {
       title: 'Talla',
       dataIndex: 'talla',
-      width: '5%',
+      width: 8,
       ...getColumnSearchProps('talla'),
       sorter: (i, j) => i.talla?.localeCompare(j.talla),
       sortDirections: ['descend', 'ascend']
@@ -137,7 +137,7 @@ export const useCustomUniforms = () => {
     {
       title: 'Región',
       dataIndex: 'region',
-      width: '7%',
+      width: 8,
       ...getColumnSearchProps('region'),
       sorter: (k, l) => k.region?.localeCompare(l.region),
       sortDirections: ['descend', 'ascend']
@@ -145,7 +145,7 @@ export const useCustomUniforms = () => {
     {
       title: 'Precio Uniforme',
       dataIndex: 'price',
-      width: '6%',
+      width: 8,
       ...getColumnSearchProps('precio'),
       sorter: (m, n) => {
         return m.price - n.price;
@@ -159,7 +159,7 @@ export const useCustomUniforms = () => {
     {
       title: 'Estado',
       dataIndex: 'status',
-      width: '6%',
+      width: 8,
       ...getColumnSearchProps('status'),
       sorter: (o, p) => o.status?.localeCompare(p.status),
       sortDirections: ['descend', 'ascend']
@@ -168,23 +168,16 @@ export const useCustomUniforms = () => {
       title: 'Acción',
       fixed: 'right',
       dataIndex: 'accion',
-      width: '6%',
+      width: 8,
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
-          <span>
-            <Typography.Link
-              onClick={() => save(record.id)}
-              style={{
-                marginRight: 8
-              }}
-            >
-              Guardar
-            </Typography.Link>
+          <div className={'flex flex-col align-center justify-center text-center'}>
+            <Typography.Link onClick={() => save(record.id)}>Guardar</Typography.Link>
             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <a>Cancelar</a>
+              <a style={{color: 'inherit'}}>Cancelar</a>
             </Popconfirm>
-          </span>
+          </div>
         ) : (
           <div onClick={() => edit(record)} className="btn-edit">
             <img src={BtnEdit} alt="btn-edit" />
