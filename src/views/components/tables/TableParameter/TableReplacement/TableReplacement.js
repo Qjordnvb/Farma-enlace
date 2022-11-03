@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Table, Form /*Modal, Input, Form*/} from 'antd';
+import {Form, Table} from 'antd';
 
 import './style.css';
 import moment from 'moment';
@@ -52,7 +52,7 @@ function TableReplacement() {
             total: currentLength
           }}
           onChange={onChange}
-          scroll={{y: 420, x: 2000}}
+          scroll={{y: 420, x: 1500}}
           columns={mergedColumns}
           dataSource={dataSource}
           components={{

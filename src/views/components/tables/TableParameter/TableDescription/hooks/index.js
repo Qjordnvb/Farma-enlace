@@ -27,14 +27,22 @@ export const useCustomDescription = () => {
   const [excelColumns, setExcelColumns] = useState({});
   useEffect(() => {
     setLoading(true);
-    getGarmentsTableParameters(true).then((res) => {
-      setGarmentsList(res);
+    getGarmentsTableParameters(true)
+      .then((res) => {
+        setGarmentsList(res);
 
-      getAllDescriptions().then((res) => {
-        setDataTable(res);
+        getAllDescriptions()
+          .then((res) => {
+            setDataTable(res);
+            setLoading(false);
+          })
+          .catch(() => {
+            setLoading(false);
+          });
+      })
+      .catch(() => {
         setLoading(false);
       });
-    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

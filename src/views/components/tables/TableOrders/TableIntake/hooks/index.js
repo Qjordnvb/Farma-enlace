@@ -205,7 +205,8 @@ export const useCustomIntake = () => {
       sortDirections: ['descend', 'ascend'],
       onFilter: (value, record) => {
         return record.correctSize?.talla?.toString().toLowerCase().includes(value);
-      }
+      },
+      width: '4%'
     },
     {
       title: 'Descripcion',

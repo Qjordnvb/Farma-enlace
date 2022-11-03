@@ -103,7 +103,8 @@ export const useCustomDelivery = () => {
       return {
         title: garment.description,
         dataIndex: `garment${garment.id}`,
-        editable: true
+        editable: true,
+        width: '10%'
       };
     });
     setGarmentsColumns(getColumns);
@@ -170,7 +171,7 @@ export const useCustomDelivery = () => {
       key: '3',
       title: 'Descripción',
       dataIndex: 'descripcion',
-      width: '10%',
+      width: '20%',
       ...getColumnSearchProps('descripcion'),
       sorter: (a, b) => a.descripcion?.localeCompare(b.descripcion),
       sortDirections: ['descend', 'ascend']
@@ -230,10 +231,12 @@ export const useCustomDelivery = () => {
     {
       key: '4',
       title: 'Porcentajes',
+
       children: [
         {
           title: 'Empleado',
           dataIndex: 'personalDiscount',
+          width: '7%',
           render: (_) => {
             return <div>{_}%</div>;
           }
@@ -241,6 +244,7 @@ export const useCustomDelivery = () => {
         {
           title: 'Empresa',
           dataIndex: 'companyDiscount',
+          width: '7%',
           render: (_) => {
             return <div>{_}%</div>;
           }
@@ -252,6 +256,7 @@ export const useCustomDelivery = () => {
       title: 'Ver',
       fixed: 'right',
       dataIndex: 'accion',
+      width: '5%',
       render: (_, record) => {
         return (
           <span className="flex items-center justify-center	">

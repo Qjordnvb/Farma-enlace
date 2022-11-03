@@ -181,7 +181,7 @@ export const useCustomInventory = () => {
       ...getColumnSearchProps('Ralla'),
       sorter: (a, b) => a.talla?.localeCompare(b.talla),
       sortDirections: ['descend', 'ascend'],
-      width: '8%'
+      width: '5%'
     },
     {
       title: 'Stock',
@@ -189,7 +189,7 @@ export const useCustomInventory = () => {
       ...getColumnSearchProps('Stock'),
       sorter: (a, b) => a.stock - b.stock,
       sortDirections: ['descend', 'ascend'],
-      width: '7%'
+      width: '5%'
     },
 
     {
@@ -198,7 +198,7 @@ export const useCustomInventory = () => {
       ...getColumnSearchProps('stock mínimo'),
       sorter: (a, b) => a.totalAverage - b.totalAverage,
       sortDirections: ['descend', 'ascend'],
-      width: '7%'
+      width: '5%'
     },
     {
       title: 'Stock máximo',
@@ -206,7 +206,7 @@ export const useCustomInventory = () => {
       ...getColumnSearchProps('Stock máximo'),
       sorter: (a, b) => a.max - b.max,
       sortDirections: ['descend', 'ascend'],
-      width: '7%'
+      width: '5%'
     },
     {
       title: 'Prioridad',
@@ -215,7 +215,7 @@ export const useCustomInventory = () => {
       sorter: (a, b) => a.priority?.localeCompare(b.priority),
       sortDirections: ['descend', 'ascend'],
       defaultSortOrder: 'ascend',
-      width: '8%',
+      width: '5%',
       render: (_) => {
         let color = {
           Alta: 'red',
@@ -236,7 +236,7 @@ export const useCustomInventory = () => {
       ...getColumnSearchProps('Cantidad'),
       sorter: (a, b) => a.suggestion - b.suggestion,
       sortDirections: ['descend', 'ascend'],
-      width: '6%'
+      width: '5%'
     },
     {
       title: 'Cantidad a comprar',
@@ -245,7 +245,7 @@ export const useCustomInventory = () => {
       ...getColumnSearchProps('Cantidad a comprar'),
       sorter: (a, b) => a.amountToBuy - b.amountToBuy,
       sortDirections: ['descend', 'ascend'],
-      width: '6%'
+      width: '5%'
     },
     {
       title: 'Acción',

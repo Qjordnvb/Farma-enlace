@@ -168,7 +168,8 @@ export const useCustomOrders = () => {
       dataIndex: 'SEXO',
       ...getColumnSearchProps('SEXO'),
       sorter: (a, b) => a.SEXO?.localeCompare(b.SEXO),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      width: '5%'
     },
     {
       title: 'Sucursal',
@@ -224,7 +225,8 @@ export const useCustomOrders = () => {
       sortDirections: ['descend', 'ascend'],
       onFilter: (value, record) => {
         return value?.toLowerCase() === record?.TALLA?.toLowerCase();
-      }
+      },
+      width: '5%'
     },
     {
       title: 'Talla mandil',
@@ -235,7 +237,8 @@ export const useCustomOrders = () => {
       sortDirections: ['descend', 'ascend'],
       onFilter: (value, record) => {
         return value?.toLowerCase() === record?.TALLA_MANDIL?.toLowerCase();
-      }
+      },
+      width: '5%'
     },
     {
       title: 'Acción',

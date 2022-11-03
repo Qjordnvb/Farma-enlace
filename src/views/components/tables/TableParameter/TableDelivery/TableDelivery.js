@@ -42,7 +42,7 @@ export default function TableDelivery() {
           total: currentLength
         }}
         onChange={onChange}
-        scroll={{y: 400, x: 2000}}
+        scroll={{y: 400, x: 1500}}
         columns={columns}
         dataSource={formatDataSource}
         showSizeChanger

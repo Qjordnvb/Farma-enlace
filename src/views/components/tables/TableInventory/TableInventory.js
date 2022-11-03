@@ -73,7 +73,7 @@ const TableInventory = ({setSelected}) => {
     <div className="container-table pt-2">
       <Form form={form} component={false}>
         <Table
-          scroll={{x: 2000, y: 400}}
+          scroll={{x: 1500, y: 400}}
           components={{
             body: {
               cell: EditableCell

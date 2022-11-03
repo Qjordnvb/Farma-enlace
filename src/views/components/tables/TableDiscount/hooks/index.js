@@ -119,14 +119,16 @@ export const useCustomDiscount = () => {
       dataIndex: 'dues',
       ...getColumnSearchProps('Cuotas'),
       sorter: (a, b) => a.dues - b.dues,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      width: '5%'
     },
     {
       title: 'Valor',
       dataIndex: 'price',
       ...getColumnSearchProps('Cuotas'),
       sorter: (a, b) => a.cuotas - b.cuotas,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      width: '5%'
     },
     {
       title: 'N° Orden de Consumo',

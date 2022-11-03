@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {Table, Form} from 'antd';
+import React, {useEffect, useState} from 'react';
+import {Form, Table} from 'antd';
 import btnDownload from '../../../../assets/img/btn-download.png';
 import {useUtils} from '../../../../hooks';
 import {useCustomUniforms} from './hooks';
@@ -47,7 +47,7 @@ const TableParameter = () => {
           total: currentLength,
           showSizeChanger: true
         }}
-        scroll={{y: 400, x: 2000}}
+        scroll={{y: 400, x: 1500}}
         columns={mergedColumns}
         dataSource={dataSource}
         loading={loading}
