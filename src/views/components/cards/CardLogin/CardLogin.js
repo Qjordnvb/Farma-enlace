@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 // Hooks
-
 import {useAuthContext} from 'contexts/authContext';
 // Components
 import LoadingComponent from 'views/components/utils/LoadingComponent';
@@ -9,7 +8,12 @@ import LoadingComponent from 'views/components/utils/LoadingComponent';
 import ArrowGreen from '../../../../assets/img/arrow-green.png';
 import Logo from '../../../../assets/img/logo.png';
 // styled components
-import {StyledContainerFormLogin, StyledContainerLogin} from './CardLogin.Styled';
+import {
+  StyledBackground,
+  StyledContainerBackground,
+  StyledContainerFormLogin,
+  StyledContainerLogin
+} from './CardLogin.Styled';
 
 function CardLogin({isLoading}) {
   const {login, token, userLogin} = useAuthContext();
@@ -38,6 +42,9 @@ function CardLogin({isLoading}) {
 
   return (
     <StyledContainerLogin isLoading={isLoading}>
+      <StyledBackground>
+        <StyledContainerBackground></StyledContainerBackground>
+      </StyledBackground>
       <StyledContainerFormLogin isLoading={isLoading} className="flex flex-col items-center">
         <img src={Logo} alt="img-logo" />
         <h1 className="text-login pb-20 pt-6">Bienvenido</h1>
