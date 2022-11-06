@@ -1,3 +1,7 @@
 .btn-report {
   margin-left: auto !important;
 }
+
+th {
+  background: #bfedcc !important;
+}

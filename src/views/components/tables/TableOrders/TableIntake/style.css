@@ -1,3 +1,8 @@
+th {
+  background: #bfedcc !important;
+  text-align: center !important;
+}
+
 .modal-add-intake {
   max-width: 500px;
   width: 100% !important;

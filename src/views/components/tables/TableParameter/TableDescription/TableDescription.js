@@ -4,6 +4,7 @@ import './style.css';
 import btnDownload from '../../../../../assets/img/btn-download.png';
 import {useUtils} from '../../../../../hooks';
 import {useCustomDescription} from './hooks';
+import useCalcSize from '../../../../../hooks/useCalcSize';
 
 const TableDescription = () => {
   const {form, EditableCell, data, mergedColumns, cancel, loading, excelColumns, garmentColumns} =
@@ -40,6 +41,9 @@ const TableDescription = () => {
       setCurrentLength(extra.currentDataSource.length);
     }
   };
+
+  const {height: tableHeight} = useCalcSize();
+
   return (
     <Form form={form} component={false}>
       <>
@@ -60,7 +64,7 @@ const TableDescription = () => {
             showSizeChanger: true
           }}
           onChange={onChange}
-          scroll={{y: 500, x: 1200}}
+          scroll={{y: tableHeight - 230, x: 1500}}
           loading={loading}
         />
         <div

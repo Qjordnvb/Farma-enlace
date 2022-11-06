@@ -25,7 +25,7 @@ export const StyledOptionDataList = styled.div.attrs({
   justify-content: space-around;
   padding: 16px;
   margin: 10px auto 0px;
-  max-width: 1200px;
+
   width: 100%;
 
   /* Tono 1 */
@@ -68,9 +68,5 @@ export const StyledOptionDataList = styled.div.attrs({
         margin-bottom: 25px;
       }
     }
-  }
-
-  @media only screen and (max-width: 1366px) {
-    max-width: 1000px;
   }
 `;

@@ -1,60 +1,17 @@
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div.container-table
-  > div:nth-child(1)
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > table
-  > thead
-  > tr
-  > th {
+th {
+  text-align: center;
+  background: #bfedcc !important;
+}
+
+td:nth-child(odd) {
+  background-color: #eeeeee;
+}
+
+td > div {
   text-align: center;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div.container-table
-  > div:nth-child(1)
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > table
-  > tbody
-  > tr
-  > td
-  > div {
-  text-align: center;
-}
-
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div.container-table
-  > div.ant-table-wrapper
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-body
-  > table
-  > tbody
-  > tr
-  > td {
+div.ant-table-body > table > tbody > tr > td {
   text-align: center !important;
 }
 
@@ -232,26 +189,7 @@ input.input-add {
   outline: 0;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div
-  > div.container-table
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-header
-  > table
-  > thead
-  > tr
-  > th
-  > div
-  > span.ant-dropdown-trigger.ant-table-filter-trigger.active
-  > span {
+span.ant-dropdown-trigger.ant-table-filter-trigger.active > span {
   color: #bfbfbf !important;
 }
 

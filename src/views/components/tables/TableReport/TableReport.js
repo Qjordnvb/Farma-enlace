@@ -6,6 +6,8 @@ import {useCustomReport} from './hooks';
 import './style.css';
 import '../TableParameter/TableReasons/style-reasons.css';
 import moment from 'moment';
+import useCalcSize from '../../../../hooks/useCalcSize';
+
 const {RangePicker} = DatePicker;
 
 const TableReport = () => {
@@ -58,6 +60,8 @@ const TableReport = () => {
     }
   };
 
+  const {height: tableHeight} = useCalcSize();
+
   return (
     <div className="container-table pt-2">
       <div className="flex justify-end items-end flex-col">
@@ -73,7 +77,7 @@ const TableReport = () => {
         />
       </div>
       <Table
-        scroll={{x: 2000, y: 400}}
+        scroll={{x: 2000, y: tableHeight - 250}}
         rowSelection={rowSelection}
         columns={columns}
         dataSource={dataSource}

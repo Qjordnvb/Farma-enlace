@@ -7,6 +7,7 @@ import {StyledGridList} from 'views/screens/user/dataGridParameters/gridList/Gri
 import btnDownload from '../../../../../assets/img/btn-download.png';
 import {useUtils} from '../../../../../hooks';
 import {useCustomReplacement} from './hooks';
+import useCalcSize from '../../../../../hooks/useCalcSize';
 
 function TableReplacement() {
   const {dataSource, form, mergedColumns, EditableCell, loading} = useCustomReplacement();
@@ -36,6 +37,8 @@ function TableReplacement() {
     setExcelData(formattedData);
   }, [dataSource]);
 
+  const {height: tableHeight} = useCalcSize();
+
   const onChange = (pagination, filters, sorter, extra) => {
     if (extra.action === 'filter') {
       setCurrentLength(extra.currentDataSource.length);
@@ -52,7 +55,7 @@ function TableReplacement() {
             total: currentLength
           }}
           onChange={onChange}
-          scroll={{y: 420, x: 1500}}
+          scroll={{y: tableHeight - 230, x: 1500}}
           columns={mergedColumns}
           dataSource={dataSource}
           components={{

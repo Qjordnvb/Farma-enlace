@@ -5,6 +5,7 @@ export const StyledContainerDataGrid = styled.div.attrs({
   className: 'StyledContainerDataGrid'
 })`
   ${tw`flex flex-col items-center justify-center`}
+  align-self: end
 `;
 
 export const StyledOptionData = styled.div.attrs({
@@ -14,10 +15,9 @@ export const StyledOptionData = styled.div.attrs({
   display: flex;
   align-items: center;
   justify-content: space-around;
-  max-width: 1200px;
   width: 100%;
   height: 60px;
-  margin: 70px auto auto;
+
   /* Tono 1 */
 
   background: #ffffff;
@@ -54,8 +54,25 @@ export const StyledOptionData = styled.div.attrs({
       }
     }
   }
+`;
 
-  @media only screen and (max-width: 1366px) {
-    max-width: 1000px;
+export const StyledGridContainer = styled.div.attrs({})`
+  ${tw``}
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 9fr;
+  grid-template-areas: 'header' 'content';
+  width: 100%;
+  padding: 0 20px;
+  max-width: ${({maxWidth}) => maxWidth + 'px' || '1200px'};
+  min-height: ${({minHeight}) => minHeight + 'px' || '100%'};
+  @media (min-height: 800px) {
+    grid-template-rows: 1fr 10fr;
+  }
+  @media (min-height: 900px) {
+    grid-template-rows: 1fr 11fr;
+  }
+  @media (min-height: 1000px) {
+    grid-template-rows: 1fr 12fr;
   }
 `;

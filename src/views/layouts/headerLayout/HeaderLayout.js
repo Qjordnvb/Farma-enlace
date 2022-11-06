@@ -5,13 +5,12 @@ import AppMenu from 'views/components/menu';
 import IcoBtn from '../../../assets/img/ico-btn.png';
 import Logo from '../../../assets/img/logo.png';
 // import IcoProfile from '../../../assets/img/user-solid.svg';
-
-import {StyledContainerLayout} from './HeaderLayout.Styled';
+import {StyledContainerContent, StyledContainerLayout} from './HeaderLayout.Styled';
 import {NavLink} from 'react-router-dom';
 import {DATA} from '../../../config/paths';
 import Ico6Green from '../../../assets/img/Settings.svg';
 
-function HeaderLayout({children}) {
+function HeaderLayout({children, home = false}) {
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -47,7 +46,7 @@ function HeaderLayout({children}) {
           />
         </div>
       </header>
-      {children}
+      {!home ? <StyledContainerContent>{children}</StyledContainerContent> : children}
     </StyledContainerLayout>
   );
 }

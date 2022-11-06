@@ -1,6 +1,7 @@
 import React from 'react';
 import {Route, Routes} from 'react-router';
 import useViews from 'views';
+import useCalcSize from '../../../../hooks/useCalcSize';
 
 // import PropTypes from 'prop-types';
 
@@ -19,11 +20,13 @@ function DataGridOrders() {
       path: 'intake'
     }
   ];
+  const {width: tableWidth, height: tableHeight} = useCalcSize();
+
   return (
     <>
       {' '}
       <DataGridLayout titleGrid="Orden de consumo" userMenuLinks={userMenu}>
-        <div>
+        <div style={{maxWidth: tableWidth + 'px', minHeight: tableHeight - 200 + 'px'}}>
           <Routes>
             <Route path="actualization" element={<TableOrders />} />
             <Route path="intake" element={<TableIntake />} />

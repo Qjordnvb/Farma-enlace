@@ -137,7 +137,8 @@ export const useCustomReplacement = () => {
       sorter: (a, b) => a.id - b.id,
       sortDirections: ['descend', 'ascend'],
       defaultSortOrder: 'ascend',
-      width: '4%'
+      width: '4%',
+      align: 'center'
     },
     {
       key: '1',
@@ -146,7 +147,8 @@ export const useCustomReplacement = () => {
       ...getColumnSearchProps('codigo'),
       sorter: (a, b) => a.codigo.length - b.codigo.length,
       sortDirections: ['descend', 'ascend'],
-      width: '8%'
+      width: '8%',
+      align: 'center'
     },
     {
       key: '2',
@@ -155,7 +157,8 @@ export const useCustomReplacement = () => {
       ...getColumnSearchProps('descripcion'),
       sorter: (a, b) => a.descripcion.length - b.descripcion.length,
       sortDirections: ['descend', 'ascend'],
-      width: '10%'
+      width: '10%',
+      align: 'center'
     },
     {
       key: '3',
@@ -164,7 +167,8 @@ export const useCustomReplacement = () => {
       ...getColumnSearchProps('talla'),
       sorter: (a, b) => a.talla.length - b.talla.length,
       sortDirections: ['descend', 'ascend'],
-      width: '5%'
+      width: '5%',
+      align: 'center'
     },
     {
       key: '4',
@@ -173,7 +177,8 @@ export const useCustomReplacement = () => {
       ...getColumnSearchProps('genero'),
       sorter: (a, b) => a.genero.length - b.genero.length,
       sortDirections: ['descend', 'ascend'],
-      width: '6%'
+      width: '6%',
+      align: 'center'
     },
     {
       key: '5',
@@ -191,7 +196,8 @@ export const useCustomReplacement = () => {
             {_ && '%'}
           </div>
         );
-      }
+      },
+      align: 'center'
     },
     {
       key: '6',
@@ -208,7 +214,8 @@ export const useCustomReplacement = () => {
           </div>
         );
       },
-      width: '6%'
+      width: '6%',
+      align: 'center'
     },
     {
       key: '7',
@@ -217,7 +224,8 @@ export const useCustomReplacement = () => {
       ...getColumnSearchProps('totalAverage'),
       sorter: (a, b) => a.totalAverage - b.totalAverage,
       sortDirections: ['descend', 'ascend'],
-      width: '8%'
+      width: '8%',
+      align: 'center'
     },
     {
       key: '8',
@@ -226,7 +234,8 @@ export const useCustomReplacement = () => {
       ...getColumnSearchProps('max'),
       sorter: (a, b) => a.max - b.max,
       sortDirections: ['descend', 'ascend'],
-      width: '8%'
+      width: '8%',
+      align: 'center'
     },
     {
       key: '9',
@@ -235,7 +244,8 @@ export const useCustomReplacement = () => {
       ...getColumnSearchProps('ultimaActualizacion'),
       sorter: (a, b) => a.ultimaActualizacion?.localeCompare(b.ultimaActualizacion),
       sortDirections: ['descend', 'ascend'],
-      width: '8%'
+      width: '8%',
+      align: 'center'
     },
     {
       key: '10',
@@ -247,7 +257,8 @@ export const useCustomReplacement = () => {
       render: (_) => {
         return <div>{moment(_).format('YYYY-MM-DD')}</div>;
       },
-      width: '9%'
+      width: '9%',
+      align: 'center'
     },
     {
       title: 'Acción',
@@ -258,14 +269,8 @@ export const useCustomReplacement = () => {
         const editable = isEditing(record);
         return editable ? (
           <span>
-            <Typography.Link
-              onClick={() => save(record.id)}
-              style={{
-                marginRight: 8
-              }}
-            >
-              Guardar
-            </Typography.Link>
+            <Typography.Link onClick={() => save(record.id)}>Guardar</Typography.Link>
+            <br />
             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
               <a>Cancelar</a>
             </Popconfirm>
@@ -275,7 +280,8 @@ export const useCustomReplacement = () => {
             <img src={BtnEdit} className="w-6" alt="btn-edit" />
           </div>
         );
-      }
+      },
+      align: 'center'
     }
   ];
 

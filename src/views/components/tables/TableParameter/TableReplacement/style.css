@@ -1,42 +1,13 @@
-#root
-  > div
-  > div
-  > div
-  > div
-  > div.container-table.pt-28
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > table
-  > thead
-  > tr
-  > th {
+th {
   text-align: center;
+  background: #bfedcc !important;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-header
-  > table
-  > thead
-  > tr
-  > th
-  > div
-  > span.ant-table-column-title {
+.ant-table-tbody > tr > td:nth-child(odd) {
+  background-color: #eeeeee;
+}
+
+span.ant-table-column-title {
   font-size: 12px !important;
 }
 .btn-edit {

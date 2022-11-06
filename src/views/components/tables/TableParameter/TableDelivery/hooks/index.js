@@ -104,7 +104,8 @@ export const useCustomDelivery = () => {
         title: garment.description,
         dataIndex: `garment${garment.id}`,
         editable: true,
-        width: '10%'
+        width: '10%',
+        align: 'center'
       };
     });
     setGarmentsColumns(getColumns);
@@ -156,7 +157,8 @@ export const useCustomDelivery = () => {
       key: '1',
       title: 'N°',
       dataIndex: 'id',
-      width: '5%'
+      width: '5%',
+      align: 'center'
     },
     {
       key: '2',
@@ -165,7 +167,8 @@ export const useCustomDelivery = () => {
       width: '10%',
       ...getColumnSearchProps('motivo'),
       sorter: (a, b) => a.reason?.localeCompare(b.reason),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       key: '3',
@@ -174,13 +177,15 @@ export const useCustomDelivery = () => {
       width: '20%',
       ...getColumnSearchProps('descripcion'),
       sorter: (a, b) => a.descripcion?.localeCompare(b.descripcion),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       key: '4',
       title: 'Prendas',
       children: [...garmentsColumns],
-      dataIndex: 'prendas'
+      dataIndex: 'prendas',
+      align: 'center'
     },
     {
       key: '5',
@@ -188,11 +193,12 @@ export const useCustomDelivery = () => {
       dataIndex: 'replacementAuto',
       width: '8%',
       ...getColumnSearchProps('reposición'),
-      sorter: (a, b) => a.replacementAuto?.localeCompare(b.replacementAuto),
+      sorter: (a, b) => a.replacementAuto - b.replacementAuto,
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
         return <div>{_} días</div>;
-      }
+      },
+      align: 'center'
     },
     {
       key: '6',
@@ -201,7 +207,8 @@ export const useCustomDelivery = () => {
       width: '9%',
       ...getColumnSearchProps('cálculo'),
       sorter: (a, b) => a.calculation?.localeCompare(b.calculation),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       key: '7',
@@ -209,24 +216,25 @@ export const useCustomDelivery = () => {
       dataIndex: 'payment',
       width: '7%',
       ...getColumnSearchProps('cobro'),
-      sorter: (a, b) => a.payment?.localeCompare(b.payment),
+      sorter: (a, b) => a.payment - b.payment,
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
         return <div>{_ ? 'SI' : 'NO'}</div>;
-      }
+      },
+      align: 'center'
     },
     {
       key: '8',
       title: 'Valor',
       width: '7%',
       dataIndex: 'price',
-
       ...getColumnSearchProps('valor'),
-      sorter: (a, b) => a.price?.localeCompare(b.price),
+      sorter: (a, b) => a.price - b.price,
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
         return <div>${_}</div>;
-      }
+      },
+      align: 'center'
     },
     {
       key: '4',
@@ -250,7 +258,8 @@ export const useCustomDelivery = () => {
           }
         }
       ],
-      dataIndex: 'prendas'
+      dataIndex: 'prendas',
+      align: 'center'
     },
     {
       title: 'Ver',
@@ -272,7 +281,8 @@ export const useCustomDelivery = () => {
             </Typography.Link>
           </span>
         );
-      }
+      },
+      align: 'center'
     }
   ];
 

@@ -8,6 +8,7 @@ import './style.css';
 import '../../TableParameter/TableReasons/style-reasons.css';
 import btnCarga from '../../../../../assets/img/btn-carga.svg';
 import {useUtils} from '../../../../../hooks';
+import useCalcSize from '../../../../../hooks/useCalcSize';
 
 const {RangePicker} = DatePicker;
 const TableIntake = () => {
@@ -54,6 +55,8 @@ const TableIntake = () => {
     }
   };
 
+  const {height: tableHeight} = useCalcSize();
+
   // eslint-disable-next-line no-console
   return (
     <div className="container-table pt-2">
@@ -85,7 +88,7 @@ const TableIntake = () => {
         />
       </div>
       <Table
-        scroll={{x: 2500, y: 300}}
+        scroll={{x: 2500, y: tableHeight - 250}}
         rowSelection={rowSelection}
         columns={columns}
         dataSource={dataSource}

@@ -15,69 +15,21 @@ html {
 }
 
 .container-table {
-  max-width: 1200px;
+  max-width: 100%;
   margin: auto;
   width: 100%;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div.container-table
-  > div:nth-child(1)
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > table
-  > thead
-  > tr
-  > th {
+th {
   background: #bfedcc;
   text-align: center;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div.container-table
-  > div:nth-child(1)
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > table
-  > tbody
-  > tr
-  > td:nth-child(odd) {
-  background-color: #eeeeee;
+td:nth-child(odd) {
+  background-color: #eeeeee !important;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div.container-table
-  > div:nth-child(1)
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > table
-  > tbody
-  > tr
-  > td {
+td {
   text-align: center;
 }
 
@@ -652,10 +604,4 @@ html:lang(es) .ant-popover-message-title::before {
   visibility: visible;
   content: '¿Seguro quieres cancelar esta acción?';
   font-size: 12px;
-}
-
-@media only screen and (max-width: 1366px) {
-  .container-table {
-    width: 1000px;
-  }
 }

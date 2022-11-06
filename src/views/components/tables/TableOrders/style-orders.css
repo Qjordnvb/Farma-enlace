@@ -1,55 +1,13 @@
-#root
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > div
-  > div
-  > div
-  > table
-  > thead
-  > tr
-  > th {
-  background: #bfedcc;
-  text-align: center;
+th {
+  background: #bfedcc !important;
+  text-align: center !important;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > div
-  > div
-  > div
-  > table
-  > tbody
-  > tr
-  > td:nth-child(odd) {
+td:nth-child(odd) {
   background-color: #eeeeee;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > div
-  > div
-  > div
-  > table
-  > tbody
-  > tr
-  > td {
+table > tbody > tr > td {
   text-align: center;
 }
 
@@ -116,17 +74,7 @@ input.input-add,
   border-radius: 9.30349px;
 }
 
-#root
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-body
+div.ant-table-body
   > table
   > tbody
   > tr.ant-table-row.ant-table-row-level-0.editable-row
@@ -136,17 +84,7 @@ input.input-add,
   color: #2bc155;
 }
 
-#root
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-body
+div.ant-table-body
   > table
   > tbody
   > tr.ant-table-row.ant-table-row-level-0.editable-row

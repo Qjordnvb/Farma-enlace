@@ -100,7 +100,8 @@ export const useCustomUniforms = () => {
       ...getColumnSearchProps('codigo'),
       sorter: (a, b) => +a.codigo - +b.codigo,
       sortDirections: ['descend', 'ascend'],
-      defaultSortOrder: 'ascend'
+      defaultSortOrder: 'ascend',
+      align: 'center'
     },
     {
       title: 'Marca',
@@ -108,7 +109,8 @@ export const useCustomUniforms = () => {
       width: 8,
       ...getColumnSearchProps('marca'),
       sorter: (c, d) => c.marca?.localeCompare(d.marca),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Descripción',
@@ -116,7 +118,8 @@ export const useCustomUniforms = () => {
       width: 22,
       ...getColumnSearchProps('descripcion'),
       sorter: (e, f) => e.descripcion?.localeCompare(f.descripcion),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Género',
@@ -124,7 +127,8 @@ export const useCustomUniforms = () => {
       width: 8,
       ...getColumnSearchProps('genero'),
       sorter: (g, h) => g.genero?.localeCompare(h.genero),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Talla',
@@ -132,7 +136,8 @@ export const useCustomUniforms = () => {
       width: 8,
       ...getColumnSearchProps('talla'),
       sorter: (i, j) => i.talla?.localeCompare(j.talla),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Región',
@@ -140,7 +145,8 @@ export const useCustomUniforms = () => {
       width: 8,
       ...getColumnSearchProps('region'),
       sorter: (k, l) => k.region?.localeCompare(l.region),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Precio Uniforme',
@@ -154,7 +160,8 @@ export const useCustomUniforms = () => {
       editable: true,
       render: (_) => {
         return <div>${_}</div>;
-      }
+      },
+      align: 'center'
     },
     {
       title: 'Estado',
@@ -162,7 +169,8 @@ export const useCustomUniforms = () => {
       width: 8,
       ...getColumnSearchProps('status'),
       sorter: (o, p) => o.status?.localeCompare(p.status),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Acción',
@@ -183,7 +191,8 @@ export const useCustomUniforms = () => {
             <img src={BtnEdit} alt="btn-edit" />
           </div>
         );
-      }
+      },
+      align: 'center'
     }
   ];
 

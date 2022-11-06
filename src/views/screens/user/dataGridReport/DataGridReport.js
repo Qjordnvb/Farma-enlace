@@ -1,6 +1,7 @@
 import React from 'react';
 
 import useViews from 'views';
+import useCalcSize from '../../../../hooks/useCalcSize';
 
 // import PropTypes from 'prop-types';
 
@@ -15,11 +16,14 @@ function DataGridReport() {
       path: ''
     }
   ];
+
+  const {width: tableWidth, height: tableHeight} = useCalcSize();
+
   return (
     <>
       {' '}
       <DataGridLayout titleGrid="Reporte" userMenuLinks={userMenu}>
-        <div>
+        <div style={{maxWidth: tableWidth + 'px', height: tableHeight}}>
           <TableReport />
         </div>
       </DataGridLayout>

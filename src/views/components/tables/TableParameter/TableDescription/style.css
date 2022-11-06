@@ -1,78 +1,19 @@
-#root
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-header
-  > table
-  > thead
-  > tr
-  > th {
-  text-align: center;
-  background: #bfedcc;
+th {
+  background: #bfedcc !important;
+}
+th.ant-table-column-sort {
+  background: #bfedcc !important;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-body
-  > table
-  > tbody
-  > tr {
+div.ant-table-body > table > tbody > tr {
   text-align: center;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-body
-  > table
-  > tbody
-  > tr
-  > td:nth-child(odd) {
+table > tbody > tr > td:nth-child(odd) {
   background-color: #eeeeee;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-body
-  > table
-  > tbody
-  > tr
-  > td
-  > span
-  > a {
+div.ant-table-body > table > tbody > tr > td > span > a {
   color: #2bc155;
 }
 

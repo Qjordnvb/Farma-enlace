@@ -1,17 +1,18 @@
 import React from 'react';
 
-import {NavLink, Routes, Route} from 'react-router-dom';
+import {NavLink, Route, Routes} from 'react-router-dom';
 import useViews from 'views';
 
 import './style.css';
 import {StyledOptionDataList} from './GridList.Styled';
+import useCalcSize from '../../../../../hooks/useCalcSize';
 
 export default function GridList() {
   const {useComponents} = useViews();
 
   const {useTables} = useComponents();
   const {TableGarments, TableReasons} = useTables();
-
+  const {width: tableWidth, height: tableHeight} = useCalcSize();
   return (
     <>
       <StyledOptionDataList>
@@ -26,7 +27,10 @@ export default function GridList() {
       </StyledOptionDataList>
 
       <>
-        <div className="container-table">
+        <div
+          className="container-table pt-2"
+          style={{maxWidth: tableWidth + 'px', minHeight: tableHeight - 200 + 'px'}}
+        >
           <Routes>
             <Route path="garments" element={<TableGarments />} />
             <Route path="reasons" element={<TableReasons />} />
