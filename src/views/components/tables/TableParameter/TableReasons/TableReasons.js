@@ -4,6 +4,7 @@ import './style-reasons.css';
 import Button from 'views/components/button/Button';
 import {StyledGridList} from 'views/screens/user/dataGridParameters/gridList/GridList.Styled';
 import {useCustomReasons} from './hooks';
+import useCalcSize from '../../../../../hooks/useCalcSize';
 
 function TableReasons() {
   const {
@@ -38,6 +39,8 @@ function TableReasons() {
     }
   };
 
+  const {height: tableHeight} = useCalcSize();
+
   return (
     <>
       <Form form={form} component={false}>
@@ -52,7 +55,7 @@ function TableReasons() {
           dataSource={dataSource}
           rowClassName={(record) => (!record.active ? 'disabled-row editable-row' : 'editable-row')}
           rowKey={(record) => record.id}
-          scroll={{y: 500, x: 1500}}
+          scroll={{y: tableHeight - 300, x: 1500}}
           loading={loading}
           components={{
             body: {

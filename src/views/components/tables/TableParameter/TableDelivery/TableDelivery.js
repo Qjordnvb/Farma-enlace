@@ -4,6 +4,7 @@ import './style.css';
 
 import btnAdd from '../../../../../assets/img/add.png';
 import {useCustomDelivery} from './hooks';
+import useCalcSize from '../../../../../hooks/useCalcSize';
 /*const {Search} = Input;*/
 const {Option} = Select;
 export default function TableDelivery() {
@@ -32,6 +33,7 @@ export default function TableDelivery() {
       setCurrentLength(extra.currentDataSource.length);
     }
   };
+  const {height: tableHeight} = useCalcSize();
 
   return (
     <div>
@@ -42,7 +44,7 @@ export default function TableDelivery() {
           total: currentLength
         }}
         onChange={onChange}
-        scroll={{y: 400, x: 1500}}
+        scroll={{y: tableHeight - 250, x: 2500}}
         columns={columns}
         dataSource={formatDataSource}
         showSizeChanger

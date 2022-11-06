@@ -1,5 +1,5 @@
-.ant-table-thead > tr > th {
-  background: #bfedcc;
+th {
+  background: #bfedcc !important;
 }
 
 .ant-table-tbody > tr > td:nth-child(odd) {
@@ -146,43 +146,11 @@ input.input-add {
   text-align: center;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div.container-table
-  > div:nth-child(1)
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > table
-  > thead
-  > tr
-  > th {
+th {
   text-align: center;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div.container-table
-  > div:nth-child(1)
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > table
-  > tbody
-  > tr
-  > td {
+td {
   text-align: center;
 }
 

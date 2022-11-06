@@ -139,7 +139,8 @@ export const useCustomOrders = () => {
       ...getColumnSearchProps('N°'),
       sorter: (a, b) => a.id - b.id,
       sortDirections: ['descend', 'ascend'],
-      width: '4%'
+      width: '4%',
+      align: 'center'
     },
     {
       title: 'Cédula',
@@ -147,21 +148,24 @@ export const useCustomOrders = () => {
       ...getColumnSearchProps('CEDULA'),
       sorter: (a, b) => +a.CEDULA - +b.CEDULA,
       sortDirections: ['descend', 'ascend'],
-      defaultSortOrder: 'ascend'
+      defaultSortOrder: 'ascend',
+      align: 'center'
     },
     {
       title: 'Colaborador',
       dataIndex: 'COLABORADOR',
       ...getColumnSearchProps('COLABORADOR'),
       sorter: (a, b) => a?.COLABORADOR?.localeCompare(b?.COLABORADOR),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Cargo',
       dataIndex: 'CARGO',
       ...getColumnSearchProps('CARGO'),
       sorter: (a, b) => a.CARGO?.localeCompare(b.CARGO),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Género',
@@ -169,21 +173,24 @@ export const useCustomOrders = () => {
       ...getColumnSearchProps('SEXO'),
       sorter: (a, b) => a.SEXO?.localeCompare(b.SEXO),
       sortDirections: ['descend', 'ascend'],
-      width: '5%'
+      width: '5%',
+      align: 'center'
     },
     {
       title: 'Sucursal',
       dataIndex: 'NOMBRE_SUCURSAL',
       ...getColumnSearchProps('Sucursal'),
       sorter: (a, b) => a.NOMBRE_SUCURSAL?.localeCompare(b.NOMBRE_SUCURSAL),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Región',
       dataIndex: 'REGION',
       ...getColumnSearchProps('REGION'),
       sorter: (a, b) => a.REGION?.localeCompare(b.REGION),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Fecha de ingreso',
@@ -193,28 +200,32 @@ export const useCustomOrders = () => {
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
         return <div>{moment(_).calendar()}</div>;
-      }
+      },
+      align: 'center'
     },
     {
       title: 'Distribución Administrativa',
       dataIndex: 'NOMBRE_CENTRO_COSTOS',
       ...getColumnSearchProps('Distribución Administrativa'),
       sorter: (a, b) => a.NOMBRE_CENTRO_COSTOS?.localeCompare(b.NOMBRE_CENTRO_COSTOS),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Número oficina',
       dataIndex: 'CODIGO_OFICINA',
       ...getColumnSearchProps('Número oficina'),
       sorter: (a, b) => a.CODIGO_OFICINA?.localeCompare(b.CODIGO_OFICINA),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Nombre de la oficina',
       dataIndex: 'NOMBRE_OFICINA',
       ...getColumnSearchProps('NOMBRE_OFICINA'),
       sorter: (a, b) => a.NOMBRE_OFICINA?.localeCompare(b.NOMBRE_OFICINA),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Talla uniforme',
@@ -226,7 +237,8 @@ export const useCustomOrders = () => {
       onFilter: (value, record) => {
         return value?.toLowerCase() === record?.TALLA?.toLowerCase();
       },
-      width: '5%'
+      width: '8%',
+      align: 'center'
     },
     {
       title: 'Talla mandil',
@@ -238,7 +250,8 @@ export const useCustomOrders = () => {
       onFilter: (value, record) => {
         return value?.toLowerCase() === record?.TALLA_MANDIL?.toLowerCase();
       },
-      width: '5%'
+      width: '8%',
+      align: 'center'
     },
     {
       title: 'Acción',
@@ -253,12 +266,10 @@ export const useCustomOrders = () => {
               onClick={async () => {
                 await save(record.id);
               }}
-              style={{
-                marginRight: 8
-              }}
             >
               Guardar
             </Typography.Link>
+            <br />
             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
               <a>Cancelar</a>
             </Popconfirm>
@@ -268,7 +279,8 @@ export const useCustomOrders = () => {
             <img src={BtnEdit} className="w-6" alt="btn-edit" />
           </div>
         );
-      }
+      },
+      align: 'center'
     }
   ];
   const mergedColumns = columns.map((col) => {

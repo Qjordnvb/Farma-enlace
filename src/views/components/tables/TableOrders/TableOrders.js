@@ -6,6 +6,7 @@ import {useUtils} from '../../../../hooks';
 import {useCustomOrders} from './hooks';
 import './style-orders.css';
 import '../TableParameter/TableReasons/style-reasons.css';
+import useCalcSize from '../../../../hooks/useCalcSize';
 
 const TableOrders = () => {
   const {form, EditableCell, mergedColumns, dataSource, inputFileRef, handleInputFile, loading} =
@@ -53,11 +54,13 @@ const TableOrders = () => {
     }
   };
 
+  const {height: tableHeight} = useCalcSize();
+
   return (
     <div className="container-table pt-2">
       <Form form={form} component={false}>
         <Table
-          scroll={{x: 2000, y: 400}}
+          scroll={{x: 2000, y: tableHeight - 250}}
           components={{
             body: {
               cell: EditableCell
@@ -75,12 +78,12 @@ const TableOrders = () => {
           onChange={onChange}
         />
       </Form>
-      <div className="container-buttons flex pt-6 pb-14 justify-between cursor-pointer">
+      <div className="container-buttons flex pt-6 pb-10 justify-between cursor-pointer">
         <div className="flex flex-col">
-          <label htmlFor="file">
+          <label htmlFor="file" className={'mb-2'}>
             <img src={btnCarga} alt="download" width="230px" height="70px" />
             <input
-              style={{visibility: 'hidden'}}
+              style={{position: 'absolute', top: 0, left: 0, visibility: 'hidden'}}
               id="file"
               type="file"
               accept=".xlsx, .xls"
@@ -98,7 +101,7 @@ const TableOrders = () => {
           </div>
         </div>
 
-        <div className="flex justify-end items-end flex-col">
+        <div className="flex items-end flex-col">
           <div
             onClick={() => {
               handleExport(excelData, 'ACTUALIZACIÓN DE TALLAS');

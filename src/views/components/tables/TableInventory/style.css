@@ -1,40 +1,12 @@
-#root
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-body
-  > table
-  > tbody
-  > tr
-  > td
-  > span
-  > a.ant-typography {
+th {
+  background: #bfedcc !important;
+}
+
+.ant-table-body > table > tbody > tr > td > span > a.ant-typography {
   color: #2bc155;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > div
-  > div
-  > div.ant-table-body
-  > table
-  > tbody
-  > tr
-  > td
-  > span
-  > a {
+.ant-table-body > table > tbody > tr > td > span > a {
   color: black;
 }
 

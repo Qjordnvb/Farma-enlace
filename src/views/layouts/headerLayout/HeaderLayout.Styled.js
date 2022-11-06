@@ -6,6 +6,8 @@ export const StyledContainerLayout = styled.div.attrs({
 })`
   ${tw``}
   min-height: 100vh;
+  max-width: 100vw;
+  overflow: hidden;
   .div-logo {
     position: absolute;
     left: 0;
@@ -90,4 +92,20 @@ export const StyledContainerLayout = styled.div.attrs({
       }
     }
   }
+`;
+
+export const StyledContainerContent = styled.div.attrs({})`
+  ${tw``}
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 12fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'sidebar content';
+  padding: 0 20px;
+  height: 100%;
+  width: 100%;
+  gap: 10px;
+  max-width: 100vw;
 `;

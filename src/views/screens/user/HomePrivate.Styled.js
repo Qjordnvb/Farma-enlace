@@ -81,4 +81,18 @@ export const StyledSelectOption = styled.div.attrs({
       }
     }
   }
+  @media screen and (max-width: 1366px) {
+    padding: 20px 10px 20px 10px;
+    margin-top: 10px;
+    .img-options {
+      height: 300px;
+    }
+    a {
+      width: 80px;
+      img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  }
 `;

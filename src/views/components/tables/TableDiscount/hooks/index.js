@@ -46,7 +46,8 @@ export const useCustomDiscount = () => {
       width: 70,
       dataIndex: 'id',
       sorter: (a, b) => a.id - b.id,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Colaborador',
@@ -57,35 +58,40 @@ export const useCustomDiscount = () => {
       width: '10%',
       onFilter: (value, record) => {
         return record?.COLABORADOR?.toLowerCase().includes(value.toLowerCase());
-      }
+      },
+      align: 'center'
     },
     {
       title: 'Cargo',
       dataIndex: 'CARGO',
       ...getColumnSearchProps('CARGO'),
       sorter: (a, b) => a.CARGO?.localeCompare(b.CARGO),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Distribución Administrativa',
       dataIndex: 'NOMBRE_CENTRO_COSTOS',
       ...getColumnSearchProps('Distribución Administrativa'),
       sorter: (a, b) => a.NOMBRE_CENTRO_COSTOS?.localeCompare(b.NOMBRE_CENTRO_COSTOS),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Código oficina ',
       dataIndex: 'CODIGO_OFICINA',
       ...getColumnSearchProps('Código oficina '),
       sorter: (a, b) => +a.CODIGO_OFICINA - +b.CODIGO_OFICINA,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Nombre de la oficina',
       dataIndex: ['employee', 'NOMBRE_OFICINA'],
       ...getColumnSearchProps('NOMBRE_OFICINA'),
       sorter: (a, b) => a.NOMBRE_OFICINA?.localeCompare(b.NOMBRE_OFICINA),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Talla',
@@ -95,14 +101,16 @@ export const useCustomDiscount = () => {
       sorter: (a, b) => {
         return a.correctSize?.talla?.localeCompare(b?.correctSize?.talla);
       },
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Kits',
       dataIndex: 'descripcion',
       ...getColumnSearchProps('Kits '),
       sorter: (a, b) => a.descripcion?.localeCompare(b.descripcion),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Fecha',
@@ -112,7 +120,8 @@ export const useCustomDiscount = () => {
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
         return <div>{moment(_).format('YYYY-MM-DD')}</div>;
-      }
+      },
+      align: 'center'
     },
     {
       title: 'Cuotas',
@@ -120,7 +129,8 @@ export const useCustomDiscount = () => {
       ...getColumnSearchProps('Cuotas'),
       sorter: (a, b) => a.dues - b.dues,
       sortDirections: ['descend', 'ascend'],
-      width: '5%'
+      width: '5%',
+      align: 'center'
     },
     {
       title: 'Valor',
@@ -128,14 +138,16 @@ export const useCustomDiscount = () => {
       ...getColumnSearchProps('Cuotas'),
       sorter: (a, b) => a.cuotas - b.cuotas,
       sortDirections: ['descend', 'ascend'],
-      width: '5%'
+      width: '5%',
+      align: 'center'
     },
     {
       title: 'N° Orden de Consumo',
       dataIndex: 'consumptionOrderNumber',
       ...getColumnSearchProps('numero orden de consumo'),
       sorter: (a, b) => a.consumptionOrderNumber?.localeCompare(b.consumptionOrderNumber),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'última modificación',
@@ -145,14 +157,16 @@ export const useCustomDiscount = () => {
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
         return <div>{_ ? _ : 'jjarrin'}</div>;
-      }
+      },
+      align: 'center'
     },
     {
       title: 'Estado',
       dataIndex: 'discountRequested',
       ...getColumnSearchProps('estado'),
       sorter: (a, b) => a.requestStatus?.localeCompare(b.requestStatus),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     }
   ];
 

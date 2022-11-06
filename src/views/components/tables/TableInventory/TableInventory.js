@@ -5,6 +5,7 @@ import {useUtils} from '../../../../hooks';
 import {useCustomInventory} from './hooks';
 import './style.css';
 import '../TableParameter/TableReasons/style-reasons.css';
+import useCalcSize from '../../../../hooks/useCalcSize';
 
 const TableInventory = ({setSelected}) => {
   const {
@@ -69,11 +70,13 @@ const TableInventory = ({setSelected}) => {
     setSelected(selectedItems);
   }, [selectedItems]);
 
+  const {height: tableHeight} = useCalcSize();
+
   return (
     <div className="container-table pt-2">
       <Form form={form} component={false}>
         <Table
-          scroll={{x: 1500, y: 400}}
+          scroll={{x: 1500, y: tableHeight - 250}}
           components={{
             body: {
               cell: EditableCell

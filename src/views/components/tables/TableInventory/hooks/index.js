@@ -173,7 +173,8 @@ export const useCustomInventory = () => {
       sorter: (a, b) => a.descripcion?.localeCompare(b.descripcion),
       sortDirections: ['descend', 'ascend'],
       fixed: 'left',
-      width: '10%'
+      width: '10%',
+      align: 'center'
     },
     {
       title: 'Talla',
@@ -181,7 +182,8 @@ export const useCustomInventory = () => {
       ...getColumnSearchProps('Ralla'),
       sorter: (a, b) => a.talla?.localeCompare(b.talla),
       sortDirections: ['descend', 'ascend'],
-      width: '5%'
+      width: '5%',
+      align: 'center'
     },
     {
       title: 'Stock',
@@ -189,7 +191,8 @@ export const useCustomInventory = () => {
       ...getColumnSearchProps('Stock'),
       sorter: (a, b) => a.stock - b.stock,
       sortDirections: ['descend', 'ascend'],
-      width: '5%'
+      width: '5%',
+      align: 'center'
     },
 
     {
@@ -198,7 +201,8 @@ export const useCustomInventory = () => {
       ...getColumnSearchProps('stock mínimo'),
       sorter: (a, b) => a.totalAverage - b.totalAverage,
       sortDirections: ['descend', 'ascend'],
-      width: '5%'
+      width: '5%',
+      align: 'center'
     },
     {
       title: 'Stock máximo',
@@ -206,7 +210,8 @@ export const useCustomInventory = () => {
       ...getColumnSearchProps('Stock máximo'),
       sorter: (a, b) => a.max - b.max,
       sortDirections: ['descend', 'ascend'],
-      width: '5%'
+      width: '5%',
+      align: 'center'
     },
     {
       title: 'Prioridad',
@@ -228,7 +233,8 @@ export const useCustomInventory = () => {
           },
           children: <div>{_}</div>
         };
-      }
+      },
+      align: 'center'
     },
     {
       title: 'Cantidad sugerida',
@@ -236,7 +242,8 @@ export const useCustomInventory = () => {
       ...getColumnSearchProps('Cantidad'),
       sorter: (a, b) => a.suggestion - b.suggestion,
       sortDirections: ['descend', 'ascend'],
-      width: '5%'
+      width: '5%',
+      align: 'center'
     },
     {
       title: 'Cantidad a comprar',
@@ -245,25 +252,20 @@ export const useCustomInventory = () => {
       ...getColumnSearchProps('Cantidad a comprar'),
       sorter: (a, b) => a.amountToBuy - b.amountToBuy,
       sortDirections: ['descend', 'ascend'],
-      width: '5%'
+      width: '5%',
+      align: 'center'
     },
     {
       title: 'Acción',
       dataIndex: 'accion',
-      width: '6%',
+      width: '4%',
       fixed: 'right',
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
           <span>
-            <Typography.Link
-              onClick={() => save(record.id)}
-              style={{
-                marginRight: 8
-              }}
-            >
-              Guardar
-            </Typography.Link>
+            <Typography.Link onClick={() => save(record.id)}>Guardar</Typography.Link>
+            <br />
             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
               <a>Cancelar</a>
             </Popconfirm>
@@ -273,7 +275,8 @@ export const useCustomInventory = () => {
             <img src={BtnEdit} className="w-6" alt="btn-edit" />
           </div>
         );
-      }
+      },
+      align: 'center'
     }
   ];
   const mergedColumns = columns.map((col) => {

@@ -1,10 +1,9 @@
 import React from 'react';
 
-import {Routes, Route} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import useViews from 'views';
 
 // import PropTypes from 'prop-types';
-
 import {StyledSidebarLayout} from './DataGridParameters.Styled';
 
 function DataGridParameters() {
@@ -35,7 +34,6 @@ function DataGridParameters() {
   ];
   return (
     <StyledSidebarLayout>
-      {' '}
       <DataGridLayout titleGrid="Parametrización" userMenuLinks={userMenu}>
         <div>
           <Routes>

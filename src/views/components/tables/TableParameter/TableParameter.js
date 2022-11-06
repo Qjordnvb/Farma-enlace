@@ -3,19 +3,17 @@ import {Form, Table} from 'antd';
 import btnDownload from '../../../../assets/img/btn-download.png';
 import {useUtils} from '../../../../hooks';
 import {useCustomUniforms} from './hooks';
-
 import './style-parameters.css';
+import useCalcSize from '../../../../hooks/useCalcSize';
 
 const TableParameter = () => {
   const {dataSource, mergedColumns, loading, form, EditableCell} = useCustomUniforms();
   const {handleExport} = useUtils();
   const [currentLength, setCurrentLength] = useState(0);
   const [excelData, setExcelData] = useState([]);
-
   useEffect(() => {
     setCurrentLength(dataSource.length);
   }, [dataSource]);
-
   useEffect(() => {
     let formattedData = dataSource.map((product) => {
       return {
@@ -33,6 +31,8 @@ const TableParameter = () => {
     setExcelData(formattedData);
   }, [dataSource]);
 
+  const {height: tableHeight} = useCalcSize();
+
   const onChange = (pagination, filters, sorter, extra) => {
     if (extra.action === 'filter') {
       setCurrentLength(extra.currentDataSource.length);
@@ -47,7 +47,7 @@ const TableParameter = () => {
           total: currentLength,
           showSizeChanger: true
         }}
-        scroll={{y: 400, x: 1500}}
+        scroll={{y: tableHeight - 210, x: 1500}}
         columns={mergedColumns}
         dataSource={dataSource}
         loading={loading}

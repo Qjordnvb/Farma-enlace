@@ -199,7 +199,8 @@ export const useCustomDescription = () => {
       sorter: (a, b) => a.codigo?.localeCompare(b.codigo),
       sortDirections: ['descend', 'ascend'],
       defaultSortOrder: 'ascend',
-      width: '8%'
+      width: '8%',
+      align: 'center'
     },
     {
       title: 'Descripción',
@@ -207,7 +208,8 @@ export const useCustomDescription = () => {
       ...getColumnSearchProps('descripcion'),
       sorter: (a, b) => a.descripcion?.localeCompare(b.descripcion),
       sortDirections: ['descend', 'ascend'],
-      width: '12%'
+      width: '12%',
+      align: 'center'
     },
     ...garmentColumns,
 
@@ -217,7 +219,8 @@ export const useCustomDescription = () => {
       ...getColumnSearchProps('marca'),
       sorter: (a, b) => a.marca?.localeCompare(b.marca),
       sortDirections: ['descend', 'ascend'],
-      width: '8%'
+      width: '5%',
+      align: 'center'
     },
     {
       title: 'Región',
@@ -225,7 +228,8 @@ export const useCustomDescription = () => {
       ...getColumnSearchProps('region'),
       sorter: (a, b) => a.region?.localeCompare(b.region),
       sortDirections: ['descend', 'ascend'],
-      width: '8%'
+      width: '5%',
+      align: 'center'
     },
     {
       title: 'Acción',
@@ -236,14 +240,8 @@ export const useCustomDescription = () => {
         const editable = isEditing(record);
         return editable ? (
           <span>
-            <Typography.Link
-              onClick={() => save(record.id)}
-              style={{
-                marginRight: 8
-              }}
-            >
-              Guardar
-            </Typography.Link>
+            <Typography.Link onClick={() => save(record.id)}>Guardar</Typography.Link>
+            <br />
             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
               <a>Cancelar</a>
             </Popconfirm>
@@ -253,7 +251,8 @@ export const useCustomDescription = () => {
             <img src={BtnEdit} alt="btn-edit" />
           </div>
         );
-      }
+      },
+      align: 'center'
     }
   ];
 

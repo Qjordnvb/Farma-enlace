@@ -1,5 +1,5 @@
-.ant-table-thead > tr > th {
-  background: #bfedcc;
+th {
+  background: #bfedcc !important;
 }
 
 .ant-table-tbody > tr > td:nth-child(odd) {

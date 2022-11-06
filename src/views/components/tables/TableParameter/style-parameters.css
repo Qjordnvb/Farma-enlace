@@ -1,91 +1,25 @@
-#root
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > table
-  > tbody
-  > tr
-  > td:nth-child(odd) {
-  background-color: #eeeeee;
+td:nth-child(odd) {
+  background-color: #eeeeee !important;
 }
 
-#root > div > div > div > div > div > div > div > div > div > div > div > table > thead > tr > th {
-  background: #bfedcc;
+th {
+  background: #bfedcc !important;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > ul
-  > li.ant-pagination-item.ant-pagination-item.ant-pagination-item-active
-  > a {
+li.ant-pagination-item.ant-pagination-item.ant-pagination-item-active > a {
   color: #ffffff;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > ul
-  > li.ant-pagination-item.ant-pagination-item
-  > a {
+li.ant-pagination-item.ant-pagination-item > a {
   color: #2bc155;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > table
-  > thead
-  > tr
-  > th {
+th {
   text-align: center;
   font-size: 12px !important;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > table
-  > tbody
-  > tr {
+tr {
   text-align: center;
 }
 
@@ -138,55 +72,11 @@ button.ant-btn.ant-btn-primary.ant-btn-sm:hover {
   color: #2bc155;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > div
-  > div
-  > div
-  > table
-  > thead
-  > tr
-  > th.ant-table-cell.ant-table-column-sort.ant-table-column-has-sorters
-  > div
-  > span.ant-table-column-title
-  > div
-  > span.ant-table-column-sorter.ant-table-column-sorter-full
-  > span
-  > span.anticon.anticon-caret-down.ant-table-column-sorter-down.active
-  > svg {
+span.anticon.anticon-caret-down.ant-table-column-sorter-down.active > svg {
   fill: #2bc155;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > div
-  > div
-  > div
-  > table
-  > thead
-  > tr
-  > th.ant-table-cell.ant-table-column-sort.ant-table-column-has-sorters
-  > div
-  > span.ant-table-column-title
-  > div
-  > span.ant-table-column-sorter.ant-table-column-sorter-full
-  > span
-  > span.anticon.anticon-caret-up.ant-table-column-sorter-up.active
-  > svg {
+span.anticon.anticon-caret-up.ant-table-column-sorter-up.active > svg {
   fill: #2bc155;
 }
 
@@ -195,26 +85,7 @@ button.ant-btn.ant-btn-primary.ant-btn-sm:hover {
   color: #ffffff;
 }
 
-#root
-  > div
-  > div
-  > div
-  > div:nth-child(4)
-  > div
-  > div.ant-table-wrapper
-  > div
-  > div
-  > div
-  > div
-  > div
-  > table
-  > thead
-  > tr
-  > th.ant-table-cell.ant-table-column-sort.ant-table-column-has-sorters
-  > div
-  > span.ant-dropdown-trigger.ant-table-filter-trigger.active
-  > span
-  > svg:hover {
+span.ant-dropdown-trigger.ant-table-filter-trigger.active > span > svg:hover {
   fill: #ffffff !important;
 }
 

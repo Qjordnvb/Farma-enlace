@@ -1,10 +1,11 @@
 import {useEffect, useState} from 'react';
-import {Table, Modal, Input, Form, Select} from 'antd';
+import {Form, Input, Modal, Select, Table} from 'antd';
 import {Option} from 'antd/es/mentions';
 import './style.css';
 import Button from 'views/components/button/Button';
 import {StyledGridList} from 'views/screens/user/dataGridParameters/gridList/GridList.Styled';
 import {useCustomGarments} from './hooks';
+import useCalcSize from '../../../../../hooks/useCalcSize';
 
 function TableGarments() {
   const {
@@ -35,6 +36,8 @@ function TableGarments() {
     }
   };
 
+  const {height: tableHeight} = useCalcSize();
+
   return (
     <>
       {' '}
@@ -46,7 +49,7 @@ function TableGarments() {
             total: currentLength
           }}
           onChange={onChange}
-          scroll={{y: 400}}
+          scroll={{y: tableHeight - 300}}
           columns={columns}
           dataSource={dataSource}
           rowClassName={(record) => {

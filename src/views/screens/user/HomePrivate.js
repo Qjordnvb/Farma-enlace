@@ -15,7 +15,7 @@ function HomePrivate() {
   const {HeaderLayout} = useLayouts();
 
   return (
-    <HeaderLayout>
+    <HeaderLayout home>
       <StyledContainerInicio className="flex flex-col items-center justify-center">
         {/*<Button
           className="btn-inicio my-12"
@@ -29,11 +29,11 @@ function HomePrivate() {
         <StyledSelectOption className="select-option">
           <h3 className="text-primary-500">Bienvenido</h3>
           <img
-            className="img-options mt-12"
+            className="img-options mt-6"
             src={'http://159.223.195.98:3002/static/home.jpg'}
             alt="options"
           />
-          <div className="flex justify-evenly w-10/12 mt-12 flex-wrap">
+          <div className="flex justify-evenly w-10/12 mt-9 flex-wrap">
             <a href={`${DATA}parameters/uniforms`}>
               <img src={Options1} alt="option-1" />
               Parametrización

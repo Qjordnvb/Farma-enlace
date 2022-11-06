@@ -8,19 +8,17 @@ export const StyledContainerSidebar = styled.div.attrs({
   className: 'StyledContainerSidebar'
 })`
   ${tw``}
-
-
-
+ display: flex;
+  justify-content: center;
+  
   ul {
-        z-index: 9999;
     li {
-
       a {
       display: flex;
-      align-items: center;
+      align-items: center; 
       justify-content: center;
       margin-top: 20px;
-           height: 101px;
+        height: 101px;
         &.active {
           background: linear-gradient(190.08deg, #2bc155 9.78%, #26d0ce 111.09%);
         }
@@ -33,12 +31,7 @@ export const StyledContainerSidebar = styled.div.attrs({
 
 
   }
-
-  position: absolute;
   width: 120px;
-  height: 605.87px;
-  left: 33px;
-  top: 150px;
 
   /* Glass */
 

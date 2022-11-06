@@ -141,7 +141,7 @@ export const StyledContainerBackground = styled.div.attrs({className: 'StyledCon
   width: 100%;
   height: 100%;
   background: url(${process.env.REACT_APP_NODE_ENV === 'production'
-      ? process.env.REACT_APP_PROD_URL
+      ? process.env.REACT_APP_PROD_URL + 'static/login.jpg'
       : process.env.REACT_APP_DEV_URL + 'static/login.jpg'})
     no-repeat center center fixed;
   background-size: cover;
