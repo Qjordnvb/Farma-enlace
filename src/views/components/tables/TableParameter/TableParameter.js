@@ -47,7 +47,7 @@ const TableParameter = () => {
           total: currentLength,
           showSizeChanger: true
         }}
-        scroll={{y: tableHeight - 210, x: 1500}}
+        scroll={{y: tableHeight - 210, x: 1300}}
         columns={mergedColumns}
         dataSource={dataSource}
         loading={loading}

@@ -26,7 +26,7 @@ function DataGridOrders() {
     <>
       {' '}
       <DataGridLayout titleGrid="Orden de consumo" userMenuLinks={userMenu}>
-        <div style={{maxWidth: tableWidth + 'px', minHeight: tableHeight - 200 + 'px'}}>
+        <div style={{maxWidth: tableWidth + 'px', minHeight: tableHeight + 'px'}}>
           <Routes>
             <Route path="actualization" element={<TableOrders />} />
             <Route path="intake" element={<TableIntake />} />

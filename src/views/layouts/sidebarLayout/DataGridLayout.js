@@ -19,13 +19,13 @@ import useCalcSize from '../../../hooks/useCalcSize';
 function DataGridLayout({children, userMenuLinks}) {
   const {useLayouts} = useViews();
   const {HeaderLayout} = useLayouts();
-  const {width: tableWidth, height: tableHeight} = useCalcSize();
+  const {width: tableWidth} = useCalcSize();
   return (
     <>
       <HeaderLayout>
         <SidebarMenu />
 
-        <StyledGridContainer maxWidth={tableWidth} minHeight={tableHeight}>
+        <StyledGridContainer maxWidth={tableWidth}>
           <StyledContainerDataGrid>
             <StyledOptionData>
               {_.map(userMenuLinks, (link) => {

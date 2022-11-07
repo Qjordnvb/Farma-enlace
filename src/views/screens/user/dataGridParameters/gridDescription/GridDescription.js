@@ -15,7 +15,7 @@ function GridDescription() {
       {' '}
       <div
         className="container-table pt-2"
-        style={{maxWidth: tableWidth + 'px', minHeight: tableHeight - 200 + 'px'}}
+        style={{maxWidth: tableWidth + 'px', minHeight: tableHeight + 'px'}}
       >
         <TableDescription />
       </div>

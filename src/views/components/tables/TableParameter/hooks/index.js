@@ -115,7 +115,7 @@ export const useCustomUniforms = () => {
     {
       title: 'Descripción',
       dataIndex: 'descripcion',
-      width: 22,
+      width: 20,
       ...getColumnSearchProps('descripcion'),
       sorter: (e, f) => e.descripcion?.localeCompare(f.descripcion),
       sortDirections: ['descend', 'ascend'],

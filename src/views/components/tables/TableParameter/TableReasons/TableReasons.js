@@ -55,7 +55,7 @@ function TableReasons() {
           dataSource={dataSource}
           rowClassName={(record) => (!record.active ? 'disabled-row editable-row' : 'editable-row')}
           rowKey={(record) => record.id}
-          scroll={{y: tableHeight - 300, x: 1500}}
+          scroll={{y: tableHeight - 300, x: 1000}}
           loading={loading}
           components={{
             body: {

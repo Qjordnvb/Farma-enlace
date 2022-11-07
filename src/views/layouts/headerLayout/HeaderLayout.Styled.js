@@ -92,6 +92,18 @@ export const StyledContainerLayout = styled.div.attrs({
       }
     }
   }
+  @media (max-height: 768px) {
+    header {
+      height: 60px;
+      button {
+        height: 35px;
+      }
+      img {
+        height: 50px;
+        width: 120px;
+      }
+    }
+  }
 `;
 
 export const StyledContainerContent = styled.div.attrs({})`

@@ -23,7 +23,7 @@ function DataGridDiscount() {
     <>
       {' '}
       <DataGridLayout titleGrid="Orden de consumo - Descuento uniforme" userMenuLinks={userMenu}>
-        <div style={{maxWidth: tableWidth + 'px', minHeight: tableHeight - 200 + 'px'}}>
+        <div style={{maxWidth: tableWidth + 'px', minHeight: tableHeight + 'px'}}>
           <TableDiscount />
         </div>
       </DataGridLayout>

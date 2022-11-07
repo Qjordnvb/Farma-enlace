@@ -95,4 +95,18 @@ export const StyledSelectOption = styled.div.attrs({
       }
     }
   }
+  @media screen and (max-height: 768px) {
+    padding: 10px 5px 10px 5px;
+    margin-top: 10px;
+    .img-options {
+      height: 250px;
+    }
+    a {
+      width: 60px;
+      img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  }
 `;

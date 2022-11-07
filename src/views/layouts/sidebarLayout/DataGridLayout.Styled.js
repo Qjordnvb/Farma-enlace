@@ -66,6 +66,9 @@ export const StyledGridContainer = styled.div.attrs({})`
   padding: 0 20px;
   max-width: ${({maxWidth}) => maxWidth + 'px' || '1200px'};
   min-height: ${({minHeight}) => minHeight + 'px' || '100%'};
+  @media (max-height: 768px) {
+    grid-template-rows: 1fr;
+  }
   @media (min-height: 800px) {
     grid-template-rows: 1fr 10fr;
   }

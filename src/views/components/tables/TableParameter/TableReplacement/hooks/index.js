@@ -214,7 +214,7 @@ export const useCustomReplacement = () => {
           </div>
         );
       },
-      width: '6%',
+      width: '7%',
       align: 'center'
     },
     {
@@ -224,7 +224,7 @@ export const useCustomReplacement = () => {
       ...getColumnSearchProps('totalAverage'),
       sorter: (a, b) => a.totalAverage - b.totalAverage,
       sortDirections: ['descend', 'ascend'],
-      width: '8%',
+      width: '7%',
       align: 'center'
     },
     {
@@ -234,7 +234,7 @@ export const useCustomReplacement = () => {
       ...getColumnSearchProps('max'),
       sorter: (a, b) => a.max - b.max,
       sortDirections: ['descend', 'ascend'],
-      width: '8%',
+      width: '7%',
       align: 'center'
     },
     {
@@ -257,7 +257,7 @@ export const useCustomReplacement = () => {
       render: (_) => {
         return <div>{moment(_).format('YYYY-MM-DD')}</div>;
       },
-      width: '9%',
+      width: '6%',
       align: 'center'
     },
     {

@@ -207,7 +207,8 @@ export const useCustomReasons = () => {
       sortDirections: ['descend', 'ascend'],
       defaultSortOrder: 'ascend',
       editable: true,
-      width: 10
+      width: 10,
+      align: 'center'
     },
     {
       key: '2',
@@ -220,7 +221,8 @@ export const useCustomReasons = () => {
       width: 8,
       render: (_) => {
         return <div>{_ ? 'SI' : 'NO'}</div>;
-      }
+      },
+      align: 'center'
     },
     {
       key: '3',
@@ -235,7 +237,8 @@ export const useCustomReasons = () => {
       render: (_) => {
         return <div>{_} días</div>;
       },
-      editable: true
+      editable: true,
+      align: 'center'
     },
     {
       key: '4',
@@ -250,7 +253,8 @@ export const useCustomReasons = () => {
       render: (_) => {
         return <div>{_ ? 'SI' : 'NO'}</div>;
       },
-      editable: true
+      editable: true,
+      align: 'center'
     },
     {
       key: '5',
@@ -260,7 +264,8 @@ export const useCustomReasons = () => {
       sorter: (a, b) => a.dues - b.dues,
       sortDirections: ['descend', 'ascend'],
       editable: true,
-      width: 8
+      width: 7,
+      align: 'center'
     },
     {
       key: '6',
@@ -270,7 +275,8 @@ export const useCustomReasons = () => {
       sorter: (a, b) => a.calculation?.localeCompare(b.calculation),
       sortDirections: ['descend', 'ascend'],
       editable: true,
-      width: 15
+      width: 10,
+      align: 'center'
     },
     {
       key: '7',
@@ -283,7 +289,8 @@ export const useCustomReasons = () => {
       render: (_) => {
         return <div>{_}%</div>;
       },
-      editable: true
+      editable: true,
+      align: 'center'
     },
     {
       key: '8',
@@ -296,13 +303,14 @@ export const useCustomReasons = () => {
       render: (_) => {
         return <div>{_}%</div>;
       },
-      editable: true
+      editable: true,
+      align: 'center'
     },
     {
       key: '9',
       title: 'Acción',
       fixed: 'right',
-      width: 8,
+      width: 10,
       render: (record) => {
         const editable = isEditing(record);
         return (
@@ -349,7 +357,8 @@ export const useCustomReasons = () => {
             </Typography.Link>
           </div>
         );
-      }
+      },
+      align: 'center'
     }
   ];
 

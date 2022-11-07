@@ -28,7 +28,7 @@ function DataGridInventory() {
     <>
       {' '}
       <DataGridLayout titleGrid="Orden de Compra" userMenuLinks={userMenu}>
-        <div style={{maxWidth: tableWidth + 'px', minHeight: tableHeight - 200 + 'px'}}>
+        <div style={{maxWidth: tableWidth + 'px', minHeight: tableHeight + 'px'}}>
           <Routes>
             <Route
               path="buy"

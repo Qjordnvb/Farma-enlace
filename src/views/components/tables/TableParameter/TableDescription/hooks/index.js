@@ -199,7 +199,7 @@ export const useCustomDescription = () => {
       sorter: (a, b) => a.codigo?.localeCompare(b.codigo),
       sortDirections: ['descend', 'ascend'],
       defaultSortOrder: 'ascend',
-      width: '8%',
+      width: '6%',
       align: 'center'
     },
     {
@@ -219,7 +219,7 @@ export const useCustomDescription = () => {
       ...getColumnSearchProps('marca'),
       sorter: (a, b) => a.marca?.localeCompare(b.marca),
       sortDirections: ['descend', 'ascend'],
-      width: '5%',
+      width: '6%',
       align: 'center'
     },
     {
@@ -234,7 +234,7 @@ export const useCustomDescription = () => {
     {
       title: 'Acción',
       dataIndex: 'accion',
-      width: '3%',
+      width: '5%',
       fixed: 'right',
       render: (_, record) => {
         const editable = isEditing(record);
