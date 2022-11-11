@@ -5,6 +5,7 @@ import Highlighter from 'react-highlight-words';
 import './styles.css';
 import * as XLSX from 'xlsx';
 import {Api, Apilocal} from 'services/Api';
+import axios from 'axios';
 
 export const useUtils = () => {
   const [searchText, setSearchText] = useState('');
@@ -118,22 +119,29 @@ export const useUtils = () => {
   }
 
   async function getOrders({dateRange, discount, status, discountStatus}) {
-    let url = '/orders/findAll';
+    let url = new URL(
+      `${
+        process.env.REACT_APP_NODE_ENV === 'production'
+          ? process.env.REACT_APP_PROD_URL
+          : process.env.REACT_APP_DEV_URL
+      }orders/findAll`
+    );
     if (dateRange?.from && dateRange?.to) {
-      url += `?from=${dateRange.from}&to=${dateRange.to}`;
+      url.searchParams.append('from', dateRange.from);
+      url.searchParams.append('to', dateRange.to);
+    }
+
+    if (status) {
+      url.searchParams.append('status', status);
     }
     if (discount) {
-      url += `?discount=${discount}`;
-    }
-    if (status) {
-      url += `?status=${status}`;
+      url.searchParams.append('discount', discount);
     }
 
     if (discountStatus) {
-      url += `?discountStatus=${discountStatus}`;
+      url.searchParams.append('discountStatus', discountStatus);
     }
-
-    const request = await Apilocal.get(url);
+    const request = await axios.get(url.href);
     return request.data;
   }
 
@@ -153,7 +161,15 @@ export const useUtils = () => {
   }
 
   async function bulkSizeUpdate(data) {
-    const request = await Apilocal.post('/employees/bulkUpdate', {employees: data});
+    let getUser = window.localStorage.getItem('MY_AUTH_APP');
+    let user = {};
+    if (getUser !== 'undefined') {
+      user = JSON.parse(getUser);
+    }
+    const request = await Apilocal.post('/employees/bulkUpdate', {
+      employees: data,
+      ultimaActualizacion: user?.user?.nombrecorto ? user?.user?.nombrecorto : 'jjarrin'
+    });
     return request.data;
   }
 
@@ -163,7 +179,15 @@ export const useUtils = () => {
   }
 
   async function updateEmployeeSize(data) {
-    const request = await Apilocal.post('/employees/updateSize', {...data});
+    let getUser = window.localStorage.getItem('MY_AUTH_APP');
+    let user = {};
+    if (getUser !== 'undefined') {
+      user = JSON.parse(getUser);
+    }
+    const request = await Apilocal.post('/employees/updateSize', {
+      ...data,
+      ultimaActualizacion: user?.user?.nombrecorto ? user.user?.nombrecorto : 'jjarrin'
+    });
     return request.data;
   }
 
@@ -188,17 +212,13 @@ export const useUtils = () => {
   }
 
   async function UserLogin(usuario, password, app, token) {
-    try {
-      const request = await Api.post(
-        'ServiceDesk/loginUsuarios',
-        {usuario, password, app},
-        {headers: {Authorization: `Bearer ${token}`}}
-      );
+    const request = await Api.post(
+      'ServiceDesk/loginUsuarios',
+      {usuario, password, app},
+      {headers: {Authorization: `Bearer ${token}`}}
+    );
 
-      return request.data;
-    } catch (e) {
-      console.log('error', e);
-    }
+    return request.data;
   }
 
   // function sorter and search tables

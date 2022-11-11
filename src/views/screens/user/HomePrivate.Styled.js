@@ -99,7 +99,7 @@ export const StyledSelectOption = styled.div.attrs({
     padding: 10px 5px 10px 5px;
     margin-top: 10px;
     .img-options {
-      height: 250px;
+      height: 225px;
     }
     a {
       width: 60px;

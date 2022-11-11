@@ -2,10 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {Form, Table} from 'antd';
 import btnDownload from '../../../../assets/img/btn-generate.png';
 import {useUtils} from '../../../../hooks';
+import useCalcSize from '../../../../hooks/useCalcSize';
 import {useCustomInventory} from './hooks';
 import './style.css';
-import '../TableParameter/TableReasons/style-reasons.css';
-import useCalcSize from '../../../../hooks/useCalcSize';
 
 const TableInventory = ({setSelected}) => {
   const {

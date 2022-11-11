@@ -67,7 +67,6 @@ export const useCustomReasons = () => {
   };
 
   const edit = (record) => {
-    console.log('record', record);
     form.setFieldsValue({
       ...record
     });

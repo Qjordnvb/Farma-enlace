@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {UploadOutlined} from '@ant-design/icons';
 import {Button, message, Upload} from 'antd';
-
+import axios from 'axios';
 import useViews from 'views';
 import {Oval} from 'react-loader-spinner';
 
@@ -84,39 +84,28 @@ function ConfigPrivate() {
         formData.append('image', file);
       });
     }
-
     setUploading({...uploading, [type]: true});
-
-    fetch(
-      `${
-        process.env.REACT_APP_NODE_ENV === 'production'
-          ? process.env.REACT_APP_PROD_URL
-          : process.env.REACT_APP_DEV_URL
-      }load/images`,
-      {
-        method: 'POST',
-        body: formData
-      }
-    )
-      .then((res) => {
-        if (res.status === 200) {
-          return res.json();
-        }
-        throw new Error('Error al subir la imagen');
-      })
+    axios
+      .post(
+        `${
+          process.env.REACT_APP_NODE_ENV === 'production'
+            ? process.env.REACT_APP_PROD_URL
+            : process.env.REACT_APP_DEV_URL
+        }load/images`,
+        formData
+      )
       .then(() => {
         if (type === 'home') {
           setFileList([]);
           setHomeKey(Date.now());
         } else if (type === 'login') {
-          console.log('login');
           setLoginList([]);
           setLoginKey(Date.now());
         }
 
         message.success('Imagen cargada con éxito.');
       })
-      .catch(() => {
+      .catch((err) => {
         if (type === 'home') {
           setFileList([]);
           setHomeKey(Date.now());
@@ -124,7 +113,11 @@ function ConfigPrivate() {
           setLoginList([]);
           setLoginKey(Date.now());
         }
-        message.error('La carga falló, por favor inténtelo nuevamente.');
+        if (err?.response?.data?.error === 'Invalid image size') {
+          message.error('Tamaño de la imagen no permitido');
+        } else {
+          message.error('La carga falló, por favor inténtelo nuevamente.');
+        }
       })
       .finally(() => {
         setUploading({...uploading, [type]: false});

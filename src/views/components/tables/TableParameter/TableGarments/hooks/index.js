@@ -75,7 +75,8 @@ export const useCustomGarments = () => {
       ...getColumnSearchProps('id'),
       sorter: (a, b) => a.id - b.id,
       sortDirections: ['descend', 'ascend'],
-      defaultSortOrder: 'ascend'
+      defaultSortOrder: 'ascend',
+      align: 'center'
     },
     {
       key: '2',
@@ -83,7 +84,8 @@ export const useCustomGarments = () => {
       dataIndex: 'description',
       ...getColumnSearchProps('description'),
       sorter: (a, b) => a.description?.localeCompare(b.description),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       key: '3',
@@ -93,7 +95,8 @@ export const useCustomGarments = () => {
       ...getColumnSearchProps('active'),
       render: (record) => {
         return <div>{record ? <p>Activo</p> : <p>Inactivo</p>}</div>;
-      }
+      },
+      align: 'center'
     },
     {
       key: '4',
@@ -131,7 +134,8 @@ export const useCustomGarments = () => {
             </Typography.Link>
           </div>
         );
-      }
+      },
+      align: 'center'
     }
   ];
 

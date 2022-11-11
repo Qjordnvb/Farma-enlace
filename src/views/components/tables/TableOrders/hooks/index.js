@@ -254,6 +254,15 @@ export const useCustomOrders = () => {
       align: 'center'
     },
     {
+      title: 'Ultima actualización',
+      dataIndex: 'ULTIMA_ACTUALIZACION',
+      ...getColumnSearchProps('Ultima actualizacion'),
+      sorter: (a, b) => a.ULTIMA_ACTUALIZACION?.localeCompare(b.ULTIMA_ACTUALIZACION),
+      sortDirections: ['descend', 'ascend'],
+      width: '8%',
+      align: 'center'
+    },
+    {
       title: 'Acción',
       dataIndex: 'accion',
       width: '5%',
@@ -275,8 +284,8 @@ export const useCustomOrders = () => {
             </Popconfirm>
           </span>
         ) : (
-          <div onClick={() => edit(record)} className="btn-edit">
-            <img src={BtnEdit} className="w-6" alt="btn-edit" />
+          <div onClick={() => edit(record)} className="btn-edit flex justify-center">
+            <img src={BtnEdit} alt="btn-edit" />
           </div>
         );
       },
@@ -323,7 +332,9 @@ export const useCustomOrders = () => {
         );
       });
       if (errorsFound) {
+        setLoading(false);
         message.error('Se encontraron errores en el archivo', 10);
+        inputFileRef.current.value = null;
       } else {
         bulkSizeUpdate(jsonData)
           .then(() => {
@@ -331,6 +342,7 @@ export const useCustomOrders = () => {
             message.success('Operación realizada con éxito', 10);
           })
           .catch(() => {
+            setLoading(false);
             message.error('Ha ocurrido un error intentalo de nuevo mas tarde');
           });
       }

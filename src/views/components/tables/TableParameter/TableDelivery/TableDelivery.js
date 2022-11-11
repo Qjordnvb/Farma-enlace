@@ -20,7 +20,8 @@ export default function TableDelivery() {
     reasonsList,
     productsList,
     onCreateDelivery,
-    loading
+    loading,
+    garmentsColumns
   } = useCustomDelivery();
 
   const [currentLength, setCurrentLength] = useState(0);
@@ -44,7 +45,10 @@ export default function TableDelivery() {
           total: currentLength
         }}
         onChange={onChange}
-        scroll={{y: tableHeight - 250, x: 2500}}
+        scroll={{
+          y: tableHeight - 250,
+          x: !garmentsColumns ? 1400 : 1400 + 200 * garmentsColumns.length
+        }}
         columns={columns}
         dataSource={formatDataSource}
         showSizeChanger
