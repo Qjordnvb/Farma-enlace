@@ -2,6 +2,10 @@ th {
   background: #bfedcc !important;
 }
 
+.editable-row td:nth-child(odd) {
+  background-color: #eeeeee;
+}
+
 .ant-table-body > table > tbody > tr > td > span > a.ant-typography {
   color: #2bc155;
 }

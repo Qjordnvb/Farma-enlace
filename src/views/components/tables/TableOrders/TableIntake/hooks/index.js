@@ -150,7 +150,7 @@ export const useCustomIntake = () => {
     {
       title: 'Colaborador',
       dataIndex: ['employee', 'COLABORADOR'],
-      ...getColumnSearchProps('collaborator'),
+      ...getColumnSearchProps('Colaborador'),
       sorter: (a, b) => a.employee?.COLABORADOR?.localeCompare(b.employee?.COLABORADOR),
       sortDirections: ['descend', 'ascend'],
       onFilter: (value, record) => {
@@ -172,7 +172,7 @@ export const useCustomIntake = () => {
     {
       title: 'Distribución Administrativa',
       dataIndex: ['employee', 'NOMBRE_CENTRO_COSTOS'],
-      ...getColumnSearchProps('administrativeDistribution'),
+      ...getColumnSearchProps('Distribucion Administrativa'),
       sorter: (a, b) =>
         a?.employee?.NOMBRE_CENTRO_COSTOS?.localeCompare(b?.employee?.NOMBRE_CENTRO_COSTOS),
       sortDirections: ['descend', 'ascend'],
@@ -184,7 +184,7 @@ export const useCustomIntake = () => {
     {
       title: 'Código oficina ',
       dataIndex: ['employee', 'CODIGO_OFICINA'],
-      ...getColumnSearchProps('officePosition'),
+      ...getColumnSearchProps('Codigo oficina'),
       sorter: (a, b) => a?.employee?.CODIGO_OFICINA?.localeCompare(b?.employee?.CODIGO_OFICINA),
       sortDirections: ['descend', 'ascend'],
       onFilter: (value, record) => {
@@ -195,7 +195,7 @@ export const useCustomIntake = () => {
     {
       title: 'Nombre de la oficina',
       dataIndex: ['employee', 'NOMBRE_OFICINA'],
-      ...getColumnSearchProps('officeName'),
+      ...getColumnSearchProps('Nombre de la oficina'),
       sorter: (a, b) => a?.employee?.NOMBRE_OFICINA?.localeCompare(b?.employee?.NOMBRE_OFICINA),
       sortDirections: ['descend', 'ascend'],
       onFilter: (value, record) => {
@@ -207,7 +207,7 @@ export const useCustomIntake = () => {
       title: 'Talla',
       dataIndex: ['correctSize', 'talla'],
       with: 50,
-      ...getColumnSearchProps('size'),
+      ...getColumnSearchProps('Talla'),
       sorter: (a, b) => a?.correctSize?.talla?.localeCompare(b?.correctSize?.talla),
       sortDirections: ['descend', 'ascend'],
       onFilter: (value, record) => {
@@ -219,7 +219,7 @@ export const useCustomIntake = () => {
     {
       title: 'Descripcion',
       dataIndex: ['producto', 'descripcion'],
-      ...getColumnSearchProps('description'),
+      ...getColumnSearchProps('Descripcion'),
       sorter: (a, b) => a?.producto?.descripcion?.localeCompare(b?.producto?.descripcion),
       sortDirections: ['descend', 'ascend'],
       onFilter: (value, record) => {
@@ -230,7 +230,7 @@ export const useCustomIntake = () => {
     {
       title: 'Uniforme a enviar',
       dataIndex: ['correctSize', 'descripcion'],
-      ...getColumnSearchProps('description'),
+      ...getColumnSearchProps('Uniforme a enviar'),
       sorter: (a, b) => a?.correctSize?.descripcion?.localeCompare(b?.correctSize?.descripcion),
       sortDirections: ['descend', 'ascend'],
       align: 'center'
@@ -270,7 +270,7 @@ export const useCustomIntake = () => {
     {
       title: 'Estado de la solicitud',
       dataIndex: 'requestStatus',
-      ...getColumnSearchProps('requestStatus'),
+      ...getColumnSearchProps('estado de la solicitud'),
       sorter: (a, b) => a.requestStatus?.localeCompare(b.requestStatus),
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
@@ -280,7 +280,7 @@ export const useCustomIntake = () => {
     },
     {
       title: 'Fecha orden de consumo.',
-      dataIndex: 'dateConsumptionOrder',
+      dataIndex: 'fecha orden de consumo',
       ...getColumnSearchProps('dateConsumptionOrder'),
       sorter: (a, b) => a.dateConsumptionOrder?.localeCompare(b?.dateConsumptionOrder),
       sortDirections: ['descend', 'ascend'],
@@ -292,10 +292,16 @@ export const useCustomIntake = () => {
     {
       title: 'N° Orden de consumo',
       dataIndex: 'consumptionOrderNumber',
-      ...getColumnSearchProps('consumptionOrderNumber'),
-      sorter: (a, b) => a?.consumptionOrderNumber?.localeCompare(b?.consumptionOrderNumber),
+      ...getColumnSearchProps('orden de consumo'),
+      sorter: (a, b) => +a.consumptionOrderNumber - +b.consumptionOrderNumber,
       sortDirections: ['descend', 'ascend'],
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => {
+        return record.consumptionOrderNumber
+          ?.toString()
+          .toLowerCase()
+          .includes(value?.toLowerCase());
+      }
     }
   ];
 
@@ -313,11 +319,18 @@ export const useCustomIntake = () => {
 
   const onAddOrder = () => {
     setLoading(true);
-    createOrder(addingFile).then(() => {
-      setLoading(false);
-      getOrdersTable();
-      resetAdd();
-    });
+    createOrder(addingFile)
+      .then(() => {
+        setLoading(false);
+        getOrdersTable();
+        message.success('Orden de consumo creada correctamente');
+        resetAdd();
+      })
+      .catch(() => {
+        setLoading(false);
+        message.error('Error al crear la orden de consumo');
+        resetAdd();
+      });
   };
 
   const onDatePickerChange = (dates) => {
@@ -341,7 +354,6 @@ export const useCustomIntake = () => {
   };
 
   const onStatusChange = (value) => {
-    console.log('value', value);
     if (value) {
       setStatus(value);
     } else {

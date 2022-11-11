@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {Form, Input, InputNumber, Popconfirm, Typography} from 'antd';
+import {Form, Input, InputNumber, message, Popconfirm, Typography} from 'antd';
 import {useUtils} from 'hooks';
 import BtnEdit from '../../../../../assets/edit-icon.svg';
 
@@ -141,23 +141,42 @@ export const useCustomInventory = () => {
 
   const save = async (id) => {
     try {
-      setLoading(true);
       const row = await form.validateFields();
       const newEditingKeys = [...editingKeys];
       const getIndex = newEditingKeys.indexOf(id);
       newEditingKeys.splice(getIndex, 1);
       setEditingKeys(newEditingKeys);
-
-      editAmountToBuy(id, row[`amountToBuy_${id}`]).then(() => {
-        getGarmentsTableParameters(true).then((res) => {
-          setGarmentsList(res);
-
-          getAllDescriptions().then((res) => {
-            setDataSource(res);
-            setLoading(false);
+      let findItem = data.find((item) => item.id === id);
+      message.loading({content: `Editando cantidad a comprar - ${findItem.descripcion}`, key: id});
+      editAmountToBuy(id, row[`amountToBuy_${id}`])
+        .then(() => {
+          getGarmentsTableParameters(true)
+            .then((res) => {
+              setGarmentsList(res);
+              getAllDescriptions()
+                .then((res) => {
+                  setDataSource(res);
+                  message.success({
+                    content: `Cantidad a comprar editada con exito ${findItem.descripcion} `,
+                    key: id,
+                    duration: 3
+                  });
+                })
+                .catch(() => {
+                  setLoading(false);
+                });
+            })
+            .catch(() => {
+              setLoading(false);
+            });
+        })
+        .catch(() => {
+          message.error({
+            content: `No se pudo editar la cantidad a comprar del producto ${findItem.descripcion}`,
+            key: id,
+            duration: 3
           });
         });
-      });
     } catch (errInfo) {
       setLoading(false);
       // eslint-disable-next-line no-console

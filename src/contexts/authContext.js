@@ -2,6 +2,7 @@ import {createContext, useCallback, useContext, useMemo, useState} from 'react';
 import PropTypes from 'prop-types';
 import {LOGIN} from 'config/paths';
 import {useUtils} from 'hooks';
+import {message} from 'antd';
 
 const MY_AUTH_APP = 'MY_AUTH_APP';
 
@@ -24,11 +25,22 @@ export default function AuthContextProvider({children}) {
 
   const userLogin = useCallback(
     async function (usuario, password, app, tokenApp) {
-      const response = await UserLogin(usuario, password, app, tokenApp);
-      //console.log("estas es la respuestaaaaaaaaaaaaaaa",response);
-
-      setIsAuthenticated(true);
-      window.localStorage.setItem(MY_AUTH_APP, JSON.stringify(response));
+      try {
+        const response = await UserLogin(usuario, password, app, tokenApp);
+        //console.log("estas es la respuestaaaaaaaaaaaaaaa",response);
+        if (response.user) {
+          setIsAuthenticated(true);
+          window.localStorage.setItem(MY_AUTH_APP, JSON.stringify(response));
+        } else {
+          setIsAuthenticated(false);
+          window.localStorage.removeItem(MY_AUTH_APP);
+          message.error('Usuario o contraseña incorrectos');
+        }
+      } catch (e) {
+        setIsAuthenticated(false);
+        window.localStorage.removeItem(MY_AUTH_APP);
+        message.error('Usuario o contraseña incorrectos');
+      }
     },
     [UserLogin]
   );

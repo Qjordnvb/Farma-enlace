@@ -25,10 +25,6 @@ th {
   text-align: center;
 }
 
-td:nth-child(odd) {
-  background-color: #eeeeee !important;
-}
-
 td {
   text-align: center;
 }

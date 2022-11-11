@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {Form, Table} from 'antd';
 import btnCarga from '../../../../assets/img/btn-carga.svg';
-import btnDownload from '../../../../assets/img/btn-generate.png';
 import {useUtils} from '../../../../hooks';
+import useCalcSize from '../../../../hooks/useCalcSize';
 import {useCustomOrders} from './hooks';
 import './style-orders.css';
 import '../TableParameter/TableReasons/style-reasons.css';
-import useCalcSize from '../../../../hooks/useCalcSize';
+import {ReactComponent as SpreadsheetIcon} from '../../../../assets/spreadsheet.svg';
+import {ReactComponent as ArrowDown} from '../../../../assets/arrow-down.svg';
 
 const TableOrders = () => {
   const {form, EditableCell, mergedColumns, dataSource, inputFileRef, handleInputFile, loading} =
@@ -16,8 +17,6 @@ const TableOrders = () => {
   const exampleSheet = [
     {
       CEDULA: '',
-      NOMBRES: '',
-      APELLIDOS: '',
       'TALLA UNIFORME': '',
       'TALLA MANDIL': ''
     }
@@ -78,8 +77,8 @@ const TableOrders = () => {
           onChange={onChange}
         />
       </Form>
-      <div className="container-buttons flex pt-6 pb-10 justify-between cursor-pointer">
-        <div className="flex flex-col">
+      <div className="container-buttons flex pt-2 pb-4 justify-between cursor-pointer">
+        <div className="flex">
           <label htmlFor="file" className={'mb-2'}>
             <img src={btnCarga} alt="download" width="230px" height="70px" />
             <input
@@ -106,14 +105,13 @@ const TableOrders = () => {
             onClick={() => {
               handleExport(excelData, 'ACTUALIZACIÓN DE TALLAS');
             }}
+            className="button-generate"
           >
-            <img
-              className="btn-download"
-              src={btnDownload}
-              alt="btnDownload"
-              width="250px"
-              height="40px"
-            />
+            <div>
+              <SpreadsheetIcon />
+              <ArrowDown />
+            </div>
+            <h3 className={'text-neutral-50 font-bold mb-0'}>Generar</h3>
           </div>
         </div>
       </div>

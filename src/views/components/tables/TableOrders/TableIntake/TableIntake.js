@@ -190,8 +190,8 @@ const TableIntake = () => {
         </>
       )}
       <div className="flex justify-between">
-        <div>
-          <label htmlFor="file">
+        <div className={'container-buttons'}>
+          <label htmlFor="file" className={'rounded-lg'}>
             <img src={btnCarga} alt="download" width="230px" height="70px" />
             <input
               style={{visibility: 'hidden'}}
@@ -211,12 +211,13 @@ const TableIntake = () => {
             <h3 className={'text-neutral-50 font-bold mb-0'}>DESCARGAR PLANTILLA</h3>
           </div>
         </div>
-        <div className={'flex flex-col'}>
+
+        <div className={'container-btns flex'}>
           <Button onClick={onAddFile} className="rounded-lg  mr-2 flex justify-center">
             <img src={btnNew} alt="new" width="220px" height="50px" />
           </Button>
 
-          <Button onClick={createConsumptionOrders} className="rounded-lg my-5 mr-2 p-4">
+          <Button onClick={createConsumptionOrders} className="rounded-lg ">
             Generar orden de consumo
           </Button>
         </div>

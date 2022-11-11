@@ -44,7 +44,8 @@ export const useCustomReport = () => {
       dataIndex: 'id',
       sorter: (a, b) => a.id - b.id,
       sortDirections: ['descend', 'ascend'],
-      defaultSortOrder: 'descend'
+      defaultSortOrder: 'descend',
+      align: 'center'
     },
 
     {
@@ -52,35 +53,40 @@ export const useCustomReport = () => {
       dataIndex: 'COLABORADOR',
       ...getColumnSearchProps('Colaborador'),
       sorter: (a, b) => a.COLABORADOR?.localeCompare(b.COLABORADOR),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Cargo',
       dataIndex: 'CARGO',
       ...getColumnSearchProps('Cargo'),
       sorter: (a, b) => a.CARGO?.localeCompare(b.CARGO),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Distribución Administrativa',
       dataIndex: 'NOMBRE_CENTRO_COSTOS',
       ...getColumnSearchProps('Distribución Administrativa'),
       sorter: (a, b) => a.NOMBRE_CENTRO_COSTOS?.localeCompare(b.NOMBRE_CENTRO_COSTOS),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Código Centro de Gestión',
       dataIndex: 'CODIGO_CENTRO_COSTOS',
       ...getColumnSearchProps('codigo centro de gestion'),
       sorter: (a, b) => a.CODIGO_CENTRO_COSTOS?.localeCompare(b.CODIGO_CENTRO_COSTOS),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Centro de Gestión',
       dataIndex: 'NOMBRE_CENTRO_COSTOS',
       ...getColumnSearchProps('nombre centro de costos'),
       sorter: (a, b) => a.NOMBRE_CENTRO_COSTOS?.localeCompare(b.NOMBRE_CENTRO_COSTOS),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Talla',
@@ -88,14 +94,16 @@ export const useCustomReport = () => {
       width: '6%',
       ...getColumnSearchProps('Talla'),
       sorter: (a, b) => a.talla - b.talla,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Kits',
       dataIndex: 'descripcion',
       ...getColumnSearchProps('Kits '),
       sorter: (a, b) => a.descripcion?.localeCompare(b.descripcion),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Fecha',
@@ -105,21 +113,24 @@ export const useCustomReport = () => {
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
         return <div>{moment(_).format('YYYY-MM-DD')}</div>;
-      }
+      },
+      align: 'center'
     },
     {
       title: 'Motivo',
       dataIndex: 'reason',
       ...getColumnSearchProps('Motivo'),
       sorter: (a, b) => a.reason?.localeCompare(b.reason),
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     },
     {
       title: 'Tiempo desde la última reposición',
       dataIndex: 'timeSinceLastReplacement',
       ...getColumnSearchProps('Tiempo desde la última reposición'),
       sorter: (a, b) => a.timeSinceLastReplacement - b.timeSinceLastReplacement,
-      sortDirections: ['descend', 'ascend']
+      sortDirections: ['descend', 'ascend'],
+      align: 'center'
     }
   ];
 

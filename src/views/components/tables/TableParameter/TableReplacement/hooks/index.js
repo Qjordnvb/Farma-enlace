@@ -108,7 +108,7 @@ export const useCustomReplacement = () => {
         porcentaje,
         reposicion,
         id: key,
-        ultimaActualizacion: user && user.nombrecorto ? user.nombrecorto : 'jjarrin'
+        ultimaActualizacion: user?.user?.nombrecorto ? user?.user?.nombrecorto : 'jjarrin'
       })
         .then(() => {
           message.success('Operación realizada con éxito');

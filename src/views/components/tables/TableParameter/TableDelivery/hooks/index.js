@@ -104,7 +104,7 @@ export const useCustomDelivery = () => {
         title: garment.description,
         dataIndex: `garment${garment.id}`,
         editable: true,
-        width: '10%',
+        width: '8%',
         align: 'center'
       };
     });
@@ -174,7 +174,7 @@ export const useCustomDelivery = () => {
       key: '3',
       title: 'Descripción',
       dataIndex: 'descripcion',
-      width: '20%',
+      width: '15%',
       ...getColumnSearchProps('descripcion'),
       sorter: (a, b) => a.descripcion?.localeCompare(b.descripcion),
       sortDirections: ['descend', 'ascend'],
@@ -323,6 +323,7 @@ export const useCustomDelivery = () => {
     reasonsList,
     onCreateDelivery,
     onDelete,
-    loading
+    loading,
+    garmentsColumns
   };
 };
