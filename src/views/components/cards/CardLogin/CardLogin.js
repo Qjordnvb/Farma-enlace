@@ -47,7 +47,7 @@ function CardLogin({isLoading}) {
       </StyledBackground>
       <StyledContainerFormLogin isLoading={isLoading} className="flex flex-col items-center">
         <img src={Logo} alt="img-logo" />
-        <h1 className="text-login pb-20 pt-6">Bienvenido</h1>
+        <h1 className="text-login pb-20 pt-6">Menu principal</h1>
         {!isLoading ? (
           <>
             {' '}

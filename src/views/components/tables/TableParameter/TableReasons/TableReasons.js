@@ -24,8 +24,9 @@ function TableReasons() {
 
   const cal = [
     'Fecha de ingreso del colaborador',
-    'Fecha de última reposición',
-    'Reposición  anterior'
+    'Fecha de reposición fija',
+    'Reposición  anterior',
+    'No aplica cálculo'
   ];
 
   const [currentLength, setCurrentLength] = useState(0);
@@ -107,7 +108,7 @@ function TableReasons() {
                     className={`item-form-custom ${
                       addingFile?.replacement === 'NO' ? 'input-disabled' : ''
                     }`}
-                    label="Reposición cantidad"
+                    label="Días de reposición"
                   >
                     <Input
                       type="number"

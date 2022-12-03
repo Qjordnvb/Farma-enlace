@@ -52,7 +52,8 @@ export const useCustomDescription = () => {
         title: garment.description,
         dataIndex: `garment${garment.id}`,
         editable: true,
-        width: '5%'
+        width: '5%',
+        align: 'center',
       };
     });
     setGarmentsColumns(getColumns);
