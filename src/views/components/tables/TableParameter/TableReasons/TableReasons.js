@@ -25,7 +25,7 @@ function TableReasons() {
   const cal = [
     'Fecha de ingreso del colaborador',
     'Fecha de reposición fija',
-    'Reposición  anterior',
+    'Reposición anterior',
     'No aplica cálculo'
   ];
 

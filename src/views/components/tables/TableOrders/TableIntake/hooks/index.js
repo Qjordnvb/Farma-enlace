@@ -274,7 +274,7 @@ export const useCustomIntake = () => {
       sorter: (a, b) => a.requestStatus?.localeCompare(b.requestStatus),
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
-        return <div>{_ ? _ : 'No Generado'}</div>;
+        return <div>{_ ? _ : 'No generado'}</div>;
       },
       align: 'center'
     },

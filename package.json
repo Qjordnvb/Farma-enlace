@@ -37,7 +37,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "env-cmd -f C:\\Users\\LEIDER~1\\Documents\\projects\\Farma-enlace\\.env react-scripts build",
+    "build": "env-cmd -f /home/leider/Documents/projects/workana/Farma-enlace/.env react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "postinstall": "husky install"
