@@ -168,7 +168,9 @@ export const useCustomDelivery = () => {
       ...getColumnSearchProps('motivo'),
       sorter: (a, b) => a.reason?.localeCompare(b.reason),
       sortDirections: ['descend', 'ascend'],
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) =>
+        record.reason.toString().toLowerCase().includes(value.toLowerCase())
     },
     {
       key: '3',
@@ -178,7 +180,8 @@ export const useCustomDelivery = () => {
       ...getColumnSearchProps('descripcion'),
       sorter: (a, b) => a.descripcion?.localeCompare(b.descripcion),
       sortDirections: ['descend', 'ascend'],
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => record.descripcion.toLowerCase().includes(value.toLowerCase())
     },
     {
       key: '4',
@@ -198,7 +201,10 @@ export const useCustomDelivery = () => {
       render: (_) => {
         return <div>{_} días</div>;
       },
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => {
+        return record.replacementAuto?.toString()?.toLowerCase().includes(value);
+      }
     },
     {
       key: '6',
@@ -208,14 +214,16 @@ export const useCustomDelivery = () => {
       ...getColumnSearchProps('cálculo'),
       sorter: (a, b) => a.calculation?.localeCompare(b.calculation),
       sortDirections: ['descend', 'ascend'],
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => {
+        return record.calculation?.toLowerCase().includes(value.toLowerCase());
+      }
     },
     {
       key: '7',
       title: 'Cobro',
       dataIndex: 'payment',
       width: '7%',
-      ...getColumnSearchProps('cobro'),
       sorter: (a, b) => a.payment - b.payment,
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
@@ -234,12 +242,14 @@ export const useCustomDelivery = () => {
       render: (_) => {
         return <div>${_}</div>;
       },
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => {
+        return record.price?.toString()?.toLowerCase().includes(value);
+      }
     },
     {
       key: '4',
       title: 'Porcentajes',
-
       children: [
         {
           title: 'Empleado',
@@ -247,7 +257,8 @@ export const useCustomDelivery = () => {
           width: '7%',
           render: (_) => {
             return <div>{_}%</div>;
-          }
+          },
+          align: 'center'
         },
         {
           title: 'Empresa',
@@ -255,7 +266,8 @@ export const useCustomDelivery = () => {
           width: '7%',
           render: (_) => {
             return <div>{_}%</div>;
-          }
+          },
+          align: 'center'
         }
       ],
       dataIndex: 'prendas',

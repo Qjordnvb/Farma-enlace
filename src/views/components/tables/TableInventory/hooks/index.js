@@ -188,7 +188,7 @@ export const useCustomInventory = () => {
     {
       title: 'Descripción',
       dataIndex: 'descripcion',
-      ...getColumnSearchProps('Descripción'),
+      ...getColumnSearchProps('descripcion'),
       sorter: (a, b) => a.descripcion?.localeCompare(b.descripcion),
       sortDirections: ['descend', 'ascend'],
       fixed: 'left',
@@ -198,7 +198,7 @@ export const useCustomInventory = () => {
     {
       title: 'Talla',
       dataIndex: 'talla',
-      ...getColumnSearchProps('Ralla'),
+      ...getColumnSearchProps('talla'),
       sorter: (a, b) => a.talla?.localeCompare(b.talla),
       sortDirections: ['descend', 'ascend'],
       width: '5%',
@@ -207,7 +207,7 @@ export const useCustomInventory = () => {
     {
       title: 'Stock',
       dataIndex: 'stock',
-      ...getColumnSearchProps('Stock'),
+      ...getColumnSearchProps('stock'),
       sorter: (a, b) => a.stock - b.stock,
       sortDirections: ['descend', 'ascend'],
       width: '5%',
@@ -221,16 +221,18 @@ export const useCustomInventory = () => {
       sorter: (a, b) => a.totalAverage - b.totalAverage,
       sortDirections: ['descend', 'ascend'],
       width: '5%',
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => record.totalAverage.toString().includes(value)
     },
     {
       title: 'Stock máximo',
       dataIndex: 'max',
-      ...getColumnSearchProps('Stock máximo'),
+      ...getColumnSearchProps('stock máximo'),
       sorter: (a, b) => a.max - b.max,
       sortDirections: ['descend', 'ascend'],
       width: '5%',
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => record.max.toString().includes(value)
     },
     {
       title: 'Prioridad',
@@ -253,26 +255,30 @@ export const useCustomInventory = () => {
           children: <div>{_}</div>
         };
       },
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) =>
+        record.priority.toString().toLowerCase().includes(value.toLowerCase())
     },
     {
       title: 'Cantidad sugerida',
       dataIndex: 'suggestion',
-      ...getColumnSearchProps('Cantidad'),
+      ...getColumnSearchProps('cantidad'),
       sorter: (a, b) => a.suggestion - b.suggestion,
       sortDirections: ['descend', 'ascend'],
       width: '5%',
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => record.suggestion?.toString().includes(value)
     },
     {
       title: 'Cantidad a comprar',
       dataIndex: 'amountToBuy',
       editable: true,
-      ...getColumnSearchProps('Cantidad a comprar'),
+      ...getColumnSearchProps('cantidad a comprar'),
       sorter: (a, b) => a.amountToBuy - b.amountToBuy,
       sortDirections: ['descend', 'ascend'],
       width: '5%',
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => record.amountToBuy?.toString().includes(value)
     },
     {
       title: 'Acción',

@@ -72,7 +72,7 @@ export const useCustomDiscount = () => {
     {
       title: 'Distribución Administrativa',
       dataIndex: 'NOMBRE_CENTRO_COSTOS',
-      ...getColumnSearchProps('Distribución Administrativa'),
+      ...getColumnSearchProps('NOMBRE_CENTRO_COSTOS'),
       sorter: (a, b) => a.NOMBRE_CENTRO_COSTOS?.localeCompare(b.NOMBRE_CENTRO_COSTOS),
       sortDirections: ['descend', 'ascend'],
       align: 'center'
@@ -80,7 +80,7 @@ export const useCustomDiscount = () => {
     {
       title: 'Código oficina ',
       dataIndex: 'CODIGO_OFICINA',
-      ...getColumnSearchProps('Código oficina '),
+      ...getColumnSearchProps('CODIGO_OFICINA'),
       sorter: (a, b) => +a.CODIGO_OFICINA - +b.CODIGO_OFICINA,
       sortDirections: ['descend', 'ascend'],
       align: 'center'
@@ -91,23 +91,29 @@ export const useCustomDiscount = () => {
       ...getColumnSearchProps('NOMBRE_OFICINA'),
       sorter: (a, b) => a.NOMBRE_OFICINA?.localeCompare(b.NOMBRE_OFICINA),
       sortDirections: ['descend', 'ascend'],
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => {
+        return record?.employee?.NOMBRE_OFICINA?.toLowerCase().includes(value.toLowerCase());
+      }
     },
     {
       title: 'Talla',
       dataIndex: ['correctSize', 'talla'],
       with: 50,
-      ...getColumnSearchProps('talla '),
+      ...getColumnSearchProps('talla'),
       sorter: (a, b) => {
         return a.correctSize?.talla?.localeCompare(b?.correctSize?.talla);
       },
       sortDirections: ['descend', 'ascend'],
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => {
+        return record?.correctSize?.talla?.toLowerCase().includes(value.toLowerCase());
+      }
     },
     {
       title: 'Kits',
       dataIndex: 'descripcion',
-      ...getColumnSearchProps('Kits '),
+      ...getColumnSearchProps('descripcion'),
       sorter: (a, b) => a.descripcion?.localeCompare(b.descripcion),
       sortDirections: ['descend', 'ascend'],
       align: 'center'
@@ -121,12 +127,16 @@ export const useCustomDiscount = () => {
       render: (_) => {
         return <div>{moment(_).format('YYYY-MM-DD')}</div>;
       },
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => {
+        let formatDate = moment(record?.requestDate).format('YYYY-MM-DD');
+        return formatDate.toLowerCase().includes(value.toLowerCase());
+      }
     },
     {
       title: 'Cuotas',
       dataIndex: 'dues',
-      ...getColumnSearchProps('Cuotas'),
+      ...getColumnSearchProps('dues'),
       sorter: (a, b) => a.dues - b.dues,
       sortDirections: ['descend', 'ascend'],
       width: '5%',
@@ -135,7 +145,7 @@ export const useCustomDiscount = () => {
     {
       title: 'Valor',
       dataIndex: 'price',
-      ...getColumnSearchProps('Cuotas'),
+      ...getColumnSearchProps('price'),
       sorter: (a, b) => a.cuotas - b.cuotas,
       sortDirections: ['descend', 'ascend'],
       width: '5%',
@@ -144,7 +154,7 @@ export const useCustomDiscount = () => {
     {
       title: 'N° Orden de Consumo',
       dataIndex: 'consumptionOrderNumber',
-      ...getColumnSearchProps('numero orden de consumo'),
+      ...getColumnSearchProps('consumptionOrderNumber'),
       sorter: (a, b) => a.consumptionOrderNumber?.localeCompare(b.consumptionOrderNumber),
       sortDirections: ['descend', 'ascend'],
       align: 'center'
@@ -152,7 +162,7 @@ export const useCustomDiscount = () => {
     {
       title: 'última modificación',
       dataIndex: 'ultimaActualizacion',
-      ...getColumnSearchProps('ultima actualizacion'),
+      ...getColumnSearchProps('ultimaActualizacion'),
       sorter: (a, b) => a.ultimaActualizacion?.localeCompare(b.ultimaActualizacion),
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
@@ -163,7 +173,7 @@ export const useCustomDiscount = () => {
     {
       title: 'Estado',
       dataIndex: 'discountRequested',
-      ...getColumnSearchProps('estado'),
+      ...getColumnSearchProps('discountRequested'),
       sorter: (a, b) => a.requestStatus?.localeCompare(b.requestStatus),
       sortDirections: ['descend', 'ascend'],
       align: 'center'

@@ -142,7 +142,7 @@ export const useCustomIntake = () => {
       sorter: (a, b) => +a?.employee?.CEDULA - +b?.employee?.CEDULA,
       sortDirections: ['descend', 'ascend'],
       onFilter: (value, record) => {
-        return record.employee?.CEDULA?.toString().toLowerCase().includes(value);
+        return record.employee?.CEDULA?.toString().toLowerCase().includes(value.toLowerCase());
       },
       defaultSortOrder: 'ascend',
       align: 'center'
@@ -154,7 +154,7 @@ export const useCustomIntake = () => {
       sorter: (a, b) => a.employee?.COLABORADOR?.localeCompare(b.employee?.COLABORADOR),
       sortDirections: ['descend', 'ascend'],
       onFilter: (value, record) => {
-        return record.employee?.COLABORADOR?.toString().toLowerCase().includes(value);
+        return record.employee?.COLABORADOR?.toString().toLowerCase().includes(value.toLowerCase());
       },
       align: 'center'
     },
@@ -165,7 +165,7 @@ export const useCustomIntake = () => {
       sorter: (a, b) => a?.employee?.CARGO?.localeCompare(b?.employee?.CARGO),
       sortDirections: ['descend', 'ascend'],
       onFilter: (value, record) => {
-        return record.employee?.CARGO?.toString().toLowerCase().includes(value);
+        return record.employee?.CARGO?.toString().toLowerCase().includes(value.toLowerCase());
       },
       align: 'center'
     },
@@ -177,7 +177,9 @@ export const useCustomIntake = () => {
         a?.employee?.NOMBRE_CENTRO_COSTOS?.localeCompare(b?.employee?.NOMBRE_CENTRO_COSTOS),
       sortDirections: ['descend', 'ascend'],
       onFilter: (value, record) => {
-        return record.employee?.NOMBRE_CENTRO_COSTOS?.toString().toLowerCase().includes(value);
+        return record.employee?.NOMBRE_CENTRO_COSTOS?.toString()
+          .toLowerCase()
+          .includes(value.toLowerCase());
       },
       align: 'center'
     },
@@ -188,7 +190,9 @@ export const useCustomIntake = () => {
       sorter: (a, b) => a?.employee?.CODIGO_OFICINA?.localeCompare(b?.employee?.CODIGO_OFICINA),
       sortDirections: ['descend', 'ascend'],
       onFilter: (value, record) => {
-        return record.employee?.CODIGO_OFICINA?.toString().toLowerCase().includes(value);
+        return record.employee?.CODIGO_OFICINA?.toString()
+          .toLowerCase()
+          .includes(value.toLowerCase());
       },
       align: 'center'
     },
@@ -199,7 +203,9 @@ export const useCustomIntake = () => {
       sorter: (a, b) => a?.employee?.NOMBRE_OFICINA?.localeCompare(b?.employee?.NOMBRE_OFICINA),
       sortDirections: ['descend', 'ascend'],
       onFilter: (value, record) => {
-        return record.employee?.CODIGO_OFICINA?.toString().toLowerCase().includes(value);
+        return record.employee?.CODIGO_OFICINA?.toString()
+          .toLowerCase()
+          .includes(value.toLowerCase());
       },
       align: 'center'
     },
@@ -211,7 +217,7 @@ export const useCustomIntake = () => {
       sorter: (a, b) => a?.correctSize?.talla?.localeCompare(b?.correctSize?.talla),
       sortDirections: ['descend', 'ascend'],
       onFilter: (value, record) => {
-        return record.correctSize?.talla?.toString().toLowerCase().includes(value);
+        return record.correctSize?.talla?.toString().toLowerCase().includes(value.toLowerCase());
       },
       width: '4%',
       align: 'center'
@@ -223,7 +229,7 @@ export const useCustomIntake = () => {
       sorter: (a, b) => a?.producto?.descripcion?.localeCompare(b?.producto?.descripcion),
       sortDirections: ['descend', 'ascend'],
       onFilter: (value, record) => {
-        return record.producto?.descripcion?.toString().toLowerCase().includes(value);
+        return record.producto?.descripcion?.toString().toLowerCase().includes(value.toLowerCase());
       },
       align: 'center'
     },
@@ -233,7 +239,9 @@ export const useCustomIntake = () => {
       ...getColumnSearchProps('Uniforme a enviar'),
       sorter: (a, b) => a?.correctSize?.descripcion?.localeCompare(b?.correctSize?.descripcion),
       sortDirections: ['descend', 'ascend'],
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) =>
+        record.correctSize?.descripcion?.toLowerCase().includes(value.toLowerCase())
     },
     {
       title: 'Fecha de solicitud',
@@ -265,7 +273,12 @@ export const useCustomIntake = () => {
         let days = duration.asDays();
         return <div>{days.toFixed()} dias</div>;
       },
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => {
+        let duration = moment.duration(moment(new Date()).diff(record.dateConsumptionOrder));
+        let days = duration.asDays();
+        return days.toString().includes(value);
+      }
     },
     {
       title: 'Estado de la solicitud',
@@ -276,18 +289,25 @@ export const useCustomIntake = () => {
       render: (_) => {
         return <div>{_ ? _ : 'No generado'}</div>;
       },
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => {
+        return record.requestStatus?.toString().toLowerCase().includes(value.toLowerCase());
+      }
     },
     {
       title: 'Fecha orden de consumo.',
-      dataIndex: 'fecha orden de consumo',
+      dataIndex: 'dateConsumptionOrder',
       ...getColumnSearchProps('dateConsumptionOrder'),
       sorter: (a, b) => a.dateConsumptionOrder?.localeCompare(b?.dateConsumptionOrder),
       sortDirections: ['descend', 'ascend'],
       render: (_) => {
         return <div>{moment(_).format('YYYY-MM-DD')}</div>;
       },
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => {
+        let format = moment(record.dateConsumptionOrder).format('YYYY-MM-DD');
+        return format.toString().includes(value);
+      }
     },
     {
       title: 'N° Orden de consumo',

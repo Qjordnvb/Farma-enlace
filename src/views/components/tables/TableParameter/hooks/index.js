@@ -151,6 +151,7 @@ export const useCustomUniforms = () => {
     {
       title: 'Precio Uniforme',
       dataIndex: 'price',
+      dataType: 'number',
       width: 8,
       ...getColumnSearchProps('precio'),
       sorter: (m, n) => {
@@ -161,7 +162,8 @@ export const useCustomUniforms = () => {
       render: (_) => {
         return <div>${_}</div>;
       },
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => record.price?.toString()?.toLowerCase().includes(value)
     },
     {
       title: 'Estado',

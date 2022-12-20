@@ -140,12 +140,13 @@ export const useCustomOrders = () => {
       sorter: (a, b) => a.id - b.id,
       sortDirections: ['descend', 'ascend'],
       width: '4%',
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => record.id?.toString().indexOf(value) === 0
     },
     {
       title: 'Cédula',
       dataIndex: 'CEDULA',
-      ...getColumnSearchProps('CEDULA'),
+      ...getColumnSearchProps('cedula'),
       sorter: (a, b) => +a.CEDULA - +b.CEDULA,
       sortDirections: ['descend', 'ascend'],
       defaultSortOrder: 'ascend',
@@ -182,7 +183,9 @@ export const useCustomOrders = () => {
       ...getColumnSearchProps('Sucursal'),
       sorter: (a, b) => a.NOMBRE_SUCURSAL?.localeCompare(b.NOMBRE_SUCURSAL),
       sortDirections: ['descend', 'ascend'],
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) =>
+        record.NOMBRE_SUCURSAL?.toLowerCase().includes(value.toLowerCase())
     },
     {
       title: 'Región',
@@ -201,7 +204,13 @@ export const useCustomOrders = () => {
       render: (_) => {
         return <div>{moment(_).calendar()}</div>;
       },
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) =>
+        moment(record.FECHA_INGRESO)
+          .calendar()
+          .toString()
+          .toLowerCase()
+          .includes(value.toLowerCase())
     },
     {
       title: 'Distribución Administrativa',
@@ -209,7 +218,9 @@ export const useCustomOrders = () => {
       ...getColumnSearchProps('Distribución Administrativa'),
       sorter: (a, b) => a.NOMBRE_CENTRO_COSTOS?.localeCompare(b.NOMBRE_CENTRO_COSTOS),
       sortDirections: ['descend', 'ascend'],
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) =>
+        record.NOMBRE_CENTRO_COSTOS?.toLowerCase().includes(value.toLowerCase())
     },
     {
       title: 'Número oficina',
@@ -217,7 +228,8 @@ export const useCustomOrders = () => {
       ...getColumnSearchProps('Número oficina'),
       sorter: (a, b) => a.CODIGO_OFICINA?.localeCompare(b.CODIGO_OFICINA),
       sortDirections: ['descend', 'ascend'],
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => record.CODIGO_OFICINA?.includes(value)
     },
     {
       title: 'Nombre de la oficina',
@@ -260,7 +272,8 @@ export const useCustomOrders = () => {
       sorter: (a, b) => a.ULTIMA_ACTUALIZACION?.localeCompare(b.ULTIMA_ACTUALIZACION),
       sortDirections: ['descend', 'ascend'],
       width: '8%',
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => record.ULTIMA_ACTUALIZACION?.includes(value.toLowerCase())
     },
     {
       title: 'Acción',

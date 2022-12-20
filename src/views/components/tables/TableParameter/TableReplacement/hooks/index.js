@@ -168,7 +168,10 @@ export const useCustomReplacement = () => {
       sorter: (a, b) => a.talla.length - b.talla.length,
       sortDirections: ['descend', 'ascend'],
       width: '5%',
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => {
+        return record.talla?.toLowerCase().includes(value.toLowerCase());
+      }
     },
     {
       key: '4',
@@ -178,7 +181,10 @@ export const useCustomReplacement = () => {
       sorter: (a, b) => a.genero.length - b.genero.length,
       sortDirections: ['descend', 'ascend'],
       width: '6%',
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => {
+        return record.genero?.toString().toLowerCase().includes(value.toLowerCase());
+      }
     },
     {
       key: '5',
@@ -197,7 +203,10 @@ export const useCustomReplacement = () => {
           </div>
         );
       },
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => {
+        return record.porcentaje?.toString().toLowerCase().includes(value.toLowerCase());
+      }
     },
     {
       key: '6',
@@ -215,7 +224,10 @@ export const useCustomReplacement = () => {
         );
       },
       width: '7%',
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => {
+        return record.reposicion?.toString().toLowerCase().includes(value.toLowerCase());
+      }
     },
     {
       key: '7',
@@ -225,7 +237,10 @@ export const useCustomReplacement = () => {
       sorter: (a, b) => a.totalAverage - b.totalAverage,
       sortDirections: ['descend', 'ascend'],
       width: '7%',
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => {
+        return record.totalAverage?.toString().toLowerCase().includes(value.toLowerCase());
+      }
     },
     {
       key: '8',
@@ -235,7 +250,10 @@ export const useCustomReplacement = () => {
       sorter: (a, b) => a.max - b.max,
       sortDirections: ['descend', 'ascend'],
       width: '7%',
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => {
+        return record.max?.toString().toLowerCase().includes(value.toLowerCase());
+      }
     },
     {
       key: '9',
@@ -245,7 +263,10 @@ export const useCustomReplacement = () => {
       sorter: (a, b) => a.ultimaActualizacion?.localeCompare(b.ultimaActualizacion),
       sortDirections: ['descend', 'ascend'],
       width: '8%',
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => {
+        return record.ultimaActualizacion?.toLowerCase().includes(value.toLowerCase());
+      }
     },
     {
       key: '10',
@@ -258,7 +279,10 @@ export const useCustomReplacement = () => {
         return <div>{moment(_).format('YYYY-MM-DD')}</div>;
       },
       width: '6%',
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => {
+        return record.updatedAt?.toLowerCase().includes(value.toLowerCase());
+      }
     },
     {
       title: 'Acción',
