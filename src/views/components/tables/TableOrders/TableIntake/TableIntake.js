@@ -69,7 +69,7 @@ const TableIntake = () => {
             showSearch={true}
             options={[
               {label: 'Todos', value: 'Todos'},
-              {label: 'No generado', value: 'No generado'},
+              {label: 'No generado', value: 'No generado', default: true},
               {label: 'Pendiente', value: 'Pendiente'},
               {label: 'Generado', value: 'Generado'}
             ]}
@@ -205,7 +205,7 @@ const TableIntake = () => {
           <div
             className="button__add"
             onClick={() => {
-              handleExport(exampleSheet, 'PLANTILLA - CARGA MASIVA DE ORDENES');
+              handleExport(exampleSheet, 'PLANTILLA - CARGA DE ORDENES');
             }}
           >
             <h3 className={'text-neutral-50 font-bold mb-0'}>DESCARGAR PLANTILLA</h3>

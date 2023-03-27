@@ -150,7 +150,8 @@ export const useCustomOrders = () => {
       sorter: (a, b) => +a.CEDULA - +b.CEDULA,
       sortDirections: ['descend', 'ascend'],
       defaultSortOrder: 'ascend',
-      align: 'center'
+      align: 'center',
+      onFilter: (value, record) => record.CEDULA?.toString().includes(value)
     },
     {
       title: 'Colaborador',

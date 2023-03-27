@@ -27,10 +27,14 @@ function HomePrivate() {
         />*/}
 
         <StyledSelectOption className="select-option">
-          <h3 className="text-primary-500">Bienvenido</h3>
+          <h3 className="text-primary-500">Menu principal</h3>
           <img
             className="img-options mt-6"
-            src={'http://159.223.195.98:3002/static/home.jpg'}
+            src={
+              process.env.REACT_APP_NODE_ENV === 'production'
+                ? `${process.env.REACT_APP_PROD_URL}static/home.jpg`
+                : `${process.env.REACT_APP_DEV_URL}static/home.jpg`
+            }
             alt="options"
           />
           <div className="flex justify-evenly w-10/12 mt-9 flex-wrap">

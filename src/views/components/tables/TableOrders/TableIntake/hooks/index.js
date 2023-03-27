@@ -28,7 +28,7 @@ export const useCustomIntake = () => {
   const [productsList, setProductsList] = useState([]);
   const [filteredSizes, setFilteredSizes] = useState([]);
   const [selectedColaborador, setSelectedColaborador] = useState({});
-  const [status, setStatus] = useState('Todos');
+  const [status, setStatus] = useState('No generado');
   const inputFileRef = useRef(null);
 
   useEffect(() => {
@@ -405,6 +405,7 @@ export const useCustomIntake = () => {
     loading,
     inputFileRef,
     handleInputFile,
-    onStatusChange
+    onStatusChange,
+    status
   };
 };
