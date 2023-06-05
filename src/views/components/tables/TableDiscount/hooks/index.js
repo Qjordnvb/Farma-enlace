@@ -13,7 +13,7 @@ export const useCustomDiscount = () => {
 
   const getOrdersTable = (dateRange, status) => {
     setLoading(true);
-    getOrders({dateRange, discount: 'descuento', status})
+    getOrders({dateRange, discount: 'descuento',discountStatus: status})
       .then((res) => {
         let formatOrders = res.map((order) => {
           return {...order, ...order.producto, ...order.employee, ...order.parameterizedReason};

@@ -33,6 +33,7 @@ export const useCustomInventory = () => {
 
   useEffect(() => {
     setLoading(true);
+    console.log('happens');
     getGarmentsTableParameters(true)
       .then((res) => {
         setGarmentsList(res);

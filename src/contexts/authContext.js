@@ -27,15 +27,16 @@ export default function AuthContextProvider({children}) {
     async function (usuario, password, app, tokenApp) {
       try {
         const response = await UserLogin(usuario, password, app, tokenApp);
-        //console.log("estas es la respuestaaaaaaaaaaaaaaa",response);
-        if (response.user) {
+        console.log("estas es la respuestaaaaaaaaaaaaaaa",response);
+        window.localStorage.setItem(MY_AUTH_APP, 'test');
+       /* if (response.user) {
           setIsAuthenticated(true);
           window.localStorage.setItem(MY_AUTH_APP, JSON.stringify(response));
         } else {
           setIsAuthenticated(false);
           window.localStorage.removeItem(MY_AUTH_APP);
           message.error('Usuario o contraseña incorrectos');
-        }
+        }*/
       } catch (e) {
         setIsAuthenticated(false);
         window.localStorage.removeItem(MY_AUTH_APP);

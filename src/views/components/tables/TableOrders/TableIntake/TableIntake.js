@@ -2,14 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {DatePicker, Form, Modal, Select, Table} from 'antd';
 import moment from 'moment';
 import Button from 'views/components/button/Button';
-import btnNew from '../../../../../assets/img/btn-new.svg';
+//import btnNew from '../../../../../assets/img/btn-new.svg';
 import {useCustomIntake} from './hooks';
 import './style.css';
 import '../../TableParameter/TableReasons/style-reasons.css';
-import btnCarga from '../../../../../assets/img/btn-carga.svg';
+//import btnCarga from '../../../../../assets/img/btn-carga.svg';
 import {useUtils} from '../../../../../hooks';
 import useCalcSize from '../../../../../hooks/useCalcSize';
-
+import {ReactComponent as SpreadsheetIcon} from '../../../../../assets/spreadsheet.svg';
 const {RangePicker} = DatePicker;
 const TableIntake = () => {
   const {
@@ -100,13 +100,16 @@ const TableIntake = () => {
         onChange={onChange}
         rowKey={(record) => record.id}
         loading={loading}
+        rowClassName={(record) => {
+          return record.status !== 'No generado' && 'disabled-row';
+        }}
       />
       {isAdd && (
         <>
           <Modal
             id="modal-add-orders-intake"
             className="modal-add-intake"
-            title="Nueva Prenda"
+            title="Nueva orden de consumo"
             visible={isAdd}
             okText="AÑADIR"
             onCancel={() => {
@@ -192,7 +195,12 @@ const TableIntake = () => {
       <div className="flex justify-between">
         <div className={'container-buttons'}>
           <label htmlFor="file" className={'rounded-lg'}>
-            <img src={btnCarga} alt="download" width="230px" height="70px" />
+            <div  className={'button-generate'}>
+              <div>
+                <SpreadsheetIcon />
+              </div>
+              <h3 className={'text-neutral-50 font-bold mb-0'}>Carga masiva</h3>
+            </div>
             <input
               style={{visibility: 'hidden'}}
               id="file"
@@ -203,7 +211,7 @@ const TableIntake = () => {
             />
           </label>
           <div
-            className="button__add"
+            className="button-generate"
             onClick={() => {
               handleExport(exampleSheet, 'PLANTILLA - CARGA DE ORDENES');
             }}
@@ -213,11 +221,11 @@ const TableIntake = () => {
         </div>
 
         <div className={'container-btns flex'}>
-          <Button onClick={onAddFile} className="rounded-lg  mr-2 flex justify-center">
-            <img src={btnNew} alt="new" width="220px" height="50px" />
+          <Button onClick={onAddFile} className="rounded-lg button-generate mr-2" style={{fontSize:"16px"}}>
+            Añadir
           </Button>
 
-          <Button onClick={createConsumptionOrders} className="rounded-lg ">
+          <Button onClick={createConsumptionOrders} className="rounded-lg  button-generate" width={'300px'}>
             Generar orden de consumo
           </Button>
         </div>

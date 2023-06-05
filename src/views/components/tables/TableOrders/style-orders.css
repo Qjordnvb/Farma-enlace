@@ -116,7 +116,7 @@ div.ant-table-body
   margin-right: 10px;
 }
 
-.button-generate {
+.label-upload{
   background: #2bc155;
   border-radius: 9.30349px;
   font-family: 'Inter', serif;
@@ -125,25 +125,11 @@ div.ant-table-body
   font-size: 15px;
   text-transform: uppercase;
   color: #ffffff;
-  height: 32px;
+
   width: 230px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-}
-
-.button-generate div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.button-generate div svg {
-  height: 20px;
-}
-
-.button-generate div svg:nth-child(2) {
-  margin-right: 10px;
 }

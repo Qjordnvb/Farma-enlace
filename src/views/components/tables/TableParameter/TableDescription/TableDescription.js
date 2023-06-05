@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Form, Table} from 'antd';
 import './style.css';
-import btnDownload from '../../../../../assets/img/btn-download.png';
+//import btnDownload from '../../../../../assets/img/btn-download.png';
 import {useUtils} from '../../../../../hooks';
 import {useCustomDescription} from './hooks';
 import useCalcSize from '../../../../../hooks/useCalcSize';
-
+import {ReactComponent as SpreadsheetIcon} from '../../../../../assets/spreadsheet.svg';
+import {ReactComponent as ArrowDown} from '../../../../../assets/arrow-down.svg';
 const TableDescription = () => {
   const {form, EditableCell, data, mergedColumns, cancel, loading, excelColumns, garmentColumns} =
     useCustomDescription();
@@ -67,16 +68,24 @@ const TableDescription = () => {
           scroll={{y: tableHeight - 230, x: 1500}}
           loading={loading}
         />
-        <div
-          className="flex justify-end"
-          onClick={() => {
-            handleExport(excelData, 'DESCRIPCIÓN UNIFORMES');
-          }}
-        >
-          {/*<img src={btnSave} className="btn-save" alt="btnDownload" />*/}
+        <div className="flex justify-end">
+          <div
+            className="button-generate "
 
-          <img className="btn-download" src={btnDownload} alt="btnDownload" />
+            onClick={() => {
+              handleExport(excelData, 'DESCRIPCIÓN UNIFORMES');
+            }}
+          >
+            {/*<img src={btnSave} className="btn-save" alt="btnDownload" />*/}
+
+            <div>
+              <SpreadsheetIcon />
+              <ArrowDown />
+            </div>
+            <h3 className={'text-neutral-50 font-bold mb-0'}>Generar</h3>
+          </div>
         </div>
+
       </>
     </Form>
   );

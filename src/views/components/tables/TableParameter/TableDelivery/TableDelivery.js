@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Form, message, Modal, Select, Table} from 'antd';
 import './style.css';
 
-import btnAdd from '../../../../../assets/img/add.png';
 import {useCustomDelivery} from './hooks';
 import useCalcSize from '../../../../../hooks/useCalcSize';
 /*const {Search} = Input;*/
@@ -127,9 +126,15 @@ export default function TableDelivery() {
       )}
 
       <div className="flex justify-end">
-        <button onClick={onAddFile}>
-          <img src={btnAdd} alt={'add'} />{' '}
-        </button>
+
+        <div
+          className="button-generate "
+
+          onClick={onAddFile}
+        >
+          {/*<img src={btnSave} className="btn-save" alt="btnDownload" />*/}
+          <h3 className={'text-neutral-50 font-bold mb-0'}>Agregar</h3>
+        </div>
       </div>
     </div>
   );

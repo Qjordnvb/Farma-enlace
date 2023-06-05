@@ -99,7 +99,7 @@ const TableReport = () => {
             handleExport(excelData, 'REPORTERIA');
           }}
           variant="primary"
-          className="rounded-md p-2 btn-report"
+          className="rounded-md p-2 btn-report button-generate "
         >
           <span>Generar reporte</span>
         </Button>

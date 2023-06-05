@@ -59,7 +59,8 @@ export const useCustomIntake = () => {
         setDataSource(res);
         setLoading(false);
       })
-      .catch(() => {
+      .catch((e) => {
+        console.log('ERROR - getOrdersTable', e);
         setLoading(false);
         message.error('Error cargando datos');
       });

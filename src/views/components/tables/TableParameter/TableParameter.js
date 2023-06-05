@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Form, Table} from 'antd';
-import btnDownload from '../../../../assets/img/btn-download.png';
+//import btnDownload from '../../../../assets/img/btn-download.png';
 import {useUtils} from '../../../../hooks';
 import {useCustomUniforms} from './hooks';
 import './style-parameters.css';
 import useCalcSize from '../../../../hooks/useCalcSize';
+import {ReactComponent as SpreadsheetIcon} from '../../../../assets/spreadsheet.svg';
+import {ReactComponent as ArrowDown} from '../../../../assets/arrow-down.svg';
 
 const TableParameter = () => {
   const {dataSource, mergedColumns, loading, form, EditableCell} = useCustomUniforms();
@@ -65,7 +67,17 @@ const TableParameter = () => {
           handleExport(excelData, 'Productos');
         }}
       >
-        <img className="btn-download" src={btnDownload} alt="btnDownload" />
+        <div
+          className="button-generate"
+        >
+          {/*<img src={btnSave} className="btn-save" alt="btnDownload" />*/}
+
+          <div>
+            <SpreadsheetIcon />
+            <ArrowDown />
+          </div>
+          <h3 className={'text-neutral-50 font-bold mb-0'}>Descargar</h3>
+        </div>
       </div>
     </Form>
   );

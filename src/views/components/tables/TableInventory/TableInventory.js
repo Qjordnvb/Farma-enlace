@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Form, Table} from 'antd';
-import btnDownload from '../../../../assets/img/btn-generate.png';
+//import btnDownload from '../../../../assets/img/btn-generate.png';
 import {useUtils} from '../../../../hooks';
 import useCalcSize from '../../../../hooks/useCalcSize';
 import {useCustomInventory} from './hooks';
 import './style.css';
-
+import {ReactComponent as SpreadsheetIcon} from '../../../../assets/spreadsheet.svg';
+import {ReactComponent as ArrowDown} from '../../../../assets/arrow-down.svg';
 const TableInventory = ({setSelected}) => {
   const {
     form,
@@ -96,16 +97,18 @@ const TableInventory = ({setSelected}) => {
         />
       </Form>
       <div className="flex justify-end items-end flex-col">
-        <img
-          className="btn-download"
-          src={btnDownload}
-          alt="btnDownload"
-          width="250px"
-          height="40px"
+        <div
           onClick={() => {
             handleExport(excelData, 'INVENTARIO');
           }}
-        />
+          className="button-generate"
+        >
+          <div>
+            <SpreadsheetIcon />
+            <ArrowDown />
+          </div>
+          <h3 className={'text-neutral-50 font-bold mb-0'}>Generar</h3>
+        </div>
       </div>
     </div>
   );

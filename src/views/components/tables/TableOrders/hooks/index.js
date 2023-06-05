@@ -48,7 +48,7 @@ export const useCustomOrders = () => {
     const inputNode =
       title === 'Talla uniforme' || title === 'Talla mandil' ? (
         <Select
-          defaultValue="lucy"
+          defaultValue="XS"
           style={{
             width: 120
           }}
@@ -61,6 +61,7 @@ export const useCustomOrders = () => {
           <Option value="XXL">XXL</Option>
           <Option value="XXXL">XXXL</Option>
           <Option value="XXXXL">XXXXL</Option>
+          <Option value="XXXXXL">XXXXXL</Option>
         </Select>
       ) : (
         <InputNumber />
@@ -331,7 +332,7 @@ export const useCustomOrders = () => {
       let jsonData = await excelToJson(file);
 
       jsonData.map((item) => {
-        let tallas = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+        let tallas = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL', 'XXXXXL'];
         let containsLetters = /[a-zA-Z]/g.test(item.CEDULA);
         if (containsLetters) {
           errorsFound = true;

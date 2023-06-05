@@ -4,11 +4,12 @@ import {Form, Table} from 'antd';
 import './style.css';
 import moment from 'moment';
 import {StyledGridList} from 'views/screens/user/dataGridParameters/gridList/GridList.Styled';
-import btnDownload from '../../../../../assets/img/btn-download.png';
+//import btnDownload from '../../../../../assets/img/btn-download.png';
 import {useUtils} from '../../../../../hooks';
 import {useCustomReplacement} from './hooks';
 import useCalcSize from '../../../../../hooks/useCalcSize';
-
+import {ReactComponent as SpreadsheetIcon} from '../../../../../assets/spreadsheet.svg';
+import {ReactComponent as ArrowDown} from '../../../../../assets/arrow-down.svg';
 function TableReplacement() {
   const {dataSource, form, mergedColumns, EditableCell, loading} = useCustomReplacement();
   const {handleExport} = useUtils();
@@ -69,14 +70,22 @@ function TableReplacement() {
       </div>
       <StyledGridList>
         <div className="btn-add">
-          <img
-            className="btn-download"
-            src={btnDownload}
-            alt="btnDownload"
+
+          <div
+            className="button-generate "
+
             onClick={() => {
               handleExport(excelData, 'PARÁMETROS DE REPOSICIÓN');
             }}
-          />
+          >
+            {/*<img src={btnSave} className="btn-save" alt="btnDownload" />*/}
+
+            <div>
+              <SpreadsheetIcon />
+              <ArrowDown />
+            </div>
+            <h3 className={'text-neutral-50 font-bold mb-0'}>Descargar</h3>
+          </div>
         </div>
       </StyledGridList>
     </Form>

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Form, Table} from 'antd';
-import btnCarga from '../../../../assets/img/btn-carga.svg';
+//import btnCarga from '../../../../assets/img/btn-carga.svg';
 import {useUtils} from '../../../../hooks';
 import useCalcSize from '../../../../hooks/useCalcSize';
 import {useCustomOrders} from './hooks';
@@ -79,8 +79,14 @@ const TableOrders = () => {
       </Form>
       <div className="container-buttons flex pt-2 pb-4 justify-between cursor-pointer">
         <div className="flex">
-          <label htmlFor="file" className={'mb-2'}>
-            <img src={btnCarga} alt="download" width="230px" height="70px" />
+          <label htmlFor="file" className={'label-upload'}>
+            <div  className={'button-generate'}>
+              <div>
+                <SpreadsheetIcon />
+              </div>
+              <h3 className={'text-neutral-50 font-bold mb-0'}>Carga masiva</h3>
+            </div>
+
             <input
               style={{position: 'absolute', top: 0, left: 0, visibility: 'hidden'}}
               id="file"
@@ -91,7 +97,7 @@ const TableOrders = () => {
             />
           </label>
           <div
-            className="button__add"
+            className="button-generate"
             onClick={() => {
               handleExport(exampleSheet, 'PLANTILLA - ACTUALIZACION');
             }}
